@@ -1,0 +1,253 @@
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>School</h1>
+			<small>Here you can add new school details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">School</li>
+			</ol>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> School
+								List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="schoolForm">
+
+							<div class="col-sm-6 form-group">
+								<label>School Identity Id</label> <input type="text" value=""
+									class="form-control" name="siteId"
+									placeholder="Enter School Id" ng-model="school.identityId"
+									>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label><span
+									ng-if="school.schoolName == undefined || school.schoolName =='' "
+									style="color: red">*</span>School Name</label> <span style="color: red"
+									ng-show="(schoolForm.siteName.$touched && schoolForm.siteName.$invalid)">
+									<span ng-show="schoolForm.siteName.$error.required"> is
+										required.</span>
+								</span><input type="text" value="" class="form-control" name="siteName"
+									placeholder="Enter School  Name" ng-model="school.schoolName"
+									required>
+							</div>
+									
+						<div class="col-sm-6 form-group">
+								<label>Email Id</label><span style="color: red"
+									ng-show="schoolForm.email.$error.pattern"> Please enter a
+										valid email address!</span>
+								 <span ng-if="schoolForm.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="schoolForm.$error.emailExists" style="color: red">
+									exists already</span> <input type="email" value=""
+									class="form-control" name="email" placeholder="Enter Email Id"
+									email-available  ng-model="school.email"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ "
+									 class="error" >
+							</div>
+							
+							<div class="col-lg-6 form-group">
+								<label>Phone Number</label> <span
+									ng-show="((schoolForm.mobileNumber.$error.minlength ||
+                           schoolForm.mobileNumber.$error.maxlength) && schoolForm.mobileNumber.$touched)"
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="schoolForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="schoolForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span><input type="text"
+									class="form-control" phone-input  maxlength="14" minlength="14"
+									name="mobileNumber" ng-model="school.mobileNumber"
+									placeholder="Enter Phone Number"  
+									>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Street Address 1</label> <input id="autocomplete"
+									placeholder="Enter your address" class="form-control"
+									onFocus="geolocate()" type="text"></input>
+							</div>
+
+							<div>
+								<input class="field form-control" type="hidden"
+									ng-model="address.address1" id="street_number"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Street Address 2</label> <input
+									class="field form-control" ng-model="address.address2"
+									id="route"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>City</label> <input class="field form-control"
+									ng-model="address.city" id="locality"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>State</label> <input class="field form-control"
+									ng-model="address.state" id="administrative_area_level_1"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Country</label> <input class="field form-control"
+									ng-model="address.country" id="country"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Zip code</label> <input class="field form-control"
+									allow-only-numbers maxlength="5" ng-model="address.zipcode"
+									id="postal_code"></input>
+							</div>
+
+							<!-- email-available -->
+						
+							<!-- <div class="col-sm-6 form-group">
+								<label>Fax</label> <span
+									ng-show="((schoolForm.fax.$error.minlength ||
+                           schoolForm.fax.$error.maxlength) && schoolForm.fax.$dirty)"
+									style="color: red"> should be 10 digits </span><input type="text" value=""
+									class="form-control" name="fax" placeholder="Enter Fax"
+									ng-model="school.fax" phone-input required>
+							</div> -->
+							
+							<div class="col-sm-6 form-group">
+								<label>Fax</label>
+								<span ng-show="((schoolForm.insurancefax.$error.minlength ||
+                           schoolForm.insurancefax.$error.maxlength) &&  schoolForm.insurancefax.$dirty) "
+                          
+									style="color: red"> should be 10 digits </span> <input type="text" value="" class="form-control"  phone-input maxlength="14" minlength="14"
+									placeholder="Enter Fax" ng-model="insurance.fax" name="insurancefax"  >
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="school.status" name="status"
+									ng-value="true" >Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="school.status" name="status" ng-value="false">InActive</label>
+							</div>
+							<!-- <div class="col-sm-12 reset-button">
+								<button class="btn btn-success"
+									ng-click="addSchool(school,address)"
+									ng-disabled=" schoolForm.$invalid ">Save</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+
+							</div> -->
+							
+							<div class="col-sm-12 reset-button">
+								<button class="btn btn-success"
+									ng-click="addSchool(school,address)"
+									ng-disabled=" !school.schoolName||schoolForm.email.$error.pattern||((schoolForm.mobileNumber.$error.minlength ||
+                           schoolForm.mobileNumber.$error.maxlength) && schoolForm.mobileNumber.$dirty)||((schoolForm.insurancefax.$error.minlength ||
+                           schoolForm.insurancefax.$error.maxlength) &&  schoolForm.insurancefax.$dirty) ">Save</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+
+							</div>
+							<script>
+								var placeSearch, autocomplete;
+								var componentForm = {
+									street_number : 'short_name',
+									route : 'long_name',
+									locality : 'long_name',
+									administrative_area_level_1 : 'short_name',
+									country : 'long_name',
+									postal_code : 'short_name'
+								};
+
+								function initAutocomplete() {
+									// Create the autocomplete object, restricting the search to geographical
+									// location types.
+									var options = {
+										types : [ 'geocode' ],
+										componentRestrictions : {
+											country : 'us'
+										}
+									};
+
+									autocomplete = new google.maps.places.Autocomplete(
+											(document
+													.getElementById('autocomplete')),
+											options);
+
+									// When the user selects an address from the dropdown, populate the address
+									// fields in the form.
+									autocomplete.addListener('place_changed',
+											fillInAddress);
+								}
+
+								function fillInAddress() {
+									// Get the place details from the autocomplete object.
+									var place = autocomplete.getPlace();
+
+									for ( var component in componentForm) {
+										document.getElementById(component).value = '';
+										document.getElementById(component).disabled = false;
+									}
+
+									// Get each component of the address from the place details
+									// and fill the corresponding field on the form.
+									for (var i = 0; i < place.address_components.length; i++) {
+										var addressType = place.address_components[i].types[0];
+										if (componentForm[addressType]) {
+											var val = place.address_components[i][componentForm[addressType]];
+											document
+													.getElementById(addressType).value = val;
+										}
+									}
+								}
+
+								// Bias the autocomplete object to the user's geographical location,
+								// as supplied by the browser's 'navigator.geolocation' object.
+								function geolocate() {
+									if (navigator.geolocation) {
+										navigator.geolocation
+												.getCurrentPosition(function(
+														position) {
+													var geolocation = {
+														lat : position.coords.latitude,
+														lng : position.coords.longitude
+													};
+													var circle = new google.maps.Circle(
+															{
+																center : geolocation,
+																radius : position.coords.accuracy
+															});
+													autocomplete
+															.setBounds(circle
+																	.getBounds());
+												});
+									}
+								}
+							</script>
+							<script
+								src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYFHF5OFfYFzoXznrZfQQU8aGOClVeXcQ&libraries=places&callback=initAutocomplete"
+								async defer></script>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+</div>

@@ -1,0 +1,271 @@
+<style>
+h2 {
+	position: relative;
+	color: #fff;
+	background: #f43059;
+	font-size: 1.5em;
+	float: left;
+	clear: both;
+	padding: 10px 10px 10px 20px;
+	margin-left: -20px;
+	margin-bottom: 20px;
+	text-shadow: 0 -1px #d0284b, 0 1px #f96080;
+	-moz-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+h2:before {
+	content: " ";
+	background: url(../img/css/ribbon.png);
+	display: block;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin-bottom: -10px;
+	z-index: -1;
+}
+
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.text {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.select {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+</style>
+
+<div class="content-wrapper"
+	ng-init="findAllpatientsByPaginationByRole();getInvoice();getPaidAmount();getTotalAmount1();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Invoice</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Invoice</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-body">
+						<div class="inv-template">
+							<div class="inv-template-hdr">
+								<div class="row">
+									<div class="col-sm-2">
+										<div class="ribbon">
+											<h2 style="width: 230px;"
+												ng-if="invoiceSingle.paidStatus=='PARTIALLYPAID'">
+												PARTIALLY PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus=='UNPAID'" >UN PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus=='PAID'" style="bgcolor:green">PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus==undefined">UN PAID</h2>
+										</div>
+									</div>
+									<div class="col-sm-10 text-right">
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<a href="" class="btn btn-primary btn-sm"
+												ng-click="gotoEditInvoice(patientObject)"><i
+												class="fa fa-pencil-square-o mr-1"></i> Edit Invoice</a> 
+												 <a ng-click="downloadInvoice();" class="btn btn-primary btn-sm" ><i
+												></i>Download</a>
+											<a  class="btn btn-primary btn-sm" target="_blank"><i
+												></i>Print</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<br> <br>
+							<div class="inv-template-bdy"
+								style="border-top: 4px dotted gray;">
+								<table class="table">
+									<tbody>
+										<tr>
+											<!-- <td class=""><img src="assets/logo.jpg" alt=""></td> -->
+											<!-- <div class="image pull-left">
+					<img ng-src="{{getImagePathData()}}" class="img-circle" height="40"
+						width="40" alt="User Image">
+				</div> -->
+											<td align="center" class=""><img
+												ng-src="{{getImagePathData()}}" height="100" width="200"
+												alt="User Image"></td>
+											<td>
+												<div class="">
+													<span class="head"><label>{{patientObject.doctor.company.companyName}}</label><br></span>
+													<span class="body">{{patientObject.doctor.company.address.address1}}
+														{{patientObject.doctor.company.address.address2}},<br>
+														{{patientObject.doctor.company.address.city.name}}
+														{{patientObject.doctor.company.address.state.name}}
+														{{patientObject.doctor.company.address.country.name}}
+													</span>
+												</div>
+											</td>
+											<td class="font-24 text-center">
+												<div class="inv-title">INVOICE</div>
+											</td>
+										</tr>
+										<tr class="inv-meta-container">
+											<td>
+												<div class="inv-bill-to">
+													<p>Bill To</p>
+													<p class="font-14">{{patientObject.patient.firstName}}
+														{{patientObject.patient.lastName}}</p>
+													<p class="font-12">{{patientObject.patient.email}}</p>
+													<p class="font-12">{{patientObject.patient.mobileNumber}}</p>
+												</div>
+											</td>
+											<td colspan="2" class="text-right">
+												<div class="inv-meta">
+													<p>
+														<span># : </span><span>{{patientObject.invoice}}</span>
+													</p>
+													<p>
+														<span>Invoice Date : </span><span>{{patientObject.starDate}}</span>
+													</p>
+													<p>
+														<span>Due Date : </span><span>{{patientObject.dueDate}}</span>
+													</p>
+													<p>
+														<!--  {{patientObject.paymentTypes}} -->
+														<span>Payment Method : </span><span>{{invoiceSingle.paymethod.name}}</span>
+													</p>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="inv-template-item">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Item Name</th>
+												<th>Item Description</th>
+												<th>Qty</th>
+												<th>Unit Cost(Rs.)</th>
+												<!-- <th>Tax(Rs.)</th> -->
+												<th>Price(Rs.)</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="personalDetail in invoiceList">
+												<td><textarea class="form-control textarea" cols="50"
+														ng-model="personalDetail.itemName" required></textarea></td>
+												<td><textarea class="form-control textarea" cols="75"
+														ng-model="personalDetail.itemDescription" required></textarea></td>
+												<td><textarea class="form-control textarea"
+														ng-model="personalDetail.quantity" required></textarea></td>
+												<td><textarea class="form-control textarea"
+														ng-model="personalDetail.unitCost" required></textarea></td>
+												<td><textarea class="form-control textarea"
+														ng-model="personalDetail.price" required></textarea></td>
+											</tr>
+
+											<tr class="total">
+												<td rowspan="2" colspan="3">
+													<p></p>
+												</td>
+												<td colspan="1"><span> Total</span></td>
+												<td colspan="1"><span>$ {{amt}}</span></td>
+											</tr>
+											<!-- <tr class="total">
+												<td colspan="1"><span>Tax</span></td>
+												<td colspan="1"><span>Rs. 15.00</span></td>
+											</tr>
+											<tr class="total">
+												<td colspan="1"><span>Discount</span></td>
+												<td colspan="1"><span>Rs. 0.00</span></td>
+											</tr> -->
+											<!-- <tr class="total">
+												<td colspan="1"><span>Total</span></td>
+												<td colspan="1"><span>Rs. {{amt}}</span></td>
+											</tr> -->
+											<tr class="total" ng-if="invoiceSingle.paidAmount!=undefined">
+												<td colspan="1"><span>Paid</span></td>
+												<td colspan="1"><span>$
+														{{invoiceSingle.paidAmount}}</span></td>
+											</tr>
+											<tr class="total" ng-if="invoiceSingle.paidAmount==undefined">
+												<td colspan="1"><span>Paid</span></td>
+												<td colspan="1"><span>$ 0</span></td>
+											</tr>
+											<!-- <tr class="total balance-due">
+												<td colspan="1"><span>Balance Due</span></td>
+												<td colspan="1"><span>Rs. 15.00</span></td>
+											</tr> -->
+											<tr>
+												<td colspan="5">
+													<p class="font-12">Terms &amp; Conditions:</p>
+													<p class="font-16">{{invoiceSingle.termsConditions}}</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- <div id="pdf" ng-if="downloadInvoicecontent !=undefined "
+									id="div1" style="display: block;">
+									<iframe id="myFrame" src="{{downloadInvoicecontent}}" 
+										width="100%" height="800px"></iframe>
+
+								</div> -->
+							</div>
+							<div class="inv-template-ftr"></div>
+						</div>
+
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>

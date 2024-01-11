@@ -1,0 +1,848 @@
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getAllClients();getCycles();getSessions();getAllPaymethods();getAllCurrencys();
+	getAllDepartmentsByCmpany();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+
+			<h1>Patient Billing Details</h1>
+			<small>Here you can make the payment of the patient.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Accounts</a></li>
+				<li class="active">Patient Billing</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<div class="col-sm-12">
+
+
+					<div class="panel panel-bd lobidisable">
+					<div class="panel-heading">
+                                    <div class="btn-group" ng-click="gotoBillingsList();"> 
+                                        <a class="btn btn-primary" > <i class="fa fa-list"></i> Patient Billing List</a>  
+                                    </div>
+                                    
+                                    <!--  <div class="btn-group pull-right"  ng-click="gotoPayList();"> 
+                                        <a class="btn btn-primary" > <i class="fa fa-list"></i> Payments List</a>  
+                                    </div> -->
+                                    
+                                    
+                                </div>
+						<div class="panel-body">
+						<div class="col-sm-12">
+							<div class="">
+							  <div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="fa fa-user"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.fullName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">DOB</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.dateOfBirth | date"
+														placeholder="DOB">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Age</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-phone"></i></span> <input type="text"
+														name="invoice[mobile]"  ng-model="patientObject.age"
+														class="form-control" placeholder="Age">
+												</div>
+											</div>
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">UCI</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="patientObject.ssn"
+														class="form-control" placeholder="UCI">
+												</div>
+											</div>
+											<!-- <div class="col-sm-3	 form-group">
+												<label class="col-form-label">Client Type</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.clientType.clientTypeName"
+														placeholder="Client Type">
+												</div>
+											</div> -->
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Gender</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-mars-stroke"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.gender"
+														placeholder="Gender">
+												</div>
+											</div>
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Email</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="patientObject.emailPatient"
+														class="form-control" placeholder="Patient Email">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Mobile Number</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-phone"></i></span> <input type="text"
+														name="invoice[mobile]"  ng-model="patientObject.mobileNumber"
+														class="form-control" placeholder="Patient Mobile Number">
+												</div>
+											</div>
+											
+											
+											
+											
+											
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Parent Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-user-circle-o"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.gaurdian"
+														placeholder="Parent Name">
+												</div>
+											</div>
+											
+											
+											
+										<!-- 	<div class="col-sm-6 form-group">
+												<label class="col-form-label">Street Address 1</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.address1"
+														placeholder="Street Address 1">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Street Address 2</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.address2"
+														placeholder="Street Address 2">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Country </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.country"
+														placeholder="Country">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">State </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.state"
+														placeholder="State">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">City </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.city"
+														placeholder="City">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Zip Code</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.address1.zipcode"
+														placeholder="Zip Code">
+												</div>
+											</div> -->
+											
+											
+								<!-- <div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>DOB :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.dateOfBirth | date}}</p>
+										<input type="date" ng-model="patientObject.dateOfBirth | date">
+									</div>
+								</div>
+
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>UCI :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.ucl}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Age :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.age}}</p>
+									</div>
+								</div>
+
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Parent Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gaurdian}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Phone Number :</label>
+									</div>
+									<div class="col-sm-6" ng-if="patientObject.mobileNumber!=null">
+										<p>{{changeMobileNumber(patientObject.mobileNumber);}}</p>
+									</div>
+								</div>
+
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Email Id :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.email}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Gender :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gender}}</p>
+									</div>
+								</div>
+								
+								<br><br>
+							
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Country :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.country}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>State :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.state}}</p>
+									</div>
+								</div>
+								
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>City :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.city}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Street Address 1:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.address1}}</p>
+									</div>
+								</div>
+								
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Street Address 2 :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.address2}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Zip Code :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.address1.zipcode}}</p>
+									</div>
+								</div>
+								<br><br> -->
+								<!-- <div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Client Type :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.clientType.clientTypeName}}</p>
+									</div>
+								</div>
+								
+								<br> -->
+								
+							</div>
+							<br>
+							</div>
+							<!--Form &Div here  -->
+							
+							
+						</div>
+						
+					</div>
+
+					<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+							
+							<div class="">
+							<div class="col-sm-3 form-group">
+												<label class="col-form-label">Total No. of Sessions</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.totalSessions"
+														placeholder="Total No. of Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Complete Sessions </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.completeSessions"
+														placeholder="Complete Sessions ">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Paid Sessions </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.paidSessions"
+														placeholder="Paid Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">UnPaid Sessions </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.unPaidSessions"
+														placeholder="UnPaid Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Awaiting  Sessions</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.awaitingSessions"
+														placeholder="Awaiting  Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Cancelled Sessions</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.cancelledSessions"
+														placeholder="Cancelled Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Duration</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-clock-o"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.duration"
+														placeholder="Duration">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Last Payment Date</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-calendar"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="session.lastPaymentDate"
+														placeholder="Last Payment Date">
+												</div>
+											</div>
+								<!-- <div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Total No. of Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.totalSessions}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Complete Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.completeSessions}}</p>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Paid Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.paidSessions}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Awaiting Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.awaitingSessions}}</p>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>UnPaid Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.unPaidSessions}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Cancelled Sessions:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.cancelledSessions}}</p>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Duration:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.duration}}Minutes</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Last Payment Date:</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{session.lastPaymentDate}}</p>
+									</div>
+								</div>
+								<br> -->
+								
+								<br>
+								</div>
+							<br> 
+							
+							</div>
+						</div>
+					</div>
+				</div>
+					<!--  -->
+						<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body" style="margin-top: 20px;">
+						
+							<div class="col-sm-12 table-responsive" align="justify">
+							<form  name="patientForm">
+								<div class="">
+									<!--  -->
+									<!-- <div class="col-sm-6 form-group">
+										<label><span
+					ng-if="paymentTypes == undefined || paymentTypes =='' "
+					style="color: red">*</span>Payment Type</label><span
+					style="color: red"
+					ng-show="(patientForm.insuranceNumber.$touched && patientForm.insuranceNumber.$invalid)">
+					<span ng-show="patientForm.insuranceNumber.$error.required">
+						is required.</span>
+				</span> <select class="form-control" name="insuranceNumber"
+											ng-model="paymentTypes" required="required">
+											<option value="" class="active">Select Payment Type</option>
+											<option value="CASH">CASH</option>
+											<option value="CHECK">CHECK</option>
+											<option value="CREDITCARD">CREDIT CARD</option>
+											<option value="DEBITCARD">DEBIT CARD</option>
+											<option value="NETBANKING">NET BANKING</option>
+										</select>
+									</div> -->
+									
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+										ng-if="patientObject.department.departmentName == undefined || patientObject.department.departmentName =='' "
+										style="color: red">*</span>Therapy Type</label>
+										<span style="color: red"
+										ng-show="(patientForm.paymeth.$touched && patientForm.paymeth.$invalid)">
+										<span ng-show="patientForm.paymeth.$error.required">
+											is required.</span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span>
+													<!-- <select ng-model="payment.department"
+														class="form-control" name="paymeth"
+														aria-required="true" aria-invalid="true"
+														ng-options="country as country.departmentName  for country in departmentsListByCmpany track by country.id"
+														required>
+														<option value="" class="active">Select Therapy Type</option>
+													</select> -->
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientObject.department.departmentName"
+														placeholder="Therapy Type">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+										ng-if="invoiceSingle.currency == undefined || invoiceSingle.currency =='' "
+										style="color: red">*</span>Currency</label>
+										<span style="color: red"
+										ng-show="(patientForm.department.$touched && patientForm.department.$invalid)">
+										<span ng-show="patientForm.department.$error.required">
+											<!-- is required. --></span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span>
+													<select ng-model="invoiceSingle.currency"
+														class="form-control" name="department"
+														aria-required="true" aria-invalid="true"
+														ng-options="country as country.name  for country in currencysList track by country.id"
+														required>
+														<option value="" class="active">Select Currency</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+										ng-if="payment.paymentTypes == undefined || payment.paymentTypes =='' "
+										style="color: red">*</span>Payment Method</label>
+										<span style="color: red"
+										ng-show="(patientForm.paymeth.$touched && patientForm.paymeth.$invalid)">
+										<span ng-show="patientForm.paymeth.$error.required">
+											is required.</span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span>
+													<select ng-model="payment.paymentTypes"
+														class="form-control" name="paymeth"
+														aria-required="true" aria-invalid="true"
+														ng-options="country as country.name  for country in paymethodsList track by country.id"
+														required>
+														<option value="" class="active">Select Payment
+															Method</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+										ng-if="modeOfPaymentTypes == undefined || modeOfPaymentTypes =='' "
+										style="color: red">*</span>Mode Of Payment</label>
+										<span style="color: red"
+										ng-show="(patientForm.paymeth.$touched && patientForm.paymeth.$invalid)">
+										<span ng-show="patientForm.paymeth.$error.required">
+											is required.</span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span>
+													<select ng-model="modeOfPaymentTypes"
+														class="form-control" name="paymeth"
+														aria-required="true" aria-invalid="true"
+														required>
+														<option value="" class="active">Select Mode Of
+												Payment Type</option>
+											<option ng-value="ONCE">ONCE</option>
+											<option ng-value="WEEKLY">WEEKLY</option>
+											<option ng-value="MONTHLY">MONTHLY</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+										ng-if="payment.paymentStatus == undefined || payment.paymentStatus =='' "
+										style="color: red">*</span>Payment Status</label>
+												<span style="color: red"
+										ng-show="(patientForm.invoice.$touched && patientForm.invoice.$invalid)">
+										<span ng-show="patientForm.invoice.$error.required">
+									<!-- 	is required. -->
+											</span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span> <select
+														ng-model="payment.paymentStatus" name="invoice"
+														id="" class="form-control" required="">
+														<!-- <option value="" class="active">Select Payment
+															Status</option>
+														<option value="PAID">Paid</option>
+														<option value="PARTIALLYPAID" selected>Partially
+															Paid</option>
+														<option value="UNPAID">Unpaid</option> -->
+														<option value="">Select Payment Status</option>
+														<option value="COMPLETE">COMPLETE</option>
+											<option value="PENDING">PENDING</option>
+											<option value="PARTIAL">PARTIAL</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<!-- ="08/05/2018" -->
+												<label class="col-form-label"><span
+										ng-if="payment.paidDate == undefined || payment.paidDate =='' "
+										style="color: red">*</span>Paid Date</label>
+										<span style="color: red"
+										ng-show="(patientForm.paidDat.$touched && patientForm.paidDat.$invalid)">
+										<span ng-show="patientForm.paidDat.$error.required">
+											is required.</span>
+									</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-calendar"></i></span>
+													<!-- <input type="text" ng-model="invoiceSingle.paidDate" value="{{invoiceSingle.paidDate | date : 'yyyy-MM-dd'}}" /> -->
+													<input type="date" name="paidDat"
+														ng-model="payment.paidDate" placeholder="yyyy-MM-dd"
+														class="form-control date">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Cost Per Session </label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required  name="invoice[name]"
+														class="form-control" ng-change="calamount(payment.noOfSessions,assignedAmount,patientObject.id);"
+											ng-model="assignedAmount"
+														placeholder="Cost Per Session">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Paying For NoOf Sessions</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sort-numeric-asc"></i></span> <input type="number" name="invoice[name]"
+														class="form-control" ng-model="payment.noOfSessions" 
+					ng-change="calamount(payment.noOfSessions,assignedAmount,patientObject.id);" 
+														placeholder="Paying  Sessions">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Paid Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="totalamount" readonly
+														placeholder="Paid Amount">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Bal Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="calamountObj.remainingAmount"
+													readonly	placeholder="Bal Amount">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Total Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="calamountObj.totalAmount"
+													readonly	placeholder="Total Amount">
+												</div>
+											</div>
+									<!-- <div class="col-sm-6 form-group">
+				<label>Payment Type</label> 
+										
+										
+										<select ng-model="payment.paymentTypes"
+														class="form-control" name="paymeth"
+														aria-required="true" aria-invalid="true"
+														ng-options="country as country.name  for country in paymethodsList track by country.id"
+														required>
+														<option value="" class="active">Select Payment
+															Method</option>
+													</select>
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='CHECK'">
+										<label>Check Number</label> <input type="text"
+											ng-model="payment.checkNumber" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='CHECK'">
+										<label>Check Issued Bank</label> <input type="text"
+											ng-model="payment.checkIssuedBank" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='DD'">
+										<label>DD Number</label> <input type="text"
+											ng-model="payment.ddNumber" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='DD'">
+										<label>DD Issued Bank</label> <input type="text"
+											ng-model="payment.ddIssuedBank" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group">
+										<label><span
+					ng-if="modeOfPaymentTypes == undefined || modeOfPaymentTypes =='' "
+					style="color: red">*</span>Mode Of Payment Type</label> <span
+					style="color: red"
+					ng-show="(patientForm.insuranceCompanyName.$touched && patientForm.insuranceCompanyName.$invalid)">
+					<span ng-show="patientForm.insuranceCompanyName.$error.required">
+						is required.</span>
+				</span><select  name="insuranceCompanyName"
+											ng-model="modeOfPaymentTypes" class="form-control" required="required">
+											<option value="" class="active">Select Mode Of
+												Payment Type</option>
+											<option ng-value="ONCE">ONCE</option>
+											<option ng-value="WEEKLY">WEEKLY</option>
+											<option ng-value="MONTHLY">MONTHLY</option>
+										</select>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label><span
+					ng-if="assignedAmount == undefined || assignedAmount =='' "
+					style="color: red">*</span>Cost Per Session</label> <span style="color: red"
+					ng-show="(patientForm.planCode.$touched && patientForm.planCode.$invalid)">
+					<span ng-show="patientForm.planCode.$error.required"> is
+						required.</span>
+				</span><input type="number" name="planCode"
+										ng-change="calamount(payment.noOfSessions,assignedAmount,patientObject.id);"
+											ng-model="assignedAmount" class="form-control" required="required">
+									</div>
+									
+									<div class="col-sm-6 form-group">
+										<label><span
+					ng-if="payment.noOfSessions == undefined || payment.noOfSessions =='' "
+					style="color: red">*</span>Paying For No. Of Sessions</label> <span style="color: red"
+					ng-show="(patientForm.insurancecountry.$touched && patientForm.insurancecountry.$invalid)">
+					<span ng-show="patientForm.insurancecountry.$error.required">
+						is required.</span>
+				</span><input type="number" name="insurancecountry" ng-model="payment.noOfSessions" class="form-control"
+					ng-change="calamount(payment.noOfSessions,assignedAmount,patientObject.id);" required="required">
+									</div>
+									
+									<div class="col-sm-6 form-group">
+										<label><span
+					ng-if="payment.paidDate == undefined || payment.paidDate =='' "
+					style="color: red">*</span>Paid Date</label> <span style="color: red"
+					ng-show="(patientForm.insurancestate.$touched && patientForm.insurancestate.$invalid)">
+					<span ng-show="patientForm.insurancestate.$error.required">
+						is required.</span>
+				</span><input type="date"  name="insurancestate" class="form-control"
+											ng-model="payment.paidDate" required="required">
+									</div>
+									
+								<div class="col-sm-6 form-group">
+										<label>Paid Amount</label> <input type="text" 
+											ng-model="totalamount" readonly
+											class="form-control">
+									</div>
+									
+									<div class="col-sm-6 form-group">
+										<label>Bal Amount</label> <input type="text" readonly
+											ng-model="calamountObj.remainingAmount" 
+											class="form-control">
+									</div>
+									
+									<div class="col-sm-6 form-group">
+										<label>Total Amount</label> 
+										<input type="text" readonly
+											ng-model="calamountObj.totalAmount" 
+											class="form-control">
+									</div> -->
+									
+									<!-- <div class="col-sm-6 form-group">
+										<label>Payment Status</label> <select
+											ng-model="payment.paymentStatus" class="form-control">
+											<option value="" class="active">Select
+												Payment Status</option>
+											<option value="COMPLETE">COMPLETE</option>
+											<option value="PENDING">PENDING</option>
+											<option value="PARTIAL">PARTIAL</option>
+										</select>
+									</div> -->
+									</div>
+									</form>
+										
+									<div align="center" class="col-sm-12">
+								<br>
+
+								<button class="btn btn-primary" ng-disabled="!payment.paidDate|| !payment.noOfSessions|| !assignedAmount || !modeOfPaymentTypes" ng-click="addPayment(payment,calamountObj,assignedAmount,totalamount,patientObject,modeOfPaymentTypes,paymentTypes,session)">Submit</button>
+								<button class="btn btn-danger" ng-click="gotoBillingsList();">Cancel</button>
+							</div>
+									<!--  -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

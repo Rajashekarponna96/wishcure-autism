@@ -1,0 +1,320 @@
+<div class="content-wrapper scrollpage">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-child"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Patient List</h1>
+			<small>Here you can view or update patient details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Patient List</li>
+			</ol>
+
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-success" ng-click="gotoAdd();"> <i
+								class="fa fa-plus"></i> Search Patient
+							</a>
+						</div>
+
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="patientSearchForm">
+
+							<div class="content-block content-block-horizantal"
+								style="background-color: rgba(128, 128, 128, 0.2)">
+								<div class="content-block-ttl">Patient Info BY</div>
+								<div class="content-block-main">
+									<div class="row content-input">
+										<div class=" col-md-12">
+
+
+											<div class="col-lg-4 form-group">
+												<label><span
+													ng-if="patient.regNo == undefined || patient.regNo == '' "
+													style="color: red">*</span>Reg No</label> <span style="color: red"
+													ng-show="(patientSearchForm.regNo.$patientSearchFormpatientSearchForm.regNo.$invalid)">
+													<span ng-show="patientSearchForm.regNo.$error.required">
+														is required.</span>
+												</span><input type="text" value="" ng-model="patient.regNo"
+													class="form-control">
+
+											</div>
+											<div class="col-lg-1 form-group">
+												<label></label><br> <span>OR</span>
+											</div>
+
+											<div class="col-lg-4 form-group">
+												<label><span
+													ng-if="patient.ssn == undefined || patient.ssn == '' "
+													style="color: red">*</span>Aadhaar Number:</label> <span
+													style="color: red"
+													ng-show="(patientSearchForm.ssn.$touched && patientSearchForm.ssn.$invalid)">
+													<span ng-show="patientSearchForm.ssn.$error.required">
+														is required.</span>
+												</span> <input type="text" value="" class="form-control"
+													ng-model="patient.ssn" maxlength="12" required>
+												<!-- ng-blur="searchPatientBySSN(patient.ssn);" -->
+											</div>
+
+											<div class="col-lg-3 form-group">
+												<label></label><br>
+												<button type="button" name="search" id="search-btn"
+													class="btn btn-primary nextBtn pull-right"
+													ng-click="searchByPatient(patient.regNo,patient.ssn);">
+													Search</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div ng-if="patientdata != undefined && patientdata != '{}'"
+								ng-init="getAllPatientRegistrationTypesList();">
+
+								<hr>
+
+								<div class="content-block content-block-horizantal"
+									style="background-color: rgba(128, 128, 128, 0.2)">
+									<div class="content-block-ttl">Child Info</div>
+									<div class="content-block-main">
+										<div class="row content-input">
+											<div class=" col-md-12">
+												<div class="col-sm-4">
+													<label>Child Name : </label> <input type="text"
+														name="child_id" ng-model="patientdata.firstName"
+														placeholder="Child Name" readonly>
+												</div>
+												<div class="col-sm-4">
+													<label>Date of Birth : </label> <input type="text" value=""
+														ng-model="patientdata.dateOfBirth" readonly>
+												</div>
+
+												<div class="col-sm-4">
+													<label>Age : </label> <input type="text"
+														name="appointment_id" value="" ng-model="patientdata.age"
+														placeholder="Age" readonly>
+												</div>
+											</div>
+											<div class=" col-md-12">
+												<div class="col-sm-4">
+													<label>Sex : </label> <input type="text" name="gender"
+														ng-model="patientdata.gender" placeholder="Gender"
+														readonly>
+												</div>
+												<div class="col-sm-4">
+													<label>Phone Number : </label> <input type="text"
+														name="mobileNumber" ng-model="patientdata.mobileNumber"
+														placeholder="Phone Number" readonly>
+												</div>
+												<div class="col-sm-4">
+													<label>Email : </label> <input type="text" name="email"
+														ng-model="patientdata.email" placeholder="email" readonly>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<hr>
+
+								<div class="content-block content-block-horizantal"
+									style="background-color: rgba(128, 128, 128, 0.2)">
+									<div class="content-block-ttl">Child Questionnaire</div>
+									<div class="content-block-main">
+										<div class="row content-input">
+											<div class=" col-md-12">
+												<div class="col-md-4 form-group" align="left">
+													<label>Do You Want to Change Registration Type? </label>
+												</div>
+												<div class="col-lg-6 form-group">
+													<label><span
+														ng-if="patientdata.patientRegistrationType == undefined || patientdata.patientRegistrationType == '' "
+														style="color: red">*</span>Registration Type</label> <span
+														style="color: red"
+														ng-show="(patientSearchForm.patientRegistrationType.$touched && patientSearchForm.patientRegistrationType.$invalid)">
+														<span
+														ng-show="patientSearchForm.patientRegistrationType.$error.required">
+															is required.</span>
+													</span> <select ng-model="patientdata.patientRegistrationType"
+														class="form-control" name="patientRegistrationType"
+														ng-options="patientRegistrationType as patientRegistrationType.name  for patientRegistrationType in patientRegistrationTypes track by patientRegistrationType.id">
+														<option value="">Select Registration Type</option>
+													</select>
+												</div>
+											</div>
+											<br>
+											<div class=" col-md-12">
+												<div class="col-md-4 form-group" align="left">
+													<label>Do You Want to Change Hospital?</label>
+												</div>
+												<div class="col-lg-6 form-group">
+													<label><span
+														ng-if="patientdata.patientRegistrationType == undefined || patientdata.patientRegistrationType == '' "
+														style="color: red">*</span>Registration Type</label> <span
+														style="color: red"
+														ng-show="(patientSearchForm.patientRegistrationType.$touched && patientSearchForm.patientRegistrationType.$invalid)">
+														<span
+														ng-show="patientSearchForm.patientRegistrationType.$error.required">
+															is required.</span>
+													</span> <select ng-model="patientdata.patientRegistrationType"
+														class="form-control" name="patientRegistrationType"
+														ng-options="patientRegistrationType as patientRegistrationType.name  for patientRegistrationType in patientRegistrationTypes track by patientRegistrationType.id">
+														<option value="">Select Registration Type</option>
+													</select>
+												</div>
+											</div>
+											<br>
+											<div class=" col-md-12">
+												<!-- <div class="card-name ng-binding col-md-12">Do You Want Separation Process of a Child? </div> -->
+												<div class="col-md-4 form-group" align="left">
+													<label>Do You Want Separation Process of a Child?</label> <label
+														class="radio-inline"><input type="radio"
+														name="evalutionDone" ng-checked="false"
+														ng-model="patientObject.evalutionDone" value="true">Yes</label>
+													<label class="radio-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+														type="radio" name="evalutionDone"
+														ng-model="patientObject.evalutionDone" ng-checked="true"
+														value="false">No
+													</label>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+							<div id="mydiv" style="display: none">
+								<div class="col-sm-6 form-group">
+									<span ng-if="patient.date == undefined || patient.date == '' "
+										style="color: red">*</span><label>Date</label> <span
+										style="color: red"
+										ng-show="(patientSearchForm.date.$touched && patientSearchForm.date.$invalid)">
+										<span style="color: red"
+										ng-show="patientSearchForm.date.$error.required"> is
+											required.</span>
+									</span> <input type="text" date="dd-MM-yyyy" class="form-control"
+										name="date" id="date" ng-model="patient.date"
+										readonly="readonly">
+								</div>
+
+								<div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.reasonForChange == undefined || patient.reasonForChange =='' "
+										style="color: red">*</span>Reason For Change</label> <span
+										style="color: red"
+										ng-show="(patientSearchForm.reasonForChange.$touched && patientSearchForm.reasonForChange.$invalid)">
+										<span
+										ng-show="patientSearchForm.reasonForChange.$error.required">
+											is required.</span>
+									</span> <input type="text" name="reasonForChange" class="form-control"
+										placeholder="Enter Reason For Change"
+										ng-model="patient.reasonForChange" required>
+								</div>
+
+								<div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.registartionType == undefined || patient.registartionType == '' "
+										style="color: red">*</span>Registration Change</label> <span
+										style="color: red"
+										ng-show="(patientSearchForm.registartionType.$touched && patientSearchForm.registartionType.$invalid)">
+										<span
+										ng-show="patientSearchForm.registartionType.$error.required">
+											is required.</span>
+									</span> <select class="form-control"
+										ng-model="patient.registartionType" onchange="getDepts();"
+										name="registartionType" id="registartionType"
+										aria-required="true" aria-invalid="true" required>
+										<option value="" class="active">Select Registration
+											Change</option>
+										<option value="In Patient">In Patient</option>
+										<option value="Out Patient">Out Patient</option>
+										<option value="Internal Transfer">Internal Transfer</option>
+									</select>
+
+								</div>
+
+								<div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.registartionType == undefined || patient.registartionType == '' "
+										style="color: red">*</span>Clinical Change</label> <span
+										style="color: red"
+										ng-show="(patientSearchForm.registartionType.$touched && patientSearchForm.registartionType.$invalid)">
+										<span
+										ng-show="patientSearchForm.registartionType.$error.required">
+											is required.</span>
+									</span> <select class="form-control"
+										ng-model="patient.registartionType" onchange="getDepts();"
+										name="registartionType" id="registartionType"
+										aria-required="true" aria-invalid="true" required>
+										<option value="" class="active">Select Clinical
+											Change</option>
+										<option value="Apollo">Apollo</option>
+										<option value="KIMS">KIMS</option>
+										<option value="Star">Star</option>
+									</select>
+
+								</div>
+
+								<div class="col-sm-3 form-group">
+									<label>Status</label>
+								</div>
+								<div class="col-sm-3 form-group">
+									<label class="radio-inline"><input type="radio"
+										name="status" value="1" ng-checked="true" ng-value="true"
+										ng-model="patient.active">Active</label> <label
+										class="radio-inline"><input type="radio"
+										ng-model="patient.active" name="status" value="0"
+										ng-checked="false" ng-value="false">Inactive</label>
+								</div>
+
+								<div class="reset-button col-sm-12" align="center">
+									<button class="btn btn-success" data-toggle="tooltip" title=""
+										data-original-title="Click here to save Patient">Submit</button>
+									<button class="btn btn-danger" type="button"
+										ng-click="gotoback()">Cancel</button>
+								</div>
+
+							</div>
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

@@ -1,0 +1,159 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotopatientDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Patient Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoCommuncationAddress();" type="button"
+				class="btn btn-default btn-circle"  >2</a>
+			<p>
+				<small>Communication Address</small>
+			</p>
+		</div>
+		<!-- <div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoUploadDocuments();" ng-style="activeColor1"
+				type="button" class="btn btn-default btn-circle"  >3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div> -->
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoClientType();" type="button"
+				class="btn btn-default btn-circle"  >3</a>
+			<p>
+				<small>Client Type</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button"
+				class="btn btn-default btn-circle"  >4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle"  >5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="col-sm-12" id="step-3" ng-init="getAllDocumentLookupFolders();">
+	<form action="" name="patientForm">
+		<div class="col-sm-6">
+			<span ng-if="lookupFolder == undefined || lookupFolder == '' "
+				style="color: red">*</span> <label>Document Type{{lookupFolder}}</label> <span
+				style="color: red"
+				ng-show="(patientForm.documentType.$touched && patientForm.documentType.$invalid)">
+				<span style="color: red"
+				ng-show="patientForm.documentType.$error.required"> is
+					required.</span>
+			</span> <select name="documentType" class="form-control"
+				ng-model="lookupFolder"
+				ng-options="folder as folder.folderName  for folder in listOfDocumentlookupFolders track by folder.id"
+				required class="form-control">
+				<option value="" class="active">Select Document Type</option>
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label>Upload Document</label>&nbsp;&nbsp; <input type="file"
+				name="file"
+				onchange="angular.element(this).scope().documentChanged(this.files);"><span
+				style="color: red"> Only PDF Files are allowed to upload</span>
+		</div>
+	</form>
+	<div class="col-sm-12">
+		<style>
+.scroll {
+	height: 200px;
+	display: block;
+	overflow: scroll overflow-y: auto;
+	overflow-x: auto;
+}
+</style>
+		<div class="col-sm-12">
+			<br> <label>PatientUpload Documents</label> <br>
+		</div>
+		<table class="col-sm-4 scroll">
+			<tr ng-repeat="document in listOfDocumentlookupFolders">
+				<th><i class="fa fa-folder"
+					style="font-size: 24px; color: yellow"
+					ng-click="getPatientDocuments('PATIENT');"></i>{{document.folderName}}
+				<th>
+			</tr>
+			<tr ng-repeat="document in patientDocumentsList">
+				<td ng-click="displayPDF(document.id)">{{document.name}}</td>
+				<td><span>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"
+						style="color: red;" ng-click="deleteDocumentalert(document)"
+						aria-hidden="true" data-toggle="modal" data-target="#ordine"></i>
+				</span></td>
+			</tr>
+			<tr ng-if="patientDocumentsList.length==0 ">
+				<td colspan="4" align="center">
+					<h3>
+						<i class="fa fa-meh-o"></i> No Documents found!
+					</h3>
+				</td>
+			</tr>
+		</table>
+		<!-- <table class="col-sm-4 scroll">
+			<tr>
+				<th><i class="fa fa-folder"
+					style="font-size: 24px; color: yellow"
+					ng-click="getEvaluationDocuments('EVALUATION');"></i>Evaluation
+				<th>
+			</tr>
+			<tr ng-repeat="document in evaluationDocumentsList">
+				<td ng-click="displayPDF(document.id)">{{document.name}}</td>
+				<td><span>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"
+						style="color: red;" ng-click="deleteDocumentalert(document)"
+						aria-hidden="true" data-toggle="modal" data-target="#ordine"></i>
+				</span></td>
+			</tr>
+			<tr ng-if="evaluationDocumentsList.length==0 ">
+				<td colspan="12" align="center">
+					<h3>
+						<i class="fa fa-meh-o"></i> No Documents found!
+					</h3>
+				</td>
+			</tr>
+		</table>
+		<table class="col-sm-4 scroll">
+			<tr>
+				<th><i class="fa fa-folder"
+					style="font-size: 24px; color: yellow"
+					ng-click="getTherapistDocuments('THERAPIST')"></i>Billings
+				<th>
+			</tr>
+			<tr ng-repeat="document in therapistDocumentsList">
+				<td src="document" ng-click="displayPDF(document.id)"
+					id="displayPdf">{{document.name}}</td>
+				<td><span>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"
+						style="color: red;" ng-click="deleteDocumentalert(document)"
+						aria-hidden="true" data-toggle="modal" data-target="#ordine"></i>
+				</span></td>
+			</tr>
+			<tr ng-if="therapistDocumentsList.length == 0">
+				<td colspan="12" align="center">
+					<h3>
+						<i class="fa fa-meh-o"></i> No Documents found!
+					</h3>
+				</td>
+			</tr>
+		</table> -->
+	</div>
+	<div class="col-sm-12">
+		<br>
+		<button class="btn btn-primary nextBtn pull-left" type="button"
+			ng-click="gotoCommuncationAddress();">Previous</button>
+		<button class="btn btn-primary nextBtn pull-right" type="button"
+			ng-click="gotoClientType();">Next</button>
+		</button>
+	</div>
+</div>

@@ -1,0 +1,660 @@
+<div class="content-wrapper"
+	ng-init="getAllActiveTherapists();getAllRegistrations();getNewPatientsCount();totalPatientsRegistered();getTodayPatientsData();getActiveDoctorsChartDataPerPresentYear();getActiveUsersChartDataPerPresentYear();getTotalPatientsRegisteredChartDataPerPresentYear();getAllactiveAdmins();getAllInactiveAdmins();getAllactiveSiteAdmins();getAllInactiveSiteAdmins();
+	getAllActiveSites();getAllInactiveSites();getAllInactiveTherapists();inActivePatients();getAllAppointmentsCountByRole();getAllEnterPrisesCompanies(type);getAllIndividualsCompanies(type);getAllActivepersonsForInternalDashboard();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-tachometer"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Dashboard</h1>
+			<small>Here you can navigate to respective dashboards.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Dashboard</li>
+				
+			</ol>
+		</div>
+	</section>
+	
+	<!-- <section class="content-header">
+		<form action="#" method="get"
+			class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+			<div class="input-group">
+				<input type="text" name="q" class="form-control"
+					placeholder="Search..."> <span class="input-group-btn">
+					<button type="submit" name="search" id="search-btn" class="btn">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</form>
+		<div class="header-icon">
+			<i class="fa fa-tachometer" style="font-size:40px;"></i>
+		</div>
+		<div class="header-title">
+			<h1>Dashboard</h1>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+		</div>
+	</section> -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'" ng-click="gotoActiveAdmins();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveAdmins}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Admin</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'"
+				ng-click="gotoInActiveAdmins();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInActiveAdmins}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Inactive Admin</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				 ng-if="loggedUserRole=='Super Admin'" ng-click="gotoActiveSiteList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveSites}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Facilities</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				 ng-if="loggedUserRole=='Super Admin'" ng-click="gotoInActiveSiteList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInActiveSites}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Inactive Facilities</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'"
+				ng-click="gotoactiveTherapists();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'"
+				ng-click="gotoinActiveTherapists();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInaciveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Inactive Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'" ng-click="gotousers();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfRegisteredUsers}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Users</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Super Admin'||loggedUserRole=='Individual'"
+				ng-click="gotopatientList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if="loggedUserRole=='Therapist'" ng-click="gotopatientList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+							<h4>Engaged</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if=" loggedUserRole=='Super Admin' || loggedUserRole=='Individual' || loggedUserRole=='Therapist'"
+				ng-click="gotopatientListInactive();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePatients}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Inactive Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if=" loggedUserRole=='Super Admin' || loggedUserRole=='Individual' || loggedUserRole=='Therapist'"
+				ng-click="gototTodaypatientList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{count}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if=" loggedUserRole=='Super Admin' || loggedUserRole=='Individual'"
+				ng-click="appointmentslistes();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h3>Total Appointments</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-click="gotoInvoicePage1(loggedUsername)"
+				ng-if=" loggedUserRole=='Super Admin' || loggedUserRole=='Individual'">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<!-- <h2>
+								<span class="count-number">{{numberOfActiveTherapists+numberOfActiveAdmins}}</span>
+							</h2> -->
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Billing Users</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			 <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if=" loggedUserRole=='Super Admin' || loggedUserRole=='Individual' "
+				ng-click="gotoAppointments();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Total Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div>  -->
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-if=" loggedUserRole=='Therapist'" ng-click="gotoAppointments();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Charts -->
+			<div class="row">
+
+				<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 " ng-if=" loggedUserRole!='Therapist'">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Active Doctors</h4>
+								<h5>For Present Year</h5>
+							</div>
+						</div>
+						<canvas id="line" class="chart chart-line" chart-data="data"
+							chart-labels="labels" chart-series="series"
+							chart-options="options" chart-dataset-override="datasetOverride"
+							chart-click="onClick" style="display: block;">
+                        </canvas>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 " ng-if=" loggedUserRole!='Therapist'">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Active Users</h4>
+								<h5>For Present Year</h5>
+							</div>
+						</div>
+						<canvas id="line" class="chart chart-line" chart-data="data5"
+							chart-labels="labels5" chart-series="series5"
+							chart-options="options" chart-dataset-override="datasetOverride"
+							chart-click="onClick" style="display: block;">
+                        </canvas>
+					</div>
+				</div>-->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 "
+					ng-if=" loggedUserRole=='Individual' ">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Total Patients Registered-Year</h4>
+							</div>
+						</div>
+						<canvas id="line" class="chart chart-line" chart-data="data6"
+							chart-labels="labels6" chart-series="series6"
+							chart-options="options" chart-dataset-override="datasetOverride"
+							chart-click="onClick" style="display: block;">
+                        </canvas>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 "
+					ng-if=" loggedUserRole=='Therapist' || loggedUserRole=='Individual'  ">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Today Patients-Week</h4>
+							</div>
+						</div>
+						<canvas id="bar" class="chart chart-bar" chart-data="data3"
+							chart-labels="labels3" chart-series="series3">
+                            </canvas>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 "
+					ng-if=" loggedUserRole=='Therapist'">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Patients Engaged-Year</h4>
+							</div>
+						</div>
+						<canvas id="line" class="chart chart-line" chart-data="data6"
+							chart-labels="labels6" chart-series="series6"
+							chart-options="options" chart-dataset-override="datasetOverride"
+							chart-click="onClick" style="display: block;">
+                        </canvas>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Product Super Admin'" ng-click="gotoRegisteredEnterPrisesCompanies();">
+					<div class="panel panel-bd cardbox">
+						<div class="panel-body">
+							<div class="statistic-box">
+								<h2>
+									<span class="count-number">{{enterpriseList}}</span>
+								</h2>
+							</div>
+							<div class="items pull-left">
+								<i class="fa fa-user-circle fa-2x"></i>
+								<h4>Multi Clinic</h4>{{type}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Product Super Admin'" ng-click="gotoRegisteredIndividualsCompanies();">
+					<div class="panel panel-bd cardbox">
+						<div class="panel-body">
+							<div class="statistic-box">
+								<h2>
+									<span class="count-number">{{individualsList}}</span>
+								</h2>
+							</div>
+							<div class="items pull-left">
+								<i class="fa fa-user-circle fa-2x"></i>
+								<h4>Single Clinic</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<!--  Site DashBoard -->
+				<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"  ng-if=" loggedUserRole=='Facility Manager'" ng-click="gotoActiveUsersOfSite(site);"
+				 >
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{activePersonsList}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Users</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'"
+				ng-click="gotoInActiveUsersOfSite();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePersonsList}}0</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Users</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			
+			 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'"
+				ng-click="gotoactiveTherapistsOfSite()">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if="loggedUserRole=='Facility Manager'"
+				ng-click="gotoinActiveTherapistsOfSite();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInaciveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'" ng-click="gotousers(siteName);"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfRegisteredUsers}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Users</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			 
+			 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'" ng-click="gotopatientListactive();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Patients</h4>
+							
+						</div>
+					</div>
+				</div>
+			</div> 
+			 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'" ng-click="gotopatientListInactive();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePatients}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'" ng-click="gotopatientList();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if=" loggedUserRole=='Facility Manager'" ng-click="gototTodaypatientList();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{count}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			
+			
+			
+			 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if="loggedUserRole=='Facility Manager'" ng-click="appointmentslists();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Total Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			
+			 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if="loggedUserRole=='Facility Manager'" ng-click="gotoAppointments();"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div> 
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-if="loggedUserRole=='Facility Manager'" ng-click="gotoInvoicePage1(siteName)"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">
+								<!-- {{numberOfActiveTherapists+numberOfActiveAdmins}} -->
+								</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Billing Invoices</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+				
+				<!-- Site DashBoard End -->
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Data Used</h4>
+							</div>
+						</div>
+						<div id="pie" dx-pie-chart="chartOptions"></div>
+					</div>
+				</div>
+
+
+				<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 " ng-if=" loggedUserRole!='Therapist'">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h4>Today Patient Information</h4>
+								<h5>for present week</h5>
+							</div>
+						</div>
+						<canvas id="bar" class="chart chart-bar" chart-data="data3"
+							chart-labels="labels3" chart-series="series3">
+                            </canvas>
+					</div>
+				</div> -->
+
+			</div>
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+

@@ -1,0 +1,194 @@
+<div class="content-wrapper scrollpage" ng-init="getAllExpenseMonthWiseByLoggedInUserName();getAllExpensesCompnywise();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Monthly Expenses List</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Monthly Expenses List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" >
+
+						<div class="btn-group" ng-click="gotoAddMonthlyClinicExpenses();">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								Monthly Expenses
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+								<div class="input-group custom-search-form">
+										<input type="text" class="form-control" ng-model="search"
+											placeholder="search.."><span
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- <div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										      <th>Serial No</th>
+										<th>Month Date</th>
+										<th>Amount</th>
+										<th>Action</th>
+										<th>Update</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="expense in expenseMonthWiseList | filter:search ">
+										  <td><input type="radio" name="radioGroup">
+                                       <label>{{department.id}}</label>   
+                                   </td>
+                                      <td>{{$index+1}}</td>
+										<td>{{expense.date}}</td>
+										<td>{{expense.amount}}</td>
+										
+										<td>
+											 <button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoOverView(monthlyExpense);"
+												title="Overview" >
+												<i class="fa fa-eye" aria-hidden="true"></i>
+											</button> 
+											<a ng-click="getSitesBasedOnCompany1(site);"
+														class="btn btn-outline btn-warning btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="Overview"><i
+														class="fa fa-eye"></i></a>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right" ng-show="hasFeature('Departent Management').canDelete==true"
+												ng-click="deleteCurrency(currency.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+									<tr ng-if="currencyLists.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> --><div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										      <th>Serial No</th>
+										<th> Date</th>
+										<th>Paid Amount</th>
+										<th>Status</th>
+										<th>Action</th>
+										<!-- <th>Update</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="expense in expensesInCompanyList | filter:search ">
+										
+                                      <td>{{$index+1}}</td>
+										<td>{{expense.paidDate}}</td>
+										<td>{{expense.paidAmount}}</td>
+										
+										<td><span class="label-success label label-default"
+											> {{expense.paymentStatus}}</span></td>
+										<td>
+											 <button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoOverView(monthlyExpense);"
+												title="Overview" >
+												<i class="fa fa-eye" aria-hidden="true"></i>
+											</button> 
+											
+											<!-- <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right" ng-show="hasFeature('Departent Management').canDelete==true"
+												ng-click="deleteExpense(monthlyExpense.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button> -->
+											
+											 <button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoUpdateClinicExpense(monthlyExpense);"
+												title="Overview" >
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button> 
+										</td>
+									</tr>
+									<tr ng-if="currencyLists.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+								<li><a rel="next" ng-click="firstPage();">First</a></li>
+								<li><a rel="next" class="btn btn-info btn-md" style="padding-bottom: 7px;"
+									data-toggle="tooltip" data-placement="left"
+									ng-click="previousPage();" title="prev"> <i
+										aria-hidden="true"></i><<
+								</a></li>
+								<li><a rel="next" class="btn btn-info btn-md" style="padding-bottom: 7px;"
+									data-toggle="tooltip" data-placement="right"
+									ng-click="nextPage();" title="next"> <i aria-hidden="true"></i>>>
+								</a></li>
+								<li><a rel="next" ng-click="lastPage();">Last</a></li>
+							</ul>
+						</div>
+						
+						
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

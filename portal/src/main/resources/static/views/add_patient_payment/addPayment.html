@@ -1,0 +1,75 @@
+<div class="panel-body" ng-init="getCycles();"
+	>
+	<form>
+		<!-- <div class="col-sm-6">
+			<label>Patient Name</label> <input type="text" ng-value="patient.firstName" ng-model="patient.firstName" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Parent Name</label> <input type="text" ng-value="patient.gaurdian"  ng-model="patient.gaurdian" class="form-control">
+		</div> -->
+		<div class="col-sm-6">
+			<label>Payment Type</label> <select class="form-control"
+				ng-model="payment.paymentTypes">
+				<option value="" class="active">Select Payment Type</option>
+				<option ng-value="CHECK">CHECK</option>
+				<option ng-value="SWIPE">SWIPE</option>
+				<option ng-value="DD">DD</option>
+				<option ng-value="CASH">CASH</option>
+			</select>
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='CHECK'">
+			<label>Check Number</label> <input type="text" ng-model="payment.checkNumber" class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='CHECK'">
+			<label>Check Issued Bank</label> <input type="text" ng-model="payment.checkIssuedBank"
+				class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='DD'">
+			<label>DD Number</label> <input type="text" ng-model="payment.ddNumber" class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='DD'">
+			<label>DD Issued Bank</label> <input type="text" ng-model="payment.ddIssuedBank" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Mode Of Payment Type</label> <select ng-model="payment.modeOfPaymentTypes"
+				class="form-control">
+				<option value="" class="active">Select Mode Of Payment Type</option>
+				<option ng-value="ONCE">ONCE</option>
+				<option ng-value="WEEKLY">WEEKLY</option>
+				<option ng-value="MONTHLY">MONTHLY</option>
+				<option ng-value="YEARLY">YEARLY</option>
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label>Amount</label> <input type="text" ng-model="payment.paidAmount" ng-change="cycles()" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Number of cycles</label> <input type="text" ng-model="payment.noOfCycles"
+				class="form-control">
+		</div>
+		<!-- <div class="col-sm-6">
+			<label>Therapy done date</label> <input type="date" ng-model="payment.therapyDoneDate"
+				class="form-control">
+		</div> -->
+		<div class="col-sm-6">
+			<label>Paid Date</label> <input type="date" ng-model="payment.paidDate" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Total Amount</label> <input type="text" ng-model="payment.totalAmount" class="form-control">
+		</div>
+		<!-- <div class="col-sm-6">
+			<label>Paid Amount</label> <input type="text" ng-model="payment.paidAmount"class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Remaining Amount</label> <input type="text" ng-model="payment.remainingAmount"
+				class="form-control">
+		</div> -->
+	</form>
+	<div align="center" class="col-sm-12">
+	<br>
+		
+		<button class="btn btn-primary" ng-click="addPayment(payment)"
+			ng-disabled="patientForm.$invalid">Save</button>
+			<button class="btn btn-danger" ng-click="gotoList();">Cancel</button>	
+	</div>
+</div>

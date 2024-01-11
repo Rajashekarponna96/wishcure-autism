@@ -1,0 +1,133 @@
+<div class="content-wrapper" >
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<h1>Update Insurance</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Insurance</li>
+			</ol>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoInsuranceLookupList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Insurance
+								List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="siteForm">
+						<div class="col-sm-6 form-group">
+								<label>Insurance Id</label><input type="text" value="" class="form-control" name="siteName"
+									placeholder="Enter InsuranceId"
+									ng-model="insurancelookup1.idNumber" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label><span
+									ng-if="insurancelookup1.insuranceCompanyName == undefined || insurancelookup1.insuranceCompanyName =='' "
+									style="color: red">*</span>Insurance Company Name</label> <span
+									style="color: red" ng-cloak
+									ng-show="(siteForm.siteName.$touched && siteForm.siteName.$invalid)">
+									<span ng-show="siteForm.siteName.$error.required">is
+										required.</span>
+								</span><input type="text" value="" class="form-control" name="siteName"
+									placeholder="Enter Insurance Company Name"
+									ng-model="insurancelookup1.insuranceCompanyName"
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							
+						<div class="col-sm-6 form-group">
+								<label>Email Id</label><span style="color: red"
+									ng-show="siteForm.email.$error.pattern"> Please enter a
+										valid email address!</span>
+								 <span ng-if="siteForm.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="siteForm.$error.emailExists" style="color: red">
+									exists already</span> <input type="email" value=""
+									class="form-control" name="email" placeholder="Enter Email Id"
+									email-available  ng-model="insurancelookup1.emailId"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ "
+									aria-required="true" class="error" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Mobile Number</label><span
+									ng-show="((siteForm.mobileNumber.$error.minlength ||
+                           siteForm.mobileNumber.$error.maxlength) && 
+                           siteForm.mobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="siteForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="siteForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span> <input type="text"
+									class="form-control" phone-input maxlength="14" minlength="14"
+									name="mobileNumber" ng-model="insurancelookup1.mobileNumber"
+									placeholder="Enter Phone Number" aria-required="true"
+									class="error" id="txt_patient_mobileNumber" required>
+							</div>
+							<div class="col-sm-6 form-group"> 
+							<label>Street Address 1</label>
+								<input class="field form-control" type="input"
+									ng-model="insurancelookup1.address1.address1" id="street_number"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Street Address 2</label> <input class="field form-control"
+									ng-model="insurancelookup1.address1.address2" id="route"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>City</label> <input class="field form-control"
+									ng-model="insurancelookup1.address1.city" id="locality"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>State</label> <input class="field form-control"
+									ng-model="insurancelookup1.address1.state" id="administrative_area_level_1"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Country</label> <input class="field form-control"
+									ng-model="insurancelookup1.address1.country" id="country"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Zip code</label> <input class="field form-control" allow-only-numbers
+									maxlength="5" ng-model="insurancelookup1.address1.zipcode" id="postal_code"></input>
+							</div>
+                             <div class="col-sm-6 form-group">
+								<label>Fax</label> <input type="text" class="form-control"  phone-input maxlength="14" minlength="14"
+									placeholder="Enter Fax" ng-model="insurancelookup1.fax" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="insurancelookup1.status" name="status"
+									ng-value="true" ng-checked="!insurancelookup1.status">Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="insurancelookup1.status" name="status" ng-value="false">InActive</label>
+							</div>
+
+							<div class="col-sm-12 reset-button">
+								<button class="btn btn-success"
+									ng-click="updateInsuranceLookup(insurancelookup1);">Update</button>
+								<a class="btn btn-danger" ng-click="gotoInsuranceLookupList()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+</div>

@@ -1,0 +1,289 @@
+
+<div class="content-wrapper scrollpage"
+	ng-init="findAllpatientsByPaginationByRole();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Billings</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Billings</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-if="loggedUserRole !='Therapist'">
+							<a class="btn btn-success" ng-click="gotoAdd();"> <i
+								class="fa fa-plus"></i> Add patient
+							</a>
+						</div>
+						<div class="btn-group" ng-if="loggedUserRole =='Therapist'">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i>
+								patient List
+							</a>
+						</div>
+
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4 "></div>
+								<div class="col-sm-4">
+									<div class="input-group custom-search-form">
+										<input type="text" class="form-control" ng-model="search"
+											placeholder="search.."><span
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead align="center">
+									<tr>
+
+										<th>Name</th>
+										<th>Mobile No</th>
+										<th>Mail Id</th>
+										<th>UCI</th>
+										<th>Status</th>
+										<th colspan="2">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="pa in patientListByAdmin | filter:search | limitTo:patientListByAdmin-1">
+										<td>{{pa.firstName}} {{pa.lastName}}</td>
+										<td ng-if="pa.mobileNumber==undefined"></td>
+										<td ng-if="pa.mobileNumber!=undefined">{{changeMobileNumber(pa.mobileNumber);}}</td>
+										<td>{{pa.email}}</td>
+										<td>{{pa.ucl}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="pa.active==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="pa.active==false"> InActive</span></td>
+
+										<td ng-click="gotoPatientDetails(pa)"><i
+											class="hvr-buzz-out fa fa-eye" data-toggle="tooltip"
+											title="View Details"></i></td>
+									</tr>
+									<tr ng-if="patientListByAdmin.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<table style="border-collapse: collapse; width: 100%;">
+								<tbody>
+									<tr>
+										<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+												<select name="example_length" ng-model="size"
+												ng-change="sizeChanged(size);">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="25">25</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+											</select> records per page
+										</label></td>
+
+
+
+
+										<td align="right" style="padding-right: 20px;">
+											<ul class="pagination pagination-large">
+												<li><a rel="next" ng-click="firstPage();">First</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="left"
+													ng-click="previousPage();" title="prev"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+												</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="right"
+													ng-click="nextPage();" title="next"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+												</a></li>
+												<li><a rel="next" ng-click="lastPage();">Last</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="ordine" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<div class="modal-content ">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Action table</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-heading">
+							<div class="btn-group">
+								<a class="btn btn-primary" href="table.html"> <i
+									class="fa fa-list"></i> Patient List
+								</a>
+							</div>
+						</div>
+						<div class="panel-body">
+
+							<form class="col-sm-12">
+								<div class="col-sm-6">
+									<label>First Name</label> <input type="text"
+										class="form-control" placeholder="Enter First Name" required>
+								</div>
+								<div class="col-sm-6">
+									<label>Last Name</label> <input type="text"
+										class="form-control" placeholder="Enter LastName" required>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label>DOB</label> <input type="DATE" class="form-control"
+										placeholder="Enter DOB" required>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>SSN</label> <input type="text" class="form-control"
+										placeholder="Enter SSN" required>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>UCI</label> <input type="text" class="form-control"
+										placeholder="Enter UCI" required>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label>Age</label> <input type="text" class="form-control"
+										placeholder="Enter Age" required>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label>Parent Name</label> <input type="text"
+										class="form-control" placeholder="Enter Parent Name" required>
+
+								</div>
+								<div class="form-group col-sm-6">
+									<label>Phone</label> <input type="number" class="form-control"
+										placeholder="Enter Phone number" required>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>Address</label>
+									<textarea class="form-control" id="exampleTextarea" rows="3"
+										required></textarea>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label>Sex</label> <label class="radio-inline"> <input
+										type="radio" name="sex" value="1" checked="checked">Male
+									</label> <label class="radio-inline"><input type="radio"
+										name="sex" value="0">Female</label>
+
+								</div>
+								<div class="form-check col-sm-6">
+									<label> Status</label> <label class="radio-inline"> <input
+										type="radio" name="status" value="1" checked="checked">Active
+									</label> <label class="radio-inline"> <input type="radio"
+										name="status" value="0">Inctive
+									</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>Communication Status</label>&nbsp;&nbsp; <label
+										class="checkbox-inline"><input name="sex" value="1"
+										checked="checked" type="checkbox">Email</label> <label
+										class="checkbox-inline"><input name="sex" value="0"
+										type="checkbox">SMS</label>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<b><u>Notes:-</u></b><br> <label>Child Growth</label><br>
+									<label class="checkbox-inline"><input name="AVG"
+										value="1" checked="checked" type="checkbox">Average</label><br>
+									<label class="checkbox-inline"><input name="good"
+										value="1" checked="checked" type="checkbox">Good</label><br>
+									<label class="checkbox-inline"><input
+										name="doingbetter" value="1" checked="checked" type="checkbox">Doing
+										Better</label><br> <label class="checkbox-inline"><input
+										name="needhelp" value="1" checked="checked" type="checkbox">Need
+										Help</label> <br>
+
+								</div>
+								<div class="form-group col-sm-6">
+									<br> <label>Child Concentration</label><br> <label
+										class="checkbox-inline"><input name="AVG" value="1"
+										checked="checked" type="checkbox">ON</label><br> <label
+										class="checkbox-inline"><input name="good" value="1"
+										checked="checked" type="checkbox">betterment</label><br>
+									<label class="checkbox-inline"><input
+										name="doingbetter" value="1" checked="checked" type="checkbox">stable</label><br>
+								</div>
+								<div class="form-group col-sm-12">
+									<label>ABC</label><br> <select class="form-control">
+										<option>xyz</option>
+									</select>
+								</div>
+								<div class="form-control">
+									<textarea class="col-sm-12" placeholder="comments"></textarea>
+									<br>
+								</div>
+
+
+
+								<div class="reset button col-sm-12">
+									<br> <a href="#" class="btn btn-primary">Reset</a> <a
+										href="#" class="btn btn-success">Save</a>
+								</div>
+								<div>
+									<button class="accordion">Section 1</button>
+									<div class="panel">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+											elit, sed do eiusmod tempor incididunt ut labore et dolore
+											magna aliqua. Ut enim ad minim veniam, quis nostrud
+											exercitation ullamco laboris nisi ut aliquip ex ea commodo
+											consequat.</p>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

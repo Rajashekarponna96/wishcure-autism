@@ -1,0 +1,77 @@
+
+<div class="content-wrapper" ng-init="getAllSpeechTheraphyCategorys();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Speech Theraphy Template Category List</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Category List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" ng-click="gotoadd();">
+
+						<div class="btn-group">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add Speech Theraphy Template Category
+								
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Category Name</th>
+										<th>Description</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="speechTheraphyCategory in speechTherahpyTeplateCategoriesList">
+										<td>{{speechTheraphyCategory.speechCategoryName}}</td>
+										<td>{{speechTheraphyCategory.description}}</td>
+										<td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoupdate(speechTheraphyCategory);"
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="deleteSpeechTheraphyCategory(speechTheraphyCategory.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

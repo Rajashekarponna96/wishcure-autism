@@ -1,0 +1,196 @@
+<div class="content-wrapper" ng-init="getCaretakerCategoryLookups();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>CareTaker Milestones</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a>Parent Role</a></li>
+				<li class="active">Parent Role</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<li style="float:left;"
+						ng-repeat="category in categorylookupLists" 
+						ng-click="getAllCaretakerMilestones(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}
+					</a></li><li>
+					<button class="btn btn-primary" data-toggle="tooltip" "
+						data-placement="right" title="Add Category">
+						<i class="" aria-hidden="true">+</i>
+					</button></li>
+				</ul>
+				<!-- Tab panels -->
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body" >
+						
+							<form class="col-sm-6" name="careTakerform" >
+							<div class="form-group" >
+								<label>Category Name</label> <input type="text"
+									class="form-control" name="categoryName"
+									placeholder="Enter Caretaker Category Name"
+									ng-model="categoryLookup.name" required> <span
+									style="color: red"
+									ng-show="(careTakerform.categoryName.$touched && careTakerform.categoryName.$invalid)">
+									<span ng-show="careTakerform.categoryName.$error.required">Category
+										Name is required.</span>
+								</span>
+							</div>
+							<div class="form-group">
+								<label>Category Description</label> <input type="text" 
+									class="form-control" name="categoryDescription"
+									placeholder="Enter Caretaker Category Description"
+									ng-model="categoryLookup.description" 
+									required> <span style="color: red" 
+									ng-show="(careTakerform.categoryDescription.$touched && careTakerform.categoryDescription.$invalid)">
+									<span ng-show="careTakerform.categoryDescription.$error.required">Category
+										Description is required.</span></span>
+							</div>
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button type="button" class="btn btn-success" 
+									ng-click="addCaretakerCategoryLookup();showme=false" >Save</button>
+								<a class="btn btn-warning" ng-click="gotomilstones();showme=false">Cancel</a>
+
+							</div>
+						</form>
+							<div class="col-sm-12 class= table-responsive" align="justify">
+								<div>
+									<table class="table table-bordered table-hover"
+										ng-if="categoryGeneralList.length<1">
+										<thead>
+										<tr>
+											<td colspan="2"><label>Parent Role:</label></td></tr>
+											<tr>
+											<td colspan="2"><label><!-- Each child develops at
+													her own pace, but talk to your baby's doctor if your
+													1-month-old: -->
+													{{categorylookupList[0].careTakerCategoryLookup.description}}
+													</label></td>
+										</tr>
+										</thead>
+										<tbody ng-repeat="question in categorylookupList">
+											<div ng-repeat="answer in question.careTakerAnswerLookups">
+												<tr ng-repeat="answer in question.careTakerAnswerLookups">
+													<td class="col-sm-10">{{question.name}}</td>
+
+													<td class="col-sm-4"><label class="radio-inline">
+															<input type="radio"
+															ng-checked="answer.selectedAnswer=='true'"
+															ng-model="answer.selectedAnswer" ng-value="true">Yes
+													</label> <label class="radio-inline"> <input type="radio"
+															g-checked="answer.selectedAnswer=='false'"
+															ng-model="answer.selectedAnswer" ng-value="false">No
+													</label></td>
+												</tr>
+											</div>
+										</tbody>
+										<tr>
+											<td colspan="2">
+												<div align="center">
+													<button class="btn btn-primary" 
+														ng-click="saveCaretakerMilestones(categorylookupList);">
+														Save</button>
+													<button class="btn btn-danger" ng-click="">Cancel</button>
+												</div>
+											</td>
+										</tr>
+										<tr rowspan="3"
+										ng-if="childQuestionsListByCategoryId.length == 0">
+										<td colspan="2" align="center"><b><h1>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h1></b></td>
+									</tr>
+
+									</table>
+
+
+									<table class="table table-bordered table-hover"
+										ng-if="categoryGeneralList.length>01">
+										<thead>
+											<td colspan="2"><label>Parent Role:</label></td>
+										</thead>
+										<tbody ng-repeat="question in categoryGeneralList">
+											<div ng-repeat="answer in question.careTakerAnswers">
+												<tr ng-repeat="answer in question.careTakerAnswers">
+													<td class="col-sm-10">{{question.name}}</td>
+
+													<td class="col-sm-4"><label class="radio-inline">
+															<input type="radio"
+															ng-checked="answer.selectedAnswer=='true'"
+															ng-model="answer.selectedAnswer" ng-value="true">Yes
+													</label> <label class="radio-inline"> <input type="radio"
+															g-checked="answer.selectedAnswer=='false'"
+															ng-model="answer.selectedAnswer" ng-value="false">No
+													</label></td>
+												</tr>
+										</tbody>
+										<tr>
+											<td colspan="2">
+												<div align="center">
+													<button class="btn btn-primary"
+														ng-click="updateCaretakerMilestones(categoryGeneralList);">
+														Save</button>
+													<button class="btn btn-danger" ng-click="">Cancel</button>
+												</div>
+											</td>
+										</tr>
+										<tr rowspan="3"
+										ng-if="categoryGeneralList.length == 0">
+										<td colspan="2" align="center"><b><h1>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h1></b></td>
+									</tr>
+										</div>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type='text/javascript'>
+	function ScrollDiv() {
+
+		if (document.getElementById('ecran').scrollTop < (document
+				.getElementById('ecran').scrollHeight - document
+				.getElementById('ecran').offsetHeight)) {
+			-1
+			document.getElementById('ecran').scrollTop = document
+					.getElementById('ecran').scrollTop + 1
+		} else {
+			document.getElementById('ecran').scrollTop = 0;
+		}
+	}
+	setInterval(ScrollDiv, 50)
+</script>

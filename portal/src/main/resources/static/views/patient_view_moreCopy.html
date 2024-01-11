@@ -1,0 +1,271 @@
+
+<div class="content-wrapper"
+	ng-init="getAllQuestionCategories();getAllgoals();getAllCratedDatesOfPatientGoals();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Patient Additional Information</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Patient List</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+
+		<div class="row">
+			<div class="content-block content-block-horizantal">
+
+
+				<div
+					class="content-block-main content-input panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-success" ng-click="gotoAppointment();"> <i
+								class="fa fa-list"></i> Appointment List
+							</a>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-sm-4">
+							<label>Name : </label> <input type="text" name="appointment_id"
+								ng-model="patientObject.firstName" placeholder="Name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>SSN : </label> <input type="text" name="appointment_id"
+								value="*************" placeholder="SSN" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Date of Birth : </label> <input type="text" value=""
+								ng-model="patientObject.dateOfBirth |date" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>UCI : </label> <input type="text" name="appointment_id"
+								value="" ng-model="patientObject.ucl" placeholder="UCI" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Age : </label> <input type="text" name="appointment_id"
+								value="" ng-model="patientObject.age" placeholder="Age" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Parent Name : </label> <input type="text" value=""
+								ng-model="patientObject.gaurdian" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Mobile Number : </label> <input type="text"
+								name="appointment_id" value=""
+								ng-model="changeMobileNumber(patientObject.mobileNumber);"
+								placeholder="Mobile Number" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>ClientType : </label> <input type="text"
+								name="appointment_id" value=""
+								ng-model="patientObject.clientType.clientTypeName"
+								placeholder="ClientType" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Sex : </label> <input type="text" value=""
+								ng-model="patientObject.gender" readonly>
+						</div>
+					</div>
+				</div>
+
+				<div class="content-block-main content-input ">
+					<div class="row">
+						<div class="col-sm-4" ng-if="progress.evaluator==undefined">
+							<label>Evaluator : </label> <input type="text"
+								name="appointment_id" ng-model="doctorName"
+								placeholder="Evaluator">
+						</div>
+						<div class="col-sm-4" ng-if="progress.evaluator!=undefined">
+							<label>Evaluator : </label> <input type="text"
+								name="appointment_id" ng-model="progress.evaluator"
+								placeholder="Evaluator">
+						</div>
+						<div class="col-sm-4">
+							<label>Service Coordinator : </label> <input type="text"
+								name="appointment_id" value="" placeholder="Service Coordinator"
+								ng-model="progress.serviceCoordinator">
+						</div>
+						<div class="col-sm-4">
+							<label>Date of Test : </label> <input type="date" value=""
+								ng-model="progress.date">
+						</div>
+					</div>
+				</div>
+				<div  ng-init="getTabs();">
+						<div class="col-sm-12 border">
+							<div class="sample" layout="column" ng-cloak>
+								<md-content class="md-padding"> <md-tabs
+									md-dynamic-height md-selected="selectedIndex" md-border-bottom
+									md-autoselect md-swipe-content> <md-tab
+									ng-repeat="tabname in tabsList" label="{{tabname}}"
+									ng-click="selectedTab(tabname);"> <!-- inner content  -->
+								
+								<div class="col-sm-12" ng-if="isselected">
+									<div class="sample" layout="column" ng-cloak>
+										<md-content class="md-padding"> <md-tabs
+											md-dynamic-height md-selected="selectedIndex"
+											md-border-bottom md-autoselect md-swipe-content> <md-tab
+											ng-repeat="tabdate in datesList" label="{{tabdate}}">
+
+										
+
+										<form layout="column" class="sm-padding"
+											style="padding-top: 0;"ng-if="!isselectedgoalsheet">
+											<div class="col-sm-12">
+												<div align="left" class="col-sm-4">
+													<button class="btn btn-primary" data-toggle="tooltip"
+														data-placement="right" ng-click="addTab();"
+														title="Click here to add new date">
+														<i class="" aria-hidden="true">+</i>
+													</button>
+												</div>
+												<div align="right" class="col-sm-4">
+												<select ng-model="assessment" ng-click="selectedAssessment(assessment);"
+																placeholder="Select Assessment/Evaluation
+															From Template"
+																class="form-control">
+																<!-- <option value="MentalScales">DASII Mental Scales</option>
+																<option value="MotorScales">DASII Motor Scales</option> 
+																 <option value="Mchat">M-chat</option> 
+																 <option value="CareTaker">CareTaker MildStones</option> 
+																 <option value="ChildObservation">Child Observation</option> 
+																 <option value="ScreeningTest">ScreeningTest</option> 
+																 <option value="evalutionSheet">EvalutionSheet Template</option> 
+																 <option value="Behaviour">Behaviour Management Programme</option> 
+																 <option value="CSBS">CSBS Template</option> 
+																<option value="Speech">Speech Evaluation</option> 
+																 <option value="Physiotheraphy">Physiotheraphy Evaluation</option>
+																<option value="NICHQParent">NICHQ Parent Template</option>
+																<option value="NICHQTeacher">NICHQ Teacher Template</option>
+																<option value="ISAABehavioural">ISAA Behavioral Template</option> -->
+																<option value="DQ">DQ Assessment</option>
+																<option value="IQ">IQ Assessment</option>
+																<option value="Autism">Autism</option>
+																<option value="Speechevaluation">Speech Evaluation</option>
+																<option value="Physio">Physiotherapy</option>
+															</select>
+													<!-- <button class="btn btn-primary" data-toggle="tooltip"
+														ng-disabled="!addFlag" data-placement="left"
+														ng-click="gotoGoalTemplate();" title="Add Goal">
+														<i class="" aria-hidden="true">Select Goals From
+															Template</i>
+													</button> -->
+												</div>
+												
+												<div align="right" class="col-sm-4">
+												<select ng-model="assessment" ng-click="selectedAssessment(assessment);"
+																placeholder="Select Assessment/Evaluation From Template" ng-if="assessment =='DQ'"
+																class="form-control">
+																<option value="Mental">DASII Mental Scales</option>
+																<option value="Motor">DASII Motor Scales</option>
+																<option value="DDHD">M-chat</option>
+																
+															</select>
+													<!-- <button class="btn btn-primary" data-toggle="tooltip"
+														ng-disabled="!addFlag" data-placement="left"
+														ng-click="gotoGoalTemplate();" title="Add Goal">
+														<i class="" aria-hidden="true">Select Goals From
+															Template</i>
+													</button> -->
+												</div>
+												<div align="right" class="col-sm-4">
+												<select ng-model="assessment" ng-click="selectedAssessment(assessment);"
+																placeholder="Select Assessment/Evaluation From Template" ng-if="assessment =='IQ'"
+																class="form-control">
+																<option value="Malin">Malian</option>
+																<option value="Bkt">Bkt</option>
+																<option value="Wise">Wise</option>
+																
+															</select>
+													<!-- <button class="btn btn-primary" data-toggle="tooltip"
+														ng-disabled="!addFlag" data-placement="left"
+														ng-click="gotoGoalTemplate();" title="Add Goal">
+														<i class="" aria-hidden="true">Select Goals From
+															Template</i>
+													</button> -->
+												</div>
+												<div align="right" class="col-sm-4">
+												<select ng-model="assessment" ng-click="selectedAssessment(assessment);"
+																placeholder="Select Assessment/Evaluation From Template" ng-if="assessment =='Autism'"
+																class="form-control">
+																<option value="Mchat">M-Chat</option>
+																<option value="Isaa">ISAA</option>
+																<option value="Cars">Cars</option>
+																
+															</select>
+													<!-- <button class="btn btn-primary" data-toggle="tooltip"
+														ng-disabled="!addFlag" data-placement="left"
+														ng-click="gotoGoalTemplate();" title="Add Goal">
+														<i class="" aria-hidden="true">Select Goals From
+															Template</i>
+													</button> -->
+												</div>
+												
+											</div>
+										
+										</form>
+											<div class="tab-content" ui-view></div>
+										</md-tab> </md-tabs> </md-content>
+										<!-- <div class="col-sm-12" align="center" ng-disabled="!addFlag"
+											ng-if="patientGoalList.length > 0">
+											<button class="btn btn-primary"
+												ng-click="addPatientGoals(obj123)" data-toggle="tooltip"
+												data-placement="top"
+												title="Click here to save goals to patient">Save
+												Goals</button>
+											<a ng-click="gotoList();" class="btn btn-danger"
+												data-toggle="tooltip" data-placement="top"
+												title="Click here to cancel the goals">Cancel</a>
+										</div> -->
+									</div>
+
+								</div>
+								
+								<div ng-if="!isselected">
+								<div class="tab-content" ui-view></div>
+								</div>
+
+								</md-tab> </md-tabs> </md-content>
+								<!-- <div class="col-sm-12" align="center" ng-disabled="!addFlag"
+									ng-if="patientGoalList.length > 0">
+									<button class="btn btn-primary"
+										ng-click="addPatientGoals(obj123)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save
+										Goals</button>
+									<a ng-click="gotoList();" class="btn btn-danger"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel the goals">Cancel</a>
+								</div> -->
+							</div>
+
+						</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

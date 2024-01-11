@@ -1,0 +1,184 @@
+<div 
+	ng-init="getAllChildObservationCategoryLookups();getAllChildObservationQuestionLookups();">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<li style="float: left;"
+						ng-repeat="category in childObservationCategoryLookupsList"
+						ng-click="getGeneralQuestionsByPersonAndCatId(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}</a></li>
+					<li>
+						<button class="btn btn-primary" data-toggle="tooltip"
+							ng-if="loggedUserRole!='Parent'" ng-click="gotoback();"
+							data-placement="right" title="Add category">
+							<i class="" aria-hidden="true">+</i>
+						</button>
+					</li>
+
+				</ul>
+				<!-- Tab panels -->
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+
+
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover"
+									ng-if="childObservationQuestionsListByPerosnIdAndCatId.length < 1">
+									<thead>
+										<tr>
+											<td colspan="2"><label>Child Observation:</label></td>
+										</tr>
+										<tr>
+											<td colspan="2"><label>
+													<!-- Each child develops at
+													her own pace, but talk to your baby's doctor if your
+													1-month-old: -->
+													{{childQuestionsListByCategoryId[0].childObservationCategoryLookup.status}}
+											</label></td>
+										</tr>
+									</thead>
+									<!-- Lookup Nunchi vasthundhi -->
+									<tbody ng-repeat="question in childQuestionsListByCategoryId">
+										<tr
+											ng-repeat="answer in question.childObservationAnswerLookups">
+											<td class="col-sm-10">{{question.name}}</td>
+											<td class="col-sm-2">
+												<div
+													ng-repeat="answer in question.childObservationAnswerLookups">
+													<!--&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radio-{{answer.id}}"
+													ng-model="answer.selectedAnswer"
+													ng-disabled="documentsList.length >0">&nbsp;&nbsp; {{answer.shortAnswer}} //ng-disabled="!addFlag"//ng-disabled="!addFlag" -->
+													<input type="radio" ng-model="answer.selectedAnswer"
+														ng-checked="answer.selectedAnswer==true" ng-value="true" />&nbsp;Yes
+													<input type="radio" ng-model="answer.selectedAnswer"
+														ng-checked="answer.selectedAnswer==false" ng-value="false" />&nbsp;No
+												</div>
+											</td>
+										</tr>
+									</tbody>
+
+									<tr
+										ng-if="childQuestionsListByCategoryId.length > 0&&loggedUserRole!='Super Admin'">
+										<td colspan="2">
+											<div align="center">
+												<button class="btn btn-primary"
+													ng-click="saveGeneralQuestion(childQuestionsListByCategoryId,answer)">
+													Save</button>
+												<button class="btn btn-danger" ng-click="">Cancel</button>
+											</div>
+
+										</td>
+									</tr>
+									<tr rowspan="3"
+										ng-if="childQuestionsListByCategoryId.length == 0">
+										<td colspan="2" align="center"><b><h1>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h1></b></td>
+									</tr>
+
+								</table>
+								<!-- generall data -->
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover"
+										ng-if="childObservationQuestionsListByPerosnIdAndCatId.length > 0">
+										<thead>
+											<tr>
+												<td colspan="2"><label>Child Observation:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label>
+														<!-- Each child develops at
+														her own pace, but talk to your baby's doctor if your
+														1-month-old: -->
+														{{childObservationQuestionsListByPerosnIdAndCatId[0].childObservationCategery.status}}
+												</label></td>
+											</tr>
+										</thead>
+										<tbody
+											ng-repeat="childObservationQuestion in childObservationQuestionsListByPerosnIdAndCatId">
+											<tr
+												ng-repeat="answer in childObservationQuestion.childObservationAnswers">
+												<td>{{childObservationQuestion.name}}</td>
+
+												<td class="col-sm-2">
+													<div
+														ng-repeat="answer in childObservationQuestion.childObservationAnswers">
+														<!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radio-{{answer.id}}"
+													ng-model="answer.selectedAnswer"
+													ng-disabled="documentsList.length >0">&nbsp;&nbsp;{{answer.shortAnswer}} //ng-disabled="!addFlag"//ng-disabled="!addFlag" -->
+														<input type="radio" ng-model="answer.selectedAnswer"
+															ng-checked="answer.selectedAnswer==true" ng-value="true" />&nbsp;Yes
+														<input type="radio" ng-model="answer.selectedAnswer"
+															ng-checked="answer.selectedAnswer==false"
+															ng-value="false" />&nbsp;No
+													</div>
+												</td>
+											</tr>
+											<tr rowspan="3"
+												ng-if="childObservationQuestionsListByPerosnIdAndCatId.length == 0 ">
+												<td colspan="2" align="center"><b><h1>
+															<i class="fa fa-meh-o"></i> No records found!
+														</h1></b></td>
+											</tr>
+										</tbody>
+										<tr ng-if="loggedUserRole!='Super Admin'">
+											<td colspan="2"
+												ng-if="childObservationQuestionsListByPerosnIdAndCatId.length > 0">
+												<div align="center">
+													<button class="btn btn-primary"
+														ng-if="loggedUserRole!='Super Admin'"
+														ng-click="updateGeneralQuestion(childObservationQuestionsListByPerosnIdAndCatId,answer)">
+														Save</button>
+													<button class="btn btn-danger"
+														ng-if="loggedUserRole!='Super Admin'" ng-click="">Cancel</button>
+												</div>
+
+											</td>
+										</tr>
+									</table>
+									<!--  -->
+									<div ng-if="loggedUserRole=='Super Admin'">
+										<button class="btn btn-primary" ng-click="showme=true">Add
+											Goal</button>
+										<form name="screeningTestform" ng-show="showme">
+
+
+											<div class="form-group">
+												<div class="col-sm-3">
+													<label>Goal</label>{{questionName}}
+												</div>
+												<div class="form-group col-sm-6">
+													<input type="text" class="form-control" name="QuestionName"
+														placeholder="Enter  Goal" ng-model="goal.questionName">
+
+													<!-- <span style="color: red" 
+										ng-show="(screeningTestform.QuestionName.$touched && screeningTestform.QuestionName.$invalid)">
+										<span ng-show="screeningTestform.QuestionName.$error.required">
+											Goal required.</span></span> -->
+												</div>
+												<div class="col-sm-3" align="center">
+													<br> <br>
+												</div>
+											</div>
+
+										</form>
+										<div class="reset-button col-sm-12" ng-show="showme">
+											<button class="btn btn-success"
+												ng-click="addChildObservationQuestionLookup(goal)"
+												ng-disabled="screeningTestform.$invalid">Add</button>
+											<a class="btn btn-warning" ng-click="showme=false">Cancel</a>
+										</div>
+									</div>
+									<!--  -->
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+</div>

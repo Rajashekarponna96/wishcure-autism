@@ -1,0 +1,236 @@
+<div class="content-wrapper"
+	ng-init="getAllSchoolsByCompanyUserNamePage();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Update School</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">School</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> School
+								List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="schoolForm">
+
+							<div class="col-sm-6 form-group">
+								<label> <span
+									ng-if="updateSchoolObj.identityId == undefined || updateSchoolObj.identityId =='' "
+									style="color: red">*</span>School Identity Id</label>
+									<span style="color: red"
+									ng-show="(schoolForm.schoolId.$touched && schoolForm.schoolId.$invalid)">
+									<span ng-show="schoolForm.schoolId.$error.required">
+										 is required.</span>
+								</span> 
+								<!-- <span style="color: red"
+									ng-show="(schoolForm.schoolName2.$touched && schoolForm.schoolName2.$invalid)">
+									<span ng-show="schoolForm.schoolName2.$error.required">
+										 is required.</span>
+								</span>  -->
+								<input type="text" value=""
+									class="form-control" name="schoolId"
+									placeholder="Enter School Id"
+									ng-model="updateSchoolObj.identityId" required>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label> <span
+									ng-if="updateSchoolObj.schoolName == undefined || updateSchoolObj.schoolName =='' "
+									style="color: red">*</span> School Name
+								</label><span style="color: red"
+									data-ng-show="(schoolForm.schoolName.$touched && schoolForm.schoolName.$invalid)">
+									<span data-ng-show="schoolForm.schoolName.$error.required">
+										 is required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="schoolName" placeholder="Enter School Name"
+									data-ng-model="updateSchoolObj.schoolName" required>
+							</div>
+									<div class="col-sm-6 form-group">
+								<label><!-- <span
+									data-ng-if="updateSchoolObj.email == undefined || updateSchoolObj.email =='' "
+									style="color: red">*</span> -->Email Id</label><span style="color: red"
+									ng-show="(schoolForm.email.$touched && schoolForm.email.$invalid)">
+									<span ng-show="schoolForm.email.$error.required">
+										 is required.</span>
+								</span><span style="color: red"
+									ng-show="schoolForm.email.$error.pattern"> Please enter a
+										valid email address!</span>
+								 <span ng-if="schoolForm.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="schoolForm.$error.emailExists" style="color: red">
+									exists already</span> <input type="email" value=""
+									class="form-control" name="email" placeholder="Enter Email Id"
+									  ng-model="updateSchoolObj.email"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ "
+									required>
+							</div>
+							<!-- 
+							<div class="col-lg-6 form-group">
+								<label> Phone Number</label><span
+									ng-show="((schoolForm.mobileNumber.$error.minlength ||
+                           schoolForm.mobileNumber.$error.maxlength) && 
+                           schoolForm.mobileNumber.$dirty)"
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="schoolForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="schoolForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span><input type="text"
+									class="form-control" phone-input  maxlength="14" minlength="13"
+									name="mobileNumber" ng-model="updateSchoolObj.mobileNumber"
+									placeholder="Enter Phone Number">
+							</div> -->
+							
+							<div class="form-group col-lg-6">
+								<label><!-- <span
+									ng-if="updateSchoolObj.mobileNumber == undefined || updateSchoolObj.mobileNumber =='' "
+									style="color: red">*</span> -->Mobile Number</label><span style="color: red"
+									ng-show="(schoolForm.mobileNumber.$touched && schoolForm.mobileNumber.$invalid)">
+									<span ng-show="schoolForm.mobileNumber.$error.required">
+										 is required.</span>
+								</span> <span
+									ng-show="((schoolForm.mobileNumber.$error.minlength ||
+                           schoolForm.mobileNumber.$error.maxlength) && 
+                          schoolForm.mobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <input phone-input maxlength="14" minlength="14"
+									type="text" value="" class="form-control" name="mobileNumber"
+									placeholder="Enter Mobile Number"
+									ng-model="updateSchoolObj.mobileNumber" required>
+							</div>
+							<!-- <div class="col-sm-6 form-group">
+								<label>Mobile Number</label><span
+									ng-show="((schoolForm.mobileNumber.$error.minlength ||
+                           schoolForm.mobileNumber.$error.maxlength) && 
+                           schoolForm.mobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="schoolForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="schoolForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span> <input type="text"
+									class="form-control" phone-input  maxlength="14" minlength="14"
+									name="mobileNumber" ng-model="updateSchoolObj.mobileNumber"
+									placeholder="Enter Phone Number" aria-required="true"
+									class="error" id="txt_patient_mobileNumber" required>
+							</div> -->
+
+							<div class="col-sm-6 form-group">
+								<label>Street Address 1</label> <input type="text"
+									class="form-control" name="address"
+									ng-model="updateSchoolObj.address.address1"
+									placeholder="Enter Address 1">
+							</div>
+							<!-- <div class="col-sm-6 form-group">
+								<label>MOBI</label> <input type="text"
+									class="form-control" name="address"
+									ng-model="updateSchoolObj.mobileNumber"
+									placeholder="Enter Address 1">
+							</div> -->
+							<div class="col-sm-6 form-group">
+								<label>Street Address 2</label> <input type="text"
+									class="form-control" name="address2"
+									ng-model="updateSchoolObj.address.address2"
+									placeholder="Enter Address 2">
+							</div>
+							<div class="form-group col-lg-6">
+								<label>City</label> <input ng-model="updateSchoolObj.address.city"
+									class="form-control" name="city">
+							</div>
+							<div class="form-group col-lg-6">
+								<label>State</label> <input
+									ng-model="updateSchoolObj.address.state" class="form-control"
+									name="state">
+							</div>
+							<div class="form-group col-lg-6	">
+								<label>Country</label> <input
+									ng-model="updateSchoolObj.address.country" class="form-control"
+									name="country">
+
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Zipcode</label> <input type="text" class="form-control" allow-only-numbers
+									name="zip" ng-model="updateSchoolObj.address.zipcode" maxlength="5"
+									placeholder="Enter zipcode">
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Fax</label>
+								<span
+									ng-show="((schoolForm.fax.$error.minlength ||
+                           schoolForm.fax.$error.maxlength) && 
+                          schoolForm.fax.$dirty) "
+									style="color: red"> should be 10 digits </span>
+								 <input type="text" maxlength="14" minlength="14"
+									class="form-control" name="fax" placeholder="Enter Fax" phone-input
+									ng-model="updateSchoolObj.fax" 
+									>
+							</div>
+							<!-- 	<div class="col-sm-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="updateSchoolObj.status" name="status"
+									ng-value="true" ng-checked="!school.status">Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="updateSchoolObj.status" name="status" ng-value="false">InActive</label>
+							</div> -->
+ <div class="form-check">
+                                          <label>Status</label><br>
+                                           <label class="radio-inline"><input type="radio"  ng-model="updateSchoolObj.status" name="status" ng-value="true" >Active</label>
+                                          <label class="radio-inline"><input type="radio" ng-model="updateSchoolObj.status" name="status"  ng-value="false" >InActive</label>
+                                          </div>
+
+						</form>
+<!-- ng-disabled=" schoolForm.$invalid " -->
+						<!-- <div class="reset-button">
+
+							<button class="btn btn-success" 	ng-disabled="schoolForm.$invalid"
+								ng-click="updateSchool(updateSchoolObj)">Update</button>
+							<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+						</div> -->
+						<div class="reset-button">
+
+							<button class="btn btn-success" 	ng-disabled="!updateSchoolObj.schoolName||schoolForm.email.$error.pattern||
+                          ((schoolForm.fax.$error.minlength || schoolForm.fax.$error.maxlength) && schoolForm.fax.$dirty)||
+                          ((schoolForm.mobileNumber.$error.minlength ||schoolForm.mobileNumber.$error.maxlength) && schoolForm.mobileNumber.$dirty)"
+                           
+                          
+                          
+								ng-click="updateSchool(updateSchoolObj)">Update</button>
+							<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+
+</div>
+
+

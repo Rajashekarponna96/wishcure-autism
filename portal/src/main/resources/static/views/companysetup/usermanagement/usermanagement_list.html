@@ -1,0 +1,187 @@
+<div class="content-wrapper" ng-init="getAllusersPage();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-user-plus"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." ng-model="search"> <span
+						class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>User Management</h1>
+			<small>Here you can view, update patients or assign patient to therapist.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">User Management</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Content Header (Page header) -->
+
+	<!-- Main content -->
+
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" ng-click="gotoAdd();">
+						<div class="btn-group">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								User
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+									<div class="input-group custom-search-form">
+										<input type="text"  class="form-control"
+											 ng-model="search"
+											placeholder="search.." ng-change="getAllusersPageSearch(search);"><span  ng-click="getAllusersPageSearch(search);"
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!--  <th>Serial No</th> -->
+										<th ng-click="sort('firstName')">First Name &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='firstName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th ng-click="sort('user.lastName')">Last Name &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.lastName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th ng-click="sort('user.userAccount.username')">Email &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.userAccount.username'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th ng-click="sort('user.mobileNumber')">Mobile No &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.mobileNumber'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th ng-click="sort('user.userAccount.role.roleName')">Role Type &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.userAccount.role.roleName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th>Status</th>
+										<th>Update</th>
+										<!-- <th>Delete</th> -->
+										<th>Assign</th>
+										<!-- <th>Assign</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="user in userLists |orderBy:sortKey:reverse | filter:search">
+										<!--  <td><input type="radio" name="radioGroup">
+                                       <label>{{user.id}}</label>   
+                                   </td> -->
+										<td>{{user.firstName}}</td>
+										<td>{{user.lastName}}</td>
+										<td>{{user.userAccount.username}}</td>
+										<td ng-if="user.mobileNumber==undefined"></td>
+										<td ng-if="user.mobileNumber!=undefined">{{(user.mobileNumber);}}</td>
+										<td>{{user.userAccount.role.roleName}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="user.userAccount.active==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="user.userAccount.active==false"> InActive</span> <!-- <td><span class="label-success label label-default" ng-if="department.status==true"> Active</span><span class="label-default label label-danger" ng-if="department.status==false"> InActive</span>
+                                   </td>
+                                    -->
+										<td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoupdate(user);"
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										</td>
+										<!-- <td>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip" ng-disabled=" user.userAccount.role.roleName == 'Super Admin' "
+												data-placement="right" ng-click="deleteUser(user.id);"
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td> -->
+										<td><button  ng-click="gotoAppointmentViewPage(user)" ng-disabled="user.userAccount.role.roleName!='Therapist'"
+														class="btn btn-outline btn-warning btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="Assign Individual Patients to Different Therapists "><i
+														class="fa fa-hourglass-2"></i></button>
+										</td>
+										
+										<!-- <td><button  ng-click="gotoAddTherapist(user.id)" ng-disabled="user.userAccount.role.roleName!='Therapist'"
+														class="btn btn-outline btn-success btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="Assign All Patients to New Therapist"><i
+														class="fa fa-hourglass-2"></i></button>
+										</td> -->
+									</tr>
+									<tr ng-if="userLists.length == 0">
+										<td colspan="8" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+														<li><a rel="next" ng-click="firstPage();">First</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="left"
+															ng-click="previousPage();" title="prev"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+														</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="right"
+															ng-click="nextPage();" title="next"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+														</a></li>
+														<li><a rel="next" ng-click="lastPage();">Last</a></li>
+													</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+

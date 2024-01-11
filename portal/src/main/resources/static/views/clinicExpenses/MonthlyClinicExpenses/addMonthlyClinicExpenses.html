@@ -1,0 +1,513 @@
+<!-- <div class="content-wrapper"
+	ng-init="getAllExpenseTypeListByCompanyUserName();">
+	schedules start
+	Content Header (Page header)
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Monthly Clinical Expense</h1>
+			<small></small>
+<ol class="breadcrumb hidden-xs">
+						<li><a><i class="pe-7s-home"></i> Home</a></li>
+						<li class="active">Monthly Clinical Expense</li>
+					</ol>
+		</div>
+	</section>
+	Main content
+	<section class="content">
+		<div class="row">
+			Form controls
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoMonthlyClinicExpenseList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								MonthlyExpense List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="addMonthlyExpenseform">
+							<div class="col-sm-4 form-group">
+								<label><span
+									ng-if="monthlyExpense.date == undefined || monthlyExpense.date == '' "
+									style="color: red">*</span>DATE</label> <span style="color: red"
+									ng-show="(addMonthlyExpenseform.date.$touched && addMonthlyExpenseform.date.$invalid)">
+									<span style="color: red"
+									ng-show="addMonthlyExpenseform.date.$error.required"> is
+										required.</span>
+								</span> <input type="DATE" class="form-control" name="date"
+									placeholder="Enter Date" id="date"
+									ng-model="monthlyExpense.date" required>
+							</div>
+							<div class="col-sm-6 form-group">
+				<span ng-if="patient.regDate == undefined || patient.regDate == '' "
+					style="color: red">*</span><label>Date</label> <span
+					style="color: red"
+					ng-show="(monthlyExpenseForm.regDate.$touched && monthlyExpenseForm.regDate.$invalid)">
+					<span style="color: red"
+					ng-show="monthlyExpenseForm.regDate.$error.required"> is required.</span>
+				</span> <input type="text" date="dd-MM-yyyy" class="form-control"
+					name="regDate" id="regDate" ng-model="patient.regDate"
+					readonly="readonly">
+			</div>
+
+
+							<div class="col-lg-4 form-group">
+								<label><span
+									ng-if="monthlyExpense.expenseType == undefined || monthlyExpense.expenseType =='' "
+									style="color: red">*</span>Expense Type</label> <span
+									style="color: red"
+									ng-show="(addMonthlyExpenseform.expenseType.$touched && addMonthlyExpenseform.expenseType.$invalid)">
+									<span
+									ng-show="addMonthlyExpenseform.expenseType.$error.required">
+										is required.</span>
+								</span><select class="form-control"
+									ng-model="monthlyExpense.clinicExpenseType" ng-click="deptMsg()"
+									name="expenseType"
+									ng-options=" expenseType as expenseType.expenseType for expenseType in  expenseTypeList">
+									<option value="" class="active">Select Expense Type</option>
+								</select>
+							</div>
+							<div class="col-lg-4 form-group">
+								<label>Amount</label> <input type="text" name="amount"
+									class="form-control" placeholder="Enter amount"
+									ng-model="monthlyExpense.amount" number only>
+							</div>
+
+
+
+
+
+							<br> <br>
+						<div class="reset-button">
+							<button class="btn btn-success" ng-click="addMonthlyExpense(monthlyExpense)">add</button>
+						</div>
+						</form>
+
+						
+
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+									<th>Month</th>
+										<th>Expense Type</th>
+										<th>Amount</th>
+										<th>Delete</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="monthlyExpense in monthlyExpenseList track by $index">
+										<td>{{monthlyExpense.date}}
+										<td>{{monthlyExpense.clinicExpenseType.expenseType}}</td>
+										<td>{{monthlyExpense.amount}}</td>
+										<td>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="deleteMonthlyExpense(MonthlyExpense.id);"
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+									<tr ng-if="monthlyExpenseLists.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+									<tr>
+									<tr>
+								</tbody>
+
+							</table>
+						</div>
+
+						<div class="reset-button">
+							<button class="btn btn-success"
+								ng-click="addTotalMonthlyExpenses()">Save</button>
+							<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+						</div>
+
+						<div class="row">
+							<table style="border-collapse: collapse; width: 100%;">
+								<tbody>
+									<tr>
+										<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+												<select name="example_length" ng-model="size"
+												ng-change="sizeChanged(size);">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="25">25</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+											</select> records per page
+										</label></td>
+
+
+
+
+										<td align="right" style="padding-right: 20px;">
+											<ul class="pagination pagination-large">
+												<li><a rel="next" ng-click="firstPage();">First</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="left"
+													ng-click="previousPage();" title="prev"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+												</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="right"
+													ng-click="nextPage();" title="next"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+												</a></li>
+												<li><a rel="next" ng-click="lastPage();">Last</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+</div>
+ -->
+
+<div class="content-wrapper"
+	ng-init="getAllExpenseTypeListByCompanyUserName();getAllPaymethods();getAllCurrencys();getCompanyUser();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Monthly Clinical Expense</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Monthly Clinical Expense</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<div class="col-sm-12">
+
+
+					<div class="panel panel-bd lobidisable">
+						<div class="panel-heading">
+							<div class="btn-group" ng-click="gotoMonthlyClinicExpenseList();">
+								<a class="btn btn-primary"> <i class="fa fa-list"></i>
+									MonthlyExpense List
+								</a>
+							</div>
+
+
+
+
+						</div>
+						<div class="panel-body">
+							<div class="col-sm-12">
+								<div class="">
+									<div class="col-sm-6 form-group">
+										<label class="col-form-label">User Name</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-user"></i></span>
+											<input type="text" name="invoice[name]" class="form-control"
+												ng-model="user.firstName" value="Charlie Runkle"
+												placeholder="Name" readonly>
+										</div>
+									</div>
+
+									<div class="col-sm-6 form-group">
+										<label class="col-form-label">UCI</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i
+												class="fa fa-envelope"></i></span> <input type="email"
+												name="invoice[email]" ng-model="user.ssn"
+												class="form-control" placeholder="UCI" readonly>
+										</div>
+									</div>
+
+
+									<div class="col-sm-6 form-group">
+										<label class="col-form-label"> Email</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i
+												class="fa fa-envelope"></i></span> <input type="email"
+												name="invoice[email]" ng-model="user.email"
+												class="form-control" placeholder=" Email" readonly>
+										</div>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label class="col-form-label"> Mobile Number</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+											<input type="text" name="invoice[mobile]"
+												ng-model="user.moiblenumber" class="form-control"
+												placeholder=" Mobile Number" readonly>
+										</div>
+									</div>
+
+
+								</div>
+								<br>
+							</div>
+							<!--Form &Div here  -->
+
+
+						</div>
+
+					</div>
+
+
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="tab1">
+							<div class="panel-body" style="margin-top: 20px;">
+
+								<div class="col-sm-12 table-responsive" align="justify">
+									<form name="monthlyExpenseForm">
+										<div class="">
+
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+													ng-if="invoiceSingle.currency == undefined || invoiceSingle.currency =='' "
+													style="color: red">*</span>Expense Type</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.department.$touched && monthlyExpenseForm.department.$invalid)">
+													<span ng-show="monthlyExpenseForm.department.$error.required">
+														<!-- is required. -->
+												</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <select
+														ng-model="monthlyExpense.clinicExpenseType"
+														class="form-control" name="expenseType"
+														aria-required="true" aria-invalid="true"
+														ng-options=" expenseType as expenseType.expenseType for expenseType in  expenseTypeList"
+														required>
+														<option value="" class="active">Select
+															ExpenseType</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+													ng-if="monthlyExpense.currency == undefined || monthlyExpense.currency =='' "
+													style="color: red">*</span>Currency</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.department.$touched && monthlyExpenseForm.department.$invalid)">
+													<span ng-show="monthlyExpenseForm.department.$error.required">
+														<!-- is required. -->
+												</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <select
+														ng-model="monthlyExpense.currency" class="form-control"
+														name="department" aria-required="true" aria-invalid="true"
+														ng-options="currency as currency.name  for currency in currencysList "
+														required>
+														<option value="" class="active">Select Currency</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+													ng-if="monthlyExpense.paymentTypes == undefined || monthlyExpense.paymentTypes =='' "
+													style="color: red">*</span>Payment Method</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.paymentTypes.$touched && monthlyExpenseForm.paymentTypes.$invalid)">
+													<span ng-show="monthlyExpenseForm.paymentTypes.$error.required">
+														is required.</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span> <select
+														ng-model="monthlyExpense.paymentTypes" class="form-control"
+														name="paymeth" aria-required="true" aria-invalid="true"
+														ng-options="paymentType as paymentType.name  for paymentType in paymethodsList"
+														required>
+														<option value="" class="active">Select Payment
+															Method</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+													ng-if="modeOfPaymentTypes == undefined || modeOfPaymentTypes =='' "
+													style="color: red">*</span>Mode Of Payment</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.modeOfPaymentTypes.$touched && monthlyExpenseForm.modeOfPaymentTypes.$invalid)">
+													<span ng-show="monthlyExpenseForm.modeOfPaymentTypes.$error.required">
+														is required.</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span> <select
+														ng-model="monthlyExpense.modeOfPaymentTypes" class="form-control"
+														name="modeOfPaymentTypes" aria-required="true" aria-invalid="true"
+														required>
+														<option value="" class="active">Select Mode Of
+															Payment Type</option>
+														<option ng-value="ONCE">ONCE</option>
+														<option ng-value="WEEKLY">WEEKLY</option>
+														<option ng-value="MONTHLY">MONTHLY</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label"><span
+													ng-if="monthlyExpense.paymentStatus == undefined || monthlyExpense.paymentStatus =='' "
+													style="color: red">*</span>Payment Status</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.paymentStatus.$touched && monthlyExpenseForm.paymentStatus.$invalid)">
+													<span ng-show="monthlyExpenseForm.paymentStatus.$error.required">
+														<!-- 	is required. -->
+												</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span> <select
+														ng-model="monthlyExpense.paymentStatus" name="invoice" id=""
+														class="form-control">
+
+														<option value="">Select Payment Status</option>
+														<option value="COMPLETE">COMPLETE</option>
+														<option value="PENDING">PENDING</option>
+														<option value="PARTIAL">PARTIAL</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<!-- ="08/05/2018" -->
+												<label class="col-form-label"><span
+													ng-if="monthlyExpense.paidDate == undefined || monthlyExpense.paidDate =='' "
+													style="color: red">*</span>Paid Date</label> <span
+													style="color: red"
+													ng-show="(monthlyExpenseForm.paidDate.$touched && monthlyExpenseForm.paidDate.$invalid)">
+													<span ng-show="monthlyExpenseForm.paidDate.$error.required">
+														is required.</span>
+												</span>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-calendar"></i></span>
+													<!-- <input type="text" ng-model="invoiceSingle.paidDate" value="{{invoiceSingle.paidDate | date : 'yyyy-MM-dd'}}" /> -->
+													<input type="date" name="paidDate"
+														ng-model="monthlyExpense.paidDate" placeholder="yyyy-MM-dd"
+														class="form-control date">
+												</div>
+											</div>
+
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Paid Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text"
+														name="paidAmount" class="form-control"
+														ng-model="monthlyExpense.paidAmount"  placeholder="Paid Amount">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Bal Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text"
+														name="remainingAmount" class="form-control"
+														ng-model="monthlyExpense.remainingAmount" 
+														placeholder="Bal Amount">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Total Amount</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-money"></i></span> <input type="text"
+														name="totalAmount" class="form-control"
+														ng-model="monthlyExpense.totalAmount"
+														placeholder="Total Amount">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label>Upload Document</label>&nbsp;&nbsp; <input
+													type="file" name="file"
+													onchange="angular.element(this).scope().documentChanged(this.files);"><span
+													style="color: red"> Only PDF Files are allowed to
+													upload</span>
+											</div>
+											<div class="col-sm-12 form-group">
+												<label>Description</label> <span style="color: red"
+													ng-show="(monthlyExpenseForm.description.$touched && monthlyExpenseForm.description.$invalid)">
+													<span
+													ng-show="monthlyExpenseForm.description.$error.required">
+														is required.</span>
+												</span>
+												<textarea class="form-control" rows="3"
+													name="description"
+													ng-model="monthlyExpense.description"
+													placeholder="Enter text ..."></textarea>
+											</div>
+
+
+
+										</div>
+									</form>
+
+									<div align="center" class="col-sm-12">
+										<br>
+
+										<button class="btn btn-primary"
+											ng-click="addClinicExpenses(monthlyExpense)">Submit</button>
+										<button class="btn btn-danger" ng-click="gotoBillingsList();">Cancel</button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

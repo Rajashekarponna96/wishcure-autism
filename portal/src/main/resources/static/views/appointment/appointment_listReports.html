@@ -1,0 +1,331 @@
+<style>
+.vl {
+    border-left: 1px solid gray;
+    height: 80px;
+}
+.card-text {
+    font-size: 13px;
+    color: #999;
+    padding: 5px 0 0 0;
+}
+.card-name {
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+}
+.card-img .fa {
+    color: #FFF;
+    padding: 10px;
+    background: #999;
+    border-radius: 4px;
+}
+.fa-3x {
+    font-size: 3em;
+}
+</style>
+<!-- <div class="content-wrapper scrollpage" -->
+<div class="content-wrapper scrollpage"
+	ng-init="getAppointmentssByAdminByPagination();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-handshake-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>&nbsp;&nbsp;Appointment Report List</h1>
+			<small>Here you can view appointment reports.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Appointment Report List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+					<!--  ng-if="loggedUserRole != 'Therapist'" ng-click="gotoAdd();" -->
+						<div class="btn-group">
+							<a class="btn btn-success" > <i
+								class="fa fa-plus"></i> Appointment Report List 
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<!-- <div class="row">
+							<div class="col-sm-4 form-group col-sm-offset-2">
+								<mdp-date-picker mdp-placeholder="From Date"
+									ng-model="StartedDate"></mdp-date-picker>
+							</div>
+
+							<div class="col-sm-4 form-group">
+								<mdp-date-picker mdp-placeholder="To Date" ng-model="EndedDate"></mdp-date-picker>
+							</div>
+
+						</div>
+
+                                  <div class="">
+								<div class="reset-button">
+									<a href="" class="btn btn-success"
+										ng-click="getListBetweenDates()">Filter</a> 
+										<a href="" ng-click="resetFilter(StartedDate,EndedDate)"
+										class="btn btn-warning">Reset</a>
+
+								</div>
+							</div> -->
+						
+						<!--Navee  -->
+						<div class="row">
+
+							<div class="col-sm-12">
+
+								<!--  Gowri Sir-->
+								<div >
+								<div ng-if="loggedUserRole=='Product Super Admin'|| loggedUserRole=='Super Admin'||loggedUserRole=='Therapist'||loggedUserRole=='Individual'" ng-repeat="appointment in appointmentsAdminList | filter:search">
+									<div class="panel panel-default" style="border-left: 5px solid  #32c1ce;">
+										<div class="panel-heading" style="padding-bottom: 2px;  padding-top: 2px;">
+											<div class="row">
+												<div class="col-sm-2  text-left">
+													<span>{{(size*page)+$index+1}}</span>
+												</div>
+												<div class="col-sm-10 text-right">
+													<em>Appointment Id : </em> <span>{{appointment.id}}</span>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body" style="padding-bottom: 2px;  padding-top: 10px;">
+											<div class="row card-bdy">
+												<div class="col-sm-1 text-left">
+													<div class="card-img card-icon" align="right">
+														<i class="fa fa-user-md fa-3x"></i>
+													</div>
+												</div>
+
+												<div class="col-sm-4 text-left">
+
+													<div class="">
+														<div class="card-name">{{appointment.doctor.firstName}}
+															{{appointment.doctor.lastName}}</div>
+														<div class="card-text">{{appointment.doctor.email}}</div>
+														<div class="card-text">{{appointment.doctor.department.departmentName}}</div>
+
+													</div>
+												</div>
+												<div class="col-sm-2 text-center vl" style="color:Turquoise;">
+													<div class="">
+														<i class="fa fa-calendar form-group"></i><span
+															class="form-group"><br>{{changeDate(appointment.appointmentStartedDate);}}</span><br>
+													</div>
+												</div>
+												<div class="col-sm-1 text-center" style="color:Turquoise;">
+													<div>
+														<i class="fa fa-hourglass-o form-group"></i><span
+															class="form-group"><br>
+															{{appointment.appointmentStartTime }}</span>
+													</div>
+												</div>
+												<div class="col-sm-4 text-left vl">
+													<div class=""
+														href="index.php?route=themeoption/doctor/edit&amp;id=3"
+														class="invoice-doctor-name" target="_blank">
+														<i class="fa fa-user-o"></i>
+														{{appointment.patient.firstName}}
+														{{appointment.patient.lastName}}
+													</div>
+													<div class="">
+														<p class="card-text">
+															<i class="fa fa-envelope"></i><span> {{appointment.patient.email}}</span>
+														</p>
+														<p class="card-text">
+															<i class="fa fa-phone"></i><span>
+																<!--  {{appointment.patient.mobileNumber}} -->
+																 {{changeMobileNumber(appointment.patient.mobileNumber);}}
+																 </span>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="panel-footer" style="padding-bottom: 2px;  padding-top: 2px;">
+											<!-- Panel Footer -->
+											<div class="card-ftr">
+												<div class="col-sm-1 text-left">
+													<span class="badge badge-light badge-sm">{{pa.starDate}}</span>
+													<p>
+													<!-- btn btn-outline btn-danger btn-outline-1x btn-circle -->
+													<a ng-if="appointment.subAppointments!=undefined"
+														 ng-model="appointment.subAppointments.length"
+														class="label-info  label label-default ">
+														Total Appointments-{{appointment.subAppointments.length}}
+														</a> 
+														<span class="label-info  label label-default"
+															ng-if="appointment.status=='AWAITING'">AWAITING</span> <span
+															class="label-success label label-default"
+															ng-if="appointment.status=='COMPLETE'">COMPLETE</span> <span
+															class="label-danger label label-default"
+															ng-if="appointment.status=='CANCEL'">CANCEL</span> <span
+															class="label-info label label-default"
+															ng-if="appointment.status=='NOTCOMPLETED'">NOT
+															COMPLETED</span> <span class="label-info label label-default"
+															ng-if="appointment.status=='PENDING'">PENDING</span> <span
+															class="label-info label label-default"
+															ng-if="appointment.status=='REJECTED'">REJECTED</span> <span
+															class="label-info label label-default"
+															ng-if="appointment.status=='WAITING'">WAITING</span>
+													</p>
+												</div>
+												
+												<div class="col-sm-9 text-left">
+													<span class="badge badge-light badge-sm">{{pa.starDate}}</span>
+													<p>&nbsp;&nbsp;
+														<span class="label-success label label-default" ng-click="gotoInvoicePage(appointment)"
+															ng-if="appointment.status=='COMPLETE'">Invoice
+															Generated</span>
+															
+													</p>
+													
+												</div>
+												
+												
+												<div class=" card-action text-right">
+												<!-- ng-click="gotoInvoicePage(pa)" -->
+													<a  ng-click="gotoSubAppointmentsByAppointment(appointment.id)"
+														class="btn btn-outline btn-warning btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="View Appointment"><i
+														class="fa fa-eye"></i></a>
+														<!--  <a
+														href="" ng-click="gotoupdate(appointment)"
+														class="btn btn-outline btn-info btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="Edit Appointment"><i
+														class="fa fa-pencil-square-o"></i></a>  -->
+													<!-- 	<a
+														class="btn btn-outline btn-danger btn-outline-1x btn-circle table-delete"
+														data-toggle="tooltip" title="" ng-click="deleteAppointmentMethod(appointment.id)"
+														data-original-title="Delete"><i class="fa fa-trash-o"></i><input
+														type="hidden" value="54"></a> -->
+												</div>
+											</div>
+										</div>
+										<!--  -->
+										<div ng-if="patientListByAdmin.length == 0">
+											<div colspan="6" align="center">
+												<h3>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h3>
+											</div>
+										</div>
+										<!--  -->
+
+									</div>
+								</div>
+								<div class="row">
+									<table style="border-collapse: collapse; width: 100%;">
+										<tbody>
+											<tr>
+												<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+														<select name="example_length" ng-model="size"
+														ng-change="sizeChanged(size);">
+															<option value="5">5</option>
+															<option value="10">10</option>
+															<option value="25">25</option>
+															<option value="50">50</option>
+															<option value="100">100</option>
+													</select> records per page
+												</label></td>
+
+
+
+
+												<td align="right" style="padding-right: 20px;">
+													<ul class="pagination pagination-large">
+														<li><a rel="next" ng-click="firstPage();">First</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="left"
+															ng-click="previousPage();" title="prev"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+														</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="right"
+															ng-click="nextPage();" title="next"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+														</a></li>
+														<li><a rel="next" ng-click="lastPage();">Last</a></li>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								</div>
+								<!-- Gowri -->
+								<!-- </div> -->
+								
+								<div ng-if="appointmentsAdminList.length == 0">
+											<div colspan="6" align="center">
+												<h3>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h3>
+											</div>
+								</div>
+								<!-- <div class="row">
+									<table style="border-collapse: collapse; width: 100%;">
+										<tbody>
+											<tr>
+												<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+														<select name="example_length" ng-model="size"
+														ng-change="sizeChanged(size);">
+															<option value="5">5</option>
+															<option value="10">10</option>
+															<option value="25">25</option>
+															<option value="50">50</option>
+															<option value="100">100</option>
+													</select> records per page
+												</label></td>
+
+
+
+
+												<td align="right" style="padding-right: 20px;">
+													<ul class="pagination pagination-large">
+														<li><a rel="next" ng-click="firstPage();">First</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="left"
+															ng-click="previousPage();" title="prev"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+														</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="right"
+															ng-click="nextPage();" title="next"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+														</a></li>
+														<li><a rel="next" ng-click="lastPage();">Last</a></li>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div> -->
+							</div>
+						</div>
+						<!--Navee  -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

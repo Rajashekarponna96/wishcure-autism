@@ -1,0 +1,194 @@
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Payments</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Payment</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ui-sref="main.patient_list"> <i
+								class="fa fa-list"></i> List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<!-- <form id="registrationForm" name="patientForm">
+							<div class="col-sm-12">
+								<form>
+									<div class="col-sm-6">
+										<label>Patient Name</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Parent Name</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Payment Type</label> <select class="form-control"
+											ng-model="type">
+											<option value="" class="active">Select Payment Type</option>
+											<option ng-value="1">Check</option>
+											<option ng-value="2">swipe</option>
+											<option ng-value="3">DD</option>
+											<option ng-value="4">Cash</option>
+										</select>
+									</div>
+									<div class="col-sm-6" ng-if="type==1">
+										<label>Check Number</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6" ng-if="type==1">
+										<label>Check Issued Bank</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6" ng-if="type==3">
+										<label>DD Number</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6" ng-if="type==3">
+										<label>DD Issued Bank</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Mode Of Payment Type</label> <select
+											ng-model="selectedName" class="form-control">
+											<option value="" class="active">Select Mode Of
+												Payment Type</option>
+											<option ng-value="1">Weekly once</option>
+											<option ng-value="2">once</option>
+											<option ng-value="3">Monthly</option>
+											<option ng-value="4">Yearly</option>
+										</select>
+									</div>
+									<div class="col-sm-6">
+										<label>Amount</label> <input type="text" class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Number of cycles</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Therapy done date</label> <input type="date"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Paid Date</label> <input type="date"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Total Amount</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Paid Amount</label> <input type="text"
+											class="form-control">
+									</div>
+									<div class="col-sm-6">
+										<label>Remaning Amount</label> <input type="text"
+											class="form-control">
+									</div>
+								</form>
+							</div>
+						</form> 
+						
+						<div align="center">
+							<button class="btn btn-primary"
+								>Save</button>
+							<button class="btn btn-warning" ng-click="gotoList();">Cancel</button>
+						</div>-->
+						<div>
+							<!-- html form -->
+							<label class="item item-input"> <span class="input-label">Card
+									number</span> <input type="text" size="20" ng-model="FormData.number"
+								placeholder="4242 4242 4242 4242" />
+							</label> <label class="item item-input"> <span
+								class="input-label">Exp. Mth (MM)</span> <input type="text"
+								size="2" ng-model="FormData.exp_month" / placeholder="01">
+							</label> <label class="item item-input"> <span
+								class="input-label">Exp. Year (YYYY)</span> <input type="text"
+								size="4" ng-model="FormData.exp_year" / placeholder="2020">
+							</label> <label class="item item-input"> <span
+								class="input-label">Sec. Code (CVC)</span> <input type="text"
+								size="4" ng-model="FormData.cvc" / placeholder="123">
+							</label>
+						</div>
+						<div class="padding center">
+							<button class="button button-block button-balanced"
+								ng-click="chargeCreditCard()">Submit</button>
+								<button id="customButton">Purchase</button>
+								<button ng-click="clickOnPurchase();">Purchase123</button>
+						</div>
+
+						<!-- <form>
+							<input type="text" placeholder="Credit Card #" name="cardNumber">
+							<input type="text" placeholder="Expiration Month" name="expMonth">
+							<input type="text" placeholder="Expiration Year" name="expYear">
+							<input type="text" placeholder="CVC" name="cvc">
+							<button ng-click="chargeCreditCard()">Submit</button>
+						</form> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- <script src="https://checkout.stripe.com/checkout.js"></script> -->
+
+<button id="customButton">Purchase</button>
+
+<script>/* 
+var handler = StripeCheckout.configure({
+  key: 'pk_test_C1H7vgRUb4SedFm57Gj3woNn',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+	  console.log("token  "+JSON.stringify(token));
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Stripe.com',
+    description: '2 widgets',
+    zipCode: true,
+    amount: 2000
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+}); */
+</script>

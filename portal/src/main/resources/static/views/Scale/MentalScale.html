@@ -1,0 +1,148 @@
+<div class="content-wrapper" ng-init="getAllMentalScale();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Mental Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="#/main/dashboard"><i class="pe-7s-home"></i>
+						Home</a></li>
+				<li><a href="#">Mental Template</a></li>
+				<li class="active">Mental Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="panel panel-bd lobidrag">
+				<div class="panel-heading">
+					<div class="btn-group" ng-click="gotoList();">
+						<a class="btn btn-primary">Mental Template
+						</a>
+					</div>
+				</div>
+				<div class="content">
+					<div class="row">
+						<div class="panel-body">
+							<form name="evalautionform">
+								<div class="form-group col-sm-12"
+									ng-repeat="evalution in evalutions">
+									<div class="col-sm-3">
+										<label>Item Description</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" value="" class="form-control"
+											name="itemDescripation" placeholder="Enter Your Answer"
+											ng-model="evalution.itemDescripation" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(evalautionform.itemDescripation.$touched && evalautionform.itemDescripation.$invalid)">
+											<span
+											ng-show="evalautionform.itemDescripation.$error.required">Item
+												Descripation is required.</span>
+									</div>
+									<div class="col-sm-3">
+										<label>Percent50</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" value="" class="form-control"
+											name="percent50" placeholder="Enter Your percent50"
+											ng-model="evalution.percent50" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(evalautionform.percent50.$touched && evalautionform.percent50.$invalid)">
+											<span ng-show="evalautionform.percent50.$error.required">percent50
+												is required.</span>
+									</div>
+									<div class="col-sm-3">
+										<label>Percent3</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" value="" class="form-control"
+											name="percent3" placeholder="Enter Your percent3"
+											ng-model="evalution.percent3" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(evalautionform.percent3.$touched && evalautionform.percent3.$invalid)">
+											<span ng-show="evalautionform.percent3.$error.required">percent3
+												is required.</span>
+									</div>
+									<div class="col-sm-3">
+										<label>Percent97</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" value="" class="form-control"
+											name="percent97" placeholder="Enter Your percent97"
+											ng-model="evalution.percent97" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(evalautionform.percent97.$touched && evalautionform.percent97.$invalid)">
+											<span ng-show="evalautionform.percent97.$error.required">percent97
+												is required.</span>
+									</div>
+									<div class="col-sm-3">
+										<label>Percent 97Rank</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" value="" class="form-control"
+											name="percent97Rank" placeholder="Enter Your percent97Rank"
+											ng-model="evalution.percent97Rank" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(evalautionform.percent97Rank.$touched && evalautionform.percent97Rank.$invalid)">
+											<span ng-show="evalautionform.percent97Rank.$error.required">percent97Rank
+												is required.</span>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="col-sm-9"></div>
+									<div class="col-sm-3">
+										<a class="btn btn-lg" ng-click="newItem()"> <span
+											class="glyphicon glyphicon-plus-sign"></span>
+										</a>
+
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-9"></div>
+									<div class="col-sm-3">
+										<a class="btn btn-lg" ng-click="deleteItem()"> <span
+											class="glyphicon glyphicon-minus-sign"></span>
+										</a>
+									</div>
+								</div>
+						</div>
+						</form>
+						<div class="reset-button">
+							<br> <br>
+							<button class="btn btn-success" ng-click="addMentalScale()"
+								ng-disabled="evalautionform.$invalid">Add</button>
+							<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+</div>

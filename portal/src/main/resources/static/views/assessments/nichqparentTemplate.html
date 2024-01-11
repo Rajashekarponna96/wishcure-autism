@@ -1,0 +1,130 @@
+<div ng-init="getAllNichqparentCategoryLookups();" >
+
+<p align="center" style="padding: 10px;">Evaluation for Nichq Parent Template</p>
+<hr>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+				<li style="float: left;"
+					ng-repeat="category in nichqParentCategoryLookupList"
+					ng-click="getAllNichqParentQuestionsByPatientAndCategory(category);"
+					ng-init="getAllNichqParentQuestionsByPatientAndCategory(nichqParentCategoryLookupList[0]);"><a
+					href="#tab1" data-toggle="tab" target="self">{{category.name}}</a></li>
+			</ul>
+			<!-- Tab panels -->
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tab1">
+					<div class="panel-body">
+						<div class="col-sm-10 table-responsive" align="justify"
+							ng-if="nichqParentQuestions.length < 1">
+							<table class="table table-bordered table-hover">
+								<tbody>
+									<tr
+										ng-repeat="question in nichqParentQuestionLookupListByCategoryId">
+										<td>{{$index + 1}}</td>
+										<td class="col-sm-7">{{question.name}}</td>
+										<td class="col-sm-5">
+											<div ng-if="categoryId == 1">
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="0" />&nbsp;Never&nbsp;<input type="radio"
+													ng-model="question.answervalue" ng-value="1" />&nbsp;Occasionally&nbsp;
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="2" />&nbsp;Often&nbsp; <input type="radio"
+													ng-model="question.answervalue" ng-value="3" />&nbsp;Very
+												Often
+											</div>
+
+											<div ng-if="categoryId == 2">
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="1" />&nbsp;Excellent &nbsp;&nbsp; <input
+													type="radio" ng-model="question.answervalue" ng-value="2" />&nbsp;Above
+												Average&nbsp;&nbsp; <input type="radio"
+													ng-model="question.answervalue" ng-value="3" />&nbsp;Average&nbsp;&nbsp;
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="4" />&nbsp;Somewhat of a problem &nbsp;<input
+													type="radio" ng-model="question.answervalue" ng-value="5" />&nbsp;Problematic
+
+
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								<tr rowspan="3"
+									ng-if="nichqParentQuestionLookupListByCategoryId.length == 0">
+									<td colspan="2" align="center"><b><h1>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h1></b></td>
+								</tr>
+							</table>
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-click="assignNichqParentTemplateToPatient();">Save
+									& Continue</button>
+							</div>
+						</div>
+						<div class="col-sm-10 table-responsive" align="justify"
+							ng-if="nichqParentQuestions.length > 1">
+							<fieldset ng-disabled="true">
+							<table class="table table-bordered table-hover">
+								<tbody>
+									<tr ng-repeat="question in nichqParentQuestions">
+									<td>{{$index + 1}}</td>
+										<td class="col-sm-7">{{question.name}}</td>
+										<td class="col-sm-5">
+											<div ng-if="categoryId == 1">
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="0" />&nbsp;Never <input type="radio"
+													ng-model="question.ansValue" ng-value="1" />&nbsp;Occasionally
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="2" />&nbsp;Often <input type="radio"
+													ng-model="question.ansValue" ng-value="3" />&nbsp;Very
+												Often
+											</div>
+											<div ng-if="categoryId == 2">
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="1" />&nbsp;Excellent <input type="radio"
+													ng-model="question.ansValue" ng-value="2" />&nbsp;Above
+												Average <input type="radio" ng-model="question.ansValue"
+													ng-value="3" />&nbsp;Average <input type="radio"
+													ng-model="question.ansValue" ng-value="4" />&nbsp;Somewhat
+												of a problem <input type="radio"
+													ng-model="question.ansValue" ng-value="5" />&nbsp;Problematic
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								<tr rowspan="3" ng-if="nichqParentQuestions.length == 0">
+									<td colspan="2" align="center"><b><h1>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h1></b></td>
+								</tr>
+
+							</table>
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-click="assignNichqParentTemplateToPatient();">save
+									& Continue</button>
+							</div>
+							</fieldset>
+						</div>
+					</div>
+					
+
+
+					<div class="reset-button col-sm-12">
+						<!-- <button class="btn btn-success"
+								ng-click="assignNichqParentTemplateToPatient();" ng-click="nichqParentTemplateResult();">Add</button> -->
+						<a class="btn btn-warning">Cancel</a>
+						<button class="btn btn-success"
+							ng-click="gotoNichqParentTemplateResult();">Generate
+							Report</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,127 @@
+
+<div ng-init="getMotorScales();getMotorClusters();getAllPatientMotorScalesByPatientId();">
+	<!-- Main content -->
+	<div class="row">
+		<div ng-hide="isMotorScaleExists" class="col-sm-12 table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Item No</th>
+						<th>Item Description</th>
+						<th>50%</th>
+						<th>3%</th>
+						<th>97%</th>
+						<th>Action</th>
+						<th>Note</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="motorScale in motorScaleList">
+						<td>{{motorScale.percent97Rank}}</td>
+						<td>{{motorScale.itemDescripation}}</td>
+						<td>{{motorScale.percent50}}</td>
+						<td>{{motorScale.percent3}}</td>
+						<td>{{motorScale.percent97}}</td>
+						<td><input type="radio"
+							ng-model="motorScale.motorScaleStatus" value="PP" ng-change='ppMotorChange(motorScale.motorScaleStatus)'>&nbsp;PP&nbsp;&nbsp;
+							<input type="radio" ng-model="motorScale.motorScaleStatus"
+							value="P">&nbsp;P&nbsp;&nbsp; <input type="radio"
+							ng-model="motorScale.motorScaleStatus" value="F">&nbsp;F&nbsp;&nbsp;
+							<input type="radio" ng-model="motorScale.motorScaleStatus"
+							value="RF" ng-change='rfMotorChange(motorScale.motorScaleStatus)'>&nbsp;RF&nbsp;&nbsp;</td>
+														
+								<td colspan=6><label class="checkbox-inline"><input
+									name="note"  ng-model="motorScale.hasnote" type="checkbox">
+							</label> 
+								<div class="col-sm-10"
+									ng-if="motorScale.hasnote == true">
+									
+									
+									<textarea   class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+									rows="5"  ng-model="motorScale.note" placeholder="Enter Note" id="noteText"
+										class="form-control" name="note"
+									
+									></textarea>	
+									 
+								</div></td>
+					</tr>
+					<tr ng-if="motorScaleList.length==0">
+						<td colspan="6">No records found</td>
+					</tr>
+				</tbody>
+			</table>
+		
+		<div class="reset-button">
+			<button class="btn btn-success"
+				ng-click="assignMotorScaleTemplateToPatient();"
+				ng-show="hasFeature('Departent Management').canAdd==true"
+				ng-disabled="isDisabled">Save</button>
+			<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+			
+			<button class="btn btn-info"
+				ng-click="gotoReport();">Evalution Result</button>
+		</div>
+		</div>
+		<div ng-show="isMotorScaleExists" class="col-sm-12 table-responsive" ng-if="patientMotorScalelist.length > 0">
+			<fieldset ng-disabled="true">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Item No</th>
+						<th>Item Description</th>
+						<th>50%</th>
+						<th>3%</th>
+						<th>97%</th>
+						<th>Action</th>
+						<th>Note</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="motorScale in patientMotorScalelist">
+						<td>{{motorScale.percent97Rank}}</td>
+						<td>{{motorScale.itemDescripation}}</td>
+						<td>{{motorScale.percent50}}</td>
+						<td>{{motorScale.percent3}}</td>
+						<td>{{motorScale.percent97}}</td>
+						<td><input type="radio"
+							ng-model="motorScale.motorScaleStatus" value="PP">&nbsp;PP&nbsp;&nbsp;
+							<input type="radio" ng-model="motorScale.motorScaleStatus"
+							value="P">&nbsp;P&nbsp;&nbsp; <input type="radio"
+							ng-model="motorScale.motorScaleStatus" value="F">&nbsp;F&nbsp;&nbsp;
+							<input type="radio" ng-model="motorScale.motorScaleStatus"
+							value="RF">&nbsp;RF&nbsp;&nbsp;</td>
+														
+								<td colspan=6><label class="checkbox-inline"><input
+									name="note"  ng-model="motorScale.hasnote" type="checkbox">
+							</label> 
+								<div class="col-sm-10"
+									ng-if="motorScale.hasnote == true">
+									
+									
+									<textarea   class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+									rows="5"  ng-model="motorScale.note" placeholder="Enter Note" id="noteText"
+										class="form-control" name="note"
+									
+									></textarea>	
+									 
+								</div></td>
+					</tr>
+					<tr ng-if="motorScaleList.length==0">
+						<td colspan="6">No records found</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="reset-button">
+				<button class="btn btn-success"
+					ng-click="updatePatientMotorScalesByPatientId();" >Update</button>
+
+				<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+				
+
+			</div>
+			</fieldset>
+			<button class="btn btn-info"
+				ng-click="gotoReport();">Evalution Result</button>
+		</div>
+	</div>
+</div>

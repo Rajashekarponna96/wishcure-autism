@@ -1,0 +1,98 @@
+<div class="content-wrapper"
+	ng-init="getAllMentalCluster();getAllMentalScale();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Mental Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="#/main/dashboard"><i class="pe-7s-home"></i>
+						Home</a></li>
+				<li><a href="#">Mental Template</a></li>
+				<li class="active">Mental Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="panel panel-bd lobidrag">
+				<div class="panel-heading">
+					<div class="btn-group" ng-click="gotoAdd();">
+						<a class="btn btn-primary">Mental Template </a>
+					</div>
+				</div>
+				<div class="content">
+					<div class="row">
+						<div class="panel-body">
+							<div class="form-group col-lg-12">
+								<label>Mental Cluster</label> <select ng-model="mentalCluster"
+									class="form-control" name="mentalCluster" aria-required="true"
+									aria-invalid="true"
+									ng-options="mentalCluster as mentalCluster.name  for mentalCluster in mentalClusterList"
+									required>
+									<option value="" class="active">Select Mental Cluster</option>
+								</select><span style="color: red" ng-cloak
+									ng-show="(registrationForm.mentalCluster.$touched && registrationForm.mentalCluster.$invalid)">
+									<span ng-show="registrationForm.mentalCluster.$error.required">Mental
+										Cluster is required.</span>
+							</div>
+
+							<div class="table-responsive col-sm-12">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>&nbsp;</th>
+											<th>Item No</th>
+											<th>Item Description</th>
+											<th>Percent 50</th>
+											<th>Percent 3</th>
+											<th>Percent 97</th>
+											<th>Percent 97Rank</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="mentalScale in mentalScaleList">
+											<td><input type="checkbox"
+												data-checklist-model="mentalScales.mentalScaleCheckList"
+												data-checklist-value="mentalScale"></td>
+											<td>{{$index+1}}</td>
+											<td>{{mentalScale.itemDescripation}}</td>
+											<td>{{mentalScale.percent50}}</td>
+											<td>{{mentalScale.percent3}}</td>
+											<td>{{mentalScale.percent97}}</td>
+											<td>{{mentalScale.percent97Rank}}</td>
+										</tr>
+										<tr ng-if="mentalClusterList.length==0">
+											<td colspan="7">No records found</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="reset-button">
+								<br> <br>
+								<button class="btn btn-success" ng-click="updateMentalClusterScale(mentalCluster)"
+									ng-disabled="registrationForm.$invalid">Submit</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+</div>

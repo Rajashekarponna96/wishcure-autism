@@ -1,0 +1,278 @@
+<div class="stepwizard" ng-init="activeColor1();">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Primary Registration</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle"
+				ng-style="activeColor1">2</a>
+			<p>
+				<small>Package Subscription</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary setup-content" id="step-2">
+	<div class="panel-heading">
+		<h3 class="panel-title">Package Subscription</h3>
+	</div>
+	<div class="panel-body">
+		<form class="col-sm-12" name="packagepricingform"
+			ng-init="getAllPackageMAstersList();getAllStripePackages();">
+			<div class="form-group col-lg-6">
+				<label><span
+					ng-if="user.stripePackage.packageName == undefined || user.stripePackage.packageName =='' "
+					style="color: red">*</span>Package Type </label> <span style="color: red"
+					ng-show="(packagepricingform.package.$touched && packagepricingform.package.$invalid)">
+					<span ng-show="packagepricingform.package.$error.required">is
+						required.</span>
+				</span> <select class="form-control" name="package"
+					ng-options="stripePackage as stripePackage.packageName  for stripePackage in  stripePackagesList track by stripePackage.id"
+					ng-model="user.stripePackage"
+					ng-change="getAllStripePlansByProductId(user.stripePackage.packageId);"
+					required class="form-control">
+					<option value="">Select Package Name</option>
+				</select>
+			</div>
+			<div class="form-group col-lg-6">
+				<label><span
+					ng-if="stripePlan.nickname == undefined || stripePlan.nickname =='' "
+					style="color: red">*</span>Data Storage(Gb)</label> <span
+					style="color: red"
+					ng-show="(packagepricingform.maxDataStorage.$touched && packagepricingform.maxDataStorage.$invalid)">
+					<span ng-show="packagepricingform.maxDataStorage.$error.required">is
+						required.</span>
+				</span> <input type="text" ng-disabled="stripePlan.nickname"
+					class="form-control" name="maxDataStorage" id="txt_username"
+					readonly="readonly" ng-model="stripePlan.nickname" required>
+			</div>
+			<!-- <div class="panel-body"
+				ng-if="user.stripePackage.packageName != undefined">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#plan-1"
+						target="self">Package Subscription</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="panel-body tab-pane fade in active" id="plan-1">
+						<div class="col-sm-12">
+							<div class="col-sm-12">
+								<div ng-repeat="tire in stripePlan.tiers ">
+									<div class="col-sm-6 form-group" ng-if="tire.upTo==10">
+										<label>For 1-{{tire.upTo}} User Account</label>
+									</div>
+									<div class="col-sm-6 form-group" ng-if="tire.upTo==20">
+										<label>For 11-{{tire.upTo}} User Account</label>
+									</div>
+									<div class="col-sm-6 form-group" ng-if="tire.upTo!=10 && tire.upTo!=20">
+										<label>Form 20 & Above User Account</label>
+									</div>
+									<div class="col-sm-6 form-group">
+										<input type="text" class="form-control" value="$"
+											ng-model="tire.amount" readonly="readonly">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="panel-body"
+				ng-if="user.stripePackage.packageName =='Premium'">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#plan-1"
+						target="self">Package Subscription</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="panel-body tab-pane fade in active" id="plan-1">
+						<div class="col-sm-12">
+							<table class="table table-bordered table-hover">
+								<tr>
+									<th style="text-align: center;">Plans</th>
+									<th style="text-align: center;">Users</th>
+									<th style="text-align: center;">Price Per User</th>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-1</p>
+									</td>
+									<td>1-10</td>
+									<td>$79.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-2</p>
+									</td>
+									<td>11-20</td>
+									<td>$69.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-3</p>
+									</td>
+									<td>For 20 & Above</td>
+									<td>$59.99</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body"
+				ng-if="user.stripePackage.packageName =='Standard'">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#plan-1"
+						target="self">Package Subscription</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="panel-body tab-pane fade in active" id="plan-1">
+						<div class="col-sm-12">
+							<table class="table table-bordered table-hover">
+								<tr>
+									<th style="text-align: center;">Plans</th>
+									<th style="text-align: center;">Users</th>
+									<th style="text-align: center;">Price Per User</th>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-1</p>
+									</td>
+									<td>1-10</td>
+									<td>$59.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-2</p>
+									</td>
+									<td>11-20</td>
+									<td>$39.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-3</p>
+									</td>
+									<td>For 20 & Above</td>
+									<td>$29.99</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body"
+				ng-if="user.stripePackage.packageName =='Basic'">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#plan-1"
+						target="self">Package Subscription</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="panel-body tab-pane fade in active" id="plan-1">
+						<div class="col-sm-12">
+							<table class="table table-bordered table-hover">
+								<tr>
+									<th style="text-align: center;">Plans</th>
+									<th style="text-align: center;">Users</th>
+									<th style="text-align: center;">Price Per User</th>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-1</p>
+									</td>
+									<td>1-10</td>
+									<td>$39.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-2</p>
+									</td>
+									<td>11-20</td>
+									<td>$29.99</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<p>Plan-3</p>
+									</td>
+									<td>For 20 & Above</td>
+									<td>$19.99</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<button class="btn btn-info nextBtn pull-left" type="button"
+			ng-click="gotoPreviousPrimaryRegistration(user,userCompanyTypeObj,packagePricing1,packagePricing.packageNameMaster);">Previous</button>
+		<button class="btn btn-primary nextBtn pull-right"
+			ng-disabled="packagepricingform.$invalid" type="button"
+			ng-click="gotoNextConfirmation(user, packagePricing1,userCompanyTypeObj);">Next</button>
+		<!-- <a class="btn btn-primary  pull-left" href="#step-1"
+									type="button">Previous</a> -->
+	</div>
+</div>
+
+<style>
+<!--
+.stepwizard-step p {
+	margin-top: 0px;
+	color: #666;
+}
+
+.stepwizard-row {
+	display: table-row;
+}
+
+.stepwizard {
+	display: table;
+	width: 100%;
+	position: relative;
+}
+
+.stepwizard-step button[disabled] {
+	/*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/
+	
+}
+
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn
+	{
+	opacity: 1 !important;
+	color: #bbb;
+}
+
+.stepwizard-row:before {
+	top: 14px;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 100%;
+	height: 1px;
+	background-color: #ccc;
+	z-index: 0;
+}
+
+.stepwizard-step {
+	display: table-cell;
+	text-align: center;
+	position: relative;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+-->
+</style>

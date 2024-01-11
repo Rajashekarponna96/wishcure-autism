@@ -1,0 +1,99 @@
+
+<div class="panel-body"
+	ng-init="getPatientDocuments('PATIENT');getEvaluationDocuments('EVALUATION');getTherapistDocuments('THERAPIST');getAllFolders();">
+	<style>
+.scroll {
+	height: 200px;
+	display: block;
+	overflow: scroll overflow-y: auto;
+	overflow-x: auto;
+}
+</style>
+
+<!-- <ul class="nav nav-tabs">
+			<li ng-style="activeColor2"><a ng-click="gotoDocuments();" data-toggle="tab">Patient
+					Documents</a></li>
+			<li><a ng-click="gotoEvalution();" data-toggle="tab">Patient
+					Evaluation Sheet</a></li>
+			<li><a href="" data-toggle="tab" target="self"
+				ng-click="gotoGoals();">Patient Goals Sheet</a></li>
+			<li><a href="#tab3" data-toggle="tab" target="self"
+				ng-click="gotoProgress();">Patient Progress Notes</a></li>
+			<li><a href="#tab4" data-toggle="tab" target="self"
+				ng-click="gotoExit();getExitSheetReportBy();">Patient Exit Note</a></li>
+		</ul> -->
+
+	<div class="col-sm-11 col-sm-offset-1">
+		<div class="border col-sm-5" style="float: left">
+			<table class="scroll">
+				<th style="padding-left: 150px; color: green;">Folders</th>
+				<tr ng-repeat="folder in listOfFolders">
+					<td style="padding-left: 50px;"><i class="fa fa-folder"
+						style="font-size: 24px; color: GoldenRod"
+						ng-click="getAllDocumentsByPatientAndFolderId(patientObject.id,folder.id)"></i>{{folder.name}}
+
+					
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div class="border col-sm-5">
+			<table class="scroll">
+				<th style="padding-left: 150px; color: green;">Documents</th>
+				<tr ng-repeat="document in patientDocumentsByFolder">
+					<td ng-if="document.extension == 'pdf' "
+						style="padding-left: 50px;" ng-click="getFilePathinS3Bucket(document.id);">{{document.name}}</td>
+					<td
+						ng-if="document.extension == 'doc' ||document.extension =='docx'  "
+						style="padding-left: 50px;"
+						ng-click="displayDocument(document.id);">{{document.name}}</td>
+					<td ng-if="document.extension == 'csv' "
+						style="padding-left: 50px;" ng-click="displayCsv(document.id);">{{document.name}}</td>
+					<td
+						ng-if="document.extension =='xls' || document.extension=='xlsx'"
+						style="padding-left: 50px;" ng-click="displayXls(document.id);">{{document.name}}</td>
+
+					<td><span>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"
+							style="color: red;" ng-click="deleteDocumentalert(document)"
+							aria-hidden="true" data-toggle="modal" data-target="#ordine"></i>
+					</span></td>
+				</tr>
+				<tr ng-if="patientDocumentsByFolder.length==0 ">
+					<td colspan="4" align="center">
+						<h3 style="padding-left: 50px;">
+							<i class="fa fa-meh-o"></i> No Documents found!
+						</h3>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<div id="pdf" ng-if="content !=undefined || displayFlag == true"
+			id="div1" style="display: block;">
+			<div class="row">
+				<i class="fa fa-times-circle-o  fa-lg  pull-right"
+					ng-if="content != undefined" style="color: red;"
+					ng-click="openFole();" aria-hidden="true" class="close"></i>
+			</div>
+			<iframe id="myFrame" src="{{content}}" ng-if="content != undefined"
+				width="100%" height="800px"></iframe>
+
+			<iframe id="myFrame" src="{{content1}}" ng-if="content1 != undefined"
+				ng-hide="content1 != undefined" width="100%" height="800px"></iframe>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		function toggle(id) {
+			var e = document.getElementById(id);
+			if (e.style.display == '') {
+				e.style.display = 'none';
+			} else {
+				e.style.display = '';
+			}
+		}
+	</script>
+</div>

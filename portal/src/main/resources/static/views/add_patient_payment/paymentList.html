@@ -1,0 +1,289 @@
+<div class="content-wrapper"  ng-init="getPaymentsByPatient()">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Payments List</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Payments List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+
+         <div class="btn-group" ng-click="gotoBillingsList();"> 
+                                        <a class="btn btn-primary" > <i class="fa fa-list"></i> Patient Billings</a>  
+                                    </div>
+                                    
+                                    <!--   <div  class="btn-group pull-right" ng-click="gotoPatientDetails(paymentsList[0].patient);"> 
+                                        <a class="btn btn-primary" > <i class="fa fa-list"></i> Patient Details</a>  
+                                    </div> -->
+						<!-- <div class="btn-group">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								Department
+							</a>
+						</div> -->
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<!-- <div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div> -->
+
+								<div class="col-sm-4"></div>
+
+								<!-- <div class="col-sm-4">
+									<div class="dataTables_length">
+										<div class="input-group custom-search-form">
+											<input type="search" class="form-control"
+												placeholder="search.." ng-model="naveen"> <span
+												class="input-group-btn">
+												<button class="btn btn-primary" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div> -->
+							</div>
+
+
+<div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="fa fa-user"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientdata.firstName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Email</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="patientdata.email"
+														class="form-control" placeholder="Patient Email">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Mobile Number</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-phone"></i></span> <input type="text"
+														name="invoice[mobile]"  ng-model="changeMobileNumber(patientdata.mobileNumber)"
+														class="form-control" placeholder="Patient Mobile Number">
+												</div>
+											</div>
+											
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Payee</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-user-circle-o"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="patientdata.gaurdian"
+														placeholder="Doctor Name">
+												</div>
+											</div>
+											
+											<!-- <div class="col-sm-6 form-group">
+												<label class="col-form-label">Client Type</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-address-book"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="paymentsList[0].patient.clientType.clientTypeName"
+														placeholder="Doctor Name">
+												</div>
+											</div> -->
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+
+										<!-- <th>Patient  Name</th>
+										<th>Parent Name</th> -->
+										<th>Therapist</th>
+										<th>Therapy Type</th>
+									<!-- 	<th>Client Type</th> -->
+										<th>TNS</th>
+										<th>CPS</th>
+										<th>CS</th>
+										<th>PS</th>
+										<th>TPS</th>
+										<th>UPS</th>
+										<th>Paid Date</th>
+										<th>Paid Amount</th>
+										<th>Bal</th>
+										<th>Payment  Status</th>
+                                        <th>MOP</th>
+										
+									<!-- 	<th>Action</th> -->
+									</tr>
+								</thead>
+								<tbody>
+								
+									<tr 
+										ng-repeat="payment in paymentsList | orderBy : 'id':true">
+
+										<!-- <td>{{payment.patient.firstName}}</td>
+										<td>{{payment.patient.firstName}}</td> -->
+										<!-- <td>{{$rootScope.$rootScope.patientFistName}}</td> -->
+										<!-- <td>{{payment.paymentStartTime }}</td> -->
+										<!-- <td>{{patientFistName}}</td> -->
+										<td>{{payment.doctor.firstName}} {{payment.doctor.lastName}}</td>
+										 <td>{{payment.department.departmentName}}</td>
+										 <!--  <td>{{payment.clientType.clientTypeName}}</td> -->
+										  
+										  <td>{{payment.totalSessions }}</td>
+										<td>{{payment.assignedAmount }}</td>
+										<td>{{payment.completeSessions }}</td>
+										<td>{{payment.noOfCycles }}</td>
+										<td>{{payment.paidSessions }}</td>
+										<td>{{payment.unPaidSessions }}</td>
+										<td>{{payment.paidDate }}</td>
+										<td>{{payment.paidAmount }}</td>
+										<td>{{payment.remainingAmount }}</td>
+										<td>{{payment.paymentStatus }}</td>
+										<td>{{payment.modeOfPaymentTypes}}</td>
+										
+										
+										<!--<td><span class="label-success label label-default" ng-if="appointment.occurance=='NEVER'">Once</span>
+							                <span class="label-info label label-default" ng-if="appointment.occurance=='WEEKLY'">Recursive</span>			
+										</td> -->
+										
+										<!-- <td align="center" >
+										<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="gotoUpadatePayment(payment)"
+												title="update ">
+										<i class="fa fa-pencil"></i></button>
+											
+										</td>  -->
+										
+									</tr>
+									<tr ng-if="paymentsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- <div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+								<li><a rel="next" ng-click="firstPage();">First</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="left"
+									ng-click="previousPage();" title="prev"> <i
+										aria-hidden="true"></i><<
+								</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="right"
+									ng-click="nextPage();" title="next"> <i aria-hidden="true"></i>>>
+								</a></li>
+								<li><a rel="next" ng-click="lastPage();">Last</a></li>
+							</ul>
+						</div> -->
+						
+						
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+
+
+
+					
+				<!-- 	<div class="panel-body" ng-init="getPaymentsByPatient()">
+					
+						
+							<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+
+										
+										<th>Patient name</th>
+									
+										<th>Paid Amount</th>
+										<th>Remaining Amount</th>
+										 <th>Total Amount</th>
+                                  
+										
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<tr 
+										ng-repeat="payment in paymentsList | orderBy : 'id':true">
+
+									
+										<td>{{patientFistName}}</td>
+										<td>{{payment.paidAmount }}</td>
+										<td>{{payment.remainingAmount }}</td>
+										 <td>{{payment.totalAmount}}</td>
+									
+										
+										<td align="center" >
+										<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="gotoUpadatePayment(payment)"
+												title="update ">
+										<i class="fa fa-pencil"></i></button>
+											
+										</td> 
+										
+									</tr>
+									<tr ng-if="paymentsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+		 -->

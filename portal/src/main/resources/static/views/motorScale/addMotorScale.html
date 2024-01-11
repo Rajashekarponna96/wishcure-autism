@@ -1,0 +1,127 @@
+
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Motor Scale</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">motorScale</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Motor
+								Scale List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="motorscaleform">
+							<div class="col-sm-6 form-group">
+								<label>MotorScale Name</label> <input type="text" value=""
+									class="form-control" name="departmentName"
+									placeholder="Enter MotorScale Name"
+									ng-model="motorScale.itemDescripation" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(motorscaleform.departmentName.$touched && motorscaleform.departmentName.$invalid)">
+									<span ng-show="motorscaleform.departmentName.$error.required">MotorScale
+										Name is required.</span>
+								</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>50%</label>
+								<input  class="form-control"
+									name="descriptionName" 
+									ng-model="motorScale.percent50" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+								<span style="color: red" ng-cloak
+									ng-show="(motorscaleform.descriptionName.$touched && motorscaleform.descriptionName.$invalid)">
+									<span ng-show="motorscaleform.descriptionName.$error.required">50%
+										is required.</span>
+								</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>3%</label>
+								<input  class="form-control"
+									name="descriptionName"
+									ng-model="motorScale.percent3" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+								<span style="color: red" ng-cloak
+									ng-show="(motorscaleform.descriptionName.$touched && motorscaleform.descriptionName.$invalid)">
+									<span ng-show="motorscaleform.descriptionName.$error.required">3%
+										is required.</span>
+								</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>97%</label>
+								<input class="form-control"
+									name="descriptionName" 
+									ng-model="motorScale.percent97" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+								<span style="color: red" ng-cloak
+									ng-show="(motorscaleform.descriptionName.$touched && motorscaleform.descriptionName.$invalid)">
+									<span ng-show="motorscaleform.descriptionName.$error.required">97%
+										is required.</span>
+								</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Rank</label>
+								<input class="form-control"
+									name="descriptionName" placeholder="Enter rank"
+									ng-model="motorScale.percent97Rank" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+								<span style="color: red" ng-cloak
+									ng-show="(motorscaleform.descriptionName.$touched && motorscaleform.descriptionName.$invalid)">
+									<span ng-show="motorscaleform.descriptionName.$error.required">rank
+										is required.</span>
+								</span>
+							</div>
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="addMotorScale();"
+									ng-show="hasFeature('Departent Management').canAdd==true"
+									ng-disabled="motorscaleform.$invalid">Save</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

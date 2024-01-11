@@ -1,0 +1,259 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoRegistrationDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoParentDetails();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="" id="step-1"
+	ng-init="getCommunicationAddress();">
+	<hr>
+	<form name="patientForm">
+	<div class="col-sm-12">
+			<br>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.parentName == undefined || patient.parentName =='' "
+					style="color: red">*</span>Father's Name</label> <span style="color: red"
+					ng-show="(patientForm.parentName.$touched && patientForm.parentName.$invalid)">
+					<span ng-show="patientForm.parentName.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="parentName" class="form-control"
+					placeholder="Enter Parent Name" ng-model="patient.parentName" required>
+			</div>
+			
+			
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.mobileNumber == undefined || patient.mobileNumber == '' "
+					style="color: red">*</span>Mobile Number</label> <span
+					style="color: red"
+					ng-show="(patientForm.mobileNumber.$touched && patientForm.mobileNumber.$invalid)">
+					<span ng-show="patientForm.mobileNumber.$error.required"
+					style="color: red"> is required.</span>
+				</span><span
+					ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$touched)"
+					style="color: red"> should be 10 digits </span> <span
+					ng-if="patientForm.$pending.mobileNumberExists">checking....</span>
+				<span ng-if="patientForm.$error.mobileNumberExists"
+					style="color: red"> exists already</span><input type="text"
+					class="form-control"
+					name="mobileNumber" ng-model="patient.mobileNumber" allow-only-numbers maxlength="10"
+					placeholder="Enter Mobile Number" aria-required="true" class="error"
+					id="txt_patient_mobileNumber" required>
+			</div>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.motherName == undefined || patient.motherName =='' "
+					style="color: red">*</span>Mother Name</label> <span style="color: red"
+					ng-show="(patientForm.motherName.$touched && patientForm.motherName.$invalid)">
+					<span ng-show="patientForm.motherName.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="motherName" class="form-control"
+					placeholder="Enter Mother Name" ng-model="patient.motherName" required>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label> Mother Mobile Number</label> <input type="text"
+					class="form-control"
+					name="secondaryNumber" ng-model="patient.secondaryNumber" allow-only-numbers maxlength="10"
+					placeholder="Enter Mobile Number" aria-required="true" class="error"
+					id="txt_patient_secondaryNumber" required>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+			<label>Search Your Adress</label> <input id="autocomplete"
+				onFocus="geolocate()" placeholder="Enter your address"
+				class="form-control" type="text"></input>
+		</div>
+		<div >
+			<input class="field form-control" type="hidden"
+				ng-model="patient.address1.address1" id="street_number"></input>
+		</div>
+
+		<div class="col-lg-6 form-group">
+			<label>Street Address </label> <input class="field form-control"
+				ng-model="patient.address1.address2" id="route" ></input>
+		</div>
+
+		<div class="col-sm-6 form-group">
+			<label>City</label> <input class="field form-control"
+				ng-model="patient.address1.city" id="locality" readonly="readonly" ></input>
+		</div>
+		<div class="col-sm-6 form-group">
+			<label>State</label> <input class="field form-control"
+				ng-model="patient.address1.state" id="administrative_area_level_1"
+				readonly="readonly"></input>
+		</div>
+		<div class="col-sm-6 form-group">
+			<label>Country</label> <input class="field form-control"
+				ng-model="patient.address1.country" id="country" readonly="readonly"></input>
+		</div>
+
+		<div class="col-sm-6 form-group">
+			<label>Zip code</label> <input class="field form-control"
+				maxlength="6" ng-model="patient.address1.zipcode" id="postal_code" readonly="readonly"
+				></input>
+		</div>
+		<div class="col-sm-6 form-group">
+			<label>No.Of Siblings</label> <input class="field form-control"
+				maxlength="6" ng-model="patient.siblings" id="siblings" 
+				></input>
+		</div>
+			
+			<div class="col-sm-3 form-group" align="left">
+				<label>Communication Status</label> <span style="color: red"
+					ng-show="(patientForm.email.$touched && patientForm.email.$invalid || patientForm.sms.$touched && patientForm.sms.$invalid)">
+					<span
+					ng-show="patientForm.sms.$error.required || patientForm.email.$error.required">Communication
+						Status is required.</span>
+				</span>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label class="checkbox-inline">&nbsp;&nbsp;&nbsp;&nbsp;<input name="email"
+					ng-model="patient.communicatonEmail" type="checkbox">Email</label>
+				<label class="checkbox-inline">&nbsp;<input name="sms"
+					ng-model="patient.sms" type="checkbox">SMS
+				</label>
+			</div>
+			<!-- email-available -->
+			<div class="col-sm-6 form-group"
+				ng-if="patient.communicatonEmail == true">
+				<label class="control-label" for="emailid">Email Id</label> <span
+					style="color: red"
+					ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+				<span ng-show="patientForm.email.$error.required">Email is
+					required.</span> <span style="color: red"
+					ng-show="patientForm.email.$error.pattern"> Please enter a
+					valid email address!</span> <span ng-if="patientForm.$pending.emailExists"
+					style="color: red">checking....</span> <span
+					ng-if="patientForm.$error.emailExists" style="color: red">Email
+					exists already</span> <input type="email" value=""
+					placeholder="Enter Email" id="txt_email" class="form-control"
+					name="email" email-available
+					aria-required="true" class="error" ng-model="patient.email"
+					aria-invalid="true"
+					ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+					ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+			</div>
+			
+			
+			</div>
+			<script>
+			var placeSearch, autocomplete;
+			var componentForm = {
+				street_number : 'short_name',
+				route : 'long_name',
+				locality : 'long_name',
+				administrative_area_level_1 : 'short_name',
+				country : 'long_name',
+				postal_code : 'short_name'
+			};
+
+			function initAutocomplete() {
+				// Create the autocomplete object, restricting the search to geographical
+				// location types.
+				var options = {
+					types : [ 'geocode' ],
+					componentRestrictions : {
+						country : 'in'
+					}
+				};
+
+				autocomplete = new google.maps.places.Autocomplete((document
+						.getElementById('autocomplete')), options);
+
+				// When the user selects an address from the dropdown, populate the address
+				// fields in the form.
+				autocomplete.addListener('place_changed', fillInAddress);
+			}
+
+			function fillInAddress() {
+				// Get the place details from the autocomplete object.
+				var place = autocomplete.getPlace();
+
+				for ( var component in componentForm) {
+					document.getElementById(component).value = '';
+					document.getElementById(component).disabled = false;
+				}
+
+				// Get each component of the address from the place details
+				// and fill the corresponding field on the form.
+				for (var i = 0; i < place.address_components.length; i++) {
+					var addressType = place.address_components[i].types[0];
+					if (componentForm[addressType]) {
+						var val = place.address_components[i][componentForm[addressType]];
+						document.getElementById(addressType).value = val;
+					}
+				}
+			}
+
+			// Bias the autocomplete object to the user's geographical location,
+			// as supplied by the browser's 'navigator.geolocation' object.
+			function geolocate() {
+				if (navigator.geolocation) {
+					navigator.geolocation
+							.getCurrentPosition(function(position) {
+								var geolocation = {
+									lat : position.coords.latitude,
+									lng : position.coords.longitude
+								};
+								var circle = new google.maps.Circle({
+									center : geolocation,
+									radius : position.coords.accuracy
+								});
+								autocomplete.setBounds(circle.getBounds());
+							});
+				}
+			}
+		</script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYFHF5OFfYFzoXznrZfQQU8aGOClVeXcQ&libraries=places&callback=initAutocomplete"
+			async defer></script>
+	</form>
+	<div class="col-sm-12">
+		<br>
+	</div>
+
+		
+		<button class="btn btn-primary nextBtn pull-left" type="button"
+	ng-click="gotoChildDetails();getAddressFromGoogle();">Previous</button>
+<button class="btn btn-primary nextBtn pull-right" type="button"
+	ng-click="gotoPayments();getAddressFromGoogle();">Next</button>
+</div>

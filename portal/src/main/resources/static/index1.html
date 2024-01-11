@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>WISH CURE</title>
+
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="assets/cssfolder/img/ico/favicon.png"
+	type="image/x-icon">
+<!-- Start Global Mandatory Style
+   =====================================================================-->
+<!-- jquery-ui css -->
+<link href="assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> -->
+
+<!--places-autocomplete#address_forms  -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFYZPcSFYceRAzbcytzZPXbKE33BoWzo&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+
+<!-- end of places-autocomplete#address_forms  -->
+<!-- Bootstrap -->
+<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- Bootstrap rtl -->
+<!--<link href="assets/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>-->
+<!-- Lobipanel css -->
+<link href="assets/plugins/lobipanel/lobipanel.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- Pace css -->
+<link href="assets/plugins/pace/flash.css" rel="stylesheet"
+	type="text/css" />
+<!-- Font Awesome -->
+<link href="assets/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- Pe-icon -->
+<link href="assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css"
+	rel="stylesheet" type="text/css" />
+<!-- Themify icons -->
+<link href="assets/themify-icons/themify-icons.css" rel="stylesheet"
+	type="text/css" />
+<!-- <link href="assets/cssfolder/css/angular-moment-picker.css"
+      rel="stylesheet" type="text/css"/>	
+<link href="assets/cssfolder/css/angular-moment-picker.min.css"
+      rel="stylesheet" type="text/css"/> -->
+<!-- End Global Mandatory Style
+        =====================================================================-->
+<!-- Start page Label Plugins 
+        =====================================================================-->
+<!-- Toastr css -->
+<link href="assets/plugins/toastr/toastr.css" rel="stylesheet"
+	type="text/css" />
+<!-- Emojionearea -->
+<link href="assets/plugins/emojionearea/emojionearea.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- Monthly css -->
+<link href="assets/plugins/monthly/monthly.css" rel="stylesheet"
+	type="text/css" />
+<!-- 	718 angular material css -->
+<link href="lib/angular/angular-material.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- <link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css"> -->
+<link rel="stylesheet" href="assets/angularjs/mdPickers.css">
+<link rel="stylesheet" href="assets/angularjs/mdPickers.min.css">
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+
+
+<script src="https://kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+<script
+	src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
+<!-- 	 KENDOUI CSS -->
+<!-- <link rel="stylesheet"
+	href="https://kendo.cdn.telerik.com/2017.3.913/styles/kendo.common-material.min.css" />
+<link rel="stylesheet"
+	href="https://kendo.cdn.telerik.com/2017.3.913/styles/kendo.material.min.css" />
+<link rel="stylesheet"
+	href="https://kendo.cdn.telerik.com/2017.3.913/styles/kendo.material.mobile.min.css" /> -->
+<!-- End page Label Plugins 
+        =====================================================================-->
+<!-- Start Theme Layout Style
+        =====================================================================-->
+<!-- Theme style -->
+<link href="assets/cssfolder/css/stylehealth.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- jQuery -->
+<script src="assets/plugins/jQuery/jquery-1.12.4.min.js"
+	type="text/javascript"></script>
+<!-- jquery-ui -->
+<script src="assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js"
+	type="text/javascript"></script>
+<script src="assets/angularjs/angular.js"></script>
+<script src="assets/angularjs/angular-ui-router.js"></script>
+
+<script src="assets/angularjs/jspdf.plugin.autotable.js"></script>
+<script src="directive/mobilenumberFormat.js"></script>
+
+<script src="directive/angucomplete-alt.js"></script>
+<script src="directive/es5-shim.min.js"></script>
+	<script src="directive/json3.min.js"></script>
+	
+ <link href="directive/angucomplete-alt.css" rel="stylesheet"
+	type="text/css" />
+	
+	<link href="directive/angucomplete-alt.css" rel="stylesheet"
+	type="text/css" />
+	<script src="directive/app.js"></script>
+	
+	<script src="directive/angucomplete-alt.min.js"></script>
+	
+	<!-- css for stripe payment   -->
+	<!--  <link rel="stylesheet" type="text/css" href="css/base.css" data-rel-css="" />
+  <link rel="stylesheet" type="text/css" href="css/example4.css" data-rel-css="" /> -->
+
+
+
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js"></script>
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-resource.min.js"></script>
+   <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css"> -->
+	 <link rel="stylesheet" type="text/css" href="css/styleselect1.css">
+        <script type='text/javascript' src="https://rawgit.com/long2know/angular-directives-general/master/src/multiselect.js"></script>
+<!--  calendar Urls -->
+
+<script src="lib/calendarmoment.js"></script>
+<script src="lib/calendarinteract.js"></script>
+<script src="lib/calendarui-bootstrap-tpls.js"></script>
+<script src="lib/calendarrrule.js"></script>
+<script src="lib/calendarbootstrap-colorpicker-module.js"></script>
+<script src="lib/calendarangular-bootstrap-calendar-tpls.js"></script>
+<link href="lib/calendarcolorpicker.min.css" rel="stylesheet">
+<link href="lib/calendarangular-bootstrap-calendar.min.css" rel="stylesheet">
+
+<!-- <script src="https://unpkg.com/moment@2.17.1"></script> -->
+<!-- <script src="https://unpkg.com/interactjs@1"></script> -->
+<!-- <script src="https://unpkg.com/angular@1.6.4/angular.js"></script> -->
+<!-- <script src="https://unpkg.com/angular-animate@1.6.4/angular-animate.js"></script> -->
+
+<!-- <script
+	src="https://unpkg.com/angular-ui-bootstrap@2/dist/ui-bootstrap-tpls.js"></script> -->
+<!-- <script src="https://unpkg.com/rrule@2"></script> -->
+<!-- <script src="https://unpkg.com/angular-bootstrap-colorpicker@3"></script> -->
+<!-- <script src="https://unpkg.com/angular-bootstrap-calendar"></script> -->
+<!-- <link href="https://unpkg.com/bootstrap@3/dist/css/bootstrap.css"
+	rel="stylesheet"> -->
+<!-- <link
+	href="https://unpkg.com/angular-bootstrap-colorpicker@3/css/colorpicker.min.css"
+	rel="stylesheet"> -->
+<!-- <link
+	href="https://unpkg.com/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css"
+	rel="stylesheet"> -->
+
+<!--  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script> -->
+
+
+<!-- KENDOUI JS -->
+<!-- 			<script src="https://kendo.cdn.telerik.com/2017.3.913/js/jquery.min.js"></script> -->
+<!-- 			<script src="https://kendo.cdn.telerik.com/2017.3.913/js/angular.min.js"></script> -->
+<!-- <script
+	src="https://kendo.cdn.telerik.com/2017.3.913/js/kendo.all.min.js"></script>
+<script
+	src="https://kendo.cdn.telerik.com/2017.3.913/js/kendo.timezones.min.js"></script>
+ -->
+<!--     angular material design js  -->
+<script src="directive/Datetime Picker/moment.js"></script>
+<script src="directive/Datetime Picker/date-timepicker.js"></script>
+<script src="lib/angular/angular-animate.min.js"></script>
+<script src="lib/angular/angular-aria.min.js"></script>
+<script src="lib/angular/angular-messages.min.js"></script>
+<script src="directive/ngAutocomplete.js"></script>
+
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script> -->
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script> -->
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+ -->
+
+<script src="lib/moment.js"></script>
+<script src="lib/moment-with-locales.js"></script>
+
+
+<!-- 718 Angular Material Library -->
+<script	src="lib/angular/angular-material.min.js"></script>
+
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+ -->
+<script src="assets/angularjs/mdPickers.js"></script>
+<script src="assets/angularjs/mdPickers.min.js"></script>
+
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>-->
+
+
+<script	src="lib/angular/angular-sanitize.js"></script>
+
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script> -->
+
+<script	src="lib/angular/ui-bootstrap-tpls-2.5.0.js"></script>
+<!-- <script
+	src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script> -->
+<!--  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!--start stripe payment integration -->
+<script src="http://cdn.rawgit.com/laurihy/angular-payments/2472bc9befa256780d106a8e53a9dea12b7341ed/lib/angular-payments.js"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<!-- <script src="js/stripePaymentfile.js" data-rel-js></script> -->
+<script type="text/javascript">
+	Stripe.setPublishableKey('pk_test_7W4ilnHOU35278UonFn8GovO');
+</script>
+<!-- <script src="js/stripePaymentfile.js" data-rel-js></script> -->
+
+
+<!-- end stripe payment integration -->
+
+<!-- Calender Libraries  -->
+<!-- pie chart links -->
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery-3.1.0.min.js"%3E%3C/script%3E'))</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/event.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/supplemental.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.4.4/cldr/unresolved.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/message.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/number.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/currency.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.1.1/globalize/date.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.5/css/dx.spa.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.5/css/dx.common.css" />
+    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/17.2.5/css/dx.light.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+<script>window.angular || document.write(decodeURIComponent('%3Cscript src="js/angular.min.js"%3E%3C\/script%3E'))</script>
+    <script src="https://cdn3.devexpress.com/jslib/17.2.5/js/dx.all.js"></script>
+    
+    <!-- sweet alerts -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	
+<!-- angular animation -->
+<script src="assets/angularjs/angular-animate.js"></script>
+<script src="assets/angularjs/ui-bootstrap-tpls-1.3.2.js"></script>
+
+<!-- help_faq_accordion script -->
+<script src="controller/helpcontroller/help_faqs_accordion.js"></script>
+<script src="controller/accordion/accordionCtrl.js"></script>
+
+
+
+<!--Angular Chart  -->
+
+<script src="directive/Chart.min.js"></script>
+<script src="directive/angular-chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/angular.chartjs/1.1.1/angular-chart.js"></script>
+
+<!--router config-->
+<script src="config/routingconfig2.js"></script>
+<script src="directive/loader.js"></script>
+<script src="config/httpInterceptor.js"></script>
+<script src="config/authhttpinterceptor.js"></script>
+<script src="config/successmessagehandler.js"></script>
+
+
+<!-- Angular-inline-edit -->
+<link href="directive/xeditable.css" rel="stylesheet">
+<script src="directive/angular-mocks.js"></script>
+<script src="directive/xeditable.js"></script>
+<script src="directive/allowOnlyNumbers.js"></script>
+<script src="directive/phoneInput.js"></script>
+<script src="directive/tel.js"></script>
+
+<script  src=https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js></script>
+<!--constants-->
+<script src="constants/moduleConstants.js"></script>
+<script src="constants/patientmoduleContants.js"></script>
+
+
+
+<!-- directives -->
+<script src="directive/emailExistanceValidationDirective.js"></script>
+<script src="directive/companyAvailable.js"></script>
+<script src="directive/requiredSymbolDirective.js"></script>
+<script src="directive/checklist-model.js"></script>
+<script src="directive/mobilenumberValidatioonDirective.js"></script>
+<script src="directive/npiNumberExistanceValidationDirective.js"></script>
+<script src="directive/uciNumberExistanceValidationDirective.js"></script>
+<script src="directive/ssnNumberExistanceValidationDirective.js"></script>
+
+<!--lib folder for localstorage -->
+<script src="lib/ngstorage/ngStorage.js"></script>
+
+
+
+<!-- services-->
+<script src="service/Login/loginService.js"></script>
+<script src="service/signup/signupService.js"></script>
+<script src="service/forgotpassword/forgotpasswordService.js"></script>
+<script src="service/changepassword/changepasswordService.js"></script>
+<script src="service/otp/otpService.js"></script>
+<script src="service/companymanagement/companyService.js"></script>
+<script src="service/clientType/clientTypeService.js"></script>
+<script src="service/role/roleService.js"></script>
+<script src="service/companytype/companyTypeService.js"></script>
+<script src="service/subscriptionmaster/subscriptionMasterService.js"></script>
+<script src="service/category/categoryService.js"></script>
+<script src="service/subcategory/subCategoryService.js"></script>
+<script src="service/patientregtype/patientRegTypeService.js"></script>
+<script src="service/packagesubscription/packageSubscriptionService.js"></script>
+<script src="service/packagepricing/packagePricingService.js"></script>
+<script src="service/Lookups/countryService.js"></script>
+<script src="service/userManagement/userManagementSerrvice.js"></script>
+<script src="service/department/departmentService.js"></script>
+<script src="service/packageDiscount/packageDiscountService.js"></script>
+<script src="service/packageNameMaster/packageMasterService.js"></script>
+<script src="service/sitemanagement/siteService.js"></script>
+<script src="service/permission/permissionService.js"></script>
+<script src="service/evalutioncategory/evalutionCategoryService.js"></script>
+<script src="service/evalutionquestion/evalutionQuestionService.js"></script>
+<script src="service/evalution/evalutionService.js"></script>
+<script src="service/schedule/scheduleService.js"></script>
+<script src="service/patient/patientService.js"></script>
+<script src="service/patient/evalutionSheetService.js"></script>
+
+<script src="service/holidays/holidaysService.js"></script>
+<script src="service/therapist/therapistService.js"></script>
+<script src="service/templateSheet/evalutionTemplateService.js"></script>
+<script src="service/goalTemplate/goalTemplateService.js"></script>
+
+<script src=service/schedule/therapistScheduleService.js></script>
+<script src="service/holidays/therapistHolidaysService.js"></script>
+<script src=service/appointment/appointmentService.js></script>
+<script src="service/patient/patientGoalService.js"></script>
+<script src="service/templateSheet/speechTheraphyService.js"></script>
+<script src="service/speechtheraphyTemplate/speechtheraphyCategoryService.js"></script>
+<script src="service/documentTypeLookup/documentTypeLookupService.js"></script>
+<script src="service/speechtheraphyTemplate/speechtheraphyQuestionService.js"></script>
+<script src="service/finance/currencyService.js"></script>
+<script src="service/finance/paymethodService.js"></script>
+<script src="service/finance/taxService.js"></script>
+<script src="service/patient/insuranceService.js"></script>
+<script src="service/stripe/stripeService.js"></script>
+<script src="service/regionalCenter/regionalCenterZoneService.js"></script>
+<script src="service/regionalCenter/regionalCenterLookupService.js"></script>
+<script src="service/insuranceLookup/insuranceLookupService.js"></script>
+<script src="service/school/schoolService.js"></script>
+<script src="service/categorytype/categoryTypeService.js"></script>
+<script src="service/clinicExpenseTypeService/clinicExpenseTypeService.js"></script>
+
+<script src="service/parentTemplate/careTaker/careTakerCategoryLookupService.js"></script>
+<script src="service/parentTemplate/careTaker/careTakerMilestonesService.js"></script>
+<script src="service/parentTemplate/careTaker/careTakerQuestionLookupService.js"></script>
+<script src="service/parentTemplate/childObservation/childObservationCategoryLookupService.js"></script>
+<script src="service/parentTemplate/childObservation/childObservationQuestionLookupService.js"></script>
+<script src="service/parentTemplate/csbs/csbsLookupservice.js"></script>
+<script src="service/parentTemplate/csbs/csbsQuestionLookupService.js"></script>
+<script src="service/parentTemplate/screeningTest/screeningTestLookupservice.js"></script>
+<script src="service/parentTemplate/screeningTest/screeningTestQuestionLookupService.js"></script>
+<script src="service/parent/csbsTemplateService.js"></script>
+<script src="service/parent/screeningTestService.js"></script>
+<script src="service/parentTemplate/mchart/mchartLookupService.js"></script>
+<script src="service/parent/mchartService.js"></script>
+
+
+<script src="service/NICHQParent/NichqCategoryLookupService.js"></script>
+<script src="service/NICHQParent/NichqQuestionLookupService.js"></script>
+<script src="service/NICHQParent/nichqParentGeneralService.js"></script>
+<script src="service/NICHQParent/nichqTemplateService.js"></script>
+
+<script src="service/Cluster/MentalClusterService.js"></script>
+<script src="service/motorTemplate/motorClusterService.js"></script>
+<script src="service/motorTemplate/motorScaleService.js"></script>
+<script src="service/Scale/MentalScaleService.js"></script>
+<script src="service/NICHQParentCategory/NICHQParentCategoryLookupService.js"></script>
+<script src="service/nichqTeacher/nichqTeacherCategoryLookupservice.js"></script>
+<script src="service/nichqTeacher/nichqTeacherQuestionLookupService.js"></script>
+<script src="service/isaaBehaviourLookUp/isaaBehaviourLookUpService.js"></script>
+<script src="service/isaaBehaviourLookUp/isaaBehaviourQuestionLookupService.js"></script>
+
+<script src="service/nichqTeacher/PatientNichqTeacherCategoryService.js"></script>
+<script src="service/NICHQParent/PatientNichqParentCategoryservice.js"></script>
+<script src="service/isaaBehaviourLookUp/patientIsaaBehaviourCategoryService.js"></script>
+<script src="service/assessment/assessmentService.js"></script>
+<script src="service/vsmsTemplate/vsmsClusterService.js"></script>
+<script src="service/vsmsTemplate/vsmsQuestionService.js"></script>
+<!--controller-->
+<script src="controller/Login/loginCtrl.js"></script>
+<script src="controller/signup/signupCtrl.js"></script>
+<script src="controller/forgotpassword/forgotPasswordCtrl.js"></script>
+<script src="controller/changepassword/changePasswordCtrl.js"></script>
+<script src="controller/otp/otpCtrl.js"></script>
+<script src="controller/companysetup/companymanagement/companyCtrl.js"></script>
+<script src="controller/masters/clientType/clientTypeCtrl.js"></script>
+<script src="controller/masters/role/roleCtrl.js"></script>
+<script src="controller/masters/companytype/companyTypeCtrl.js"></script>
+<script src="controller/masters/clinicExpense/clinicExpenseTypeCtrl.js"></script>
+<script
+	src="controller/masters/subscriptionmaster/subscriptionMasterCtrl.js"></script>
+<script src="controller/masters/category/categoryCtrl.js"></script>
+<script src="controller/masters/subCategory/subCategoryCtrl.js"></script>
+<script src="controller/masters/patientRegType/patientRegTypeCtrl.js"></script>
+
+<script
+	src="controller/packages/packagesubscription/packageSubscriptionCtrl.js"></script>
+<script src="controller/packages/packagepricing/packagePricingCtrl.js"></script>
+<script src="controller/schedule/scheduleCtrl.js"></script>
+<script src="controller/holidays/holidayCtrl.js"></script>
+<script src="controller/goalTemplate/goalTemplateCtrl.js"></script>
+
+
+
+<script src="controller/calender/calender2Ctrl.js"></script>
+<script src="controller/calender/alertModel.js"></script>
+
+<script
+	src="controller/companysetup/departmentmanagement/departmentCtrl.js"></script>
+<script
+	src="controller/companysetup/usermanagement/userManagementCtrl.js"></script>
+<script src="controller/packages/packageNameMaster/packageMasterCtrl.js"></script>
+<script src="controller/packages/PackageDiscount/packageDiscountCtrl.js"></script>
+<script src="controller/companysetup/sitemanagement/siteCtrl.js"></script>
+<script src="controller/permission/permissionCtrl.js"></script>
+
+<script src="controller/therapist/therapistCtrl.js"></script>
+<script
+	src="controller/template/evalutioncategory/evalutionCategoryCtrl.js"></script>
+<script
+	src="controller/template/evalutionquestion/evalutionQuestionCtrl.js"></script>
+<script src="controller/template/evalutionCtrl.js"></script>
+<script src="controller/patient/patientCtrl.js"></script>
+<script src="controller/calender/calenderCtrl.js"></script>
+<script src="controller/holidays/therapistHolidayCtrl.js"></script>
+<script src="controller/template/templateSheet/evalutionTemplateCtrl.js"></script>
+<script src="controller/schedule/therapistScheduleCtrl.js"></script>
+<script src="controller/appointment/appointmentCtrl.js"></script>
+<script src="controller/template/speechTheraphyCtrl.js"></script>
+<script src="controller/speechtheraphyTemplate/speechTheraphyCategoryCtrl.js"></script>
+<script src="controller/documentTypeLookup/documentTypeLookupCtrl.js"></script>
+<script src="controller/speechtheraphyTemplate/speechTheraphyQuestionCtrl.js"></script>
+<script src="controller/finance/currencyCtrl.js"></script>
+<script src="controller/finance/paymethodCtrl.js"></script>
+<script src="controller/finance/taxCtrl.js"></script>
+<script src="controller/patient/insuranceCtrl.js"></script>
+<script src="controller/masters/regionalCenter/regionalCenterZoneCtrl.js"></script>
+<script src="controller/masters/regionalCenter/regionalCenterLookupCtrl.js"></script>
+<script src="controller/insuranceLookup/InsurancelookupCtrl.js"></script>
+<script src="controller/school/schoolCtrl.js"></script>
+<script src="controller/vsmsTemplate/vsmsClusterCtrl.js"></script>
+<script src="controller/vsmsTemplate/vsmsQuestionCtrl.js"></script>
+<script src="controller/parentTemplate/careTaker/careTakerCategoryLookupCtrl.js"></script>
+<script src="controller/parentTemplate/careTaker/caretakerMilestonesCtrl.js"></script>
+<script src="controller/parentTemplate/careTaker/careTakerQuestionLookupCtrl.js"></script>
+<script src="controller/parentTemplate/childObservation/childObservationCategoryLookupCtrl.js"></script>
+<script src="controller/parentTemplate/childObservation/childObservationCtrl.js"></script>
+<script src="controller/parentTemplate/childObservation/childObservationQuestionLookupCtrl.js"></script>
+<script src="controller/parentTemplate/csbs/csbsLookupCtrl.js"></script>
+<script src="controller/parentTemplate/csbs/csbsQuestionCtrl.js"></script>
+<script src="controller/parentTemplate/screeningTest/screeningTestLookupCtrl.js"></script>
+<script src="controller/parentTemplate/screeningTest/screeningTestQuestionCtrl.js"></script>
+<script src="controller/parent/screeningTestCtrl.js"></script>
+<script src="controller/parent/csbsTemplateCtrl.js"></script>
+<script src="controller/parentTemplate/mchart/mchartLookupCtrl.js"></script>
+<script src="controller/parent/mchartCtrl.js"></script>
+
+<script src="controller/NICHQParent/NichqCategoryLookupCtrl.js"></script>
+<script src="controller/NICHQParent/NichqQuestionLookupCtrl.js"></script>
+<script src="controller/NICHQParent/nichqTemplateCtrl.js"></script>	
+<script src="controller/NICHQParent/nichqParentGeneralCtrl.js"></script>
+
+<script src="controller/Cluster/MentalClusterCtrl.js"></script>
+<script src="controller/motorTemplate/motorClusterCtrl.js"></script>
+<script src="controller/motorTemplate/motorScaleCtrl.js"></script>
+<script src="controller/scale/MentalScaleCtrl.js"></script>
+<script src="controller/template/mentalMotorCtrl.js"></script>
+<script src="controller/NichqParentCategory/NICHQParentCategoryLookupCtrl.js"></script>
+<script src="controller/teacherInfo/teacherCategorylookupCtrl.js"></script>
+<script src="controller/nichqTeacher/nichqTeacherCategoryLookupCtrl.js"></script>
+<script src="controller/nichqTeacher/nichqTeacherQuestionLookupCtrl.js"></script>
+<script src="controller/isaaBehaviourLookUp/isaaBehaviourlookUPCtrl.js"></script>
+<script src="controller/isaaBehaviourLookUp/isaaBehaviourQuestionLookupCtrl.js"></script>
+<script src="controller/assessment/assessmentCtrl.js"></script>
+
+<script src="controller/categorytype/categoryTypeCtrl.js"></script>
+
+<!-- 718 shift controller -->
+<!-- <script src="controller/schedule/scheduleCtrl.js"></script> -->
+<!-- <script src="controller/holidays/holidayCtrl.js"></script> -->
+
+
+
+<!--<link href="assets/cssfolder/css/stylehealth-rtl.css" rel="stylesheet" type="text/css"/>-->
+<!-- End Theme Layout Style
+        =====================================================================-->
+</head>
+<body class="hold-transition sidebar-mini" ng-app="HealthApplication">
+	<div class="wrapper">
+		<div id="loaderDiv" ng-if="loader">
+			<img src="assets/cssfolder/img/loading-detail.gif"
+				class="ajax-loader" />
+			<p>Loading...</p>
+		</div>
+
+
+		<div ui-view></div>
+	</div>
+	<!-- Site wrapper -->
+	<!-- ./wrapper -->
+	<!-- ./wrapper -->
+	<!-- Start Core Plugins
+        =====================================================================-->
+	<!-- Bootstrap -->
+	<script src="assets/bootstrap/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<!-- lobipanel -->
+	<script src="assets/plugins/lobipanel/lobipanel.min.js"
+		type="text/javascript"></script>
+	<!-- Pace js -->
+	<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+	<!-- SlimScroll -->
+	<script src="assets/plugins/slimScroll/jquery.slimscroll.min.js"
+		type="text/javascript"></script>
+	<!-- FastClick -->
+	<script src="assets/plugins/fastclick/fastclick.min.js"
+		type="text/javascript"></script>
+	<!-- Hadmin frame -->
+	<script src="assets/cssfolder/js/custom1.js" type="text/javascript"></script>
+	<!-- End Core Plugins
+        =====================================================================-->
+	<!-- Start Page Lavel Plugins
+        =====================================================================-->
+	<!-- Toastr js -->
+	<script src="assets/plugins/toastr/toastr.min.js"
+		type="text/javascript"></script>
+	<!-- Sparkline js -->
+	<script src="assets/plugins/sparkline/sparkline.min.js"
+		type="text/javascript"></script>
+	<!-- Data maps js -->
+	<script src="assets/plugins/datamaps/d3.min.js" type="text/javascript"></script>
+	<script src="assets/plugins/datamaps/topojson.min.js"
+		type="text/javascript"></script>
+	<script src="assets/plugins/datamaps/datamaps.all.min.js"
+		type="text/javascript"></script>
+	<!-- Counter js -->
+	<script src="assets/plugins/counterup/waypoints.js"
+		type="text/javascript"></script>
+	<script src="assets/plugins/counterup/jquery.counterup.min.js"
+		type="text/javascript"></script>
+	<!-- ChartJs JavaScript -->
+	<script src="assets/plugins/chartJs/Chart.min.js"
+		type="text/javascript"></script>
+	<script src="assets/plugins/emojionearea/emojionearea.min.js"
+		type="text/javascript"></script>
+	<!-- Monthly js -->
+	<script src="assets/plugins/monthly/monthly.js" type="text/javascript"></script>
+	<!-- Data maps -->
+<!-- 	<script src="assets/plugins/datamaps/d3.min.js" type="text/javascript"></script> -->
+<!-- 	<script src="assets/plugins/datamaps/topojson.min.js" type="text/javascript"></script> -->
+<!-- 	<script src="assets/plugins/datamaps/datamaps.all.min.js" type="text/javascript"></script> -->
+
+	<!-- End Page Lavel Plugins
+        =====================================================================-->
+	<!-- Start Theme label Script
+        =====================================================================-->
+	<!-- Dashboard js -->
+	<script src="assets/cssfolder/js/custom.js" type="text/javascript"></script>
+
+	<!-- End Theme label Script
+        =====================================================================-->
+	<script>
+		"use strict"; // Start of use strict
+		// notification
+		setTimeout(function() {
+			/* toastr.options = {
+				closeButton : true,
+				progressBar : true,
+				showMethod : 'slideDown',
+				timeOut : 1000
+			};
+			toastr.success('Admin', 'Welcome to TWST CLINIC'); */
+
+		}, 1300);
+
+		//counter
+		$('.count-number').counterUp({
+			delay : 10,
+			time : 5000
+		});
+
+		//data maps
+		var basic_choropleth = new Datamap({
+			element : document.getElementById("map1"),
+			projection : 'mercator',
+			fills : {
+				defaultFill : "#009688",
+				authorHasTraveledTo : "#fa0fa0"
+			},
+			data : {
+				USA : {
+					fillKey : "authorHasTraveledTo"
+				},
+				JPN : {
+					fillKey : "authorHasTraveledTo"
+				},
+				ITA : {
+					fillKey : "authorHasTraveledTo"
+				},
+				CRI : {
+					fillKey : "authorHasTraveledTo"
+				},
+				KOR : {
+					fillKey : "authorHasTraveledTo"
+				},
+				DEU : {
+					fillKey : "authorHasTraveledTo"
+				}
+			}
+		});
+
+		var colors = d3.scale.category10();
+
+		window.setInterval(function() {
+			basic_choropleth.updateChoropleth({
+				USA : colors(Math.random() * 10),
+				RUS : colors(Math.random() * 100),
+				AUS : {
+					fillKey : 'authorHasTraveledTo'
+				},
+				BRA : colors(Math.random() * 50),
+				CAN : colors(Math.random() * 50),
+				ZAF : colors(Math.random() * 50),
+				IND : colors(Math.random() * 50)
+			});
+		}, 2000);
+
+		//bar chart
+		var ctx = document.getElementById("barChart");
+		var myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ "January", "February", "March", "April", "May",
+						"June", "July", "August", "September", "October",
+						"November", "December" ],
+				datasets : [ {
+					label : "My First dataset",
+					data : [ 65, 59, 80, 81, 56, 55, 40, 25, 35, 51, 94, 16 ],
+					borderColor : "#009688",
+					borderWidth : "0",
+					backgroundColor : "#009688"
+				}, {
+					label : "My Second dataset",
+					data : [ 28, 48, 40, 19, 86, 27, 90, 91, 41, 25, 34, 47 ],
+					borderColor : "#009688",
+					borderWidth : "0",
+					backgroundColor : "#009688"
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+			}
+		});
+		//radar chart
+		var ctx = document.getElementById("radarChart");
+		var myChart = new Chart(ctx, {
+			type : 'radar',
+			data : {
+				labels : [ [ "Eating", "Dinner" ], [ "Drinking", "Water" ],
+						"Sleeping", [ "Designing", "Graphics" ], "Coding",
+						"Cycling", "Running" ],
+				datasets : [ {
+					label : "My First dataset",
+					data : [ 65, 59, 66, 45, 56, 55, 40 ],
+					borderColor : "#00968866",
+					borderWidth : "1",
+					backgroundColor : "rgba(0, 150, 136, 0.35)"
+				}, {
+					label : "My Second dataset",
+					data : [ 28, 12, 40, 19, 63, 27, 87 ],
+					borderColor : "rgba(55, 160, 0, 0.7",
+					borderWidth : "1",
+					backgroundColor : "rgba(0, 150, 136, 0.35)"
+				} ]
+			},
+			options : {
+				legend : {
+					position : 'top'
+				},
+				scale : {
+					ticks : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+		// Message
+
+		$('.message_inner').slimScroll({
+			size : '3px',
+			height : '320px'
+		});
+
+		//emojionearea
+		$(".emojionearea").emojioneArea({
+			pickerPosition : "top",
+			tonesStyle : "radio"
+		});
+
+		//monthly calender
+		$('#m_calendar').monthly({
+			mode : 'event',
+			//jsonUrl: 'events.json',
+			//dataType: 'json'
+			xmlUrl : 'events.xml'
+		});
+
+		//line chart
+		var ctx = document.getElementById("lineChart");
+		var myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ "January", "February", "March", "April", "May",
+						"June", "July", "August", "September", "October",
+						"November", "December" ],
+				datasets : [
+						{
+							label : "My First dataset",
+							borderColor : "rgba(0,0,0,.09)",
+							borderWidth : "1",
+							backgroundColor : "rgba(0,0,0,.07)",
+							data : [ 22, 44, 67, 43, 76, 45, 12, 45, 65, 55,
+									42, 61, 73 ]
+						},
+						{
+							label : "My Second dataset",
+							borderColor : "#009688",
+							borderWidth : "1",
+							backgroundColor : "#009688",
+							pointHighlightStroke : "#009688",
+							data : [ 16, 32, 18, 26, 42, 33, 44, 24, 19, 16,
+									67, 71, 65 ]
+						} ]
+			},
+			options : {
+				responsive : true,
+				tooltips : {
+					mode : 'index',
+					intersect : false
+				},
+				hover : {
+					mode : 'nearest',
+					intersect : true
+				}
+
+			}
+		});
+	</script>
+
+</body>
+
+</html>

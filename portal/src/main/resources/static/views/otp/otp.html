@@ -1,0 +1,86 @@
+<div class="login-wrapper" ng-init="timerForOtpExpires()">
+	<div class="container-center">
+		<div class="panel panel-bd">
+			<div class="panel-heading">
+				<div class="view-header">
+					<div class="header-icon">
+						<i class="pe-7s-unlock"></i>
+					</div>
+					<div class="header-title">
+						<strong>OTP Verification</strong><br> <small>Please
+							enter your OTP to Login</small><br>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="otpform" name="otpform">
+					<div class="form-group">
+						<span style="color: red"
+							ng-show="otpform.otp.$touched && otpform.otp.$invalid"> <span
+							ng-show="otpform.otp.$error.required"> is required.</span></span> <input
+							type="text" class="form-control input-lg input-round text-center"
+							name="otp" ng-model="otpDto.token" placeholder="Enter OTP">
+						<span ng-show="otpform.otp.$error.required">OTP is
+							required.</span> <span style="color: red"
+							ng-show="otpform.otp.$error.pattern"> Please enter a valid
+							OTP!</span>
+					</div>
+					<!-- <div class="col-sm-12">
+						<h6 class="col-sm-8" align="left" style="color: red" id="demo"></h6>
+						<h6 class="col-sm-6" align="right" ng-click="resndOTP()">Resend Otp</h6>
+					</div> -->
+					<div align="center" class="col-sm-12">
+					<br>
+						<a class="btn btn-primary" ng-disabled="otpform.otp.$invalid"
+							ng-click="validateOtp();">Verify</a>
+						<button class="btn btn-danger" ui-sref="login">Cancel</button>
+						<hr>
+					</div>
+					<!--  -->
+					<hr>
+					<hr>
+					<div class="panel-body" style="padding-top: 10px;" >
+					<br>
+											<div class="row card-bdy" style="padding-top: 4px;">
+												<div  class="col-sm-1">
+													<div class="card-img card-icon" >
+														<i class="fa fa-envelope fa-4x"></i>
+													</div>
+												</div>
+
+												<div class="col-sm-10" >
+
+													<div class="form-group">
+														<div style="padding-left: 55px;"><h6>If you did not receive the OTP on E-mail, you can</h6>
+															</div>
+															<br>
+														<div style="padding-left: 55px;"><span class="label-success label label-default" ng-click="resndOTP()">
+														Click here to resend the OTP</span></div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--  -->
+					
+					<!-- <div class="row card-bdy">
+												<div class="col-sm-1 text-left">
+													<div class="card-img card-icon" align="right">
+														<i class="fa fa-user-md fa-3x"></i>
+													</div>
+												</div>
+					<div class="col-sm-11 " >
+													<span class="badge badge-light badge-sm"> If you did not receive the OTP,you can</span>
+													<p>&nbsp;&nbsp;
+														<span class="label-success label label-default" ng-click="gotoInvoicePage(appointment)">
+														Click here to resend the OTP</span>
+													</p>
+												</div>
+												</div> -->
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+

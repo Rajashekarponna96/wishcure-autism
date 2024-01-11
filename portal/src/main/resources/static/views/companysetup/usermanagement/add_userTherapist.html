@@ -1,0 +1,332 @@
+<div class="content-wrapper"
+	ng-init="getAllRolesBasedOnStatus();getAllDepartments();getAllSitesByCompanyUserNameAndStatus();getCountrysByIsdCode();
+	addUser.role.roleName='Therapist'">
+
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Create Therapist</h1>
+			<small>Assign All Existing Patients To New Therapist</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Create Therapist</li>
+			</ol>
+
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary btn-list" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> User list
+							</a>
+
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="addUserForm">
+
+							<div class="form-group col-lg-6">
+								<label><span
+										ng-if="addUser.firstName == undefined || addUser.firstName =='' "
+										style="color: red">*</span>Firstname</label><span style="color: red" ng-cloak
+									ng-show="(addUserForm.firstName.$touched && addUserForm.firstName.$invalid)">
+									<span ng-show="addUserForm.firstName.$error.required">
+										 is required.</span>
+										</span> <input type="text" value=""
+									class="form-control" name="firstName" id="txt_username"
+									ng-model="addUser.firstName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+
+							<div class="form-group col-lg-6">
+								<label><span
+										ng-if="addUser.lastName == undefined || addUser.lastName =='' "
+										style="color: red">*</span>Lastname</label><span style="color: red" ng-cloak
+									ng-show="(addUserForm.lastName.$touched && addUserForm.lastName.$invalid)">
+									<span ng-show="addUserForm.lastName.$error.required">
+										 is required.</span>
+										</span> <input type="text" id="txt_lastname"
+									class="form-control" name="lastName"
+									ng-model="addUser.lastName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+										
+							</div>
+							<div class="form-group col-lg-6">
+							<!-- {{existId}} -->
+								<label><span
+										ng-if="addUser.username == undefined || addUser.username =='' "
+										style="color: red">*</span>Email Address</label> <span style="color: red" ng-cloak
+									ng-show="(addUserForm.email.$touched && addUserForm.email.$invalid)">
+									<span ng-show="addUserForm.email.$error.required">
+										is required.</span></span> <span style="color: red"
+									ng-show="addUserForm.email.$error.pattern"> Please enter
+										a valid email address!</span> <!-- <p class="text-danger-red" id="label_user_email"></p> -->
+									<span ng-if="addUserForm.$pending.emailExists">checking....</span>
+									<span ng-if="addUserForm.$error.emailExists" style="color: red"> exists
+										already</span> <input type="email" value=""
+									id="txt_email" class="form-control" name="email"
+									ng-model="addUser.username" aria-required="true" class="error"
+									id="txt_user_email" aria-invalid="true" email-available
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+								
+										
+							</div>
+
+
+							<div class="form-group col-lg-6">
+								<label><span
+										ng-if="addUser.password == undefined || addUser.password =='' "
+										style="color: red">*</span>Password</label> <span style="color: red" ng-cloak
+									ng-show="(addUserForm.password.$touched && addUserForm.password.$invalid)">
+									<span ng-show="addUserForm.password.$error.required">
+										is required.</span>
+										</span> <input type="password" id="txt_password"
+									class="form-control" name="password"
+									ng-model="addUser.password" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label><span
+										ng-if="addUser.mobileNumber == undefined || addUser.mobileNumber =='' "
+										style="color: red">*</span>Mobile</label> <span style="color: red"
+									ng-cloak
+									ng-show="(addUserForm.mobileNumber.$touched && addUserForm.mobileNumber.$invalid)">
+									<span ng-show="addUserForm.mobileNumber.$error.required">
+										is required.</span></span> <span
+									ng-show="((addUserForm.mobileNumber.$error.minlength ||
+                           addUserForm.mobileNumber.$error.maxlength) && 
+                           addUserForm.mobileNumber.$dirty) " style="color: red">
+										phone number should be 10 digits </span>
+									<span ng-if="addUserForm.$pending.mobileNumberExists">checking....</span>
+									<span ng-if="addUserForm.$error.mobileNumberExists">
+										exists already</span> <input type="text" class="form-control"
+									phone-input maxlength="14" minlength="14" value=""
+									name="mobileNumber" ng-model="addUser.mobileNumber"
+									placeholder="Enter Mobile" aria-required="true" class="error"
+									id="txt_user_mobileNumber" aria-invalid="true" mobile-available
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									maxlength="10" required> 
+										
+							</div>
+							<!-- <div class="col-sm-6 form-group">
+								<label><span
+										ng-if="addUser.role == undefined || addUser.role =='' "
+										style="color: red">*</span>User Role </label> <span style="color: red" 
+									ng-show="(addUserForm.userRole.$touched && addUserForm.userRole.$invalid)">
+									<span ng-show="addUserForm.userRole.$error.required">
+										 is required.</span>
+										</span> <select name="userRole"
+									class="form-control" ng-model="addUser.role"
+									ng-options="role as role.roleName for role in  rolesList"
+									required>
+									<option value="" class="active">Select Role</option>
+									<option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option>
+								</select> 
+							</div> -->
+							
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>NPI</label> <span style="color: red" ng-cloak
+									ng-show="(addUserForm.npi.$touched && addUserForm.npi.$invalid)">
+									<span ng-show="addUserForm.npi.$error.required">
+										 is required.</span>
+								</span>
+								<div ng-if="addUserForm.$pending.npiExists">checking....</div>
+								<div ng-if="addUserForm.$error.npiExists" style="color: red">NPI
+									Number exists already</div> <input type="text" class="form-control"
+									value="" name="npi" ng-model="addUser.npi" npi-available
+									placeholder="Enter NPI Number" aria-required="true"
+									class="error" id="txt_addUser_npi" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Designation</label> <span style="color: red"
+										ng-show="(addUserForm.designation.$touched && addUserForm.designation.$invalid)">
+										<span ng-show="addUserForm.designation.$error.required">
+											is required.</span>
+									</span><input type="text"
+									ng-model="addUser.designation" name="designation"  class="form-control"
+									placeholder="Enter Designation" required>
+							</div>
+							
+							<div class="col-sm-6 form-group" ng-if="addUser.role.roleName=='Therapist'">
+								<label>Department</label> <span style="color: red"
+										ng-show="(addUserForm.department.$touched && addUserForm.department.$invalid)">
+										<span ng-show="addUserForm.department.$error.required">
+											is required.</span>
+									</span><select class="form-control"
+									  ng-model="addUser.department" name="department"
+									ng-options="department as department.departmentName for department in departmentsList"
+									>
+									<option value="" class="active" >Select Department</option>
+								</select>
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Specialization</label> <span style="color: red"
+										ng-show="(addUserForm.specialization.$touched && addUserForm.specialization.$invalid)">
+										<span ng-show="addUserForm.specialization.$error.required">
+											is required.</span>
+									</span> <input type="text"
+									ng-model="addUser.specialization" name="specialization" class="form-control"
+									placeholder="specialization" required>
+							</div>
+
+							<div class="col-sm-6 form-group" ng-if="addUser.role.roleName=='Therapist'">
+								<label>Country</label> <span style="color: red"
+										ng-show="(addUserForm.country.$touched && addUserForm.country.$invalid)">
+										<span ng-show="addUserForm.country.$error.required">
+											is required.</span>
+									</span> <select ng-model="addUser.countryName"
+									class="form-control" name="country" aria-required="true"
+									aria-invalid="true"
+									ng-options="country as country.name  for country in countriesList"
+									ng-change="getAllStatesByCountryId(addUser.countryName.id);"
+									required>
+									<option value="" class="active">Select Country</option>
+								</select>
+								
+							</div>
+							<div class="col-sm-6 form-group" ng-if="addUser.role.roleName=='Therapist'">
+								<label>State</label> <span style="color: red"
+										ng-show="(addUserForm.state.$touched && addUserForm.state.$invalid)">
+										<span ng-show="addUserForm.state.$error.required">
+											is required.</span>
+									</span> <select ng-model="addUser.stateName"
+									class="form-control" name="state" aria-required="true"
+									aria-invalid="true"
+									ng-options="state as state.name for state in statesList"
+									ng-change="getAllCitiesByStateId(addUser.stateName.id);"
+									required>
+									<option value="" class="active">Select State</option>
+								</select>
+								
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>City</label> <span style="color: red"
+										ng-show="(addUserForm.cityName.$touched && addUserForm.cityName.$invalid)">
+										<span ng-show="addUserForm.cityName.$error.required">
+											is required.</span>
+									</span>
+
+								<input type="text" value="" class="form-control" name="cityName"
+									id="txt_username" ng-model="addUser.cityName"
+									aria-required="true" aria-invalid="true" required>
+							</div>
+
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Address</label> <span style="color: red"
+										ng-show="(addUserForm.address1.$touched && addUserForm.address1.$invalid)">
+										<span ng-show="addUserForm.address1.$error.required">Address
+											is required.</span>
+									</span>
+								<textarea type="text" class="form-control" rows="3" name="address1"
+									ng-model="addUser.address1" placeholder="Enter Address"
+									required></textarea>
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Zip/Postal Code</label> <span style="color: red"
+										ng-show="(addUserForm.zipcode.$touched && addUserForm.zipcode.$invalid)">
+										<span ng-show="addUserForm.zipcode.$error.required">
+											is required.</span>
+									</span> <input type="text"  name="zipcode"
+									allow-only-numbers ng-model="addUser.zipcode"
+									class="form-control" maxlength="5" placeholder="Enter zipcode"
+									required>
+							</div>
+							<div class="col-sm-3 form-group">
+								<label>Sex</label><br> <label class="radio-inline">
+									<input type="radio" ng-value="0" name="gender"
+									ng-model="addUser.gender">Male
+								</label> <label class="radio-inline"> <input type="radio"
+									name="gender" ng-model="addUser.gender" ng-value="1">Female
+								</label>
+
+							</div>
+							<div class="col-sm-3 form-group">
+								<div class="form-check">
+									<label>Status</label><br> <label class="radio-inline">
+										<input type="radio" name="isActive" ng-model="addUser.active"
+										ng-value="1" ng-checked="!addUser.active">Active
+									</label> <label class="radio-inline"> <input type="radio"
+										name="isActive" ng-model="addUser.active" ng-value="0">Inctive
+									</label>
+								</div>
+							</div>
+
+							<div class="col-sm-12 form-group"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Short Biography</label> <span style="color: red"
+										ng-show="(addUserForm.shortAutoBiography.$touched && addUserForm.shortAutoBiography.$invalid)">
+										<span ng-show="addUserForm.shortAutoBiography.$error.required">
+											is required.</span>
+									</span>
+								<textarea  class="form-control" rows="3" name="shortAutoBiography"
+									ng-model="addUser.shortAutoBiography"
+									placeholder="Enter text ..."></textarea>
+							</div>
+							<div class="form-group col-lg-6"
+								ng-if="addUser.role.roleName=='Therapist'">
+								<label>Upload Signature</label> <input type="file" name="file"
+									onchange="angular.element(this).scope().fileChanged(this.files)"
+									required>
+							</div>
+							<div class="col-sm-6 form-group"
+								ng-if="addUser.role.roleName=='Therapist'"
+								ng-if="ProfilePicimagePath != undefined">
+								<img ng-src="{{getImagePathData(imageUrl)}}" height="100"
+									width="100" alt="User Image">
+							</div>
+						</form>
+						<div class="">
+							<div class="reset-button">
+								<button  class="btn btn-success"
+								ng-disabled=" !addUser.firstName || !addUser.lastName || !addUser.username   || !addUser.password || !addUser.mobileNumber || !addUser.role"
+									ng-show="hasFeature('User Management').canAdd==true"
+									ng-click="addTherapist(existId);">Save</button> <a href=""
+									class="btn btn-danger">Cancel</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+
+

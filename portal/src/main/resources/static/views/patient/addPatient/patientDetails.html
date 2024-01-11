@@ -1,0 +1,279 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoRegistrationDetails();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<!-- <div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoUploadDocuments();" type="button"
+				class="btn btn-default btn-circle"  >3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div> -->
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-1" ng-init="getAllPatientRegistrationTypesList();">
+	<hr>
+	<form name="patientForm">
+	<div class="col-sm-12">
+	<br>
+			<div class="col-lg-6 form-group">
+			<label><span ng-if="patient.patientRegistrationType == undefined || patient.patientRegistrationType == '' " style="color: red">*</span>Registration Type</label>
+			<span style="color: red"
+					ng-show="(patientForm.patientRegistrationType.$touched && patientForm.patientRegistrationType.$invalid)">
+					<span ng-show="patientForm.patientRegistrationType.$error.required"> is
+						required.</span>
+						</span>
+				<select class="form-control"
+									name="patientRegistrationType" placeholder="please select patientRegistrationType"
+									ng-model="patient.patientRegistrationType" ng-change="getAllCategoriesByRegistartiontype(patient.patientRegistrationType.id);"
+									ng-options="patientRegistrationType as patientRegistrationType.name for patientRegistrationType in patientRegistrationTypes"><option
+										value="" class="active">Select Registration Type</option></select>
+			
+			</div>
+			
+			<div class="col-sm-6 form-group">
+				<span
+					ng-if="patient.categoryType == undefined || patient.categoryType == '' "
+					style="color: red">*</span><label>Category</label> <span
+					style="color: red"
+					ng-show="(patientForm.categoryType.$touched && patientForm.categoryType.$invalid)">
+					<span style="color: red"
+					ng-show="patientForm.categoryType.$error.required"> is
+						required.</span>
+				</span> <select ng-model="patient.categoryType" class="form-control"
+					name="categoryType" id="categoryType" aria-required="true"
+					aria-invalid="true" ng-options="categoryType as categoryType.name  for categoryType in categoriesList"
+					required>
+					<option value="">Select Category</option>
+				</select>
+			</div>
+			
+	</div>
+		<div class="col-sm-12">
+			<br>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.firstName == undefined || patient.firstName =='' "
+					style="color: red">*</span>Child Name</label> <span style="color: red"
+					ng-show="(patientForm.firstName.$touched && patientForm.firstName.$invalid)">
+					<span ng-show="patientForm.firstName.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="firstName" class="form-control"
+					placeholder="Enter firstname" ng-model="patient.firstName" required>
+			</div>
+			
+			
+			
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.dateOfBirth == undefined || patient.dateOfBirth == '' "
+					style="color: red">*</span>DOB</label> <span style="color: red"
+					ng-show="(patientForm.dateOfBirth.$touched && patientForm.dateOfBirth.$invalid)">
+					<span style="color: red" ng-show="patientForm.dateOfBirth.$error.required">
+						is required.</span>
+				</span> <input type="DATE" class="form-control" ng-change="getAge()"
+					name="dateOfBirth" placeholder="Enter DOB" id="birth_date"
+					ng-model="patient.dateOfBirth" required>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label>Age</label> <input type="text" class="form-control" allow-only-numbers
+					placeholder="Enter Age" id="age" ng-model="patient.age" name="age"
+					required>
+			</div>
+			
+			
+			<!-- <div class="col-lg-6 form-group">
+				<label>SSN</label> <input type="text" class="form-control"
+					allow-only-numbers name="ssn" placeholder="Enter SSN"
+					ng-model="patient.ssn" maxlength="10">
+			</div> -->
+			
+			<div class="col-lg-6 form-group">
+				<span style="color: red">*</span><label>Aadhaar Number</label> <input type="text" class="form-control"
+					allow-only-numbers name="aadhaarNo" placeholder="Enter Aadhaar Number"
+					ng-model="patient.aadhaarNo" maxlength="12">
+			</div>
+			
+			
+			<div class="col-lg-6 form-group"
+				ng-show="patient.categoryType.name=='Early intervention'">
+				<label><span
+					ng-if="patient.ucl == undefined || patient.ucl == '' "
+					style="color: red">*</span>UCI</label> <span style="color: red"
+					ng-show="(patientForm.ucl.$touched && patientForm.ucl.$invalid)">
+					<span style="color: red" ng-show="patientForm.ucl.$error.required">
+						is required.</span>
+				</span> <span ng-if="patientForm.$pending.uciExists">checking....</span> <span
+					ng-if="patientForm.$error.uciExists"> exists already</span> <input
+					type="text" class="form-control" maxlength="10"
+					placeholder="Enter UCI" ng-model="patient.ucl" name="ucl"
+					class="error" aria-invalid="true" uci-available allow-only-numbers
+					ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+					required>
+			</div>
+			<div class="col-lg-6 form-group"
+				ng-show="patient.categoryType.name=='Early intervention'">
+				<label><span
+					ng-if="patient.gaurdian == undefined || patient.gaurdian == '' "
+					style="color: red">*</span>Parent Name</label> <span style="color: red"
+					ng-show="(patientForm.parentname.$touched && patientForm.parentname.$invalid)">
+					<span style="color: red"
+					ng-show="patientForm.parentname.$error.required"> is
+						required.</span>
+				</span><input type="text" class="form-control"
+					placeholder="Enter Parent Name" name="parentname"
+					ng-model="patient.gaurdian" required>
+			</div>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.mobileNumber == undefined || patient.mobileNumber == '' "
+					style="color: red">*</span>Primary Phone Number(Dad)</label> <span
+					style="color: red"
+					ng-show="(patientForm.mobileNumber.$touched && patientForm.mobileNumber.$invalid)">
+					<span ng-show="patientForm.mobileNumber.$error.required"
+					style="color: red"> is required.</span>
+				</span><span
+					ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$touched)"
+					style="color: red"> should be 10 digits </span> <span
+					ng-if="patientForm.$pending.mobileNumberExists">checking....</span>
+				<span ng-if="patientForm.$error.mobileNumberExists"
+					style="color: red"> exists already</span><input type="text"
+					class="form-control" phone-input maxlength="14" minlength="14"
+					name="mobileNumber" ng-model="patient.mobileNumber"
+					placeholder="Enter Phone Number" aria-required="true" class="error"
+					id="txt_patient_mobileNumber" required>
+			</div>
+			<div class="col-lg-6 form-group"
+				ng-show="patient.categoryType.name=='Early intervention'">
+				<label>Secondary Phone Number(Mom)</label><span
+					ng-show="((patientForm.mobileNumber1.$error.minlength ||
+                           patientForm.mobileNumber1.$error.maxlength) && 
+                           patientForm.mobileNumber1.$touched) "
+					style="color: red"> should be 10 digits </span> <span
+					ng-if="patientForm.$pending.mobileNumberExists">checking....</span>
+				<span ng-if="patientForm.$error.mobileNumberExists"
+					style="color: red"> exists already</span> <input type="text"
+					class="form-control" phone-input maxlength="14" mobile-available
+					minlength="14" value="" name="mobileNumber1"
+					ng-model="patient.secondaryNumber" placeholder="Enter Phone Number"
+					aria-required="true" class="error" id="txt_patient_mobileNumber"
+					aria-invalid="true"
+					ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+					maxlength="10">
+			</div>
+			
+			<div class="col-sm-3 form-group" align="left">
+				<label>Sex</label><label class="radio-inline"></label>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label class="radio-inline"> <input type="radio"
+					ng-value="0" name="gender" ng-model="patient.gender">Male
+				</label> <label class="radio-inline">&nbsp;&nbsp;<input
+					type="radio" name="gender" ng-model="patient.gender" ng-value="1">Female
+				</label>
+			</div>
+			<div class="col-sm-3 form-group">
+				<label>Status</label>
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="radio-inline"><input type="radio"
+					name="status" value="1" ng-checked="true" ng-value="true"
+					ng-model="patient.active">Active</label> <label
+					class="radio-inline"><input type="radio"
+					ng-model="patient.active" name="status" value="0"
+					ng-checked="false" ng-value="false">Inactive</label>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label>Is Evalution Done?</label>
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="radio-inline"><input type="radio"
+					name="evalutionDone" ng-checked="false"
+					ng-model="patient.evalutionDone" value="true">Yes</label> <label
+					class="radio-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+					type="radio" name="evalutionDone" ng-model="patient.evalutionDone"
+					ng-checked="true" value="false">No
+				</label>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label>Communication Status</label> <span style="color: red"
+					ng-show="(patientForm.email.$touched && patientForm.email.$invalid || patientForm.sms.$touched && patientForm.sms.$invalid)">
+					<span
+					ng-show="patientForm.sms.$error.required || patientForm.email.$error.required">Communication
+						Status is required.</span>
+				</span>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label class="checkbox-inline"><input name="email"
+					ng-model="patient.communicatonEmail" type="checkbox">Email</label>
+				<label class="checkbox-inline">&nbsp;<input name="sms"
+					ng-model="patient.sms" type="checkbox">SMS
+				</label>
+			</div>
+			<!-- email-available -->
+			<div class="col-sm-6 form-group"
+				ng-if="patient.communicatonEmail == true">
+				<label class="control-label" for="emailid">Email Id</label> <span
+					style="color: red"
+					ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+				<span ng-show="patientForm.email.$error.required">Email is
+					required.</span> <span style="color: red"
+					ng-show="patientForm.email.$error.pattern"> Please enter a
+					valid email address!</span> <span ng-if="patientForm.$pending.emailExists"
+					style="color: red">checking....</span> <span
+					ng-if="patientForm.$error.emailExists" style="color: red">Email
+					exists already</span> <input type="email" value=""
+					placeholder="Enter Email" id="txt_email" class="form-control"
+					name="email" email-available ng-model="patient.email"
+					aria-required="true" class="error" id="txt_user_email"
+					aria-invalid="true"
+					ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+					ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+			</div>
+			</div>
+	</form>
+	<div class="col-sm-12">
+		<br>
+	</div>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoChildDetails();">Next</button>
+</div>
+
+

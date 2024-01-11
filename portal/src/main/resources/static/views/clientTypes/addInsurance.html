@@ -1,0 +1,242 @@
+<div class="content-wrapper scrollpage" ng-init="">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Insurance</h1>
+			<small>Here you can add new insurance company details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Insurance</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Insurance List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="patientForm">
+							<div class="col-lg-6 form-group">
+								<label>InsuranceId</label><input type="text" value=""
+									class="form-control" name="siteName"
+									placeholder="Enter InsuranceId"
+									ng-model="insurance.idNumber">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label><span
+									ng-if="insurance.insuranceCompanyName == undefined || insurance.insuranceCompanyName =='' "
+									style="color: red">*</span>Insurance Company Name</label> <span
+									style="color: red"
+									ng-show="(patientForm.insuranceCompanyName.$touched && patientForm.insuranceCompanyName.$invalid)">
+									<span
+									ng-show="patientForm.insuranceCompanyName.$error.required">
+										is required.</span>
+								</span><input type="text" name="insuranceCompanyName"
+									class="form-control" placeholder="Enter Insurance CompanyName"
+									ng-model="insurance.insuranceCompanyName" required>
+							</div>
+							<div class="form-group col-sm-6">
+								<label>E-Mail</label><span style="color: red"
+									ng-show="patientForm.insuranceEmail.$error.pattern">
+									Please enter a valid email address!</span> <span
+									ng-if="patientForm.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="patientForm.$error.emailExists" style="color: red">Email
+									exists already</span> <input type="email" value=""
+									placeholder="Enter insurance Email" id="txt_email"
+									class="form-control" name="insuranceEmail"
+									ng-model="insurance.emailId" 
+									id="txt_user_email" 
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " >
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Phone Number</label> <span
+									ng-show="((patientForm.insuranceMobileNumber.$error.minlength ||
+                           patientForm.insuranceMobileNumber.$error.maxlength) && 
+                           patientForm.insuranceMobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="patientForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="patientForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span> <input type="text"
+									phone-input name="insuranceMobileNumber" class="form-control"
+									placeholder="Enter Insurance Phone Number" maxlength="14"
+									minlength="14" ng-model="insurance.mobileNumber" >
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Street Address 1</label> <input id="autocomplete"
+									placeholder="Enter your address" class="form-control"
+									onFocus="geolocate()" type="text"></input>
+							</div>
+
+							<div>
+								<input class="field form-control" type="hidden"
+									ng-model="insurance.address1.address1" id="street_number"></input>
+							</div>
+
+							<div class="col-lg-6 form-group">
+								<label>Street Address 2</label> <input
+									class="field form-control"
+									ng-model="insurance.address1.address2" id="route"></input>
+							</div>
+
+							<div class="col-lg-6 form-group">
+								<label>City</label> <input class="field form-control"
+									ng-model="insurance.address1.city" id="locality"></input>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>State</label> <input class="field form-control"
+									ng-model="insurance.address1.state"
+									id="administrative_area_level_1"></input>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Country</label> <input class="field form-control"
+									ng-model="insurance.address1.country" id="country"></input>
+							</div>
+
+							<div class="col-lg-6 form-group">
+								<label>Zip code</label> <input class="field form-control"  allow-only-numbers
+									maxlength="5" ng-model="insurance.address1.zipcode"
+									id="postal_code"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Fax</label>
+								<span ng-show="((patientForm.insurancefax.$error.minlength ||
+                           patientForm.insurancefax.$error.maxlength) && 
+                           patientForm.insurancefax.$dirty) "
+									style="color: red"> should be 10 digits </span> <input type="text" value="" class="form-control"  phone-input maxlength="14" minlength="14"
+									placeholder="Enter Fax" ng-model="insurance.fax" name="insurancefax"  >
+							</div>
+
+							<div class="col-lg-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="insurance.status" name="status"
+									ng-value="true" ng-checked="!insurance.status">Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="insurance.status" name="status" ng-value="false">InActive</label>
+							</div>
+
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-click="addInsurance(insurance)"
+									ng-disabled="!insurance.insuranceCompanyName || patientForm.insuranceEmail.$error.pattern ||((patientForm.insuranceMobileNumber.$error.minlength ||
+                           patientForm.insuranceMobileNumber.$error.maxlength) &&  patientForm.insuranceMobileNumber.$dirty)||
+                          ((patientForm.insurancefax.$error.minlength ||patientForm.insurancefax.$error.maxlength) &&  patientForm.insurancefax.$dirty)">Save</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+
+							</div>
+							<script>
+								var placeSearch, autocomplete;
+								var componentForm = {
+									street_number : 'short_name',
+									route : 'long_name',
+									locality : 'long_name',
+									administrative_area_level_1 : 'short_name',
+									country : 'long_name',
+									postal_code : 'short_name'
+								};
+
+								function initAutocomplete() {
+									// Create the autocomplete object, restricting the search to geographical
+									// location types.
+									var options = {
+										types : [ 'geocode' ],
+										componentRestrictions : {
+											country : 'us'
+										}
+									};
+
+									autocomplete = new google.maps.places.Autocomplete(
+											(document
+													.getElementById('autocomplete')),
+											options);
+
+									// When the user selects an address from the dropdown, populate the address
+									// fields in the form.
+									autocomplete.addListener('place_changed',
+											fillInAddress);
+								}
+
+								function fillInAddress() {
+									// Get the place details from the autocomplete object.
+									var place = autocomplete.getPlace();
+
+									for ( var component in componentForm) {
+										document.getElementById(component).value = '';
+										document.getElementById(component).disabled = false;
+									}
+
+									// Get each component of the address from the place details
+									// and fill the corresponding field on the form.
+									for (var i = 0; i < place.address_components.length; i++) {
+										var addressType = place.address_components[i].types[0];
+										if (componentForm[addressType]) {
+											var val = place.address_components[i][componentForm[addressType]];
+											document
+													.getElementById(addressType).value = val;
+										}
+									}
+								}
+
+								// Bias the autocomplete object to the user's geographical location,
+								// as supplied by the browser's 'navigator.geolocation' object.
+								function geolocate() {
+									if (navigator.geolocation) {
+										navigator.geolocation
+												.getCurrentPosition(function(
+														position) {
+													var geolocation = {
+														lat : position.coords.latitude,
+														lng : position.coords.longitude
+													};
+													var circle = new google.maps.Circle(
+															{
+																center : geolocation,
+																radius : position.coords.accuracy
+															});
+													autocomplete
+															.setBounds(circle
+																	.getBounds());
+												});
+									}
+								}
+							</script>
+							<script
+								src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYFHF5OFfYFzoXznrZfQQU8aGOClVeXcQ&libraries=places&callback=initAutocomplete"
+								async defer></script>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

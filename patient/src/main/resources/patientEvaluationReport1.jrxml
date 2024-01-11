@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patientEvaluationReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c32bb14-b882-4601-bac5-00106b14f338">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="companyLogo" class="java.lang.String"/>
+	<parameter name="doctorSign" class="java.lang.String"/>
+	<parameter name="JRdataMentalScalesSource" class="com.openspace.Model.MentalReferenceProfile.PatientMentalScale"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="history" class="java.lang.String"/>
+	<field name="backgroundInformation" class="java.lang.String"/>
+	<field name="observation" class="java.lang.String"/>
+	<field name="testAdministered" class="java.lang.String"/>
+	<field name="oralMotor" class="java.lang.String"/>
+	<field name="pragmaticSkills" class="java.lang.String"/>
+	<field name="summary" class="java.lang.String"/>
+	<field name="recommandations" class="java.lang.String"/>
+	<field name="receptiveLanguage" class="java.lang.String"/>
+	<field name="expressiveLanguage" class="java.lang.String"/>
+	<field name="patient" class="com.openspace.Model.DoctorManagement.Patient"/>
+	<field name="progressDate" class="java.time.LocalDate"/>
+	<field name="evaluator" class="java.lang.String"/>
+	<field name="serviceCoordinator" class="java.lang.String"/>
+	<variable name="patientName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{patient}.getFirstName()]]></variableExpression>
+	</variable>
+	<variable name="ucl" class="java.lang.String">
+		<variableExpression><![CDATA[$F{patient}.getUcl()]]></variableExpression>
+	</variable>
+	<variable name="ssn" class="java.lang.String">
+		<variableExpression><![CDATA[$F{patient}.getSsn()]]></variableExpression>
+	</variable>
+	<variable name="parentName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{patient}.getGaurdian()]]></variableExpression>
+	</variable>
+	<variable name="age" class="java.lang.String">
+		<variableExpression><![CDATA[$F{patient}.getAge()]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="92">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" isLazy="true">
+				<reportElement positionType="Float" x="326" y="10" width="200" height="80" isRemoveLineWhenBlank="true" uuid="41163248-a790-45c0-87b6-20a922f41322"/>
+				<imageExpression><![CDATA["file:/C:/Users/KanthiSri/git/ParentProject/ParentProject/portal/src/main/resources/static/images/banner/are-you-doctor.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="304" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="30" y="236" width="500" height="27" uuid="b0361126-059d-43c6-a7b5-92b8c9ab1130"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[History        :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="267" width="500" height="33" uuid="b41230b6-f392-4bc7-b6a8-560878715e9b"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{history}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="76" width="72" height="23" uuid="667260fb-634a-409e-bbaf-740845772935"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name	   :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="106" y="76" width="100" height="22" uuid="080edc8c-cd1b-458e-a742-797302efd4c1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{patientName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="104" width="73" height="25" uuid="70e3f008-45b8-419a-a274-ba9e3bbb17c7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uci	    : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="106" y="104" width="100" height="25" uuid="6a90a3ef-6894-48b3-bccd-41846568bd39"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ucl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="328" y="78" width="100" height="20" uuid="d6e9bffc-662b-48e4-8343-f7f5be691a36"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Of Test     :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="432" y="75" width="95" height="23" uuid="97fd69a5-cea7-42fb-a54f-ff2adeff4746"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{progressDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="329" y="107" width="99" height="18" uuid="a189866c-ba8c-4745-820f-3317511f7a8f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SSN                  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="431" y="107" width="96" height="18" uuid="43dd0650-fda7-4739-8c5a-01ce11b1797e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{ssn}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="329" y="138" width="100" height="17" uuid="a7915a85-b5cd-438f-bf2b-67df629ff43c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ParentName     :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="431" y="138" width="96" height="17" uuid="6d1e509f-a967-44b9-99f7-574f09a0158d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{parentName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="136" width="72" height="20" uuid="367e3e98-dea5-4c9e-a37c-e4c9be1092fb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age         :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="106" y="136" width="100" height="20" uuid="41c38a0c-7d9c-499b-9a26-134a99f4a7e6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{age}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="172" width="72" height="20" uuid="5094f2ab-baa1-40aa-80bc-b2fde0ceffd2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evaluator  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="171" width="97" height="20" uuid="22cbaded-c664-41c0-a26f-c7322fed3a65"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evaluator}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="180" y="198" width="130" height="22" uuid="7660e181-398e-4737-8f70-84b93d933101"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serviceCoordinator}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="199" width="147" height="21" uuid="35f007b2-4706-4679-b191-bc1c21638c48"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Service Coordinator      :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="431" y="166" width="95" height="17" uuid="8dec885f-878a-4676-aa44-884344cb86cc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{progressDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="329" y="166" width="98" height="17" uuid="2afa9702-e02e-47cc-b4d2-332d188c3d58"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Progress Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="6" width="270" height="40" uuid="99f93e93-620c-41d3-918d-de959fccc8c6"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Speech and Language Evaluation Note]]></text>
+			</staticText>
+		</band>
+		<band height="133">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="98" width="500" height="30" uuid="78b2aa67-1fa7-4f27-b271-29a5f99ee73b"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="67" width="500" height="25" uuid="7f9b5008-ac93-4d63-8f20-75b1adba2893"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observation      :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="3" width="500" height="30" uuid="2832134a-0d78-4fd7-82ac-6f6ece81476a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Background Information          :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="33" width="500" height="27" uuid="3201b969-537c-494b-ac8d-6728c16cd05c"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{backgroundInformation}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="143">
+			<staticText>
+				<reportElement positionType="Float" x="30" y="74" width="500" height="30" uuid="9d32a3a8-3ef3-4681-abdb-beef2c3883c2"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oral Motar      :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="108" width="500" height="31" uuid="6ca717d5-ff65-4438-a0cc-778f47c4accb"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{oralMotor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="6" width="500" height="30" uuid="5fbddec0-b4db-404c-ab11-355c99d84624"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Test Adminstered       :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="38" width="500" height="33" uuid="d2df80b5-e720-4df8-a31e-f5182dec32c0"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testAdministered}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="169">
+			<staticText>
+				<reportElement positionType="Float" x="30" y="84" width="500" height="30" uuid="69e8b86d-38ae-49ac-a56a-df99bc2ba586"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary       :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="120" width="500" height="40" uuid="3e9be24e-c9d5-4fee-8f3b-1622bcdba776"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{summary}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="37" width="500" height="40" uuid="1bc3dafb-758e-4bdb-b2e8-005f2e8c285f"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pragmaticSkills}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="2" width="500" height="30" uuid="a59ab60b-9888-4595-8dde-6795f6bd5c69"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pragmatic Skills  : ]]></text>
+			</staticText>
+		</band>
+		<band height="183">
+			<staticText>
+				<reportElement positionType="Float" x="30" y="88" width="500" height="30" uuid="267cdbfa-fa77-423d-b5b0-6383da81e38b"/>
+				<textElement textAlignment="Justified">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receptive Language  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="126" width="500" height="50" uuid="2e61542f-e344-4e22-a90c-8a077bfc1d95"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receptiveLanguage}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="30" y="37" width="500" height="40" uuid="f6425c60-0094-4267-a247-deb8d370fd8c"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recommandations}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="3" width="500" height="30" uuid="434057c5-37cf-4ba6-b004-d36b4a4f0451"/>
+				<textElement textAlignment="Justified">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recommandations     :]]></text>
+			</staticText>
+		</band>
+		<band height="163">
+			<staticText>
+				<reportElement positionType="Float" x="30" y="0" width="500" height="30" uuid="a2ec3ae2-5a80-49df-954a-317c80df0f3f"/>
+				<textElement textAlignment="Justified">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expressive Language    :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="37" width="500" height="40" uuid="6ab541f4-69c8-4f1c-a1ba-a05eb4158279"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{expressiveLanguage}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" isLazy="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" mode="Transparent" x="380" y="113" width="146" height="50" isRemoveLineWhenBlank="true" uuid="6d288e28-4eb2-429c-927c-60efb03f313c"/>
+				<imageExpression><![CDATA["file:/C:/Users/KanthiSri/git/ParentProject/ParentProject/portal/src/main/resources/static/assets/cssfolder/img/d3.png"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

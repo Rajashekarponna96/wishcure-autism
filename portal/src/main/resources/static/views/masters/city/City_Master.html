@@ -1,0 +1,184 @@
+
+
+
+<div class="page">
+	<div class="panel panel-default" ng-controller="CityMasterController">
+		<div class="panel-heading">
+			<strong><span class="glyphicon glyphicon-th"></span>City
+				Types</strong> <input style="margin-top: -7px;" value="Add city"
+				class="btn btn-primary pull-right" type="button"
+				ng-click="cityMasterAdd();open('md');" />
+
+
+		</div>
+		<div class="panel-body">
+			<!--<p id="xyz"></p>-->
+			<div class="table-filters">
+				<div class="row">
+
+					<table align="center">
+
+						<tr>
+							<td align="right">Search: <input class=""
+								ng-model="search.$">
+							</td>
+						</tr>
+
+
+					</table>
+
+				</div>
+			</div>
+			<br />
+			<table class="table table-bordered table-striped table-responsive">
+				<thead>
+
+
+					<tr>
+						<th style="background-color: grey" colspan="12" align="left">
+							<input type="checkbox" id="selectall" onClick="selectAll(this)" />&nbsp;
+
+
+							<label style="margin-bottom: 0px; color: white">City List</label>
+						</th>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="th"></div>
+						</th>
+
+
+						<th>
+							<div class="th">City Id</div>
+						</th>
+
+
+						<th>
+							<div class="th">Short Name</div>
+						</th>
+						<th>
+							<div class="th">Full Name</div>
+						</th>
+						<th>
+							<div class="th">State Name</div>
+						</th>
+						<th>
+							<div class="th">STD code</div>
+						</th>
+						<th>
+							<div class="th">Land line length</div>
+						</th>
+
+						<th><label style="margin-bottom: 0px;">Modify</label></th>
+						<th><label style="margin-bottom: 0px;">Delete</label></th>
+					</tr>
+				</thead>
+				<tbody dir-paginate="city in cities | itemsPerPage:5 | filter:search:strict">
+					<!-- <tr data-ng-repeat="city in cities|filter:searchKeywords"> -->
+
+						<td><input type="checkbox" name="names[]" value="dinesh" /></td>
+						<td>{{city.cid}}</td>
+						<td>{{city.csname}}</td>
+						<td>{{city.cfname}}</td>
+						<td>{{city.cstname}}</td>
+						<td>{{city.cscode}}</td>
+						<td>{{city.cllength}}</td>
+
+						<td>
+							<!--ng-click="open('lg')"--> <i
+							ng-click="cityMasterEdit($index);open('md');"
+							style="font-size: 17px; margin-bottom: 0px; cursor: pointer;"
+							class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</td>
+						<td><i ng-click="deleteopen($index);"
+							style="font-size: 17px; margin-bottom: 0px; cursor: pointer;"
+							class="fa fa-trash" aria-hidden="true"></i></td>
+					<!-- </tr> -->
+
+				</tbody>
+			</table>
+			<tfoot align="right">
+				<dir-pagination-controls max-size="5" direction-links="true"
+					boundary-links="true"> </dir-pagination-controls>
+			</tfoot>
+			<script type="text/ng-template" id="CMModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">{{tag}}</h3>                    
+                </div>
+                <div class="modal-body">
+                    <p>Short Name</p>
+                    <input type="text" class="form-control" id="txt_City_shortName" ng-model="csname" />
+                    <p class="text-danger-red" id="lbl_e_City_shortName"></p>
+
+                       <p>Full Name</p>
+                    <input type="text" class="form-control" id="txt_City_fullName" ng-model="cfname" />
+                    <p class="text-danger-red" id="lbl_e_city_fullName"></p>
+
+                       <p>State Name</p>
+                    <input type="text" class="form-control" id="txt_City_statename" ng-model="cstname" />
+                    <p class="text-danger-red" id="lbl_e_city_statename"></p>
+
+                     <p>STD code</p>
+                    <input type="text" class="form-control" id="txt_City_stdcode" ng-model="cscode" />
+                    <p class="text-danger-red" id="lbl_e_City_stdcode"></p>
+                      
+
+                    <p>LandLine Length</p>
+                    <input type="text" class="form-control" id="txt_City_llength" ng-model="cllength" />
+                    <p class="text-danger-red" id="lbl_e_City_llength"></p>
+
+
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-primary"   ng-click="ok()" >Submit</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+			<script type="text/ng-template" id="CMModalContentdelete.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">Delete City</h3>
+                </div>
+                <div class="modal-body">
+                   <p>Please confirm to delete {{citytext}}</p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary"  ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+		</div>
+	</div>
+
+
+	<script language="JavaScript">
+		function selectAll(source) {
+			checkboxes = document.getElementsByName('names[]');
+			for ( var i in checkboxes)
+				checkboxes[i].checked = source.checked;
+		}
+	</script>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+
+<div class="content-wrapper" ng-init="getAllRolesBasedOnStatus();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Goal Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Goal Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" ng-click="gotoAdd();">
+
+						<div class="btn-group">
+							<a class="btn btn-primary btn-list" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> Goal list
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="addUserForm">
+							<div class="form-group col-lg-12">
+								<label>Goal Name</label>
+							</div>
+							<div class=" col-lg-12">
+								<input type="text" value="" class="form-control col-sm-8"
+									name="goalTemplateLookupName"
+									placeholder="Enter Your Goal Here"
+									ng-model="goalUpdate.goalTemplateLookupName"
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="form-group col-lg-12">&nbsp;&nbsp;&nbsp;</div>
+							<div class="reset-button">
+								<a class="btn btn-success" ng-click="updateGoal(goalUpdate)">Update</a>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+	</section>
+</div>

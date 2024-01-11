@@ -1,0 +1,164 @@
+<div class="content-wrapper" ng-init="getTodaySubAppointments();" style="height: 900px; overflow: scroll overflow-y: auto;  overflow-x: auto;">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Approve Appointments</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Appointment List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-if="loggedUserRole != 'Therapist'">
+							<a class="btn btn-success" ng-click="gotoAddxdfv();"> <i
+								class="fa fa-plus"></i>Approve Appointments
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<!-- <div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length">
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									
+								</div>
+							</div> -->
+							
+
+						</div>
+						
+	<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+                                     <!--  <th>select</th> -->
+										<th>Therapist Name</th>
+										<th>Patient Name</th>
+										<th>Start date</th>
+										<th>Start Time</th>
+										<th>End date</th>
+										<th>End Time</th>
+										<!-- <th>Scheduled By</th>
+                                        <th>Status</th> -->
+										<th>Patient Info</th>
+										<!-- <th>Current Status</th> -->
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								<!-- data-checklist-value="" -->
+									<tr 
+										ng-repeat="appointment in TodaySubAppointmentsList | orderBy : 'id':true">
+                                          <!-- <td class="col-sm-1" ><input
+											type="checkbox" ng-click="approve(appointment.id)" data-checklist-model="patient.patientGoals"
+											data-checklist-value="appointment"></td> -->
+										<td>{{appointment.doctor.firstName}} {{appointment.doctor.lastName}}</td>
+										<td>{{appointment.patient.firstName}}</td>
+										<td>{{changeDate(appointment.appointmentStartedDate);}}</td>
+										<td>{{appointment.appointmentStartTime }}</td>
+										<td>{{changeDate(appointment.appointmentEndedDate);}}</td>
+										<td>{{appointment.appointmentEndTime }}</td>
+										<!-- <td><span class="label-info label label-default"
+											ng-if="appointment.status=='PROGRESSIVE'"> PROGRESSIVE</span>
+											<span class="label-success label label-default"
+											ng-if="appointment.status=='COMPLETED'"> COMPLETED</span>
+											<span class="label-danger label label-default"
+											ng-if="appointment.status=='CANCELLED'"> CANCELLED</span>
+											</td> -->
+											
+											<td align="center" >
+										<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="gotoPatientViewPage(appointment.patient)"
+												title="Patient info ">
+										<i class="fa fa-user"></i></button>
+											
+										</td> 
+										
+										<td><select name="occurance" ng-model="appointment.status" ng-click="updateStatus(appointment.id,appointment.status)"
+										class="form-control" required>
+										<!-- <option value="" class="active">Select Appointment</option> -->
+										<option  value="AWAITING">Awaiting</option>
+										<option  value="COMPLETE">Complete</option>
+										<option value="CANCEL">Cancel</option>
+										
+									</select></td>
+										<!-- <td>{{appointment.person.firstName}}</td>
+										<td><span class="label-success label label-default" ng-if="appointment.occurance=='NEVER'">Once</span>
+							                <span class="label-info label label-default" ng-if="appointment.occurance=='WEEKLY'">Recursive</span>			
+										</td> -->
+										
+										
+									</tr>
+									<tr ng-if="TodaySubAppointmentsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- <div align="center" >
+									<button class="btn btn-primary"
+										ng-click="approved();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to approve appointments">Approve
+										</button>
+								</div> -->
+						</div>
+						
+						
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+								<li><a rel="next" ng-click="firstPage();">First</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="left"
+									ng-click="previousPage();" title="prev"> <i
+										aria-hidden="true"></i><<
+								</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="right"
+									ng-click="nextPage();" title="next"> <i aria-hidden="true"></i>>>
+								</a></li>
+								<li><a rel="next" ng-click="lastPage();">Last</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+		

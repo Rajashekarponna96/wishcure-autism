@@ -1,0 +1,103 @@
+
+<!-- Tab panels -->
+<div class="tab-content">
+	<div ng-init="getAllIsaaBehavioralQuestionsByPatientAndCategoryLookup(category1);getAllIsaaBehavioralQuestionLookupsByCAtegoryLookup(category1);">
+		<div class="row">
+			<div class="col-sm-12 table-responsive" align="justify"
+				ng-if="isaaBehavioralQuestionsList.length < 1">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+
+							<th>Question Name less1</th>
+							<th>Rarely Upto 20%</th>
+							<th>Sometimes 21-40%</th>
+							<th>Frequently 41-60%</th>
+							<th>Mostly 61-80%</th>
+							<th>Always 81-100</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="question in isaaBehavioralQuestionLookupList">
+							<td>{{question.name}}</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="1" />&nbsp; Score 1&nbsp;</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="2" />&nbsp; Score 2&nbsp;</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="3" />&nbsp; Score 3&nbsp;</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="4" />&nbsp; Score 4</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="5" />&nbsp; Score 5</td>
+						</tr>
+					</tbody>
+					<tr rowspan="3"
+						ng-if="isaaBehavioralQuestionLookupList.length == 0">
+						<td colspan="2" align="center"><b><h1>
+									<i class="fa fa-meh-o"></i> No records found!
+								</h1></b></td>
+					</tr>
+				</table>
+				<div class="reset-button col-sm-12">
+					<button class="btn btn-success"
+						ng-click="assignIsaaBehavioralTemplateToPatient();">Save
+						& Continue</button>
+				</div>
+			</div>
+			<div class="col-sm-12 table-responsive" align="justify"
+				ng-if="isaaBehavioralQuestionsList.length > 1">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+
+							<th>Question Name grate1</th>
+							<th>Rarely Upto 20%</th>
+							<th>Sometimes 21-40%</th>
+							<th>Frequently 41-60%</th>
+							<th>Mostly 61-80%</th>
+							<th>Always 81-100</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="question in isaaBehavioralQuestionsList">
+							<td>{{question.name}}</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="1" />&nbsp; Score 1&nbsp;</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="2" />&nbsp; Score 2&nbsp;</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="3" />&nbsp; Score 3</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="4" /> Score 4</td>
+							<td><input type="radio" ng-model="question.answervalue"
+								ng-value="5" /> Score 5</td>
+						</tr>
+					</tbody>
+					<tr rowspan="3" ng-if="isaaBehavioralQuestionsList.length == 0">
+						<td colspan="2" align="center"><b><h1>
+									<i class="fa fa-meh-o"></i> No records found!
+								</h1></b></td>
+					</tr>
+
+				</table>
+				<div class="reset-button col-sm-12">
+					<button class="btn btn-success"
+						ng-click="assignIsaaBehavioralTemplateToPatient();">Save
+						& Continue</button>
+				</div>
+			</div>
+		</div>
+		<div class="reset-button col-sm-12">
+			<a class="btn btn-warning">Cancel</a>
+			<button class="btn btn-success"
+				ng-click="gotoIsaaBehaviourTemplateResult();">Generate
+				Report</button>
+
+		</div>
+	</div>
+</div>
+
+
+
+

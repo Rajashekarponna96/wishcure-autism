@@ -1,0 +1,85 @@
+    <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="header-icon">
+                        <i class="pe-7s-note2"></i>
+                    </div>
+                    <div class="header-title">
+                        <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>   
+                        <h1>PackageNameMaster</h1>
+                        <small></small>
+                        <ol class="breadcrumb hidden-xs">
+                            <li><a><i class="pe-7s-home"></i> Home</a></li>
+                            <li class="active">PackageNameMaster</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <!-- Form controls -->
+                        <div class="col-sm-12">
+                            <div class="panel panel-bd lobidrag">
+                                <div class="panel-heading">
+                                    <div class="btn-group" ng-click="gotoList();"> 
+                                        <a class="btn btn-primary" > <i class="fa fa-list"></i> PackageNameMaster List</a>  
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+
+                                    <form class="col-sm-6" name="packagenameform">
+                                            <div class="form-group">
+							                        <label>Package Name</label> <span style="color: red" ng-cloak
+								                    ng-show="(packagenameform.packageName.$touched && packagenameform.packageName.$invalid)">
+								                    <span ng-show="packagenameform.packageName.$error.required"> is required.</span></span>
+							                        <input type="text" value="" class="form-control" name="packageName" placeholder="Enter Package Name"
+								                     ng-model="packageMaster.packageName" aria-required="true"
+								                    aria-invalid="true"
+								                    ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+								                    required> 
+					 	                   </div>
+                                          <div class="form-group">
+							                        <label>Description</label> <span style="color: red" ng-cloak
+								                    ng-show="(packagenameform.packageDescription.$touched && packagenameform.packageDescription.$invalid)">
+								                    <span ng-show="packagenameform.packageDescription.$error.required"> is required.</span></span>
+							                        <textarea rows="3" value="" class="form-control" name="packageDescription" placeholder="Enter Description"
+								                     ng-model="packageMaster.packageDescription" aria-required="true"
+								                    aria-invalid="true"
+								                    ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+								                    required></textarea> 
+					 	               </div>
+                                        <div class="form-check">
+                                          <label>Status</label><br>
+                                           <label class="radio-inline"><input type="radio"  ng-model="packageMaster.active" name="status" ng-value="true" ng-checked="!packageMaster.active">Active</label>
+                                          <label class="radio-inline"><input type="radio" ng-model="packageMaster.active" name="status"  value="false" >InActive</label>
+                                          </div>      
+                                          
+                                          <div class="row" align="center">
+						                       <span ng-if="message != undefined" style="color: red">{{message}}<br>
+						                       </span><br>
+					                      </div>    
+                                          
+                                          <div class="reset-button">
+                                           <button  class="btn btn-success" ng-click="addPackageMaster(packageMaster)" ng-show="hasFeature('Package Name').canAdd==true" ng-disabled="packagenameform.$invalid">Save</button>
+                                           <a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+                                           
+                                       </div>
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       
+                   </div>
+                   
+                   
+               </section> <!-- /.content -->
+           </div> <!-- /.content-wrapper -->
+     

@@ -1,0 +1,257 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotopatientDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Patient Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoCommuncationAddress();" ng-style="activeColor1"
+				type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+			<p>
+				<small>Communication Address</small>
+			</p>
+		</div>
+		<!-- <div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoUploadDocuments();"
+				type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div> -->
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoClientType();" type="button"
+				class="btn btn-default btn-circle" disabled="disabled">3</a>
+			<p>
+				<small>Client Type</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button"
+				class="btn btn-default btn-circle" disabled="disabled">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle" disabled="disabled">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-1" ng-init="getCommunicationAddress();">
+	<hr>
+	<form name="patientForm">
+		<div class="col-sm-12">
+			<br>
+		</div>
+
+
+		<div class="col-sm-6 form-group">
+			<label>Street Address 1</label> <input id="autocomplete"
+				onFocus="geolocate()" placeholder="Enter your address"
+				class="form-control" type="text"></input>
+		</div>
+		<div >
+			<input class="field form-control" type="hidden"
+				ng-model="patient.address1.address1" id="street_number"></input>
+		</div>
+
+		<div class="col-sm-6 form-group">
+			<label>Street Address 2</label> <input class="field form-control"
+				ng-model="patient.address1.address2" id="route" ></input>
+		</div>
+
+		<div class="col-sm-6 form-group">
+			<label>City</label> <input class="field form-control"
+				ng-model="patient.address1.city" id="locality" ></input>
+		</div>
+		<div class="col-sm-6 form-group">
+			<label>State</label> <input class="field form-control"
+				ng-model="patient.address1.state" id="administrative_area_level_1"
+				></input>
+		</div>
+		<div class="col-sm-6 form-group">
+			<label>Country</label> <input class="field form-control"
+				ng-model="patient.address1.country" id="country" ></input>
+		</div>
+
+		<div class="col-sm-6 form-group">
+			<label>Zip code</label> <input class="field form-control"
+				maxlength="6" ng-model="patient.address1.zipcode" id="postal_code"
+				></input>
+		</div>
+
+		<script>
+			var placeSearch, autocomplete;
+			var componentForm = {
+				street_number : 'short_name',
+				route : 'long_name',
+				locality : 'long_name',
+				administrative_area_level_1 : 'short_name',
+				country : 'long_name',
+				postal_code : 'short_name'
+			};
+
+			function initAutocomplete() {
+				// Create the autocomplete object, restricting the search to geographical
+				// location types.
+				var options = {
+					types : [ 'geocode' ],
+					componentRestrictions : {
+						country : 'in'
+					}
+				};
+
+				autocomplete = new google.maps.places.Autocomplete((document
+						.getElementById('autocomplete')), options);
+
+				// When the user selects an address from the dropdown, populate the address
+				// fields in the form.
+				autocomplete.addListener('place_changed', fillInAddress);
+			}
+
+			function fillInAddress() {
+				// Get the place details from the autocomplete object.
+				var place = autocomplete.getPlace();
+
+				for ( var component in componentForm) {
+					document.getElementById(component).value = '';
+					document.getElementById(component).disabled = false;
+				}
+
+				// Get each component of the address from the place details
+				// and fill the corresponding field on the form.
+				for (var i = 0; i < place.address_components.length; i++) {
+					var addressType = place.address_components[i].types[0];
+					if (componentForm[addressType]) {
+						var val = place.address_components[i][componentForm[addressType]];
+						document.getElementById(addressType).value = val;
+					}
+				}
+			}
+
+			// Bias the autocomplete object to the user's geographical location,
+			// as supplied by the browser's 'navigator.geolocation' object.
+			function geolocate() {
+				if (navigator.geolocation) {
+					navigator.geolocation
+							.getCurrentPosition(function(position) {
+								var geolocation = {
+									lat : position.coords.latitude,
+									lng : position.coords.longitude
+								};
+								var circle = new google.maps.Circle({
+									center : geolocation,
+									radius : position.coords.accuracy
+								});
+								autocomplete.setBounds(circle.getBounds());
+							});
+				}
+			}
+		</script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYFHF5OFfYFzoXznrZfQQU8aGOClVeXcQ&libraries=places&callback=initAutocomplete"
+			async defer></script>
+			
+		<!-- <div class="col-sm-12 form-group">
+			<input type="checkbox" ng-model="patient.modelData" ng-checked />&nbsp;Therapy
+			Address Is Different Please Check Here
+			<div ng-show="patient.modelData">
+				<div class="col-lg-6 form-group">
+					<label><span
+						ng-if="patient.therapyAddress.address1 == undefined || patient.therapyAddress.address1 =='' "
+						style="color: red">*</span>Street Address 1</label> <span style="color: red"
+						ng-show="(patientForm.therapyAddress1.$touched && patientForm.therapyAddress1.$invalid)">
+						<span ng-show="patientForm.therapyAddress1.$error.required">
+							is required.</span>
+					</span> <input type="text" name="therapyAddress1" class="form-control"
+						placeholder="Enter Therapy Address 1"
+						ng-model="patient.therapyAddress.address1" required>
+				</div>
+				<div class="col-lg-6 form-group">
+					<label><span
+						ng-if="patient.therapyAddress.address2 == undefined || patient.therapyAddress.address2 =='' "
+						style="color: red">*</span>Street Address 2</label> <span style="color: red"
+						ng-show="(patientForm.therapyAddress2.$touched && patientForm.therapyAddress2.$invalid)">
+						<span ng-show="patientForm.therapyAddress2.$error.required">
+							is required.</span>
+					</span> <input type="text" name="therapyAddress2" class="form-control"
+						placeholder="Enter Therapy Address 1"
+						ng-model="patient.therapyAddress.address2" required>
+				</div>
+				<div class="form-group col-lg-6">
+					<label><span
+						ng-if="patient.therapyAddress.country == undefined || patient.therapyAddress.country =='' "
+						style="color: red">*</span>Country</label> <span style="color: red"
+						ng-show="(patientForm.therapycountry.$touched && patientForm.therapycountry.$invalid)">
+						<span ng-show="patientForm.therapycountry.$error.required">
+							is required.</span>
+					</span> <select ng-model="patient.therapyAddress.country"
+						class="form-control" name="therapycountry" aria-required="true"
+						aria-invalid="true"
+						ng-options="country as country.name  for country in countriesList track by country.id"
+						ng-change="getAllStatesByCountryId123(patient.therapyAddress.country.id);"
+						required>
+						<option value="" class="active">Select Country</option>
+					</select>
+				</div>
+				<div class="form-group col-lg-6">
+					<label><span
+						ng-if="patient.therapyAddress.state == undefined || patient.therapyAddress.state =='' "
+						style="color: red">*</span>State </label> <span style="color: red"
+						ng-show="(patientForm.therapystate.$touched && patientForm.therapystate.$invalid)">
+						<span ng-show="patientForm.therapystate.$error.required">
+							is required.</span>
+					</span> <select ng-model="patient.therapyAddress.state"
+						class="form-control" name="therapystate" aria-required="true"
+						aria-invalid="true"
+						ng-options="state as state.name for state in statesList123 track by state.id"
+						ng-change="getAllCitiesByStateId(patient.therapyAddress.state.id);"
+						required>
+						<option value="" class="active">Select State</option>
+					</select>
+				</div>
+
+
+				<div class="form-group col-lg-6">
+					<label><span
+						ng-if="patient.therapyAddress.city.name == undefined || patient.therapyAddress.city.name =='' "
+						style="color: red">*</span>City</label> <span style="color: red"
+						ng-show="(patientForm.therapycityName.$touched && patientForm.therapycityName.$invalid)">
+						<span ng-show="patientForm.therapycityName.$error.required">
+							is required.</span>
+					</span> <input type="text" value="" class="form-control"
+						name="therapycityName" id="txt_username"
+						ng-model="patient.therapyAddress.city.name" aria-required="true"
+						aria-invalid="true" required>
+
+				</div>
+				<div class="form-group col-lg-6">
+					<label><span
+						ng-if="patient.therapyAddress.zipcode == undefined || patient.therapyAddress.zipcode == '' "
+						style="color: red">*</span>Zip/Postal Code</label> <span
+						style="color: red"
+						ng-show="(patientForm.therapyAddresszipcode.$touched && patientForm.therapyAddresszipcode.$invalid)">
+						<span ng-show="patientForm.therapyAddresszipcode.$error.required">
+							Code is required.</span>
+					</span> <input type="text" allow-only-numbers
+						ng-model="patient.therapyAddress.zipcode" class="form-control"
+						name="therapyAddresszipcode" maxlength="5"
+						placeholder="Enter zipcode" required>
+				</div>
+			</div></div> -->
+	</form>
+</div>
+<button class="btn btn-primary nextBtn pull-left" type="button"
+	ng-click="gotopatientDetails();getAddressFromGoogle();">Previous</button>
+<button class="btn btn-primary nextBtn pull-right" type="button"
+	ng-click="gotoClientType();getAddressFromGoogle();">Next</button>
+
+
+

@@ -1,0 +1,233 @@
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
+<div class="content-wrapper"
+	ng-init="getVSMSReportData();getVSMSSheetByStatusAndPatientId(patientObject.id);getDoctorByPatientId();getVsmsClusters();getPatientVSMSCluterAndClusterCountForGraph();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title ">
+			<form id="searchButton" action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>VSMS REPORT</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Patient VSMS Report</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div id="listButton" class="panel-heading">
+						<div class="btn-group" ng-if="loggedUserRole !='Therapist'">
+							<a class="btn btn-success" ng-click="gotoList();"> <i
+								class="fa fa-plus"></i> Patient List
+							</a>
+						</div>
+						<div class="btn-group" ng-if="loggedUserRole =='Therapist'">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i>
+								Patient VSMS Report
+							</a>
+						</div>
+
+					</div>
+					<div  >
+						<div class="row" id="patientEvalutionReport">
+							<div class="panel-header">
+								<div class="col-sm-12">
+
+									<table class="table">
+
+										<tbody>
+										<thead></thead>
+										<tr>
+											<th>Reg No :</th>
+											<td>{{patientObject.regNumber}}</td>
+											<th>Name :</th>
+											<td>{{patientObject.firstName}}
+												{{patientObject.lastName}}</td>
+										</tr>
+										<tr>
+											<th>Gender :</th>
+											<td>{{patientObject.gender}}
+											<th>Date of Evaluation :</th>
+											<td>{{progress.date}}</td>
+										</tr>
+
+										<tr>
+											<th>Age :</th>
+											<td>{{patientObject.age}}</td>
+											<th>Evaluator :</th>
+											<td>{{doctorObj.firstName}} {{doctorObj.lastName}}</td>
+
+										</tr>
+										<tr>
+											<th>Reason for Refferal :</th>
+											<td>{{patientObject.reasonForReferral}}</td>
+
+											<th>Reffered by :</th>
+											<td>{{patientObject.referredBy}}</td>
+										</tr>
+										</tbody>
+									</table>
+  									
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										ng-disabled="loggedUserRole=='Patient'">
+										<br> <label>Developmental And Social History :</label><br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.history"></textarea>
+
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.history.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">{{progress.history}}</p>
+
+										<br> <label>Behavioural Observation :</label> <br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.observation"></textarea>
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.observation.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">{{progress.observation}}</p>
+										<br> A. VSMS Observation
+										<ul ng-repeat="mentalScale in patientMentalScalelist">
+											<p ng-if="mentalScale.note.length">{{mentalScale.note}}</p>
+
+										</ul>
+										<br>
+										
+										<br> <label>Test Administered :</label><br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.testAdministered"></textarea>
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.testAdministered.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">
+											{{progress.testAdministered}}<br>
+										</p>
+
+										<br> <label>Assessment Result :</label><br>
+										<p>VSMS Age is {{vsmsReportGraphDTO.socialAge}}
+											Months and the calculated VSMS Quotient is
+											{{vsmsReportGraphDTO.vsmsQuotient}}</p>
+										
+									</div>
+								</div>
+
+								
+								<div class="col-sm-12">
+									<br> <br> <br> <label>CHILD
+										PERFORMANCE</label><br>
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Name of cluster</th>
+												<th>Total No.Of Items Passed</th>
+												<th>Percentile</th>
+												<th>Remarks</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="patientVSMSReport in patientVSMSReportList">
+												<td>{{patientVSMSReport.nameOfCluster}}
+													({{patientVSMSReport.clusterCount}})</td>
+												<td>{{patientVSMSReport.totalNoOfItemsPassed}}</td>
+												<td>{{patientVSMSReport.percentile}}</td>
+												<td>{{patientVSMSReport.remarks}}</td>
+											</tr>
+											<tr ng-if="motorAgeAndClusterCount.length==0">
+												<td colspan="4">No records found</td>
+											</tr>
+										</tbody>
+									</table>
+									<!-- <div class="demo-container">
+										<div id="chart" dx-chart="chartOptionsMotor"></div>
+									</div> -->
+								</div>
+								 <canvas id="vsmsClusterId" class="chart chart-base" chart-type="type" chart-data="vsmsClusterData"
+                        chart-labels="vsmsClusterLabels" chart-colors="colors"></canvas>
+									
+							</div><br><br><br><br><br><br><br><br><br><br>
+							<div class="col-sm-12">
+								<br> <label>Interpretation :</label><br>
+								<textarea ng-hide="editMode"
+									class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5"
+									ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+									ng-model="progress.interpretation"></textarea>
+								<p ng-hide="editMode" class="pull-right" id="textCount"
+									style="font-size: 11px; color: blue">{{1500-progress.interpretation.length}}&nbsp;Characters
+									Left</p>
+									<br>
+								<p ng-show="editMode">
+									{{progress.interpretation}}<br>
+								</p>
+								<br> <label>Recommendations:</label><br>
+								<textarea ng-hide="editMode"
+									class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5"
+									ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+									ng-model="progress.recommandations"></textarea>
+								<p ng-hide="editMode" class="pull-right" id="textCount"
+									style="font-size: 11px; color: blue">{{1500-progress.recommandations.length}}&nbsp;Characters
+									Left</p>
+								<br>
+								<p ng-show="editMode">
+									{{progress.recommandations}}<br>
+								</p>
+							</div>
+							<div class=col-lg-12 >
+								<br> <strong>It was a pleasure to meet and work
+									with {{patientObject.firstName}} {{patientObject.lastName}}.
+									Feel free to contact me with any questions.</strong> <br> <label>Assessment
+									and therapy session completed by:</label> <br> <br> <br>
+								<br> Dr.{{doctorObj.firstName}} {{doctorObj.lastName}}
+
+							</div>
+							<div class="col-sm-12" align="center">
+								<button id="savePageButton" class="btn btn-primary"
+									ng-click="addEvalutionSave()" ng-disabled="editMode">Save</button>
+								<!-- <button class="btn btn-primary"
+									ng-click="generateEvaluationReport()">Generate Report</button> -->
+								<button id="cancelPageButton" ng-click="gotoList();"
+									class="btn btn-warning" ng-disabled="loggedUserRole=='Patient'">Cancel</button>
+
+								
+									
+								<button id="create_pdf" class="btn btn-primary"
+									>Print multi Report</button>
+									
+								<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- /.content -->
+</div>

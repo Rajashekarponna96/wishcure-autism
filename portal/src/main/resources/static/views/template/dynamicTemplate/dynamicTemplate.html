@@ -1,0 +1,198 @@
+
+<div class="content-wrapper"
+	ng-init="getAllRolesBasedOnStatus();getAllDepartments();getAllSitesByCompanyUserNameAndStatus();getCountrysByIsdCode();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Dynamic Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="index-2.html"><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Dynamic Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Dynamic Template
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+
+
+						<!-- Keep HTML: <input type="checkbox" ng-model="myVar"
+							ng-init="myVar = false">
+ -->
+
+						<!-- <div ng-if="myVar1">
+							<h1>Welcome1</h1>
+							<p>Welcome1 to my home.</p>
+							<hr>
+						</div> -->
+						<!-- <div ng-if="myVar2">
+							<h1>Welcome2</h1>
+							<p>Welcome1 to my home.</p>
+							<hr>
+						</div> -->
+
+						<table align="center">
+							<tr>
+								<td><label>Template : </label></td>
+								<td><select name="userRole" class="form-control"
+									ng-model="user.role"
+									ng-options="role as role.roleName for role in  rolesList"
+									required>
+										<option value="" class="active">Select Template</option>
+										<!-- <option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option> -->
+								</select></td>
+							</tr>
+							<tr>
+								<td><label>Template Categories : </label></td>
+								<td><select name="userRole" class="form-control"
+									ng-model="user.role"
+									ng-options="role as role.roleName for role in  rolesList"
+									required>
+										<option value="" class="active">Select Template
+											Categories</option>
+										<!-- <option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option> -->
+								</select></td>
+
+							</tr>
+						</table>
+						<!-- <div align="center">
+
+							&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" ng-model="myVar"
+								ng-init="myVar = false">Text Area &nbsp;&nbsp; <input
+								type="checkbox" ng-model="myVar1" ng-init="myVar1 = false">Text
+							&nbsp;&nbsp; <input type="checkbox" ng-model="myVar2"
+								ng-init="myVar2 = false">Text box <br> <br> <input
+								type="checkbox" ng-model="myVar3" ng-init="myVar = false">Radio
+							Button &nbsp;&nbsp; <input type="checkbox" ng-model="myVar4"
+								ng-init="myVar = false">check box &nbsp;&nbsp; <input
+								type="checkbox" ng-model="myVar5" ng-init="myVar = false">check
+							box &nbsp;&nbsp; <input type="checkbox" ng-model="myVar6"
+								ng-init="myVar = false">check box &nbsp;&nbsp; <input
+								type="checkbox" ng-model="myVar7" ng-init="myVar = false">check
+							box &nbsp;&nbsp; <input type="checkbox" ng-model="myVar8"
+								ng-init="myVar = false">check box &nbsp;&nbsp; <input
+								type="checkbox" ng-model="myVar9" ng-init="myVar = false">check
+							box &nbsp;&nbsp;
+
+
+
+							<input
+								type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews2">Text Area&nbsp;&nbsp; <input
+								type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews2">Text box &nbsp;&nbsp; <input
+								type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews3">Text<br> <br> <input
+								type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews4">drop down box &nbsp;&nbsp; <input
+								type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews5">Radio Button
+						</div> -->
+
+						<!-- <div ng-if="myVar">
+							<textarea rows="3" value="" class="form-control"
+								name="description" placeholder="Enter Description"
+								ng-model="clientType.clientTypeDescription" required></textarea>
+						</div>
+						<br>
+
+						<div ng-if="myVar1">
+							<h1>Welcome</h1>
+							<p>Welcome to openspace.</p>
+							<hr>
+						</div>
+
+
+						<div ng-if="myVar2">
+							<input type="text" value="" class="form-control"
+								name="clientTypeName" placeholder="Enter Client Type Name"
+								ng-model="clientType.clientTypeName" required>
+						</div>
+						<br>
+
+						<div ng-if="myVar3">
+							<input type="radio" ng-model="myForm.whichNewsletter"
+								value="weeklyNews2">
+						</div> -->
+<br><br>
+						<div style="display: inline">
+							<input type="button" id="txtPlain" value="Add Plain Text"
+								style="" /> <input type="button" id="txt" value="Add TextBox"
+								style="" /> <input type="button" id="chk" value="Add CheckBox"
+								style="" /> <input type="button" id="rad" value="Add Radio"
+								style="" /> <input type="button" id="btn" value="Add Button"
+								style="" /> <input type="button" id="atxt" value="Add Textarea"
+								style="" />
+								<a href=""><input type="button" id="q&a" value="Question&Answer"></a>
+						</div>
+						<div class="col-sm-12 form-group" id="holder"></div>
+						<script type="text/javascript">
+						$("#txt").click(function(){
+							var $ctrl = $('<input/>').attr({ type: 'text', name:'text', value:'text'}).addClass("form-control");
+							$("#holder").append($ctrl);
+							});
+							$("#atxt").click(function(){
+							var $ctrl = $('<textarea/>').attr({name:'textarea',rows:'5',value:'textarea'}).addClass("form-control");
+							$("#holder").append($ctrl);
+							});
+							$("#chk").click(function(){
+							var $ctrl = $('<input/>').attr({ type: 'checkbox', name:'chk'}).addClass("chk");
+							$("#holder").append($ctrl);
+							});
+							$("#rad").click(function(){
+							var $ctrl = $('<input/>').attr({ type: 'radio', name:'rad'}).addClass("rad");
+							$("#holder").append($ctrl);
+							});
+							$("#btn").click(function(){
+							var $ctrl = $('<input/>').attr({ type: 'button', name:'btn',value:'Button'}).addClass("btn");
+							$("#holder").append($ctrl);
+							});
+							$("#txtPlain").click(function(){
+							var lbl = prompt ("Enter Text","");
+							$("#holder").append(lbl);
+							});
+						</script>
+						<form name="form" novalidate>
+  Size:
+  <input type="text" ng-model="size" name="size" ng-required="true" />
+  <span ng-show="form.size.$error.required">The value is required!</span>
+</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

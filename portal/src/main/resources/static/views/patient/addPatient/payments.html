@@ -1,0 +1,146 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoRegistrationDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<!-- <div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoUploadDocuments();" type="button"
+				class="btn btn-default btn-circle"  >3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div> -->
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button" ng-style="activeColor1"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-5"
+	ng-init="getAllPaymethodsList();getAllPaymethods();getPaymentsByPatient();">
+	<hr>
+	<div class="col-sm-12">
+		<br>
+		<form name="patientForm">
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="payment.paymentId == undefined || payment.paymentId == '' "
+					style="color: red">*</span>Payment Id</label> <span style="color: red"
+					ng-show="(patientForm.paymentId.$touched && patientForm.paymentId.$invalid)">
+					<span ng-show="patientForm.paymentId.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="paymentId" class="form-control"
+					ng-model="payment.paymentId" required readonly="readonly">
+
+			</div>
+
+			<div class="col-sm-6 form-group">
+				<span
+					ng-if="payment.paymentTypes == undefined || payment.paymentTypes == '' "
+					style="color: red">*</span> <label>Payment Type</label> <span
+					style="color: red"
+					ng-show="(patientForm.paymentTypes.$touched && patientForm.paymentTypes.$invalid)">
+					<span style="color: red"
+					ng-show="patientForm.paymentTypes.$error.required"> is
+						required.</span>
+				</span> <select class="form-control" name="paymentTypes"
+					placeholder="please select categoryType"
+					ng-model="payment.paymentTypes"
+					ng-options="paymentTypes as paymentTypes.name for paymentTypes in paymethodLists">
+					<option value="" class="active">Select Payment Types</option>
+						
+						</select>
+			</div>
+
+
+
+			<div class="col-sm-6 form-group">
+				<label><span
+					ng-if="payment.modeOfPaymentTypes == undefined || payment.modeOfPaymentTypes =='' "
+					style="color: red">*</span>Mode Of Payment Type</label><span
+					style="color: red"
+					ng-show="(patientForm.serviceco.$touched && patientForm.serviceco.$invalid)">
+					<span ng-show="patientForm.serviceco.$error.required"> is
+						required.</span>
+				</span> <select name="serviceco" ng-model="payment.modeOfPaymentTypes"
+					class="form-control" required="required">
+					<option value="" class="active">Select Mode Of Payment
+						Type</option>
+					<option value="ONCE">once</option>
+					<option value="WEEKLY">Weekly</option>
+					<option value="MONTHLY">Monthly</option>
+				</select>
+			</div>
+
+			<!-- Focus -->
+			<div class="col-sm-6 form-group">
+				<label><span
+					ng-if="payment.assignedAmount == undefined || payment.assignedAmount =='' "
+					style="color: red">*</span>Per Session Cost</label>
+				<!-- ng-model="persessioncost" -->
+				<span style="color: red"
+					ng-show="(patientForm.rccountry.$touched && patientForm.rccountry.$invalid)">
+					<span ng-show="patientForm.rccountry.$error.required"> is
+						required.</span>
+				</span>
+				<!-- ng-change="calamount(payment.noofsessions,payment.assignedAmount);" -->
+				<input type="number" ng-model="payment.assignedAmount"
+					ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required
+					class="form-control" name="rccountry" aria-required="true"
+					aria-invalid="true" required="required">
+			</div>
+
+			<!-- Focus  -->
+			<!-- <div class="col-sm-6 form-group">
+				<label>Total Amount</label> <input type="text" readonly
+					ng-model="totalamount" class="form-control">
+			</div>
+			<div class="col-sm-6 form-group">
+				<label>Status</label><br> <label class="radio-inline">
+					<input type="radio" ng-model="active" name="status" value="1"
+					checked="checked">Active
+				</label> <label class="radio-inline"> <input type="radio"
+					ng-model="active" name="status" value="0">Inctive
+				</label>
+			</div>
+			<div class="col-sm-6 form-group">
+				<label>Comment</label>
+				<textarea class="form-control" ng-model="comment" rows="3" required></textarea>
+			</div> -->
+		</form>
+	</div>
+	{{lookupFolder | json}}
+	<button class="btn btn-primary nextBtn pull-left" type="button"
+		ng-click="gotoParentDetails();">Previous</button>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoSummary();">Next</button>
+</div>

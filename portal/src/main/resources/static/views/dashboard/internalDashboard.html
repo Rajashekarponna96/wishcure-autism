@@ -1,0 +1,227 @@
+<div class="content-wrapper"
+	ng-init="getAllActiveTherapistsForInternalDashboard();getAllRegistrationsForInternalDashboard();getNewPatientsCountForInternalDashboard();totalPatientsRegisteredForInternalDashboard();getTodayPatientsDataForInternalDashboard();getAllactiveAdminsForInternalDashboard();getAllInactiveAdminsForInternalDashboard();getAllInactiveTherapistsForInternalDashboard();inActivePatientsForInternalDashboard();getAllAppointmentsCountByRoleForInternalDashboard();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-tachometer"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>{{userName.userAccount.company.companyName}} Dashboard</h1>
+			<!-- <h2>Owner {{userName.username}}</h2> -->
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Internal Dashboard</li>
+			</ol>
+		</div>
+	</section>
+	
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-click="gotoActiveAdminsAndSuperAdminMethod(userName);"
+				 >
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveAdmins}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Admin</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="gotoInactiveAdminsAndSuperAdminMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInActiveAdmins}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Admin</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="goactiveTherapistsMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="goInActiveTherapistsMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInaciveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfRegisteredUsers}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Users</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>TotalPatients</h4>
+							<h4>Engaged</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePatients}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{count}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Total Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="col-sm-12">
+							<div class="reset-button">
+								 <a ng-click="goToBack();"
+									class="btn btn-danger">Back</a>
+
+							</div>
+						</div>
+	
+		</div>
+		
+	</section>
+	
+
+</div>
+

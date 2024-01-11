@@ -1,0 +1,400 @@
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.text {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.select {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+</style>
+<div class="content-wrapper"
+	ng-init="findAllpatientsByPaginationByRole();getInvoice();getPaidAmount();getTotalAmount1();getAllPaymethods();getAllCurrencys();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Edit Invoice</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Edit Invoice</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-body">
+						<form>
+							<!-- <div class="page-hdr">
+								<div class="row">
+									<div class="col-8 page-name">
+										<h1>
+											<i class="fa fa-credit-card"></i>Invoice Edit
+										</h1>
+									</div>
+									<div class="col-4 page-menu">
+										<a id="cancel" href="index.php?route=invoice"
+											data-toggle="tooltip" data-placement="left"
+											title="Back to List"><i class="fa fa-reply"></i></a>
+										<button type="submit" name="submit" data-toggle="tooltip"
+											data-placement="left" title="Save Appointment">
+											<i class="fa fa-floppy-o"></i>
+										</button>
+									</div>
+								</div>
+							</div> -->
+							
+
+							<div class="content">
+							
+								<div class="content-block content-block-horizantal">
+								<div class="col-sm-12 text-right">
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<a href="" class="btn btn-success btn-sm" ng-click="gotoInvoicePage(dto)"><i
+												class="fa fa-eye-square-o mr-1"></i> View Invoice</a>
+										</div>
+									</div>
+									<div class="content-block-ttl">Invoice Details</div>
+									<!--  -->
+									
+									<!--  -->
+									<div class="content-block-main">
+										<input type="hidden" name="_token" value="">
+										<div class="row ">
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="icon-user"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="dto.patient.firstName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Email</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="dto.patient.email"
+														class="form-control" placeholder="Patient Email">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Mobile Number</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-phone"></i></span> <input type="text"
+														name="invoice[mobile]" value="0011223344" ng-model="dto.patient.mobileNumber"
+														class="form-control" placeholder="Patient Mobile Number">
+												</div>
+											</div>
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Doctor</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-user-md"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="dto.doctor.firstName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Last Paid Date</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-calendar"></i></span> <input type="text"
+														class="form-control" value="08-10-2017"
+														ng-model="invoiceSingle.paidDate| date : 'dd-MM-yyyy'"
+														placeholder="Paid Date">
+												</div><!-- yyyy-MM-dd -->
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Due Date</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-calendar"></i></span> <input type="text"
+														name="invoice[duedate]" value="11-01-2018" ng-model="dto.dueDate"
+														class="form-control date" placeholder="Due Date">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Currency</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-credit-card"></i></span> 
+														<!-- <input type="text"
+														name="invoice[currency]" value="USD" 
+														class="form-control " placeholder=""> -->
+														<select ng-model="invoiceSingle.currency"
+					class="form-control" name="insurancecountry" aria-required="true"
+					aria-invalid="true"
+					ng-options="country as country.name  for country in currencysList track by country.id"
+					required>
+					<option value="" class="active">Select Currency</option>
+				</select>
+														
+														<!-- <select class="form-control"
+														name="invoice[currency]">
+														<option value="1">USD</option>
+													</select> -->
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Payment Method</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-credit-card"></i></span> <!-- <input type="text" name="invoice[name]"
+														class="form-control" ng-model="invoiceSingle.paymentTypes"
+														value="Charlie Runkle"
+														ng-options="country as country.name  for country in countriesList"
+														placeholder="Patient Name"> -->
+														
+														<select ng-model="invoiceSingle.paymethod"
+					class="form-control" name="insurancecountry" aria-required="true"
+					aria-invalid="true"
+					ng-options="country as country.name  for country in paymethodsList track by country.id"
+					required>
+					<option value="" class="active">Select Payment Method</option>
+				</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Payment Status</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-credit-card"></i></span> <select ng-model="invoiceSingle.paidStatus"
+														name="invoice[status]" id="" class="form-control"
+														required="">
+														<option value="" class="active">Select Payment Status</option>
+														<option value="PAID">Paid</option>
+														<option value="PARTIALLYPAID" selected>Partially
+															Paid</option>
+														<option value="UNPAID">Unpaid</option>
+														<!-- <option value="Cancelled">Cancelled</option>
+														<option value="Other">Other</option>
+														<option value="Unknown">Unknown</option> -->
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">  <!-- ="08/05/2018" -->
+												<label class="col-form-label">Paid Date</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-calendar"></i></span> 
+														<!-- <input type="text" ng-model="invoiceSingle.paidDate" value="{{invoiceSingle.paidDate | date : 'yyyy-MM-dd'}}" /> -->
+														<input type="date"  
+														name="invoice[paiddate]" 
+														ng-model="invoiceSingle.paidDate"  placeholder="yyyy-MM-dd"
+														class="form-control date" >
+												</div>
+											</div>
+											<div class="col-sm-12 form-group">
+												<div class="table-responsive">
+													<br> <br>
+													<form ng-submit="addNew()">
+														<table class="table table-bordered table-hover">
+															<thead>
+																<tr>
+																	<th>&nbsp;</th>
+																	<th>Item Name</th>
+																	<th>Item Description</th>
+																	<th>Quantity</th>
+																	<th>Unit Cost</th>
+																	<th>Price</th>
+																	<!-- <th>Delete</th> -->
+																</tr>
+															</thead>
+															<tbody>
+																<tr ng-repeat="personalDetail in invoiceList">
+																	<td><input type="checkbox"
+																		ng-model="personalDetail.selected"  /></td>
+																		<!-- ng-click="deleteItem(personalDetail.id);" -->
+																	<!-- <td><a class=" "ng-model="personalDetail.selected" ng-click="remove();delete()"><i style="color:red;" class="fa-1x icon-close"></i></a></td>	
+																	 --><td>
+																	
+																	<textarea class="form-control textarea" cols="50"
+																			ng-model="personalDetail.itemName" required></textarea></td>
+																	<td><textarea class="form-control textarea"  cols="75"
+																			ng-model="personalDetail.itemDescription" required></textarea></td>
+																	<td><textarea class="form-control textarea"
+																			ng-model="personalDetail.quantity" allow-only-numbers required></textarea></td>
+																	<td><textarea class="form-control textarea"
+																			ng-model="personalDetail.unitCost" allow-only-numbers ng-change="calculation(personalDetail);getTotalAmount(invoiceList)"required></textarea></td>
+																	<td><textarea class="form-control textarea"
+																			ng-model="personalDetail.price" allow-only-numbers required></textarea></td>
+																</tr>
+																<tr>
+																	<td colspan="2" class="p-2">
+																		<div class="add-items d-inline-block">
+																			<a class="btn btn-success btn-sm" ng-click="addNew()"><i
+																				class="icon-plus mr-1"></i> Add items</a>
+																			<a class="btn btn-danger btn-sm" ng-click="remove();delete()"><i
+																				class="icon-plus mr-1"></i> Remove</a>	
+																		</div>
+																	</td>
+																	<!-- <td colspan="3" class="total-line" align="right"
+																		style="vertical-align: middle;"><label>Sub
+																			Total</label></td>
+																	<td colspan="1" class="total-value"><input
+																		type="text" name="invoice[subtotal]"
+																		class="form-transparent sub-total text" value="300.00"
+																		readonly></td> -->
+																</tr>
+																<!-- <tr>
+																	<td colspan="2" class="blank"></td>
+																	<td colspan="3" class="total-line" align="right"
+																		style="vertical-align: middle;"><label>Tax</label>
+																	</td>
+																	<td colspan="1" class="total-value"><input
+																		type="text" name="invoice[tax]"
+																		class="form-transparent tax-total text" value="15.00"
+																		readonly></td>
+																</tr>
+																<tr>
+																	<td colspan="2" class="blank"></td>
+																	<td colspan="3" class="total-line" align="right"
+																		style="vertical-align: middle;">
+																		<div class="row align-items-center">
+																			<div class="col-sm-9" style="vertical-align: middle;">
+																				<label>Discount</label>
+																			</div>
+																			<div class="col-sm-3">
+																				<select name="invoice[discounttype]"
+																					class="form-control select">
+																					<option value="1" selected>%</option>
+																					<option value="2">Flat</option>
+																				</select>
+																			</div>
+																		</div>
+																	</td>
+																	<td colspan="1" class="total-value"><input
+																		type="text" name="invoice[discount]"
+																		class="form-transparent discount-total text" value="0">
+																		<input type="hidden" class="discount_amount "
+																		name="invoice[discount_value]" value="0.00"></td>
+																</tr> -->
+																<tr align="right" style="vertical-align: middle;">
+																	<td colspan="2" class="blank"></td>
+																	<td colspan="3" class="total-line"><label>Total</label>
+																	</td>
+																	<td colspan="1" class="total-value">
+																	<input
+																		type="text" name="invoice[amount]" ng-model="amt"
+																		class="form-transparent  total-amount text"
+																		value="315.00" readonly>
+																		<!-- {{amt}} -->
+																		</td>
+																</tr>
+																<tr align="right" style="vertical-align: middle;">
+																	<td colspan="2" class="blank"></td>
+																	<td colspan="3" class="total-line"><label>Amount
+																			Paid</label></td>
+																	<td colspan="1" class="total-value" ><input allow-only-numbers
+																		type="text" name="invoice[paid]" ng-model="invoiceSingle.paidAmount"
+																		class="form-transparent paid-amount text" value="300" >
+																		<!-- {{paidAmountObj.paidAmount}} -->
+																	</td>
+																</tr>
+																<!-- <tr align="right">
+																	<td colspan="2" class="blank"></td>
+																	<td colspan="3" class="total-line" align="right"
+																		style="vertical-align: middle;"><label>Amount
+																			Due</label></td>
+																	<td colspan="1" class="total-value"><input
+																		type="text" name="invoice[due]"
+																		class="form-transparent due-amount text" value="15.00"
+																		readonly></td>
+																</tr> -->
+															</tbody>
+														</table>
+													</form>
+												</div>
+												<div class="pt-5">
+													<div class="row">
+														<div class="col-sm-6">
+															<div class="form-group">
+																<label>Customer Notes</label>
+																<textarea class="form-control" name="invoice[note]"
+																	ng-model="invoiceSingle.custNotes" rows="3"></textarea>
+																<span class="form-text">Will be displayed on the
+																	invoice</span>
+															</div>
+														</div>
+														<div class="col-sm-6">
+															<div class="form-group">
+																<label>Terms &#38; Conditions</label>
+																<textarea class="form-control" name="invoice[tc]"
+																	ng-model="invoiceSingle.termsConditions" rows="3"></textarea>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<input type="hidden" class="taxes"
+									value="[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot; Vat 7.0&quot;,&quot;rate&quot;:&quot;7&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Vat 7.5&quot;,&quot;rate&quot;:&quot;7.5&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;Vat 12.5&quot;,&quot;rate&quot;:&quot;12.5&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;CGST 5.5&quot;,&quot;rate&quot;:&quot;5.5&quot;},{&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;SGST 5.5&quot;,&quot;rate&quot;:&quot;5.5&quot;},{&quot;id&quot;:&quot;6&quot;,&quot;name&quot;:&quot;CGST 12&quot;,&quot;rate&quot;:&quot;12&quot;},{&quot;id&quot;:&quot;7&quot;,&quot;name&quot;:&quot;CGST 18&quot;,&quot;rate&quot;:&quot;18&quot;}]">
+								<input type="hidden" name="invoice[appointment_id]" value="19">
+								<input type="hidden" name="id" value="54">
+								<div class="content-submit text-center">
+									<button type="submit" name="submit" ng-disabled="!invoiceSingle.paidStatus || !invoiceSingle.paidAmount|| !invoiceSingle.paidDate|| !invoiceSingle.paymethod || !invoiceSingle.currency " ng-click="saveInvoice(invoiceList,invoiceSingle)" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>

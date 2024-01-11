@@ -1,0 +1,152 @@
+<div ng-init="getAllNichqteachercategorylookups();">
+
+<p align="center" style="padding: 10px;">Evaluation for Nichq Teacher Template</p>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+				<li style="float: left;"
+					ng-repeat="category in nichqteachercategorylookupList"
+					ng-click="getAllNichqTeacherQuestionsByPatientAndCategory(category);"
+					ng-init="getAllNichqTeacherQuestionsByPatientAndCategory(nichqteachercategorylookupList[0]);"><a href="#tab1" data-toggle="tab" target="self">{{category.name}}</a></li>
+			</ul>
+			<!-- Tab panels -->
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tab1">
+					<div>
+						<div class="col-sm-12 table-responsive" align="justify"
+							ng-if="nichqTeacherQuestions.length < 1">
+							<table class="table table-bordered table-hover">
+								<tbody>
+									<tr
+										ng-repeat="question in nichqTeacherQuestionLookupListByCategoryId">
+										<td>{{$index + 1}}</td>
+										<td class="col-sm-7">{{question.name}}</td>
+										<td class="col-sm-5">
+											<div ng-if="categoryId == 1">
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="0" />&nbsp;Never&nbsp;<input type="radio"
+													ng-model="question.answervalue" ng-value="1" />&nbsp;Occasionally&nbsp;
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="2" />&nbsp;Often &nbsp;<input type="radio"
+													ng-model="question.answervalue" ng-value="3" />&nbsp;Very
+												Often
+											</div>
+											<div ng-if="categoryId != 1">
+												<input type="radio" ng-model="question.answervalue"
+													ng-value="1" />&nbsp;&nbsp;Excellent&nbsp;&nbsp; <input type="radio"
+													ng-model="question.answervalue" ng-value="2" />&nbsp;&nbsp;Above
+												Average&nbsp;&nbsp;<input type="radio" ng-model="question.answervalue"
+													ng-value="3" />&nbsp;Average&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+													ng-model="question.answervalue" ng-value="4" />&nbsp;&nbsp;Somewhat
+												of a problem&nbsp; <input type="radio"
+													ng-model="question.answervalue" ng-value="5" />&nbsp;Problematic
+
+
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								<tr rowspan="3"
+									ng-if="nichqTeacherQuestionLookupListByCategoryId.length == 0">
+									<td colspan="2" align="center"><b><h1>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h1></b></td>
+								</tr>
+
+							</table>
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-click="assignNichqTeacherTemplateToPatient();">Add</button>
+							</div>
+						</div>
+
+						<div class="col-sm-12 table-responsive" align="justify"
+							ng-if="nichqTeacherQuestions.length > 1">
+							<fieldset ng-disabled="true">
+							<table class="table table-bordered table-hover">
+								<tbody>
+									<tr ng-repeat="question in nichqTeacherQuestions">
+									<td>{{$index + 1}}</td>
+										<td class="col-sm-8">{{question.name}}</td>
+										<td class="col-sm-4">
+											<div ng-if="categoryId == 1">
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="0" />&nbsp;Never <input type="radio"
+													ng-model="question.ansValue" ng-value="1" />&nbsp;Occasionally
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="2" />&nbsp;Often <input type="radio"
+													ng-model="question.ansValue" ng-value="3" />&nbsp;Very
+												Often
+											</div>
+											<div ng-if="categoryId != 1">
+												<input type="radio" ng-model="question.ansValue"
+													ng-value="1" />&nbsp;Excellent <input type="radio"
+													ng-model="question.ansValue" ng-value="2" />&nbsp;Above
+												Average <input type="radio" ng-model="question.ansValue"
+													ng-value="3" />&nbsp;Average <input type="radio"
+													ng-model="question.ansValue" ng-value="4" />&nbsp;Somewhat
+												of a problem <input type="radio"
+													ng-model="question.ansValue" ng-value="5" />&nbsp;Problematic
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								<tr rowspan="3" ng-if="nichqTeacherQuestions.length == 0">
+									<td colspan="2" align="center"><b><h1>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h1></b></td>
+								</tr>
+
+							</table>
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-click="assignNichqTeacherTemplateToPatient();">save</button>
+							</div>
+							</fieldset>
+						</div>
+						<!-- <div
+							ng-if="nichqParentResult != undefined || nichqParentResult != null">
+							<p>For Office Use Only</p>
+							<p>Total number of questions scored 2 or 3 in questions 1-9 :
+								{{nichqParentResult.score1to9}}</p>
+
+							<p>Total number of questions scored 2 or 3 in questions 10-18
+								: {{nichqParentResult.score10to18}}</p>
+
+							<p>Total Symptoms score for questions 1-18 :
+								{{nichqParentResult.score1to18}}</p>
+
+							<p>Total number of questions scored 2 or 3 in questions 19-26
+								: {{nichqParentResult.score19to26}}</p>
+
+							<p>Total number of questions scored 2 or 3 in questions 27-40
+								: {{nichqParentResult.score27to40}}</p>
+
+							<p>Total number of questions scored 2 or 3 in questions 41-47
+								: {{nichqParentResult.score41to47}}</p>
+
+							<p>Total number of questions scored 2 or 3 in questions 48-55
+								: {{nichqParentResult.score48to55}}</p>
+
+							<p>Average Performance Score :
+								{{nichqParentResult.avgPerformanceScore}}</p>
+
+						</div> -->
+
+
+
+						<div class="reset-button col-sm-12">
+							<!-- <button class="btn btn-success"
+								ng-click="assignNichqParentTemplateToPatient();">Add</button> -->
+							<button class="btn btn-success"
+								ng-click="gotoNichqTeacherTemplateResult();">Report</button>
+							<a class="btn btn-warning" ng-click="">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

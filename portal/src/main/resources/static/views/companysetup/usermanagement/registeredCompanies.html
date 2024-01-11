@@ -1,0 +1,297 @@
+<div class="content-wrapper" ng-init="registeredEnterpriseCompaniesForAdmin(type)">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." ng-model="search"> <span
+						class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Registered Companies</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Registered Companies</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Content Header (Page header) -->
+
+	<!-- Main content -->
+
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="goToBack();">
+							<a class="btn btn-success"> <i class="fa fa-list"></i> Dashboard
+							</a><!-- {{type}} -->
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<!-- <div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length">
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div> -->
+								
+								<!-- <div class="col-sm-2">
+									<label>Registration Type</label>
+								</div>
+								<div class="col-sm-2">
+									<select class="form-control" ng-model="registrationType"
+										name="registrationType"
+										ng-change="getAllRegisteredCompanies(registrationType);">
+										<option value="" class="active">Select Registration
+											Type</option>
+										<option value="All">All</option>
+										<option value="Super Admin" class="active">Enterprice</option>
+										<option value="Individual" class="active">Individual</option>
+									</select>
+								</div> 
+								<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									<div class="dataTables_length" id="example_length">
+										<div class="input-group custom-search-form">
+											<input type="search" class="form-control"
+												placeholder="search.."> <span
+												class="input-group-btn">
+												<button class="btn btn-primary" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>-->
+								
+								<div class="col-sm-3 ">
+										<mdp-date-picker mdp-placeholder="From Date"
+											ng-model="person.startDate"></mdp-date-picker>
+									</div>
+									<div class="col-sm-3">
+										<mdp-date-picker mdp-placeholder="To Date"
+											ng-model="person.endDate"></mdp-date-picker>
+									</div>
+								<div class="col-sm-3 " layout="row">
+										<md-input-container class="md-block" flex-gt-sm>
+										<label>Staus</label> <md-select
+											ng-model="person.status" mdp-placeholder="df"> <md-option
+											value="">Select Staus</md-option> <!-- <md-option
+											class="demo-header-searchbox md-text" ng-value="client"
+											ng-repeat="client in clientsList">{{client.clientTypeName}}</md-option> -->
+											
+											<md-option  value="HOLD">Hold</md-option>
+										<md-option  value="ACTIVE">Active</md-option>
+										<md-option value="INACTIVE">InActive</md-option>
+
+										</md-select> </md-input-container>
+									</div>
+							</div>
+
+						</div>
+						
+						<div class="">
+								<div class="reset-button">
+									<a href="" class="btn btn-success"
+										ng-click="getRegisteredCompaniesFilter(person);">Filter</a> 
+									<a href=""	ng-click="reset(person)" class="btn btn-warning">Reset</a>
+
+								</div>
+							</div>
+							
+ 						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!--  <th>Serial No</th> -->
+										<th>Company Name</th>
+										<th>Owner</th>
+										<th>Company Type</th>
+										<th>Created Date</th>
+										<th>Status</th>
+										<th>Over View</th>
+										<!-- <th>Info</th> -->
+									</tr>
+								</thead>
+								<!-- <tr ng-if="flash==true">
+									<td> true</td>
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr> -->
+									<tr ng-if="registeredCompanies.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								<tbody ng-repeat="user in registeredCompanies track by $index">
+									<tr>
+										<td ng-if="user.userAccount.role.roleName!='Individual'"><a
+											style="color: #428bca" data-toggle="tooltip"
+											title="Click here to see Users info "
+											ng-click="getUsersBasedOnCompany(user,registeredCompanies);">{{user.userAccount.company.companyName}}</a></td>
+										<td ng-if="user.userAccount.role.roleName!='Super Admin'">{{user.userAccount.company.companyName}}</td>
+										<!-- <td>{{user.userAccount.username}}</td> -->
+										<td>
+						<p class="font-16 margin-0">{{user.firstName}}{{user.lastName}}</p>
+						<p class="font-12 margin-0">{{user.email}}</p>
+						<p class="font-12 margin-0">{{changeMobileNumber(user.mobileNumber);}}</p>
+					</td>
+										<td ><span ng-if="user.userAccount.role.roleName=='Super Admin'">Enterprise</span>
+										<span ng-if="user.userAccount.role.roleName=='Individual'">Individual</span></td>
+										<td>{{user.createdDate}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="user.activeStatus=='ACTIVE'"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="user.activeStatus=='INACTIVE'"> InActive</span></td>
+											
+										<!-- 	<td>{{user.activeStatus}}</td> -->
+										<!-- <td><span class="align-right"><a
+												data-toggle="modal" ng-click="getOwnerObject(user);" ali
+												data-target="#ordine" align="left"><i
+													class="hvr-buzz-out fa fa-eye" data-toggle="tooltip"
+													title="View Company Info"></i></a></span></td> 
+													
+													 ng-click="getUsersBasedOnCompany(user,registeredCompanies);"-->
+												<td><a ng-click="getUsersBasedOnCompany1(user,registeredCompanies);"
+														class="btn btn-outline btn-warning btn-outline-1x btn-circle"
+														data-toggle="tooltip" title="" data-original-title="Overview"><i
+														class="fa fa-eye"></i></a>
+										</td>	
+									</tr>
+									<tr ng-if="registeredCompanies.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+									
+									<!-- <tr ng-if="registeredCompanies.length != 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> All records found!
+											</h3>
+										</td>
+									</tr> -->
+									<tr ng-if="registeredCompanies.length <1">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- <div id="ordine" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									Modal content
+									<div class="modal-content ">
+										<div class="modal-header" style="color: #FF6347">
+											<div class="image pull-center">
+					<img ng-src="{{getImagePathData1(ownerObject.email)}}" class="img-thumbnail" height="40"
+						width="40" alt="User Image">
+				</div>
+											<button type="button" class="close" data-dismiss="modal"
+												style="color: #FF6347">x</button>
+											<p class="modal-title">{{ownerObject.userAccount.company.companyName}}
+												Profile</p>
+										</div>
+										<div class="modal-body" align="center">
+											<p style="text-align: center;">
+												First Name:<span>{{ownerObject.firstName}}</span>
+											</p>
+											<p style="text-align: center;">
+												Last Name:<span>{{ownerObject.lastName}}</span>
+											</p>
+											<p style="text-align: center;">
+												Email:<span>{{ownerObject.email}}</span>
+											</p>
+											<p style="text-align: center;">
+												Mobile Number:<span>{{ownerObject.mobileNumber}}</span>
+											</p>
+											<p style="text-align: center;">
+												Gender:<span>{{ownerObject.gender}}</span>
+											</p>
+											<p style="text-align: center;">
+												Address:<span>{{ownerObject.userAccount.company.companyName}},
+													{{ownerObject.userAccount.company.address.country.name}},{{ownerObject.userAccount.company.address.state.name}}
+													,{{ownerObject.userAccount.company.address.city.name}},{{ownerObject.userAccount.company.address.address1}}
+													,{{ownerObject.userAccount.company.address.zipcode}} </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div> -->
+						</div>
+						
+						<div class="row">
+							<table style="border-collapse: collapse; width: 100%;">
+								<tbody>
+									<tr>
+										<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+												<select name="example_length" ng-model="size"
+												ng-change="sizeChanged(size);">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="25">25</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+											</select> records per page
+										</label></td>
+
+
+
+
+										<td align="right" style="padding-right: 20px;">
+											<ul class="pagination pagination-large">
+												<li><a rel="next" ng-click="firstPage();">First</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="left"
+													ng-click="previousPage();" title="prev"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+												</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="right"
+													ng-click="nextPage();" title="next"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+												</a></li>
+												<li><a rel="next" ng-click="lastPage();">Last</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

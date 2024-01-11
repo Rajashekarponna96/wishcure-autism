@@ -1,0 +1,182 @@
+
+
+                <!-- =============================================== -->
+                <!-- Content Wrapper. Contains page content -->
+                <div class="panel panel-default" ng-controller="SecurityQuestionController">
+                
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <div class="header-icon">
+                            <i class="pe-7s-box1"></i>
+                        </div>
+                        <div class="header-title">
+                            <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>   
+                            <h1>Security Question</h1>
+                            <small></small>
+                            <ol class="breadcrumb hidden-xs">
+                                <li><a><i class="pe-7s-home"></i> Home</a></li>
+                                <li class="active">Security Question</li>
+                            </ol>
+                        </div>
+                    </section>
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-bd lobidrag">
+                                    <div class="panel-heading">
+                                        <div class="btn-group"> 
+                                            <a class="btn btn-success" ng-click="securityquestionAdd();open('md');"> <i class="fa fa-plus"></i> Add Security Question 
+                                            </a>  
+                                        </div>        
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="panel-header">
+                                                <div class="col-sm-4 col-xs-12">
+                                                    <div class="dataTables_length">
+                                                        <label>Display 
+                                                            <select name="example_length">
+                                                                <option value="10">10</option>
+                                                                <option value="25">25</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                            </select> records per page</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-12">
+                                                        <div class="dataTables_length">
+                                                        <!-- <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
+                                                             <span>Copy</span></a>
+                                                             <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0"><span>CSV</span></a>
+                                                             <a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0"><span>Excel</span></a>
+                                                             <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0"><span>PDF</span></a>
+                                                             <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a>-->
+                                                             
+                                                         </div>
+                                                     </div>
+                                                     <div class="col-sm-4 col-xs-12">
+                                                        <div class="dataTables_length">
+                                                            <div class="input-group custom-search-form">
+                                                                <input type="search" class="form-control" placeholder="search..">
+                                                                <span class="input-group-btn">
+                                                                  <button class="btn btn-primary" type="button">
+                                                                      <span class="glyphicon glyphicon-search"></span>
+                                                                  </button>
+                                                              </span>
+                                                          </div><!-- /input-group -->
+                                                      </div>
+                                                  </div>
+                                              </div>
+
+                                          </div>
+                                          <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Security Question Id</th>
+                                                        <!--<th>Picture</th>-->
+                                                        <th>Security Question</th>
+                                                        <th>Modify</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr data-ng-repeat="securityquestion in securityquestions|filter:searchKeywords">
+                                                    <td>{{securityquestion.sqid}}</td>
+						                            <td>{{securityquestion.sqname}}</td>
+                                                     <!--<td>$43</td>-->
+                                                     <td>
+                                                        <button type="button" class="btn btn-info btn-xs"  ng-click="securityquestionEdit($index);open('md');"><i class="fa fa-pencil"></i>
+                                                        </button>
+                                                       
+                                                    </td>
+                                                    <td>
+                                                     <button type="button" class="btn btn-danger btn-xs" ng-click="deleteopen($index);"><i class="fa fa-trash-o"></i>
+                                                        </button>
+							                            
+						                           </td>
+						                           
+                                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="page-nation text-right">
+                        <ul class="pagination pagination-large">
+                            <li class="disabled"><span>«</span></li>
+                            <li class="active"><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li class="disabled"><span>...</span></li><li>
+                            <li><a rel="next" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</section> <!-- /.content -->
+
+
+</div> <!-- /.content-wrapper -->
+
+</div> <!-- ./wrapper -->
+
+
+
+			<script type="text/ng-template" id="SQModalContent.html">
+ 
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">{{tag}}</h3>                    
+                </div>
+                <div class="modal-body">
+                    <p>securityquestion Name</p>
+                    <input type="text" class="form-control" id="txt_securityquestion_Description" ng-model="sqname" />
+                    <p class="text-danger-red" id="lbl_e_securityquestion_Description"></p>
+                                 
+                 </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-primary"   ng-click="ok()" >Submit</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+			<script type="text/ng-template" id="SQModalContentdelete.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">Delete companytype</h3>
+                </div>
+                <div class="modal-body">
+                   <p>Please confirm to delete {{securityquestiontext}}</p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary"  ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+		
+
+
+	<!-- <script language="JavaScript">
+		function selectAll(source) {
+			checkboxes = document.getElementsByName('names[]');
+			for ( var i in checkboxes)
+				checkboxes[i].checked = source.checked;
+		}
+	</script> -->
+
+
+</div>
+
+
+
+

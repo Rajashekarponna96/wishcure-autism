@@ -1,0 +1,198 @@
+
+  
+            
+<div class="page">
+	<div class="panel panel-default" ng-controller="StateMasterController">
+		<div class="panel-heading">
+			<strong><span class="glyphicon glyphicon-th"></span>Country
+				Types</strong> <input style="margin-top: -7px;" value="Add State"
+				class="btn btn-primary pull-right" type="button"
+				ng-click="stateMasterAdd();open('md');" />
+				
+				
+		</div>
+		<div class="panel-body">
+		
+		
+		<div class="table-filters">
+				<div class="row">
+
+					<table align="center">
+					
+					<tr>
+							<td align="right"> Search:
+						<input class="" ng-model="search.$"> </td></tr>
+
+
+					</table>
+
+				</div>
+			</div>
+			<!--<p id="xyz"></p>-->
+		<!-- 	<div class="table-filters">
+				<div class="row">
+					<div class="col-sm-4 col-xs-6">
+						<form>
+							<input type="text" placeholder="Search..." class="form-control"
+								data-ng-model="searchKeywords" data-ng-keyup="search()">
+						</form>
+					</div>
+					<div class="col-sm-3 col-xs-6 filter-result-info">
+						<span> Showing {{filteredStores.length}}/{{stores.length}}
+							entries </span>
+					</div>
+				</div>
+			</div> -->
+			<br />
+			<table class="table table-bordered table-striped table-responsive">
+				<thead>
+
+					
+					<tr>
+						<th style="background-color: grey" colspan="12" align="left">
+							<input type="checkbox" id="selectall" onClick="selectAll(this)" />&nbsp;
+
+
+							<label style="margin-bottom: 0px; color: white">State List</label>
+						</th>
+					</tr>
+
+					<tr>
+						<th>
+							<div class="th"></div>
+						</th>
+
+						<th>
+							<div class="th">
+								State Id
+							</div>
+						</th>
+						<th>
+							<div class="th">
+								Short name 
+							</div>
+						</th><th>
+							<div class="th">
+								Full name
+							</div>
+						</th>
+						<th>
+							<div class="th">
+								Country Name
+							</div>
+						</th>
+						
+					<!-- 	<th><label style="margin-bottom: 0px;">Created By
+								User</label></th> -->
+						<th><label style="margin-bottom: 0px;">Modify</label></th>
+						<th><label style="margin-bottom: 0px;">Delete</label></th>
+					</tr>
+				</thead>
+				<!-- <tbody>
+					<tr data-ng-repeat="state in stateuses|filter:searchKeywords"> -->
+					 <tbody dir-paginate="state in stateuses | itemsPerPage:5 | filter:search:strict">
+					
+
+						<td><input type="checkbox" name="names[]" value="bhairavi" /></td>
+						<td>{{state.cid}}</td>
+						<td>{{state.csname}}</td>
+						<td>{{state.cfname}}</td>
+						<td>{{state.cicode}}</td>
+					
+						
+						<!-- <td>{{country.sid}}</td> -->
+						<td>
+							<!--ng-click="open('lg')"--> <i
+							ng-click="stateMasterEdit($index);open('md');"
+							style="font-size: 17px; margin-bottom: 0px; cursor: pointer;"
+							class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</td>
+						<td><i ng-click="deleteopen($index);"
+							style="font-size: 17px; margin-bottom: 0px; cursor: pointer;"
+							class="fa fa-trash" aria-hidden="true"></i></td>
+					<!-- </tr> -->
+
+				</tbody>
+			</table>
+			<!-- <footer class="table-footer">
+				<div class="row">
+					<div class="col-md-6 page-num-info">
+						<span> Show <select data-ng-model="numPerPage"
+							data-ng-options="num for num in numPerPageOpt"
+							data-ng-change="onNumPerPageChange()"></select> entries per page
+						</span>
+					</div>
+					<div class="col-md-6 text-right pagination-container">
+						<pagination class="pagination-sm" ng-model="currentPage"
+							total-items="filteredStores.length" max-size="4"
+							ng-change="select(currentPage)" items-per-page="numPerPage"
+							rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;"
+							boundary-links="true"></pagination>
+					</div>
+				</div>
+			</footer> -->
+			<tfoot align="right">
+				<dir-pagination-controls max-size="5" direction-links="true"
+					boundary-links="true"> </dir-pagination-controls>
+			</tfoot>
+			<script type="text/ng-template" id="STModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">{{tag}}</h3>                    
+                </div>
+                <div class="modal-body">
+                    <p>Short Name</p>
+                    <input type="text" class="form-control" id="txt_State_shortName" ng-model="csname" />
+                    <p class="text-danger-red" id="lbl_e_State_shortName"></p>
+
+                       <p>Full Name</p>
+                    <input type="text" class="form-control" id="txt_State_fullName" ng-model="cfname" />
+                    <p class="text-danger-red" id="lbl_e_State_fullName"></p>
+
+                       <p>Country Name</p>
+                    <input type="text" class="form-control" id="txt_State_cntname" ng-model="cicode" />
+                    <p class="text-danger-red" id="lbl_e_State_cntname"></p>
+
+                      
+
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-primary"   ng-click="ok()" >Submit</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+			<script type="text/ng-template" id="STModalContentdelete.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modaltitle">Delete State</h3>
+                </div>
+                <div class="modal-body">
+                   <p>Please confirm to delete {{statetext}}</p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary"  ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+		</div>
+	</div>
+
+
+	<script language="JavaScript">
+		function selectAll(source) {
+			checkboxes = document.getElementsByName('names[]');
+			for ( var i in checkboxes)
+				checkboxes[i].checked = source.checked;
+		}
+	</script>
+
+
+</div>
+            
+            
+            
+            
+ 
+           
+           
+            

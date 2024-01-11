@@ -1,0 +1,193 @@
+ <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper" ng-init="invoice();">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="header-icon">
+                        <i class="pe-7s-news-paper"></i>
+                    </div>
+                    <div class="header-title">
+                        <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>  
+                        <h1>Invoice</h1>
+                        <small>Clean invoice template.</small>
+                        <ol class="breadcrumb hidden-xs">
+                            <li><a href="index-2.html"><i class="pe-7s-home"></i> Home</a></li>
+                            <li><a href="#">UI Elements</a></li>
+                            <li class="active">Invoice</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-bd">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <address>
+                                                <strong>Twitter, Inc.</strong><br>
+                                                <!-- 1355 Market Street, Suite 900<br>
+                                                San Francisco, CA 94103<br> -->
+                                                <p>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="invoice.add" ng-model="invoice.address"
+													">{{add
+													|| 'empty' }}</a> <br>
+											</p>
+                                                
+                                                <abbr title="Phone">P:</abbr> 
+                                                
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="invoice.mobileNumber" ng-model="invoice.mobileNumber"
+													onaftersave="updateGoal(pa)">{{mobileNumber
+													|| 'empty' }}</a> <br>
+											
+                                            </address>
+                                            <address>
+                                                <strong>Full Name</strong><br>
+                                            <!--     <a href="cdn-cgi/l/email-protection.html#3417"><span class="__cf_email__" data-cfemail="4e28273c3d3a60222f3d3a0e2b362f233e222b602d2123">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>
+                                             -->
+                                             <p>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="name" ng-model="invoice.address"
+													onaftersave="updateGoal(pa)">{{name
+													|| 'empty' }}</a> <br>
+											</p>
+											 <strong>Email</strong><br>
+											 <p>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="email" 
+													onaftersave="updateGoal(pa)">{{email
+													|| 'empty' }}</a> <br>
+											</p>
+                                            </address>
+                                            
+                                        </div>
+                                        <div class="col-sm-6 text-left">
+                                            <h1 class="m-t-0">Invoice #
+                                            <a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="invoiceNo"
+													onaftersave="updateGoal(pa)">{{invoiceNo
+													|| 'empty' }}</a> <br>
+                                            </h1>
+                                            <div>Issued  <a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="issued"
+													onaftersave="updateGoal(pa)">{{issued
+													|| 'empty' }}</a> <br></div>
+                                            <div class="text-danger m-b-15">Payment due&nbsp;&nbsp; 
+                                            <a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="due"
+													onaftersave="updateGoal(pa)">{{due
+													|| 'empty' }}</a> <br></div>
+                                            <address>
+                                                <strong>Twitter, Inc.</strong><br>
+                                               <!--  1355 Market Street, Suite 900<br>
+                                                San Francisco, CA 94103<br> -->
+                                                 <p>
+												<a href="#" e-style="width:200px;" ng-hide="$form.$visible"
+													editable-text="add"
+													onaftersave="updateGoal(pa)">{{add
+													|| 'empty' }}</a> <br>
+											</p>
+                                                <abbr title="Phone">P:</abbr> 
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="mobileNumber"
+													onaftersave="updateGoal(pa)">{{mobileNumber
+													|| 'empty' }}</a> <br>
+                                            </address>
+                                        </div>
+                                    </div> <hr>
+                                    <div class="table-responsive m-b-20">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item List</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Tax</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="pa in items1 | filter:search">
+                                                   <!-- <td><div><strong>Lorem Ipsum is simply dummy text</strong></div>
+                                                        <small>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots</small></td>
+                                                      <td>1</td> -->
+                                                        <!--  -->
+                                                   <td><div>
+												<a href="#" e-style="width:300px;" ng-hide="$form.$visible"
+													editable-text="pa.name"
+													onaftersave="updateGoal(pa)">{{pa.name
+													|| 'empty' }}</a> <br>
+											</div></td>
+											 <td><div>
+												<a href="#" e-style="width:100px;" ng-hide="$form.$visible"
+													editable-text="pa.id"
+													onaftersave="updateGoal(pa)">{{pa.id
+													|| 'empty' }}</a> <br>
+											</div></td>
+											<!--  -->
+											<td><div>
+												<a href="#" e-style="width:100px;" ng-hide="$form.$visible"
+													editable-text="pa.firstName"
+													onaftersave="updateGoal(pa)">{{pa.firstName
+													|| 'empty' }}</a> <br>
+											</div></td>
+											<td><div>
+												<a href="#" e-style="width:100px;" ng-hide="$form.$visible"
+													editable-text="pa.gaurdian"
+													onaftersave="updateGoal(pa)">{{pa.gaurdian
+													|| 'empty' }}</a> <br>
+											</div></td>
+											<td><div>
+												<a href="#" e-style="width:100px;" ng-hide="$form.$visible"
+													editable-text="pa.mobileNumber"
+													onaftersave="updateGoal(pa)">{{pa.mobileNumber
+													|| 'empty' }}</a> <br>
+											</div></td>
+                                                       
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+                                                            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                                                            to make a type specimen book.</p>
+                                                            <p><strong>Thank you very much for choosing us. It was a pleasure to have worked with you.</strong></p>
+                                                            <img src="assets/dist/img/credit/AM_mc_vs_ms_ae_UK.png" class="img-responsive" alt="">
+
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <ul class="list-unstyled text-left">
+                                                                <li>
+                                                                    <strong>Sub - Total amount:</strong> $9265 </li>
+                                                                    <li>
+                                                                        <strong>Discount:</strong> 12.9% </li>
+                                                                        <li>
+                                                                            <strong>VAT:</strong> ----- </li>
+                                                                            <li>
+                                                                                <strong>Grand Total:</strong> $12489 </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-footer text-left">
+                                                                    <button type="button" class="btn btn-info" onclick="myFunction()"><span class="fa fa-print"></span></button>
+                                                                    <button type="button" class="btn btn-success"><i class="fa fa-dollar"></i> Make A Payment</button>
+                                                                    <button type="button" class="btn btn-success" ng-click="generateInvoice();"> Generate Invoice</button>
+                                                                    <embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section> <!-- /.content -->
+                                            </div> <!-- /.content-wrapper -->
+                                           

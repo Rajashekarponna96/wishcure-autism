@@ -1,0 +1,215 @@
+<div class="content-wrapper" ng-init="getAllQuestionCategories();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Evaluation Template</h1>
+			<small>This template is helpful for the evaluation category.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Evaluation Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Evaluation Template
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="col-sm-12">
+							<br> <label>History :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.history"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Background Information :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.backgroundInformation"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Observation :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.observation"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Test Administered :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.testAdministered"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br>
+							<table class="col-sm-12 border" cellspacing="10">
+								<tr>
+									<th>Result</th>
+									<th>Standard Score</th>
+									<th>Percentile</th>
+									<th>Age Equivalent</th>
+									<th>Delay %</th>
+								</tr>
+								<tr>
+									<td>Auditoty Comprehension</td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+								</tr>
+								<tr>
+									<td>Expressive Communication</td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+								</tr>
+								<tr>
+									<td>Total Language Score</td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+									<td><input type="text" /></td>
+								</tr>
+							</table>
+
+						</div>
+						<div class="col-sm-12">
+							<div ng-repeat="evalutionCategory in questionCategoryList">
+								<label>{{evalutionCategory.name}}:</label><br>
+								<div class="col-sm-12 border">
+									<div
+										ng-repeat="evalutionQuestion in evalutionCategory.questionDtos">
+										<b>{{evalutionQuestion.questionName}}?</b>
+										<div ng-repeat="answer in evalutionQuestion.answerDtos">
+											<input type="checkbox" ng-model="answer.selectedAnswer">&nbsp;&nbsp;{{answer.shortAnswer}}
+										</div><br>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div class="col-sm-12">
+							<div ng-repeat="evalutionCategory in  evalutionCategoryList">
+								<label>{{evalutionCategory.name}}:</label><br>
+								<div class="border">
+									<select ng-model="evalutionQuestion.questionName"
+										class="form-control" name="question" aria-required="true"
+										aria-invalid="true"
+										ng-options="evalutionQuestion as evalutionQuestion.questionName  for evalutionQuestion in evalutionCategory.questionDtos"
+										ng-change="getanswers(evalutionQuestion.questionName.id)"
+										required>
+									</select>
+									<div ng-repeat="anser in  answersList">
+										<input type="checkbox">{{anser.shortAnswer}}
+									</div>
+									<div>
+										<input type="text" ng-model="addShortAnswer" placeholder="Add your Answer"
+											class="form-control" /> <input type="button"
+											class="btn btn primary" ng-click="addanswerObj()" value="Add" />
+									</div>
+									<div ng-repeat="evalutionQuestion in  evalutionCategory.questionDtos">
+											<b>{{evalutionQuestion.questionName}}?</b>
+											<div ng-repeat="answerDto in  evalutionQuestion.answerDtos">
+
+												<input type="checkbox">{{answerDto.shortAnswer}}
+											</div>
+
+										</div>
+								</div>
+							</div>
+						</div> -->
+						<div class="col-sm-12">
+							<br> <label>Oral Motor :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.oralMotor"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Pragmatic Skills :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.pragmaticSkills"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Summary :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.summary"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Recommendations :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.recommendations"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Receptive Language :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.receptiveLanguage"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Expressive Language :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.expressiveLanguage"></textarea>
+
+						</div>
+
+						<div class="col-sm-12">
+							<br> <label>Parental Tips :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.parentalTips"></textarea>
+
+							<br> <br>
+							<div class=col-sm-12>
+								<strong>It was a pleasure to meet and work with
+									Paitent_name. Feel free to contact me with any questions.</strong> <br>
+								<label>Assessment and therapy session completed by:</label> <br>
+								<br> <br> <br> <label>Upload Your
+									signarure</label> <input type="file" ng-model="template.path">
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="addtemplate(template)"
+									ng-show="hasFeature('Evalution Template').canAdd==true"
+									ng-disabled="packagenameform.$invalid">Save</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

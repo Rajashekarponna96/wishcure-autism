@@ -1,0 +1,151 @@
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<div class="content-wrapper">
+<section class="content-header">
+                    <div class="header-icon">
+                        <i class="pe-7s-note2"></i>
+                    </div>
+                    <div class="header-title">
+                        <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>   
+                        <h1>Update Appointment</h1>
+                        <small></small>
+                        <ol class="breadcrumb hidden-xs">
+                            <li><a><i class="pe-7s-home"></i> Home</a></li>
+                            <li class="active">Appointment</li>
+                        </ol>
+                    </div>
+                </section>
+<!--  -->
+<section class="content">
+<div class="row">
+			<div class="col-md-12">
+				<div class="content-block content-block-horizantal">
+					<div class="content-block-ttl">Appointment Info</div>
+					<div class="content-block-main">
+						<div class="row content-input">
+						<div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="icon-user"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="updatedappointment.patient.firstName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Email</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="updatedappointment.patient.email"
+														class="form-control" placeholder="Patient Email">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Mobile Number</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-phone"></i></span> <input type="text"
+														name="invoice[mobile]" value="0011223344" ng-model="changeMobileNumber(updatedappointment.patient.mobileNumber);"
+														class="form-control" placeholder="Patient Mobile Number">
+												</div>
+											</div>
+							<div class="col-sm-6">
+								<label>Appointment Id : </label>
+								<input type="text" name="appointment_id" value="2017071190054758" ng-model="updatedappointment.id" placeholder="Appointment Id" readonly="">
+							</div>
+							<div class="col-sm-6">
+								<label>Appointment created : </label>
+								<input type="text" value="10 Jul 2017  ( 10:47 PM )" ng-model="changeDate(updatedappointment.createdDate);" readonly="">
+							</div>
+						</div>
+						<div class="content-input col-sm-6">
+							<label>Doctor : </label>
+						<input type="text" name="time"  ng-model="updatedappointment.doctor.firstName" readonly="">	
+							
+						</div>
+						<div class="content-input col-sm-6">
+							<label>Department : </label>
+							<input type="text" class="appointment-department" ng-model="updatedappointment.doctor.department.departmentName" value="Gynaecology" readonly="">
+							<input type="hidden" name="department" id="appointment-department" value="1">
+						</div>
+						
+						<div class="content-input col-sm-6">
+									<label>Appointment Date : </label>
+									<input type="text" name="date" id="appointment-date" ng-model="changeDate(updatedappointment.appointmentStartedDate);"  value="2018-05-29" placeholder="Date" readonly="" required="">
+								</div>
+							<!-- </div> -->
+							<!-- <div class="col-sm-6"> -->
+								<div class="content-input col-sm-6">
+									<label>Appointment Time : </label>
+									<input type="text" name="text"  ng-model="updatedappointment.appointmentStartTime"  placeholder="Time" readonly="">
+								</div>
+								
+						<div class="content-invisible">
+														<input type="hidden" value="{&quot;id&quot;:3,&quot;name&quot;:&quot;Melissa Bates&quot;,&quot;department_id&quot;:1,&quot;weekly&quot;:&quot;[\&quot;1\&quot;,\&quot;2\&quot;,\&quot;6\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-04-13, 2017-04-14, 2017-04-20, 2017-07-07, 2017-07-08, 2017-07-14\&quot;&quot;,&quot;department&quot;:&quot;Gynaecology&quot;}" class="doctor-id-3 department-id-Gynaecology">
+														<input type="hidden" value="{&quot;id&quot;:8,&quot;name&quot;:&quot;Linda Adams&quot;,&quot;department_id&quot;:1,&quot;weekly&quot;:&quot;[\&quot;0\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-06-16, 2017-06-21, 2017-06-26, 2017-07-11, 2017-07-14, 2017-07-20, 2017-07-31\&quot;&quot;,&quot;department&quot;:&quot;Gynaecology&quot;}" class="doctor-id-8 department-id-Gynaecology">
+														<input type="hidden" value="{&quot;id&quot;:1,&quot;name&quot;:&quot;Daniel Barnes&quot;,&quot;department_id&quot;:2,&quot;weekly&quot;:&quot;[\&quot;3\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-01-18, 2017-01-21, 2017-01-30, 2017-03-27, 2017-03-31\&quot;&quot;,&quot;department&quot;:&quot;Orthology&quot;}" class="doctor-id-1 department-id-Orthology">
+														<input type="hidden" value="{&quot;id&quot;:5,&quot;name&quot;:&quot;Steve Soeren&quot;,&quot;department_id&quot;:2,&quot;weekly&quot;:&quot;[\&quot;0\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-02-16, 2017-03-14, 2017-03-17, 2017-03-23, 2017-03-31\&quot;&quot;,&quot;department&quot;:&quot;Orthology&quot;}" class="doctor-id-5 department-id-Orthology">
+														<input type="hidden" value="{&quot;id&quot;:7,&quot;name&quot;:&quot;Barbara Baker&quot;,&quot;department_id&quot;:2,&quot;weekly&quot;:&quot;[\&quot;1\&quot;,\&quot;5\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-06-08, 2017-06-20, 2017-06-28, 2017-06-29\&quot;&quot;,&quot;department&quot;:&quot;Orthology&quot;}" class="doctor-id-7 department-id-Orthology">
+														<input type="hidden" value="{&quot;id&quot;:4,&quot;name&quot;:&quot;Cheri Aria&quot;,&quot;department_id&quot;:3,&quot;weekly&quot;:&quot;[\&quot;5\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-03-07, 2017-03-14, 2017-03-20, 2017-03-26\&quot;&quot;,&quot;department&quot;:&quot;Dermatologist&quot;}" class="doctor-id-4 department-id-Dermatologist">
+														<input type="hidden" value="{&quot;id&quot;:6,&quot;name&quot;:&quot;Theodore Bennett&quot;,&quot;department_id&quot;:4,&quot;weekly&quot;:&quot;[\&quot;0\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25, 2017-02-15, 2017-02-16, 2017-03-07, 2017-03-15, 2017-03-23, 2017-03-31\&quot;&quot;,&quot;department&quot;:&quot;Anaesthesia&quot;}" class="doctor-id-6 department-id-Anaesthesia">
+														<input type="hidden" value="{&quot;id&quot;:10,&quot;name&quot;:&quot;Vedhraj Jain&quot;,&quot;department_id&quot;:5,&quot;weekly&quot;:&quot;[\&quot;6\&quot;,\&quot;0\&quot;]&quot;,&quot;national&quot;:&quot;\&quot;2000-12-25\&quot;&quot;,&quot;department&quot;:&quot;Ayurvedic&quot;}" class="doctor-id-10 department-id-Ayurvedic">
+													</div>
+						
+						<div class="row">
+							
+							
+							<div class="col-sm-12" ng-if="updatedappointment.status!=undefined">
+							<div class="content-input">
+									<label>Status:</label>
+									<!-- </div>
+								</div>
+								<div class="col-sm-8">
+								<div class="content-input"> -->
+								<select name="occurance"  ng-model="updatedappointment.status" 
+										class="form-control" required>
+										<!-- <option value="" class="active">Select Appointment</option> -->
+										<option  value="AWAITING">Awaiting</option>
+										<option  value="COMPLETE">Complete</option>
+										<option value="CANCEL">Cancel</option>
+										
+									</select>
+										</div>
+								</div>
+								
+				<!--  -->
+						</div>
+						<div class="content-input appointment-slot">
+							<label></label>
+							<div id="appointment-slot"></div>
+						</div>
+						
+						
+						         <div class="reset-button">
+                                           <button  class="btn btn-primary" ng-click="updateStatus1(updatedappointment.appointmentStartedDate,updatedappointment.id,updatedappointment.status)" ng-disabled="departmentform.$invalid">Submit</button>
+                                           <button  class="btn btn-warning" ng-click="gotoList()">Cancel</button>
+                                       </div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		 </section> <!-- /.content -->
+           </div> <!-- /.content-wrapper -->

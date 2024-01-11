@@ -1,0 +1,116 @@
+
+<div class="content-wrapper" ng-init="getNichqteachercategorylookup();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>NICHQ Teacher Category</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">NICHQ Teacher Category</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+					<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								NICHQ Teacher Category
+							</a>
+						</div>
+						</div>
+					<div class="panel-body">
+					
+						<form class="col-sm-6" name="TeacherForm">
+							<div class="form-group">
+								<label>Category Name</label> <span style="color: red"
+									ng-show="(TeacherForm.categoryName.$touched && TeacherForm.categoryName.$invalid)">
+									<span
+									ng-show="TeacherForm.categoryName.$error.required">is
+										required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="categoryName" placeholder="Enter Category Name"
+									ng-model="nichqteachercategorylookup.name" required>
+							</div>
+
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success"
+									ng-click="addNichqteachercategorylookup()"
+									ng-disabled="TeacherForm.$invalid">Save</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+
+						<div class="table-responsive col-sm-12">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!-- 	<th>Serial No</th> -->
+										<th>Category Name</th>
+										<!-- 	<th>Description</th> -->
+										<th>Action</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="nichqteachercategorylookup in nichqteachercategorylookupList">
+										<!-- <td><input type="radio" name="radioGroup"> 
+										<label>{{evalutionCategory.id}}</label></td> -->
+										<td>{{nichqteachercategorylookup.name}}</td>
+										<!-- <td>{{csbs.categoryStatus}}</td> -->
+										<td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left"
+												ng-click="gotoupdate(nichqteachercategorylookup);"
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right" ng-click="deleteNichqteachercategorylookup(nichqteachercategorylookup.id);"
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

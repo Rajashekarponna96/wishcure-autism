@@ -1,0 +1,187 @@
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Schedule List By Date</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Schedule List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> Schedule List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length" id="example_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-4"></div>
+								<!-- <div class="col-sm-4">
+									<div class="dataTables_length">
+										<div class="input-group custom-search-form">
+											<input type="search" class="form-control"
+												placeholder="search.." ng-model="searchBox"> <span
+												class="input-group-btn">
+												<button class="btn btn-primary" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div> -->
+								<div class="col-sm-4">
+									<div class="input-group custom-search-form">
+										<input type="text" class="form-control" ng-model="search"
+											placeholder="search.."><span
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>S.No</th>
+										<th>AvailabeDate</th>
+										<th>Therapist Name</th>
+										<th>start time</th>
+										<th>End time</th>
+										<th>Day</th>
+										<!-- <th>Select</th> -->
+										<th>Status</th>
+										<!--{{flaf}} <th>Availability</th> -->
+									</tr>
+								</thead>
+								<tbody 	ng-repeat="schedule in scheduleListByDate ">
+									<tr>
+										<td>{{$index+1}}</td>
+										<td>{{changeDateformate(schedule.scheduledDate);}}</td>
+
+										<td>{{schedule.doctor.firstName}}
+											{{schedule.doctor.lastName}}</td>
+										<td>{{schedule.fromTime | date:'HH:mm:ss'}}</td>
+										<td>{{schedule.toTime | date:'HH:mm:ss'}}</td>
+										<td>{{arrayToString(schedule.availableDays)}}</td>
+										<!-- <td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="selectSchedule(schedule,schedule.scheduledDate,appointment.appointmentEnddate);"
+												title="Add ">
+												<i class="fa fa-plus" aria-hidden="true"></i>
+											</button>
+										</td> -->
+										<td ng-if="flaf!=true">
+											<button class="btn label-info" data-toggle="modal" data-target="#ordine"
+												ng-click="findScheduledHours(schedule);">Book
+												Appointment</button>
+										</td>
+										<td ng-if="flaf==true">
+											<button class="btn label-info" data-toggle="modal" data-target="#ordine"
+												ng-click="findScheduledHours(schedule);">Assign
+												Appointment</button>
+										</td>
+										<!-- <tr colspan="8" ng-if="findScheduledHours!=undefined"><div ng-repeat="scheduledHour in hoursList">
+												<div class="col-sm-1"><button type="button" class="buttonAppointment"
+												ng-click="selectScheduleSub(scheduledHourDto,scheduledHourDto.appointmentStartedDate,appointment.appointmentEnddate,scheduledHour);">{{scheduledHour}}</button></div>	
+											</div></tr> -->
+
+										<!-- 	<td>{{schedule.scheduleStatus}}</td> -->
+										<!-- <tr ng-if="$index">
+										<td colspan="8"><div ng-repeat="scheduledHour in hoursList">
+												<div class="col-sm-1"><button type="button" class="buttonAppointment"
+												ng-click="selectScheduleSub(scheduledHourDto,scheduledHourDto.appointmentStartedDate,appointment.appointmentEnddate,scheduledHour);">{{scheduledHour}}</button></div>	
+											</div></td>
+									</tr> -->
+									</tr>
+									
+									<tr ng-if="scheduleListByDate.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr> 
+								</tbody>
+							</table>
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<div id="ordine" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content ">
+     <div class="modal-header" style="background-color: #20B2AA">
+          <button style="color: black" type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:white" class="modal-title">Therapist Availability</h4>
+        </div>
+   
+        <div >
+            
+            <div class="panel-body">
+
+                <form class="col-sm-12">
+                  
+                  	<div ng-repeat="scheduledHour in hoursList">
+												<div class="col-sm-3"><button type="button" class="buttonAppointment"
+												ng-click="selectScheduleSub(scheduledHourDto,scheduledHourDto.appointmentStartedDate,appointment.appointmentEnddate,scheduledHour);">{{scheduledHour}}</button></div>	
+											</div>
+											
+								
+             </form>
+         </div>
+    
+
+ </div>				
+</div> <!-- /.content-wrapper -->
+</div>
+</div>

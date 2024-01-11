@@ -1,0 +1,159 @@
+
+<div class="content-wrapper"
+	ng-init="getAllQuestionCategories();getAllgoals();getAllCratedDatesOfPatientGoals();getDoctorByPatientId();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Patient Additional Information</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Patient List</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+
+		<div class="row">
+			<div class="content-block content-block-horizantal">
+
+
+				<div
+					class="content-block-main content-input panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-success" ng-click="gotoAppointment();"> <i
+								class="fa fa-list"></i> Appointment List
+							</a>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-sm-4">
+							<label>Name : </label> <input type="text" name="appointment_id"
+								ng-model="patientObject.firstName" placeholder="Name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Aadhaar Number: </label> <input type="text" name="appointment_id"
+								ng-model="patientObject.ssn" placeholder="SSN" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Date of Birth : </label> <input type="text" value=""
+								ng-model="patientObject.dateOfBirth" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<!-- <div class="col-sm-4">
+							<label>UCI : </label> <input type="text" name="appointment_id"
+								value="" ng-model="patientObject.ucl" placeholder="UCI" readonly>
+						</div> -->
+						<div class="col-sm-4">
+							<label>Age : </label> <input type="text" name="appointment_id"
+								value="" ng-model="patientObject.age" placeholder="Age" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Parent Name : </label> <input type="text" value=""
+								ng-model="patientObject.parentName" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Mobile Number : </label> <input type="text"
+								name="appointment_id" value=""
+								ng-model="patientObject.mobileNumber"
+								placeholder="Mobile Number" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Department Name : </label> <input type="text"
+								name="appointment_id" value=""
+								ng-model="department.departmentName"
+								placeholder="Department Name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Sex : </label> <input type="text" value=""
+								ng-model="patientObject.gender" readonly>
+						</div>
+					</div>
+				</div>
+
+				<div class="content-block-main content-input ">
+					<div class="row">
+						<div class="col-sm-4" ng-if="progress.evaluator==undefined">
+							<label>Evaluator : </label> <input type="text"
+								name="appointment_id" ng-model="doctorObj.firstName"
+								placeholder="Evaluator"  readonly>
+						</div>
+						<div class="col-sm-4" ng-if="progress.evaluator!=undefined">
+							<label>Evaluator : </label> <input type="text"
+								name="appointment_id" ng-model="progress.evaluator"
+								placeholder="Evaluator"  readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Service Coordinator : </label> <input type="text"
+								name="appointment_id" value="" placeholder="Service Coordinator"
+								ng-model="progress.serviceCoordinator">
+						</div>
+						<div class="col-sm-4">
+							<label>Date of Test : </label> <input type="date" value=""
+								ng-model="progress.date">
+						</div>
+					</div>
+				</div>
+				<div>
+					<div ng-init="getTabs();">
+						<div class="col-sm-12 border">
+							<div class="sample" layout="column" ng-cloak>
+								<md-content class="md-padding"> <md-tabs
+									md-dynamic-height md-selected="selectedIndex" md-border-bottom
+									md-autoselect md-swipe-content> <md-tab
+									ng-repeat="tabname in tabsList" label="{{tabname}}"
+									ng-click="selectedTab(tabname);"> <!-- inner content  -->
+
+
+								</md-tab> </md-tabs> </md-content>
+							</div>
+							<div>
+
+
+								
+								
+								<div class="tab-content" ui-view></div>
+							</div>
+
+							
+
+						</div>
+
+						<!-- <div ng-if="!isselected">
+							<div class="tab-content" ui-view></div>
+						</div> -->
+
+						</md-tab>
+						</md-tabs>
+						</md-content>
+						
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

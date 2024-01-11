@@ -1,0 +1,205 @@
+	
+<div class="panel-body" ng-init="getAllCratedDatesOfPatientGoals();getDoctorByPatientId();">
+	<div class="col-sm-12">
+	<ul class="nav nav-tabs" style="background-color: white" >
+		<!-- 			<li><a ng-click="gotoDocuments();"
+						data-toggle="tab">Patient Documents</a></li>
+					<li><a ng-click="gotoEvalution();" data-toggle="tab">Patient
+							Evaluation Sheet</a></li>
+					<li ng-style="activeColor2"><a href="" data-toggle="tab" target="self"
+						ng-click="gotoGoals();">Patient
+							Goals Sheet</a></li>
+					<li><a href="#tab3" data-toggle="tab" target="self"
+						ng-click="gotoProgress();">Patient Progress Notes</a></li>
+					<li><a href="#tab4" data-toggle="tab" target="self"
+						ng-click="gotoExit();getExitSheetReportBy();">Patient Exit Note</a></li>
+				</ul> -->
+	<!-- <div class="content-block-main content-input ">
+		<div class="row" ng-if="patientGoalList[0].evaluator == null">
+			<div class="col-sm-4">
+				<label>Evaluator : </label> <input type="text"
+					ng-model="obj123.evaluator" placeholder="Evaluator">
+			</div>
+			<div class="col-sm-4">
+				<label>Service Coordinator</label> <input type="text" value=""
+					 ng-model="obj123.serviceCoordinator">
+			</div>
+			<div class="col-sm-4">
+				<label>Date of Test :</label> <input type="date" value=""
+					 ng-model="today1">
+			</div>
+			
+		</div>
+		<div class="row" ng-if="patientGoalList[0].evaluator != null">
+			<div class="col-sm-4">
+				<label>Evaluator : </label> <input type="text"
+					ng-model="patientGoalList[0].evaluator" placeholder="Evaluator">
+			</div>
+			<div class="col-sm-4">
+				<label>Service Coordinator</label> <input type="text" value=""
+					 ng-model="patientGoalList[0].serviceCoordinator">
+			</div>
+			<div class="col-sm-4">
+				<label>Date of Test :</label> <input type="text" value=""
+					 ng-model="patientGoalList[0].date">
+			</div>
+			
+		</div>
+	</div> -->
+		<div class="col-sm-12 border">
+			<div class="sample" layout="column" ng-cloak>
+				<md-content class="md-padding"> <md-tabs
+					md-dynamic-height md-selected="selectedIndex" md-border-bottom
+					md-autoselect md-swipe-content> <md-tab
+					ng-repeat="tabdate in datesList track by $index"
+					label="{{tabdate}}"
+					ng-click="findAllPatientGoalsByPatientIdAndCreatedDate(tabdate);">
+
+				<form layout="column" class="sm-padding" style="padding-top: 0;">
+					<div class="col-sm-12">
+						<div align="left" class="col-sm-6">
+							<button class="btn btn-primary" data-toggle="tooltip"
+								data-placement="right" ng-click="addTab();"
+								title="Click here to add new date">
+								<i class="" aria-hidden="true">+</i>
+							</button>
+						</div>
+						<div align="right" class="col-sm-6">
+							<button class="btn btn-primary" data-toggle="tooltip"
+								ng-disabled="!addFlag" data-placement="left"
+								ng-click="gotoGoalTemplate();" title="Add Goal">
+								<i class="" aria-hidden="true">Select Goals From Template</i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<div class="table-responsive" ng-if="flag">
+					<table class="table table-bordered table-hover">
+						<tr ng-if="goalsList.length > 0">
+							<td colspan="3"><label> Goals Description:</label></td>
+						</tr>
+						<tr ng-repeat="goals in goalList">
+							<td class="col-sm-6">{{goals.goalTemplateLookupName}}</td>
+							<td class="col-sm-2" align="center"><input type="radio"
+								ng-model="goals.answer" ng-disabled="!addFlag"
+								ng-checked="goals.answer=='true'" ng-value=true />&nbsp;&nbsp;&nbsp;Yes
+							</td>
+							<td class="col-sm-2" align="center"><input type="text"
+								ng-model="goals.answer" ng-disabled="!addFlag" />&nbsp;&nbsp;%
+							</td>
+							<td class="col-sm-2" align="center"><input type="radio"
+								ng-model="goals.answer" ng-disabled="!addFlag"
+								ng-checked="goals.answer=='false'" ng-value=false />&nbsp;&nbsp;&nbsp;No
+							</td>
+						</tr>
+						<tr ng-if="goalsList.length == 0">
+							<td colspan="12" align="center">
+								<h3>
+									<i class="fa fa-meh-o"></i> Please click on <b>Select Goals
+										From Template</b>
+								</h3>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="table-responsive" ng-if="!flag">
+					<table class="table table-bordered table-hover">
+						<tr ng-if="patientGoalList.length > 0">
+							<td colspan="3"><label> Goals Description:</label></td>
+						</tr>
+						<tr ng-repeat="goal in patientGoalList" class="col-sm-12" style=" padding-left: 0px;padding-right: 0px;">
+							<td class="col-sm-8">{{goal.name}} <br> <br> <textarea ng-trim="false" maxlength="3000"
+									type="text" class="col-sm-8 form-control"
+									placeholder="Add your comment" ng-model="goal.comment"
+									data-toggle="tooltip" data-placement="top"
+									title="Add your comment to specific goal"
+									ng-disabled="!addFlag"></textarea>
+									<span class="pull-right" style="font-size: 11px;color: blue">{{3000-goal.comment.length}}&nbsp;Characters Left</span>
+							</td>
+							<td class="col-sm-1" align="center"><input type="checkbox"
+								name="status" ng-model="goal.yesValue" ng-value="YES"
+								ng-checked="goal.yesValue=='true' "
+								ng-click="goal.noValue='null'; goal.percentile='';"
+								ng-disabled="!addFlag" />&nbsp;&nbsp;&nbsp;Yes</td>
+							<td class="col-sm-1"><input type="number"
+								class="form-control" placeholder="%" ng-model="goal.percentile"
+								
+								ng-click="goal.noValue='null';goal.yesValue='null'; "
+								ng-disabled="!addFlag" /></td>
+							<td class="col-sm-1" align="center"><input type="checkbox"
+								name="status" ng-model="goal.noValue" ng-value="NO"
+								ng-checked="goal.noValue=='true' "
+								ng-click="goal.yesValue='null'; goal.percentile='';"
+								ng-disabled="!addFlag" />&nbsp;&nbsp;&nbsp;No</td>
+							<td class="col-sm-1" align="center"><button type="button"
+									class="btn btn-danger" data-toggle="tooltip"
+									data-placement="top"
+									title="Click here to delete goals from patient"
+									ng-disabled="!addFlag" ng-click="deletealert(goal.id);"
+									>
+									<i	style="font-size: 17px; margin-bottom: 0px; cursor: pointer;"
+								class="fa fa-trash-o" aria-hidden="true"></i>
+								</button>
+								</td>
+						</tr>
+						<tr ng-if="patientGoalList.length == 0">
+							<td colspan="12" align="center">
+								<h3>
+									<i class="fa fa-meh-o"></i> Please click on <b>Select Goals
+										From Template</b> ...
+								</h3>
+							</td>
+						</tr>
+					</table>
+				</div>
+				</md-tab> </md-tabs> </md-content>
+				<div class="col-sm-12" align="center" ng-disabled="!addFlag"
+					ng-if="patientGoalList.length > 0">
+					<button class="btn btn-primary" ng-click="addPatientGoals(obj123)"
+						data-toggle="tooltip" data-placement="top"
+						title="Click here to save goals to patient">Save Goals</button>
+					<a ng-click="gotoList();" class="btn btn-danger"
+						data-toggle="tooltip" data-placement="top"
+						title="Click here to cancel the goals">Cancel</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div id="ordine" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content ">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">Update table</h4>
+    </div>
+    <div class="modal-body">
+        <div class="panel panel-bd lobidrag">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+
+                <form class="col-sm-12">
+                
+                  <div class="reset button">
+                     <a href="#" class="btn btn-primary">Reset</a>
+                     <a href="#" class="btn btn-success">Save</a>
+                 </div>
+					 
+    
+             </form>
+         </div>
+     </div>
+
+ </div>
+ <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+		
+</div>
+
+</div>
+</div>

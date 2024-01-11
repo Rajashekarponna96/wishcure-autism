@@ -1,0 +1,136 @@
+<div class="content-wrapper" ng-init="getAllChildObservationCategoryLookups();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Observation Question</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Observation Question</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Observation Question List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form name="screeningTestform">
+							<div class="form-group">
+								<div class="col-sm-3">
+									<label>Category</label>
+								</div>
+								<div class="col-sm-6">
+									<select ng-model="childObservationQuestionLookup.childObservationCategoryLookup" class="form-control"
+										name="screeningTest" 
+										ng-options="observationCategory as observationCategory.name  for observationCategory in childObservationCategoryLookupsList track by observationCategory.id"
+										required class="form-control">
+										<option value="" class="active">Select</option>
+									</select><span style="color: red" 
+										ng-show="(screeningTestform.screeningTest.$touched && screeningTestform.screeningTest.$invalid)">
+										<span
+										ng-show="screeningTestform.screeningTest.$error.required">
+											Category is required.</span></span>
+								</div>
+								<div class="col-sm-3" align="center"></div>
+								<br> <br>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-3">
+									<label>Question Name</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="text"  class="form-control"
+										name="QuestionName"
+										placeholder="Enter  Observation Question Name"
+										ng-model="childObservationQuestionLookup.name" 
+										required> <span style="color: red" 
+										ng-show="(screeningTestform.QuestionName.$touched && screeningTestform.QuestionName.$invalid)">
+										<span ng-show="screeningTestform.QuestionName.$error.required">
+											Question Name is required.</span></span>
+								</div>
+								<div class="col-sm-3" align="center">
+									<br> <br>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-12">
+								<div class="col-sm-3">
+									<label>Answer</label>
+								</div>
+								<div class="col-sm-6">
+									<!-- <div ng-repeat="ans in evalutions"> -->
+										<input type="text"  class="form-control" name="answer"
+											placeholder="Enter Your Answer" ng-model="answer.name"
+											required> <span style="color: red" 
+											ng-show="(screeningTestform.answer.$touched && screeningTestform.answer.$invalid)">
+											<span ng-show="screeningTestform.answer.$error.required">Answer
+												is required.</span></span>
+									<!-- </div> -->
+
+								</div>
+								<!-- <div class="col-sm-3">
+									<a class="btn btn-lg" ng-click="newItem()"> <span
+										class="glyphicon glyphicon-plus-sign"></span>
+									</a>
+
+								</div> -->
+							</div>
+							<br>
+
+							<!-- <div class="form-group">
+								<div class="col-sm-9"></div>
+								<div class="col-sm-3">
+									<a class="btn btn-lg" ng-click="deleteItem()"> <span
+										class="glyphicon glyphicon-minus-sign"></span>
+									</a>
+								</div>
+							</div> -->
+						</form>
+					</div>
+
+					<!-- <div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div> -->
+					<div class="reset-button">
+						<button class="btn btn-success" ng-click="updateChildObservationQuestionLookup(childObservationQuestionLookup)"
+							ng-disabled="screeningTestform.$invalid">Update</button>
+						<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- </div>
+</div> -->
+</section>
+<!-- /.content -->
+</div>
+
+<!-- /.content-wrapper -->
+

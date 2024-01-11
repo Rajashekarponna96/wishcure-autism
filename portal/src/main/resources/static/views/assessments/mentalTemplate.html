@@ -1,0 +1,134 @@
+
+<div class="tab-content">
+	<div
+		ng-init="getAllMentalScale();getAllPatientMentalScalesByPatientId();">
+		<div class="row">
+			<div ng-hide="isMentalScaleExists" class="col-sm-12 table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Item Description</th>
+							<th>50%</th>
+							<th>3%</th>
+							<th>97%</th>
+							<th>Action</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="mentalScale in mentalScaleList">
+							<td>{{mentalScale.percent97Rank}}</td>
+							<td>{{mentalScale.itemDescripation}}</td>
+							<td>{{mentalScale.percent50}}</td>
+							<td>{{mentalScale.percent3}}</td>
+							<td>{{mentalScale.percent97}}</td>
+							<td><input type="radio"
+								ng-model="mentalScale.mentalScaleStatus" value="PP" ng-change='ppMentalChange(mentalScale.mentalScaleStatus)'>&nbsp;PP&nbsp;
+								<input type="radio" ng-model="mentalScale.mentalScaleStatus"
+								value="P">&nbsp;P&nbsp;
+								 <input type="radio"
+								ng-model="mentalScale.mentalScaleStatus" value="F">&nbsp;F&nbsp;
+								<input type="radio" ng-model="mentalScale.mentalScaleStatus"
+								value="RF" ng-change='rfMentalChange(mentalScale.mentalScaleStatus)'>RF&nbsp;&nbsp;</td>
+								
+								
+								
+							<td><label class="checkbox-inline"><input
+									name="note" ng-model="mentalScale.hasnote" type="checkbox">
+							</label>
+								<div class="col-sm-10" ng-if="mentalScale.hasnote == true">
+
+
+									<textarea
+										class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+										rows="5" ng-model="mentalScale.note" placeholder="Enter Note"
+										id="noteText" class="form-control" name="note"></textarea>
+
+								</div></td>
+
+
+						</tr>
+						<tr ng-if="mentalScaleList.length==0">
+							<td colspan="6">No records found</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<div class="reset-button">
+					<button class="btn btn-success"
+						ng-click="assignMentalScalestoPatient();"
+						ng-disabled="isMentalScaleExists">Save & Continue</button>
+
+					<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+				</div>
+			</div>
+
+			<div ng-show="isMentalScaleExists" class="col-sm-12 table-responsive"
+				ng-if="patientMentalScalelist.length > 0">
+				<fieldset ng-disabled="true">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Item Description</th>
+							<th>50%</th>
+							<th>3%</th>
+							<th>97%</th>
+							<th>Action</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="mentalScale in patientMentalScalelist">
+							<td>{{mentalScale.percent97Rank}}</td>
+							<td>{{mentalScale.itemDescripation}}</td>
+							<td>{{mentalScale.percent50}}</td>
+							<td>{{mentalScale.percent3}}</td>
+							<td>{{mentalScale.percent97}}</td>
+							<td><input type="radio"
+								ng-model="mentalScale.mentalScaleStatus" value="PP">&nbsp;PP&nbsp;
+								<input type="radio" ng-model="mentalScale.mentalScaleStatus"
+								value="P">&nbsp;P&nbsp; <input type="radio"
+								ng-model="mentalScale.mentalScaleStatus" value="F">&nbsp;F&nbsp;
+								<input type="radio" ng-model="mentalScale.mentalScaleStatus"
+								value="RF">RF&nbsp;&nbsp;</td>
+							<td><label class="checkbox-inline"><input
+									name="note" ng-model="mentalScale.hasnote" type="checkbox">
+							</label>
+								<div class="col-sm-10" ng-if="mentalScale.hasnote == true">
+
+
+									<textarea
+										class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+										rows="5" ng-model="mentalScale.note" placeholder="Enter Note"
+										id="noteText" class="form-control" name="note"></textarea>
+
+								</div></td>
+
+
+						</tr>
+						<tr ng-if="mentalScaleList.length==0">
+							<td colspan="6">No records found</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="reset-button">
+					<button class="btn btn-success"
+						ng-click="updatePatientMentalScalesByPatientId();"
+						ng-disabled="isDisabled">Update</button>
+
+					<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+				</div>
+				</fieldset>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+

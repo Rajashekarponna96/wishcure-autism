@@ -1,0 +1,142 @@
+
+<div class="content-wrapper" ng-init="getAllTherapistsHolidaysByAdminUsername();">
+	
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Holidays List</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Holidays List</li>
+			</ol>
+		</div>
+	</section>
+	
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" >
+
+						<div class="btn-group" ng-click="gotoAdd();">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								Holidays
+							</a>
+						</div>
+					</div>
+					 
+					<div class="panel-body">
+					<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length" id="example_length">
+										<label>Display <select name="example_length" ng-model="size" ng-change="sizeChanged(size);">
+										<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									
+								</div>
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<div class="input-group custom-search-form">
+											<input type="search" class="form-control"
+												placeholder="search.."  ng-model="searchBox"> <span
+												class="input-group-btn">
+												<button class="btn btn-primary" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+						<!-- <div>
+					Search:	<input type="text" ng-model="searchBox">
+					</div><br> -->
+					   <!-- <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search..." ng-model="searchBox">
+                                <span class="input-group-btn">
+                                    <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div> -->
+					
+						<table align="center">
+					
+					<!-- <tr>
+							<td align="right"> Search:
+						<input class="" ng-model="search.$"> </td></tr> -->
+
+
+					</table>
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Title</th>
+												<th>Start Date</th>
+												<th>Start Time</th>
+												<th>End Date</th>
+												<th>End Time</th>
+												<th>Therapist Name</th>
+												<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="holidays in holidaysListAdmin | filter:searchBox">
+										<!-- <td><input type="radio" name="radioGroup"> <label>{{holidays.id}}</label></td> -->
+										<td>{{holidays.reason}}</td>
+										<td>{{holidays.fromTime | date:'dd-MM-yyyy'}}</td>
+										<td>{{holidays.fromTime | date:'HH:mm:ss'}}</td>
+										<td>{{holidays.toTime | date:'dd-MM-yyyy'}}</td>
+										<td>{{holidays.toTime |date:'HH:mm:ss'}}</td>
+										<td>{{holidays.doctor.firstName}}</td>
+										
+										<td>
+											<!-- <button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left"
+												ng-click="gotoupdate(holidays);" title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button> -->
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right" ng-show="hasFeature('Therapist Holidays').canDelete==true"
+												ng-click="deleteHolidays(holidays.id);"
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+</div>
+

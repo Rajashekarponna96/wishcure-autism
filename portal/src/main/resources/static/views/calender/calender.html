@@ -1,0 +1,57 @@
+<style>
+html {
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+
+<style>
+.custom-event {
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+}
+
+.custom-all-day-event {
+	text-align: center;
+	text-transform: uppercase
+}
+</style>
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-date"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Calender</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Calender</a></li>
+				<li class="active">Calender</li>
+			</ol>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div kendo-scheduler k-options="schedulerOptions">
+					<span k-event-template class='custom-event'>{{dataItem.title}}</span>
+					<div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

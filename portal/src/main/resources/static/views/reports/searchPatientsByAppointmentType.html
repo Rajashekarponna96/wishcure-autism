@@ -1,0 +1,322 @@
+
+<div class="content-wrapper"
+	ng-init="getAllClients();getAllDepartments();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Search By AppointmentType</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Search Patients</li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>&nbsp;
+							Reports
+							</a>
+
+
+						</div>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+                      <div class="panel-body">
+                       <div class="col-sm-12" >
+                           <div class="col-sm-3 " >
+                      <mdp-date-picker mdp-placeholder="From Date"
+									ng-model="patient.startedDate"></mdp-date-picker>
+									</div>
+									<div class="col-sm-3" >
+                      <mdp-date-picker mdp-placeholder="To Date"
+									ng-model="patient.endDate"></mdp-date-picker>
+									</div>
+									
+									 <div class="col-sm-3 " layout="row">
+										<md-input-container class="md-block">
+										 <label>Appointment Type</label> 
+										<md-select ng-model="patient.occurance" mdp-placeholder="fg">
+										 <md-option value="">Select Appointment Type</md-option>
+										<md-option	value="NEVER">&nbsp; Once   &nbsp;</md-option>
+										 <md-option value="WEEKLY"> &nbsp; Recursive   &nbsp; </md-option>
+										</md-select> </md-input-container>
+									</div> 
+									
+									<div class="col-sm-3 " layout="row">
+										<md-input-container class="md-block">
+										 <label>Payment	Status</label> 
+										<md-select ng-model="patient.status" mdp-placeholder="fg">
+										 <md-option value="">Select Payment Status</md-option>
+										<md-option	value="PAID">&nbsp; Paid   &nbsp;</md-option>
+										 <md-option value="DUE"> &nbsp; Dues   &nbsp; </md-option>
+										</md-select> </md-input-container>
+									</div>
+									
+									</div>
+                      <!-- <div class="col-sm-12" >
+                           <div class="col-sm-3 col-sm-offset-3" >
+                           <label>Start Date</label>
+									<input type="date" class="form-control" name="date1"
+										placeholder="Enter DOB"
+										ng-model="patient.startedDate"
+										
+										required> <span style="color: red" 
+										ng-show="(patientForm.date1.$touched && patientForm.date1.$invalid)">
+										<span ng-show="patientForm.date1.$error.required">Start
+											Date is required.</span></span><br>
+								</div>
+								
+								
+								 <div class="col-sm-3" >
+								 <label>End Date</label>
+									<input type="date" class="form-control" name="date1"
+										placeholder="Enter DOB"
+										ng-model="patient.endDate"
+										
+										required> <span style="color: red" 
+										ng-show="(patientForm.date1.$touched && patientForm.date1.$invalid)">
+										<span ng-show="patientForm.date1.$error.required">Start
+											Date is required.</span></span><br>
+								</div>
+								</div> -->
+							
+								<!-- <div class="col-sm-12" >
+                                    
+								
+								
+                                
+								
+								<div class="col-sm-3 form-group ">
+										<label>Payment Status</label> <select class="form-control"
+											ng-model="patient.status">
+											<option value="" class="active">Select Payment Status</option>
+											<option value="PAID">Paid</option>
+											<option value="DUE">Dues</option>
+										</select>
+									</div>
+								
+								 <div class="col-sm-3 form-group">
+										<label>Appointment Type</label> <select
+											ng-model="patient.occurance" class="form-control">
+											<option value="" class="active">Select Payment Type</option>
+											<option value="NEVER">Once</option>
+											<option value="WEEKLY">Recursive</option>
+										</select>
+									</div>
+								
+								 
+                                     
+								</div> -->
+								 </div>
+								 
+								 <div class="">
+							<div class="reset-button">
+								<a href="" class="btn btn-success"
+									
+									ng-click="searchPatient(patient);">Filter</a> <a href=""
+									class="btn btn-warning">Reset</a>
+
+							</div>
+						</div>
+								</form>
+							
+							
+							<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead  align="center">
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										 <th>Payee</th>
+										<th>Mobile</th>
+										<th>E-Mail</th>
+										<!-- <th>UCI</th> 
+										<th>Address</th>-->
+										<th>Paid Amt</th>
+										<th>Bal Amt</th>
+										<th>App Type</th>
+										<th>Schedules</th>
+										<th>completed</th>
+										<th>Cost per Session</th>
+										<th>Status</th>
+										<!-- <th colspan="2">Action</th> -->
+									</tr>
+								</thead>
+								<tbody>
+								<!-- pa in patientListByAdmin track by pa.id in "" -->
+									<tr ng-repeat="pa in seachPatientsList | filter:search">
+										<td>{{pa.id}}</td>
+										<td>{{pa.firstName}} {{pa.lastName}}</td>
+										<td>{{pa.gaurdian}}</td>
+										         
+										<td>{{changeMobileNumber(pa.mobileNumber);}}</td>
+										<td>{{pa.email}}</td>
+										<!-- <td>{{pa.ucl}}</td> -->
+									<!-- 	<td><span class="label-success label label-default" ng-if="pa.active==true"> Active</span><span class="label-default label label-danger" ng-if="pa.active==false"> InActive</span></td>
+										 -->
+										<!-- <td ng-click="gotoPatientDetails(pa)">
+										<i class="hvr-buzz-out fa fa-eye" data-toggle="tooltip"  title="View Details"></i>
+										</td> -->
+									<!-- 	<td>
+										<button class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="left"
+                                    ng-click="gotoupdate(pa);" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></button></td> -->
+									</tr>
+									<tr ng-if="seachPatientsList.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>	
+								
+								
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="content-wrapper" ng-init="getAllClients();getAllDepartments();">
+	Content Header (Page header)
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Search Patient</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Search Patient</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<div class="content">
+ <form role="form">
+   <div class="panel-body">
+
+                                     <div class="form-group col-lg-3">
+									<label><span
+										ng-if="patient.clientType == undefined || patient.clientType == '' "
+										style="color: red">*</span>Type of Client</label> <select
+										ng-model="patient.clientType" class="form-control"
+										name="client" aria-required="true" aria-invalid="true"
+										ng-options="client as client.clientTypeName  for client in clientsList"
+										required>
+										<option value="" class="active">Select Client</option>
+									</select> <span style="color: red"
+										ng-show="(patientForm.client.$touched && patientForm.client.$invalid)">
+										<span ng-show="patientForm.client.$error.required">Type
+											of Client is required.</span>
+									</span>
+								</div>
+								
+								
+                                
+								
+								<div class="col-sm-3 form-group">
+										<label>Payment Status</label> <select class="form-control"
+											ng-model="payment.status">
+											<option value="" class="active">Select Payment Status</option>
+											<option ng-value="PAID">PAID</option>
+											<option ng-value="DUES">DUES</option>
+									
+										</select>
+									</div>
+								
+								 <div class="col-sm-3 form-group">
+										<label>Payment Type</label> <select
+											ng-model="payment.modeOfPaymentTypes" class="form-control">
+											<option value="" class="active">Select Payment Type</option>
+											<option ng-value="ONCE">ONCE</option>
+											<option ng-value="WEEKLY">WEEKLY</option>
+											<option ng-value="MONTHLY">MONTHLY</option>
+											<option ng-value="QUARTERLY">QUARTERLY</option>
+											<option ng-value="HALFYEARLY">HALFYEARLY</option>
+											<option ng-value="YEARLY">YEARLY</option>
+										</select>
+									</div>
+								<div class="col-sm-3">
+								<label>Department</label> <select class="form-control"
+									id="exampleSelect1" ng-model="patient.department"
+									ng-options="department as department.departmentName for department in departmentsList"
+									name="select" size="1">
+									<option value="" class="active">Select Department</option>
+								</select>
+							</div>
+								   
+                                     
+								
+								 </div>
+								</form>
+								<div class="">
+							<div class="reset-button">
+								<a href="" class="btn btn-success"
+									
+									ng-click="searchPatient(patient);">Search</a> <a href=""
+									class="btn btn-warning">Reset</a>
+
+							</div>
+						</div>
+</div>
+ </div>
+ -->

@@ -1,0 +1,126 @@
+
+<div class="content-wrapper" ng-init="getVsmsClusters();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Vsms Questions</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">vsmsQuestions</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> VSMS
+								Questions List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-6" name="motorclusterform">
+
+							<div class="form-group">
+								<label>VSMS Question Name</label> <input type="text" value=""
+									class="form-control" name="vsmsClusterName"
+									placeholder="Enter VSMSCluster Name"
+									ng-model="vsmsQuestion.questionName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(motorclusterform.vsmsClusterName.$touched && motorclusterform.vsmsClusterName.$invalid)">
+									<span ng-show="motorclusterform.vsmsClusterName.$error.required">VSMS Scale
+										Name is required.</span>
+								</span>
+							</div>
+
+							<div class="col-lg-6 form-group">
+				<label>Age(Years)</label> <select class="form-control"
+					name="ageInYears" ng-model="vsmsQuestion.ageInYears"><option
+						value="" class="active">Select Age in Years</option>
+					<option value="0 to 1" class="active">0 to 1</option>
+					<option value="1 to 2" class="active">1 to 2</option>
+					<option value="2 to 3" class="active">2 to 3</option>
+					<option value="2 to 3" class="active">3 to 4</option>
+					<option value="2 to 3" class="active">4 to 5</option>
+					<option value="2 to 3" class="active">5 to 6</option>
+					<option value="2 to 3" class="active">6 to 7</option>
+					<option value="2 to 3" class="active">7 to 8</option>
+					<option value="2 to 3" class="active">8 to 9</option>
+					<option value="2 to 3" class="active">9 to 10</option>
+					<option value="2 to 3" class="active">10 to 11</option>
+					<option value="2 to 3" class="active">11 to 12</option>
+					<option value="2 to 3" class="active">12 to 13</option>
+					<option value="2 to 3" class="active">13 to 14</option>
+					<option value="2 to 3" class="active">14 to 15</option>
+
+
+				</select>
+			</div>
+			<div class="form-group">
+								<label>Age in Months</label> <input type="text" value=""
+									class="form-control" name="ageInMonths"
+									placeholder="Enter age in months"
+									ng-model="vsmsQuestion.ageInMonths" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+							<div class="col-sm-6 form-group">
+				 <label>Payment Type</label> <select class="form-control" name="vsmsCluster"
+					placeholder="please select VSMS Cluster"
+					ng-model="vsmsQuestion.vsmsCluster"
+					ng-options="vsmsCluster as vsmsCluster.name for vsmsCluster in vsmsClustersList">
+					<option value="" class="active">Select VSMS Cluster</option>
+						
+						</select>
+			</div>
+							
+
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success"
+									ng-click="addVSMSQuestion();"
+									ng-show="hasFeature('Departent Management').canAdd==true"
+									ng-disabled="motorclusterform.$invalid">Save</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

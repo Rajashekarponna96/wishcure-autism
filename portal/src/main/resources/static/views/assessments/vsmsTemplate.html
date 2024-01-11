@@ -1,0 +1,144 @@
+<p align="center" ><b>VSMS Template</b></p>
+<hr>
+<div class="tab-content">
+	<div
+		ng-init="getVsmsQuestions();getAllPatientVsmsQuestionsByPatientId();">
+		<div class="row">
+			<div ng-hide="isVsmsQuestionsExists" class="col-sm-10 table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Question Name</th>
+							<th>Scoring Age</th>
+							<th>Age In Years</th>
+							<th>Action</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="vsmsQuestion in vsmsQuestionsList">
+						<td>{{$index+1}}</td>
+							<td>{{vsmsQuestion.questionName}}</td>
+							<td>{{vsmsQuestion.vsmsAnswerCountAndScoringSheet.scoringAge}}</td>
+							<td>{{vsmsQuestion.ageInYears}}</td>
+							<td><input type="radio"
+								ng-model="vsmsQuestion.vsmsQuestionStatus" value="PP" ng-change='ppVSMSChange(vsmsQuestion.vsmsQuestionStatus)'>&nbsp;PP&nbsp;
+								<input type="radio" ng-model="vsmsQuestion.vsmsQuestionStatus"
+								value="P">&nbsp;P&nbsp;
+								 <input type="radio"
+								ng-model="vsmsQuestion.vsmsQuestionStatus" value="F">&nbsp;F&nbsp;
+								<input type="radio" ng-model="vsmsQuestion.vsmsQuestionStatus"
+								value="RF" ng-change='rfVSMSChange(vsmsQuestion.vsmsQuestionStatus)'>RF&nbsp;&nbsp;</td>
+								
+								
+								
+							<td><label class="checkbox-inline"><input
+									name="note" ng-model="vsmsQuestion.note" type="checkbox">
+							</label>
+								<div class="col-sm-10" ng-if="vsmsQuestion.note == true">
+
+
+									<textarea
+										class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+										rows="5" ng-model="vsmsQuestion.note" placeholder="Enter Note"
+										id="noteText" class="form-control" name="note"></textarea>
+
+								</div></td>
+
+
+						</tr>
+						<tr ng-if="vsmsQuestionsList.length==0">
+							<td colspan="6">No records found</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<div class="reset-button">
+					<button class="btn btn-success"
+						ng-click="assignvsmsQuestionstoPatient();"
+						ng-disabled="isVsmsQuestionsExists">Save & Continue</button>
+
+					<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+				</div>
+			</div>
+
+			<div ng-show="isVsmsQuestionsExists" class="col-sm-10 table-responsive"
+				ng-if="patientVsmsQuestionslist.length > 0">
+				<fieldset ng-disabled="true">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Question Name</th>
+							<th>Scoring Age</th>
+							<th>Age In Years</th>
+							<th>Action</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="patientVsmsQuestion in patientVsmsQuestionslist">
+						<td>{{$index+1}}</td>
+							<td>{{patientVsmsQuestion.vsmsQuestion.questionName}}</td>
+							<td>{{patientVsmsQuestion.vsmsAnswerCountAndScoringSheet.scoringAge}}</td>
+							<td>{{patientVsmsQuestion.vsmsQuestion.ageInYears}}</td>
+							<td><input type="radio"
+								ng-model="patientVsmsQuestion.vsmsQuestionStatus" value="PP" ng-change='ppVSMSChange(vsmsQuestion.vsmsQuestionStatus)'>&nbsp;PP&nbsp;
+								<input type="radio" ng-model="patientVsmsQuestion.vsmsQuestionStatus"
+								value="P">&nbsp;P&nbsp;
+								 <input type="radio"
+								ng-model="patientVsmsQuestion.vsmsQuestionStatus" value="F">&nbsp;F&nbsp;
+								<input type="radio" ng-model="patientVsmsQuestion.vsmsQuestionStatus"
+								value="RF" ng-change='rfVSMSChange(patientVsmsQuestion.vsmsQuestionStatus)'>RF&nbsp;&nbsp;</td>
+								
+								
+								
+							<td><label class="checkbox-inline"><input
+									name="note" ng-model="patientVsmsQuestion.note" type="checkbox">
+							</label>
+								<div class="col-sm-10" ng-if="vsmsQuestion.note == true">
+
+
+									<textarea
+										class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+										rows="5" ng-model="patientVsmsQuestion.note" placeholder="Enter Note"
+										id="noteText" class="form-control" name="note"></textarea>
+
+								</div></td>
+
+
+						</tr>
+						<tr ng-if="vsmsQuestionsList.length==0">
+							<td colspan="6">No records found</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="reset-button">
+					<button class="btn btn-success"
+						ng-click="updatePatientMentalScalesByPatientId();"
+						ng-disabled="isDisabled">Update</button>
+
+					<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+				</div>
+				</fieldset>
+				<div class="reset-button">
+					<button class="btn btn-success"
+						ng-click="gotoReport();"
+						>VSMS Result</button>
+						<div>				
+						Count: {{vsmsQuestionsCount}}
+						</div>		
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+

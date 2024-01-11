@@ -1,0 +1,989 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
+
+<p align="center" style="padding: 10px;"><b>Evaluation for Speech</b></p>
+
+
+<div ng-init="getAllPatientSpeechEvaluationByPatientId();" ng-disabled="isSpeechEvalutionExists">
+	<div class="row">
+		<div class="panel panel-bd lobidrag" id="patientEvalutionReport" >
+		
+			<div class="panel-body">
+			<table class="table">
+
+										<tbody>
+										<thead></thead>
+										<tr>
+											<th>Reg No :</th>
+											<td>{{patientObject.regNumber}}</td>
+											<th>Name :</th>
+											<td>{{patientObject.firstName}}
+												{{patientObject.lastName}}</td>
+										</tr>
+										<tr>
+											<th>Gender :</th>
+											<td>{{patientObject.gender}}
+											<th>Date of Evaluation :</th>
+											<td>{{progress.date}}</td>
+										</tr>
+
+										<tr>
+											<th>Age :</th>
+											<td>{{patientObject.age}}</td>
+											<th>Evaluator :</th>
+											<td>{{doctorObj.firstName}} {{doctorObj.lastName}}</td>
+
+										</tr>
+										
+										</tbody>
+									</table>
+				<div class="table-responsive">
+					<div class="col-lg-6 form-group">
+						<label>(A) Oral Peripheral Examination</label>
+					</div>
+					<table style="width: 80%" class="table table-bordered table-hover" >
+						<tr>
+							<th>Speech Organ</th>
+							<th colspan="2">Appearnace</th>
+							<th style="text-align: center;" colspan="3">Function</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Normal</td>
+							<td>Abnormal</td>
+							<td>Present</td>
+							<td>Present but inadequate</td>
+							<td>Absent</td>
+						</tr>
+						<tr>
+							<td>Lips</td>
+							<td><input type="radio" value="Normal"
+								ng-model="speechEvaluation.oralLipsAppearance"></td>
+							<td><input type="radio" value="Abnormal"
+								ng-model="speechEvaluation.oralLipsAppearance"></td>
+								
+							<td><input type="radio" value="Present"
+								ng-model="speechEvaluation.oralLipsFunction"></td>
+							<td><input type="radio" value="Present but inadequate"
+								ng-model="speechEvaluation.oralLipsFunction"></td>
+							<td><input type="radio" value="Absent"
+								ng-model="speechEvaluation.oralLipsFunction"></td>
+						</tr>
+						<tr>
+							<td>Mandible</td>
+							<td><label class="radio-inline"><input value="Normal"
+									ng-model="speechEvaluation.oralMandibleAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Abnormal"
+									ng-model="speechEvaluation.oralMandibleAppearance"
+									type="radio"> </label></td>
+									
+							<td><label class="radio-inline"><input value="Present"
+									ng-model="speechEvaluation.oralMandibleFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input
+									value="Present but inadequate" ng-model="speechEvaluation.oralMandibleFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Absent"
+									ng-model="speechEvaluation.oralMandibleFunction"
+									type="radio"> </label></td>
+						</tr>
+						<tr>
+							<td>Tongue</td>
+							<td><label class="radio-inline"><input value="Normal"
+									ng-model="speechEvaluation.oralTongueAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Abnormal"
+									ng-model="speechEvaluation.oralTongueAppearance"
+									type="radio"> </label></td>
+									
+							<td><label class="radio-inline"><input value="Present"
+									ng-model="speechEvaluation.oralTongueFunction" type="radio">
+							</label></td>
+							<td><label class="radio-inline"><input
+									value="Present but inadequate" ng-model="speechEvaluation.oralTongueFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Absent"
+									ng-model="speechEvaluation.oralTongueFunction" type="radio">
+							</label></td>
+						</tr>
+						<tr>
+							<td>Teeth</td>
+							<td><label class="radio-inline"><input value="Normal"
+									ng-model="speechEvaluation.oralTeethAppearance" type="radio">
+							</label></td>
+							<td><label class="radio-inline"><input value="Abnormal"
+									ng-model="speechEvaluation.oralTeethAppearance" type="radio">
+							</label></td>
+							<td><label class="radio-inline"><input value="Present"
+									ng-model="speechEvaluation.oralTeethFunction" type="radio">
+							</label></td>
+							<td><label class="radio-inline"><input
+									value="Present but inadequate" ng-model="speechEvaluation.oralTeethFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Absent"
+									ng-model="speechEvaluation.oralTeethFunction" type="radio">
+							</label></td>
+						</tr>
+						<tr>
+							<td>Hard Plate</td>
+							<td><label class="radio-inline"><input value="Normal"
+									ng-model="speechEvaluation.oralHardPlateAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Abnormal"
+									ng-model="speechEvaluation.oralHardPlateAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Present"
+									ng-model="speechEvaluation.oralHardPlateFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input
+									value="Present but inadequate" ng-model="speechEvaluation.oralHardPlateFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Absent"
+									ng-model="speechEvaluation.oralHardPlateFunction"
+									type="radio"> </label></td>
+						</tr>
+						<tr>
+							<td>Soft palate</td>
+							<td><label class="radio-inline"><input value="Normal"
+									ng-model="speechEvaluation.oralSoftPlateAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Abnormal"
+									ng-model="speechEvaluation.oralSoftPlateAppearance"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Present"
+									ng-model="speechEvaluation.oralSoftPlateFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input
+									value="Present but inadequate" ng-model="speechEvaluation.oralSoftPlateFunction"
+									type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Absent"
+									ng-model="speechEvaluation.oralSoftPlateFunction"
+									type="radio"> </label></td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-lg-6 form-group">
+					<label>(B) Phonetic Level Assessment</label>
+					<div></div>
+					<label>1. Non Segmental Analysis</label>
+				</div>
+				<table style="width: 80%" class="table table-bordered table-hover">
+					<tr>
+						<th style="width: 30%"></th>
+						<th>Present Consistently</th>
+						<th>Present but inconsistent</th>
+						<th>Absent</th>
+					</tr>
+					<tr>
+						<td>Spontaneous Vocalization</td>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.spontaneousVocalization"
+								type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.spontaneousVocalization"
+								type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.spontaneousVocalization"
+								type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>Vocalization on demand</td>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.vocalizationOnDemand" type="radio">
+						</label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.vocalizationOnDemand"
+								type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.vocalizationOnDemand" type="radio">
+						</label></td>
+					</tr>
+					<tr>
+						<td>Duration Control</br> </br> &nbsp;&nbsp;(a)sustained vocalization
+							for 3-4 sec.</br> </br> &nbsp;&nbsp;(b)series of brief vocalization lasting
+							1-2 seconds or less</br> </br> &nbsp;&nbsp;(c)stream of unto 3
+							vocalizations varying in duration
+						</td>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.durationControl" type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.durationControl" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.durationControl" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td rowspan="4">Loudness Control</br> </br>&nbsp;&nbsp;(a)sound of 3
+							seconds duration in a loud voice</br> </br>(b)sound of 3 seconds duration
+							in a soft voice</br> </br> &nbsp;&nbsp;(c)sound of 3 seconds duration in a
+							whisper voice</br> </br> &nbsp;&nbsp;(d)several syllables varying in
+							loudness
+						</td>
+						
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.loudnessControlLoudVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.loudnessControlLoudVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.loudnessControlLoudVoice" type="radio"> </label></td>
+				
+						
+						
+						<tr>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.loudnessControlSoftVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.loudnessControlSoftVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.loudnessControlSoftVoice" type="radio"> </label></td>
+								</tr>
+
+
+					<tr>	
+					<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.loudnessControlWishperVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.loudnessControlWishperVoice" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.loudnessControlWishperVoice" type="radio"> </label></td>
+					
+</tr>
+					<tr>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.loudnessControlLoudness" type="radio"> </label></td>
+						<td><label class="radio-inline"><input
+								value="Present but inconsistent" ng-model="speechEvaluation.loudnessControlLoudness" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.loudnessControlLoudness" type="radio"> </label></td>
+					</tr>
+
+
+					
+				</tr>
+					<tr>
+						<td rowspan="3">Pitch Control</br> </br> &nbsp;&nbsp;(a)sound of 3 sec duration in
+							a high pitch.</br> </br> &nbsp;&nbsp;(b)sound of 3 sec duration in a mid
+							pitch</br> </br> &nbsp;&nbsp;(c)sound of 3 sec duration in a low pitch
+						</td>
+						<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.pitchControlHigh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Present but inconsistent"
+								ng-model="speechEvaluation.pitchControlHigh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.pitchControlHigh" type="radio"> </label></td>
+								
+								
+							<tr>	<td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.pitchControlMid" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Present but inconsistent"
+								ng-model="speechEvaluation.pitchControlMid" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.pitchControlMid" type="radio"> </label></td></tr>
+								
+								
+								<tr><td><label class="radio-inline"><input value="Present Consistently"
+								ng-model="speechEvaluation.pitchControlLow" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Present but inconsistent"
+								ng-model="speechEvaluation.pitchControlLow" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Absent"
+								ng-model="speechEvaluation.pitchControlLow" type="radio"> </label></td></tr>
+								
+								
+					</tr>
+
+				</table>
+				<div class="col-lg-6 form-group">
+					<label>2. Segmental Analysis</label>
+
+
+					<table style="width: 80%" class="table table-bordered table-hover">
+						<tr>
+							<th colspan="2"></th>
+							<th>Correct</th>
+							<th>Incorrect</th>
+						</tr>
+						<tr>
+							<td rowspan="5" align="center" center>Bilabials</td>
+							<td>/p/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticBilabialsP" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticBilabialsP" type="radio"> </label></td>
+						
+						<tr>
+
+							<td>/ph/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticBilabialsPh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticBilabialsPh" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/b/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticBilabialsB" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticBilabialsB" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/bh/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticBilabialsBh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticBilabialsBh" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/m/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticBilabialsM" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticBilabialsM" type="radio"> </label></td>
+
+						</tr>
+						</tr>
+						<tr>
+							<td rowspan="2">Loaded path</td>
+
+
+							<td>/l/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticLoadedPathL" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticLoadedPathL" type="radio"> </label></td>
+						
+						<tr>
+							<td>/v/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticLoadedPathV" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticLoadedPathV" type="radio"> </label></td>
+
+						</tr>
+						
+						<tr>
+							<td rowspan="4">Dentals</td>
+							
+							<td>/t/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticDentalsT" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticDentalsT" type="radio"> </label></td>
+						
+						<tr>
+							<td>/th/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticDentalsTh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticDentalsTh" type="radio"> </label></td>
+
+
+						</tr>
+						<tr>
+
+							<td>/d/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticDentalsD" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticDentalsD" type="radio"> </label></td>
+									</tr>
+						
+						<tr>
+							<td>/dh/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticDentalsDd" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticDentalsDd" type="radio"> </label></td>
+
+						</tr>
+						</tr>
+						<tr>
+							<td rowspan="4">Retroflex</td>
+
+							<td>/t/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticRetroflexT" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticRetroflexT" type="radio"> </label></td>
+						
+						<tr>
+							<td style="text-decoration: underline;">/t/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticRetroflexTt" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticRetroflexTt" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/d/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticRetroflexD" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticRetroflexD" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td style="text-decoration: underline;">/d/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticRetroflexDd" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticRetroflexDd" type="radio"> </label></td>
+
+						</tr>
+						</tr>
+						<tr>
+							<td rowspan="4">Paltals</td>
+
+							<td>/c/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticPaltalsC" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticPaltalsC" type="radio"> </label></td>
+						
+						<tr>
+							<td>/ch/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticPaltalsCh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticPaltalsCh" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/j/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticPaltalsJ" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticPaltalsJ" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/jh/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticPaltalsJh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticPaltalsJh" type="radio"> </label></td>
+
+						</tr>
+
+						<tr>
+							<td rowspan="4">Velars</td>
+
+							<td>/k/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticVelarsK" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticVelarsK" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/kh/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticVelarsKh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticVelarsKh" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/g/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticVelarsG" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticVelarsG" type="radio"> </label></td>
+
+						</tr>
+						<tr>
+							<td>/gh/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticVelarsGh" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticVelarsGh" type="radio"> </label></td>
+
+						</tr>
+
+						<tr>
+							<td>Glottals</td>
+
+							<td>/h/</td>
+
+							<td><label class="radio-inline"><input value="Correct"
+									ng-model="speechEvaluation.phonaticGlottals" type="radio"> </label></td>
+							<td><label class="radio-inline"><input value="Incorrect"
+									ng-model="speechEvaluation.phonaticGlottals" type="radio"> </label></td>
+
+						</tr>
+						</tr>
+
+					</table>
+				</div>
+
+
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<div></div>
+				<label>Phonological Level Assessment</label><br /> <br />
+				<h1>
+					<b> Segmental Analysis:</b>For each position of each phoneme mark correct if the sound is correctly articulated.if not,write the errors made by the child in the respective column.
+				</h1>
+			</div>
+			<div>
+				<table style="width: 80%" class="table table-bordered table-hover">
+					<tr>
+						<th colspan=2></th>
+						<th>Initial</th>
+						<th>Medial</th>
+						<th>Final</th>
+					</tr>
+					<tr>
+						<td rowspan="5" align="center" center>Bilabials</td>
+						<td>/p/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalBilabialsP" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalBilabialsP" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalBilabialsP" type="radio"> </label></td>
+					
+					<tr>
+
+						<td>/ph/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalBilabialsPh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalBilabialsPh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalBilabialsPh" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/b/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalBilabialsB" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalBilabialsB" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalBilabialsB" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/bh/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalBilabialsBh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalBilabialsBh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalBilabialsBh" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/m/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalBilabialsM" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalBilabialsM" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalBilabialsM" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td rowspan="4">Dentals</td>
+
+
+
+						<td>/t/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalDentalsT" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalDentalsT" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalDentalsT" type="radio"> </label></td>
+					
+					<tr>
+						<td>/th/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalDentalsTh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalDentalsTh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalDentalsTh" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/d/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalDentalsD" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalDentalsD" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalDentalsD" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/dh/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalDentalsDh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalDentalsDh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalDentalsDh" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td rowspan="2">Alveolars</td>
+
+						<td>/l/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalAlveolarsL" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalAlveolarsL" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalAlveolarsL" type="radio"> </label></td>
+					
+					<tr>
+						<td>/n/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalAlveolarsN" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalAlveolarsN" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalAlveolarsN" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td rowspan="4">Retroflex</td>
+
+						<td>/t/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalRetroflexT" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalRetroflexT" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalRetroflexT" type="radio"> </label></td>
+					
+					<tr>
+						<td style="text-decoration: underline;">/t/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalRetroflexTt" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalRetroflexTt" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalRetroflexTt" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/d/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalRetroflexD" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalRetroflexD" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalRetroflexD" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td style="text-decoration: underline;">/d/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalRetroflexDd" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalRetroflexDd" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalRetroflexDd" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td rowspan="4">Paltals</td>
+
+						<td>/c/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalPaltalsC" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalPaltalsC" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalPaltalsC" type="radio"> </label></td>
+					
+					<tr>
+						<td>/ch/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalPaltalsCh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalPaltalsCh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalPaltalsCh" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/j/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalPaltalsJ" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalPaltalsJ" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalPaltalsJ" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/jh/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalPaltalsJh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalPaltalsJh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalPaltalsJh" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td rowspan="4">Velars</td>
+
+						<td>/k/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalVelarsK" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalVelarsK" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalVelarsK" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/kh/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalVelarsKh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalVelarsKh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalVelarsKh" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/g/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalVelarsG" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalVelarsG" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalVelarsG" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>/gh/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalVelarsGh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalVelarsGh" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalVelarsGh" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td>Glottals</td>
+
+						<td>/h/</td>
+
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalGlottals" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalGlottals" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalGlottals" type="radio"> </label></td>
+					</tr>
+					</tr>
+					<tr>
+						<td>Emphsis/Stress</td>
+						<td></td>
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalEmphsis" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalEmphsis" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalEmphsis" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>Phrasing</td>
+						<td></td>
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalPhrasing" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalPhrasing" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalPhrasing" type="radio"> </label></td>
+					</tr>
+					<tr>
+						<td>Rate</td>
+						<td></td>
+						<td><label class="radio-inline"><input value="Initial"
+								ng-model="speechEvaluation.phonologicalRate" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Medial"
+								ng-model="speechEvaluation.phonologicalRate" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value="Final"
+								ng-model="speechEvaluation.phonologicalRate" type="radio"> </label></td>
+					</tr>
+				</table>
+			</div>
+
+			<div>
+				<table style="width: 50%" class="table table-bordered table-hover">
+					<tr>
+
+						<th>Vowels</th>
+						<th>Present</th>
+						<th>Absent</th>
+					</tr>
+					<tr>
+
+						<td>/a/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelA" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelA" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/a:/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelAA" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelAA" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/i/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelI" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelI" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/i:/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelII" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelII" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/u/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelU" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelU" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/u:/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelUU" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelUU" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/e/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelE" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelE" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/e:/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelEE" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelEE" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/ae/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelAE" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelAE" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/o/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelO" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelO" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/o:/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelOO" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelOO" type="radio"> </label></td>
+					</tr>
+					<tr>
+
+						<td>/au/</td>
+						<td><label class="radio-inline"><input value=true
+								ng-model="speechEvaluation.vowelAU" type="radio"> </label></td>
+						<td><label class="radio-inline"><input value=false
+								ng-model="speechEvaluation.vowelAU" type="radio"> </label></td>
+					</tr>
+
+				</table>
+				<div align="center" >
+				<button class="btn btn-primary"
+					ng-click="savePatientSpeechEvalution();">Save</button>
+				<button class="btn btn-danger" ng-click="">Cancel</button>
+				<button id="create_pdf" class="btn btn-primary"
+									>Print multi Report</button>
+			</div>
+			
+			<div class="panel-body">
+				<div class="table-responsive">
+					<div class="col-lg-12 form-group">
+						<label class="col-lg-6"> Supervisor</label> <label
+							class="col-lg-6" style='text-align: right'>Trainee
+							Teacher</label>
+					</div>
+
+				</div>
+			</div>
+			
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+

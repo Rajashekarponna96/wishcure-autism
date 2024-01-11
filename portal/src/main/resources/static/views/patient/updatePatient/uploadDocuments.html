@@ -1,0 +1,208 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateRegistrationDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateChildDetails();" type="button"
+				 class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateUploadDocuments();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdatePayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div id="step-3" ng-init="getAllFolders();">
+	<hr>
+	<div class="col-sm-11 col-sm-offset-1">
+		<div class="col-sm-5 form-group border">
+			<div class="col-sm-12 form-group">
+				<span ng-if="foldername == undefined || foldername == '' "
+					style="color: red">*</span> <label>Create Folder</label> <span
+					style="color: red" ng-show="(folder.$touched && folder.$invalid)">
+					<span ng-show="folder.$error.required"> is required.</span>
+				</span> <input type="text" class="form-control" ng-model="foldername"
+					placeholder="Enter Folder Name" required>
+			</div>
+			<div class="col-sm-12 form-group">
+				<span
+					ng-if="folderdescription == undefined || folderdescription == '' "
+					style="color: red">*</span> <label>Description</label> <span
+					style="color: red"
+					ng-show="(description.$touched && description.$invalid)"> <span
+					ng-show="description.$error.required"> is required.</span>
+				</span> <input type="text" class="form-control"
+					ng-model="folderdescription" placeholder="Enter Description"
+					required>
+			</div>
+
+			<div class="col-sm-12" align="center">
+				<br>
+				<button class="btn btn-primary" ng-click="createFolderForPatient();">Save</button>
+				<button class="btn btn-danger">Cancel</button>
+				<br>
+			</div>
+		</div>
+		<div class="col-sm-5 form-group border">
+			<form name="patientObjectForm">
+				<div class="col-sm-12">
+					<span ng-if="folder == undefined || folder == '' "
+						style="color: red">*</span> <label>Folder Type</label> <span
+						style="color: red"
+						ng-show="(patientObjectForm.documentType.$touched && patientObjectForm.documentType.$invalid)">
+						<span style="color: red"
+						ng-show="patientObjectForm.documentType.$error.required">
+							is required.</span>
+					</span> <select name="documentType" class="form-control" ng-model="folder"
+						ng-options="folder as folder.name  for folder in listOfFolders"
+						ng-change="clearResponse();" required class="form-control">
+						<option value="" class="active">Select Folder Type</option>
+					</select>
+				</div>
+				<div class="col-sm-12">
+					<br>
+				</div>
+				<div class="col-sm-12">
+					<label>Upload Document</label>&nbsp;&nbsp; <input type="file"
+						ng-disabled="folder == undefined" name="file"
+						onchange="angular.element(this).scope().documentChanged(this.files);"
+						required>
+				</div>
+				<div class="col-sm-12" align="center">
+					<br> <br>
+					<button class="btn btn-primary"
+						ng-disabled="folder == undefined && folder=''  && documents == undefined && documents.length <0"
+						ng-click="addDocument()">Submit</button>
+					<button class="btn btn-danger">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<style>
+.scroll {
+	height: 200px;
+	display: block;
+	overflow: scroll overflow-y: auto;
+	overflow-x: auto;
+}
+</style>
+	<div class="col-sm-12">
+		<br>
+		<center>
+			<b>Uploaded Documents</b>
+		</center>
+		<br>
+	</div>
+
+	<div class="col-sm-11 col-sm-offset-1">
+		<div class="border col-sm-5" style="float: left">
+			<table class="scroll">
+				<th style="padding-left: 150px; color: green;">Folders</th>
+				<tr ng-repeat="folder in listOfFolders">
+					<td><i class="fa fa-folder" data-toggle="tooltip" title=""
+						data-original-title="Click here to see documents"
+						style="font-size: 24px; color: GoldenRod"
+						ng-click="getAllDocumentsByPatientAndFolderId(patientObject.id,folder.id)"></i><a
+						e-style="width:100px;" ng-hide="$form.$visible"
+						editable-text="folder.name" data-toggle="tooltip" title=""
+						data-original-title="Click here to edit the folder name"
+						onaftersave="updateFolderName(folder);">{{folder.name ||
+							'empty' }}</a>
+					<td>
+				</tr>
+			</table>
+		</div>
+		<div class="border col-sm-5">
+			<table class="scroll">
+				<th style="padding-left: 150px; color: green;">Documents</th>
+				<tr ng-repeat="document in patientDocumentsByFolder">
+					<td ng-if="document.extension == 'pdf' "
+						style="padding-left: 50px;" target="_blank"
+						ng-click="getFilePathinS3Bucket(document.id);">
+						{{document.name}}
+						<!-- <a href="{{content}}"   target="_blank"> {{document.name}}
+</a> -->
+						</td>
+					<td
+						ng-if="document.extension == 'doc' ||document.extension =='docx'  "
+						style="padding-left: 50px;"
+						ng-click="displayDocument(document.id);">{{document.name}}
+						
+						<!-- <a href="{{content}}"   target="_blank"> {{document.name}}
+</a> -->
+						</td>
+					<td ng-if="document.extension == 'csv' "
+						style="padding-left: 50px;" ng-click="displayCsv(document.id);">{{document.name}}</td>
+					<td
+						ng-if="document.extension =='xls' || document.extension=='xlsx'"
+						style="padding-left: 50px;" ng-click="displayXls(document.id);">{{document.name}}</td>
+					<td><span>&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"
+							style="color: red;" ng-click="deleteDocumentalert(document)"
+							aria-hidden="true" data-toggle="modal"></i>
+					</span></td>
+				</tr>
+				<tr ng-if="patientDocumentsByFolder.length==0 ">
+					<td colspan="4" align="center">
+						<h3 style="padding-left: 50px;">
+							<i class="fa fa-meh-o"></i> No Documents found!
+						</h3>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<!-- <iframe id="myFrame" ng-src="{{s3BucketUrl}}" width="100%"
+			height="800px"></iframe> -->
+		<div id="pdf" ng-if="content !=undefined || displayFlag == true"
+			id="div1" style="display: block;">
+			<i class="fa fa-times-circle-o  fa-lg pull-right"
+				ng-if="content != undefined" style="color: red;"
+				ng-click="openFole();" aria-hidden="true" class="close"></i>
+
+			<iframe id="myFrame" src="{{content}}" ng-if="content != undefined"
+				width="100%" height="800px"></iframe>
+			<iframe id="myFrame" src="{{content1}}" ng-if="content1 != undefined"
+				ng-hide="content1 != undefined" width="100%" height="800px"></iframe>
+		</div>
+	</div>
+</div>
+<div class="col-sm-12">
+	<br>
+	<button class="btn btn-primary nextBtn pull-left" type="button"
+		ng-click="gotoupdateParentDetails();">Previous</button>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoupdatePayments();">Next</button>
+</div>

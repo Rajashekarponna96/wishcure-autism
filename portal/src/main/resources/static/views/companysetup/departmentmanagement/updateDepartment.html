@@ -1,0 +1,131 @@
+
+<div class="content-wrapper"
+	ng-init="getAllRolesBasedOnStatus();getAllPatientRegistrationTypesList();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-sitemap"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Update Department</h1>
+			<small>Here you can update department details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Department</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Department List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="departmentform">
+
+
+							<div class="form-group col-lg-6">
+								<label>Department Name</label> <span style="color: red"
+									ng-show="(departmentform.departmentName.$touched && departmentform.departmentName.$invalid)">
+									<span ng-show="departmentform.departmentName.$error.required">
+										is required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="departmentName" placeholder="Enter Department Name"
+									ng-model="department.departmentName" required>
+							</div>
+
+
+
+							<div class="form-group col-lg-6">
+								<label>Description</label> <span style="color: red"
+									ng-show="(departmentform.descriptionName.$touched && departmentform.descriptionName.$invalid)">
+									<span ng-show="departmentform.descriptionName.$error.required">is
+										required.</span>
+								</span>
+								<textarea rows="3" value="" class="form-control"
+									name="descriptionName" placeholder="Enter Description"
+									ng-model="department.descriptionName" required></textarea>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Type</label> <select class="form-control" name="type"
+									ng-model="department.type">
+									<option value=""  class="active">Select Type</option>
+									<option value="role" class="active">Role</option>
+									<option value="patientRegistrationType" class="active">Patient
+										Registration Type</option>
+
+
+								</select>
+							</div>
+							<div class="form-group col-lg-6"
+								ng-show="department.type=='role'">
+								<label>Role</label> <select class="form-control" name="role"
+									placeholder="please select role" ng-model="department.role"
+									ng-options="role as role.roleName for role in rolesList track by role.id"><option
+										value="" class="active">Select Role</option></select>
+
+							</div>
+							<div class="form-group col-lg-6"
+								ng-show="department.type=='patientRegistrationType'">
+								<label>Patient Registration Type</label> <select
+									class="form-control" name="patientRegistrationType"
+									placeholder="please Registration Type"
+									ng-model="department.patientRegistrationType"  
+									ng-options="patientRegistrationType as patientRegistrationType.name for patientRegistrationType in patientRegistrationTypes"><option
+										value="" class="active">Select Patient Registration
+										Type</option></select>
+
+							</div>
+
+
+							<div class="form-check col-sm-6">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="department.status" name="status"
+									ng-value="true">Active</label> <label class="radio-inline"><input
+									type="radio" ng-model="department.status" name="status"
+									ng-value="false">InActive</label>
+							</div>
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success"
+									ng-click="updateDepartment(department)"
+									ng-disabled="departmentform.$invalid">Update</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

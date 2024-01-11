@@ -1,0 +1,64 @@
+<div class="login-wrapper">
+	<div class="container-center">
+		<div class="panel panel-bd">
+			<div class="panel-heading">
+				<div class="view-header">
+					<!-- <div ng-if="successMessage != undefined">{{successMessage}}</div> -->
+					<div class="header-icon">
+						<i class="pe-7s-key"></i>
+					</div>
+					<div class="header-title">
+						<h1 style="font-size:22px;">Login</h1>
+						<h6>Please enter your credentials to login.</h6>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="loginForm" name="loginForm">
+					<div class="form-group">
+						<label class="control-label" for="username">Email </label><span
+							style="color: red" ng-cloak
+							ng-show="(loginForm.username.$touched && loginForm.username.$invalid)">
+							<span ng-show="loginForm.username.$error.required"> is
+								required.</span>
+						</span> <span style="color: red"
+							ng-show="loginForm.username.$error.pattern"> Please enter
+							a valid email address!</span> <input type="text"
+							placeholder="example@gmail.com" ng-model="registration.username"
+							title="Please enter you username" class="form-control"
+							email-available name="username" aria-required="true"
+							aria-invalid="true"
+							ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+							ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="password">Password</label><span
+							style="color: red" ng-cloak
+							ng-show="(loginForm.password.$touched && loginForm.password.$invalid)">
+							<span ng-show="loginForm.password.$error.required"> is
+								required.</span>
+						</span><input type="password" name="password"
+							ng-model="registration.password" class="form-control"
+							value="Mickey" required>
+					</div>
+					<div class="row" align="center">
+						<span ng-if="message != undefined" style="color: red">{{message}}<br>
+						</span><br>
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary"
+							ng-click="doLogin(registration)">Login</button>
+						<a class="btn btn-warning" ng-click="gotoRegistration();">Register</a>
+						<a align="right" ui-sref="forgotpassword">ForgotPassword</a>
+					</div>
+				</form>
+				<!-- <div>
+					<h3>Get Client Machine IP Address using JavaScript and JSON</h3>
+					<a href="#" onclick="getIPAddress()">Cleck to get IP Address</a> <br/>
+					<br/> <br/>For <a href="http://www.code-sample.com/">more
+						...</a>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>

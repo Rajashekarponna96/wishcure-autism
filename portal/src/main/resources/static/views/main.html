@@ -1,0 +1,735 @@
+<div class="wrapper" ng-init="getImageS3()">
+	<header class="main-header">
+		<a class="logo"> <!-- Logo --> <span class="logo-mini"> <!--<b>A</b>H-admin-->
+				<!-- <img src="assets/logo.jpg" alt=""> --> <!-- <img
+				src="../assets/cssfolder/img/wishcure_logo1.jpeg" alt=""> --><h1>Wish Cure</h1>
+		</span> <span class="logo-lg"> <!--<b>Admin</b>H-admin--> <!-- <img src="assets/logo.jpg" alt="">
+				<img src="../assets/cssfolder/img/wishcure_logo1.jpeg" alt=""> --><h1>Wish Cure</h1>
+		</span>
+		</a>
+		<!-- Header Navbar -->
+		<nav class="navbar navbar-static-top" role="navigation">
+			<a class="sidebar-toggle" data-toggle="offcanvas" collapsed="false"
+				role="button"> <!-- Sidebar toggle button--> <span
+				class="sr-only">Toggle navigation</span> <span class="fa fa-tasks"></span>
+			</a>
+
+
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+					<li class="dropdown dropdown-user admin-user" align="right"><a
+						class="dropdown-toggle" data-toggle="dropdown">
+							<div class="user-image">
+
+								<img src="../assets/cssfolder/img/mini-logo.png"
+									class="img-circle" height="40" width="40" alt="User Image">
+							</div>
+					</a>
+						<ul class="dropdown-menu">
+							<!--   <li><a><i class="fa fa-users"></i> User Profile</a></li> -->
+							<li><a><i class="fa fa-gear"></i> Settings</a></li>
+							<li><a ng-click="help();" style="cursor: pointer;"><i
+									class="fa fa-question-circle"></i> Help</a></li>
+							<li><a href="index.html" ng-click="logout();"><i
+									class="fa fa-sign-out"></i> Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+
+		</nav>
+	</header>
+	<!-- =============================================== -->
+	<!-- Left side column. contains the sidebar -->
+	<aside class="main-sidebar ">
+		<!-- sidebar -->
+		<div class="sidebar">
+			<!-- Sidebar user panel -->
+			<div class="user-panel">
+				<div class="image pull-left">
+					<img ng-src="{{getImageUrl}}" class="img-circle" height="40"
+						width="40" alt="User Image">
+				</div>
+
+				<!-- 	<div class="image pull-left">
+					<img ng-src="data:image/JPEG;base64,{{image}}" class="img-circle"
+						height="40" width="40" alt="User Image">
+						<img ng-src="data:image/jpeg;base64,{{arrayBufferToBase64(image)}}" class="img-circle"
+						height="40" width="40" alt="User Image" />
+				</div> -->
+
+
+				<div class="info">
+					<h4>Welcome</h4>
+					<p>{{loggedFirstname}}{{loggedLastname}}</p>
+				</div>
+			</div>
+
+			<!-- sidebar menu -->
+			<ul class="sidebar-menu"
+				style="overflow-y: scroll; height: auto; max-height: 500px;">
+				<li class="active" ng-show="hasFeature('Dashboard').canView==true"><a
+					href="#/main/dashboard"><i class="fa fa-tachometer"></i><span>Dashboard</span>
+				</a></li>
+				<li class="active"
+					ng-show="hasFeature('ParentDashboard').canView==true"><a
+					href="#/main/ParentDashboard"><i class="fa fa-tachometer"></i><span>Dashboard</span>
+				</a></li>
+				<!-- same as above -->
+				<!--  -->
+				<li class="treeview"
+					ng-show="hasFeature('EnterPrise Setup').canView==true"><a
+					href=""> <i class="fa fa-hospital-o"></i><span> Multi
+							Clinic Center Setup</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Company Management').canView==true"><a
+							href="#/main/update_companymanagement">Company Management</a></li>
+
+						<!-- <li ng-show="hasFeature('Branch Management').canView==true"><a
+							href="#/main/departmentlist">Facility Management</a></li> -->
+
+						<li ng-show="hasFeature('Site Management').canView==true"><a
+							href="#/main/addSite">Facility Management</a> <!-- <ul class="treeview-menu">
+								<li><a href="#/main/addSite">Add Site</a></li>
+								<li><a>Add Site</a></li>
+							</ul> --></li>
+
+						<li ng-show="hasFeature('Departent Management').canView==true"><a
+							href="#/main/departmentlist">Department Management</a></li>
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/addCurrency">Currency</a></li>
+						<!-- <li ng-show="hasFeature('AddRegionalCenter').canView==true"><a
+							href="#/main/regionalCenterList">Regional Center</a></li>
+						<li ng-show="hasFeature('AddInsurance').canView==true"><a
+							href="#/main/insuranceList">Insurance</a></li>
+						<li><a href="#/main/schoolList">School</a></li> -->
+						<li ng-show="hasFeature('PaymentMethod').canView==true"><a
+							href="#/main/paymethodList">Payment Method</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/documentTypeLookupList">Document Type </a></li>
+							<li ng-show="hasFeature('ExpenseType').canView==true"><a
+							href="#/main/addExpense">ExpenseType</a></li>
+					</ul></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('Facility Setup').canView==true"><a
+					href=""> <i class="fa fa-hospital-o"></i><span> Facility
+							Mgmt Setup </span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Company Management').canView==true"><a
+							href="#/main/update_companymanagement">Facility Management</a></li>
+
+						<li ng-show="hasFeature('Departent Management').canView==true"><a
+							href="#/main/departmentlist">Department Management</a></li>
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/addCurrency">Currency</a></li>
+
+						<li ng-show="hasFeature('PaymentMethod').canView==true"><a
+							href="#/main/paymethodList">Payment Method</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/documentTypeLookupList">Document Type </a></li>
+					</ul>
+					</li>
+
+
+
+
+				<li class="treeview"
+					ng-show="hasFeature('Individual SetUp').canView==true"><a
+					href=""> <i class="fa fa-hospital-o"></i><span> Single
+							Clinic Center</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<!-- <li ng-show="hasFeature('TherapistManagement').canView==true"><a
+							href="#/main/updateTherapist">Therapist Management</a></li> -->
+						<li ng-show="hasFeature('Departent Management').canView==true"><a
+							href="#/main/departmentlist">Department Management</a></li>
+						<!-- <li ng-show="hasFeature('Branch Management').canView==true"><a
+							href="#/main/departmentlist">Branch Management</a></li> -->
+						<!-- <li ng-show="hasFeature('AddRegionalCenter').canView==true"><a
+							href="#/main/regionalCenterList">Regional Center</a></li>
+						<li ng-show="hasFeature('AddInsurance').canView==true"><a
+							href="#/main/insuranceList">Insurance</a></li>
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/addCurrency">Currency</a></li>
+						<li><a href="#/main/schoolList">School</a></li> -->
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/addCurrency">Currency</a></li>
+						<li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/paymethodList">Payment Method</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/documentTypeLookupList">Document Type </a></li>
+					</ul></li>
+
+
+				<li class="treeview"
+					ng-show="hasFeature('Special School').canView==true"><a
+					href=""> <i class="fa fa-hospital-o"></i><span> Special
+							Education School</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<!-- <li ng-show="hasFeature('TherapistManagement').canView==true"><a
+							href="#/main/updateTherapist">Therapist Management</a></li> -->
+						<li ng-show="hasFeature('Departent Management').canView==true"><a
+							href="#/main/departmentlist">Department Management</a></li>
+						<li ng-show="hasFeature('Branch Management').canView==true"><a
+							href="#/main/departmentlist">Branch Management</a></li>
+						<!-- <li ng-show="hasFeature('AddRegionalCenter').canView==true"><a
+							href="#/main/regionalCenterList">Regional Center</a></li>
+						<li ng-show="hasFeature('AddInsurance').canView==true"><a
+							href="#/main/insuranceList">Insurance</a></li>
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/addCurrency">Currency</a></li>
+						<li><a href="#/main/schoolList">School</a></li> -->
+						<li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/paymethodList">Payment Method</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/documentTypeLookupList">Document Type </a></li>
+					</ul></li>
+
+
+
+				<li class="treeview" ng-show="hasFeature('Packages').canView==true"><a
+					href=""> <i class="fa fa-sitemap"></i><span>My Payments</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Package Name').canView==true"><a
+							href="#/main/mypayments">Data Usage</a></li>
+						<li ng-show="hasFeature('Package Pricing').canView==true"><a
+							href="#/main/listofpayments">List Of Payments</a></li>
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Masters').canView==true">
+					<a href=""> <i class="fa fa-sitemap"></i><span>Masters</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Company Type').canView==true"><a
+							href="#/main/addCompanyType">Company Type</a></li>
+						<li ng-show="hasFeature('Client Type').canView==true"><a
+							href="#/main/addclienttype">Client Type</a></li>
+						<!-- <li><a href="#/main/addSubscriptionMaster">Add
+								Subscription</a></li> -->
+						<li ng-show="hasFeature('Role').canView==true"><a
+							href="#/main/addRole">Role</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/addDocumentTypeLookup">Document Type </a></li>
+						<!-- <li><a href="#/main/addCategory">Add Category</a></li>
+						<li><a href="#/main/roleFeature">Add Role Features</a></li> -->
+						<li ng-show="hasFeature('RegionalCenterList').canView==true"><a
+							href="#/main/addRegionalCenterZone">Regional Center Zone</a></li>
+						<li ng-show="hasFeature('AddRegionalCenter').canView==true"><a
+							href="#/main/addRegionalCenterLookup">Regional Center</a></li>
+						<li ng-show="hasFeature('ExpenseType').canView==true"><a
+							href="#/main/addExpense">ExpenseType</a></li>	
+							
+					</ul>
+				</li>
+
+
+				<li class="treeview"
+					ng-show="hasFeature('ProductSetup').canView==true"><a href="">
+						<i class="fa fa-hospital-o"></i><span>Product Setup</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Company Type').canView==true"><a
+							href="#/main/companyTypesList">Company Type</a></li>
+						<li ng-show="hasFeature('Client Type').canView==true"><a
+							href="#/main/clienttypelist">Client Type</a></li>
+						<li ng-show="hasFeature('Role').canView==true"><a
+							href="#/main/roleist">Role</a></li>
+						<li ng-show="hasFeature('Doc Types').canView==true"><a
+							href="#/main/documentTypeLookupList">Document Type </a></li>
+						<li ng-show="hasFeature('Departent Management').canView==true"><a
+							href="#/main/departmentlist">Department Management</a></li>
+						<li ng-show="hasFeature('RegionalCenterList').canView==true"><a
+							href="#/main/regionalCenterZoneList">Regional Center Zone</a></li>
+						<li ng-show="hasFeature('AddRegionalCenter').canView==true"><a
+							href="#/main/regionalCenterLookupList">Regional Center</a></li>
+						<li ng-show="hasFeature('InsuranceList').canView==true"><a
+							href="#/main/insuranceLookupList">Insurance</a></li>
+						<li ng-show="hasFeature('School').canView==true"><a
+							href="#/main/schoolList">School </a></li>
+						<li ng-show="hasFeature('Currency').canView==true"><a
+							href="#/main/currencyList">Currency</a></li>
+						<li ng-show="hasFeature('PaymentMethod').canView==true"><a
+							href="#/main/paymethodList">Payment Method</a></li>
+
+					</ul></li>
+				<!--  -->
+				<li ng-show="hasFeature('RegisteredCompanies').canView==true"><a
+					href="#/main/registeredCompaniesDashboard"> <i
+						class="fa fa-sitemap"></i><span>Registered Companies</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a></li>
+
+				<li ng-show="hasFeature('User Management').canView==true"><a
+					href="#/main/usermanagement_list"> <i class="fa fa-user-plus"></i><span>User
+							Management</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('Therapist Setup').canView==true"><a
+					href=""> <i class="fa fa-user-md"></i> <span>Therapist
+							Setup</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('TherapistManagement').canView==true"><a
+							href="#/main/updateTherapist">Therapist Management </a></li>
+						<li ng-show="hasFeature('My Availability').canView==true"><a
+							href="#/main/addSchedule">Availability</a></li>
+						<li ng-show="hasFeature('Holidays').canView==true"><a
+							href="#/main/addHolidays">Holidays</a></li>
+
+					</ul></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('Therapist Setup For Individual').canView==true"><a
+					href=""> <i class="fa fa-user-md"></i> <span> Therapist
+							Management</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('My Availability').canView==true"><a
+							href="#/main/updateTherapist">Update Profile</a></li>
+						<li ng-show="hasFeature('My Availability').canView==true"><a
+							href="#/main/addSchedule">Availability</a></li>
+						<li ng-show="hasFeature('Holidays').canView==true"><a
+							href="#/main/addHolidays">Holidays</a></li>
+
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Patient').canView==true"><a
+					href=""> <i class="fa fa-child"></i><span>Patient
+							Management</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Add Patient').canView==true"><a
+							href="#/main/add_patient/add_patient_details">Add Patient</a></li>
+						<li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/patient_list">Patient List</a></li>
+						<li ng-show="hasFeature('Child Search').canView==true"><a
+							href="#/main/separationprocess">Child Search </a></li>
+						<!-- <li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/invoiceTemplate">Invoice Template</a></li>	 -->
+						<!-- <li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/addRegionalCenter">Regional Center</a></li>
+							<li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/addInsurance">Insurance</a></li>	 -->
+
+					</ul></li>
+
+
+
+
+
+
+				<li class="treeview" ng-show="hasFeature('parent').canView==true"><a
+					href=""> <i class="fa fa-user"></i><span>Parent</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Add Patient Milestones').canView==true"><a
+							href="#/main/ParentMilestones">Parent Role</a></li>
+						<li ng-show="hasFeature('Add Patient Milestones').canView==true"><a
+							href="#/main/ChildObservation">Child Observation</a></li>
+						<li ng-show="hasFeature('Add Patient Milestones').canView==true"><a
+							href="#/main/ScreeningTest">Screening Test</a></li>
+
+					</ul></li>
+				<!-- 
+				<li class="treeview"
+					ng-show="hasFeature('My Availability').canView==true"><a
+					href=""> <i class="fa fa-list-alt"></i> <span>My
+							Availability</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('My Availability').canView==true"><a
+							href="#/main/addSchedule">My Availability</a></li>
+						<li ng-show="hasFeature('Holidays').canView==true"><a
+							href="#/main/addHolidays">Holidays</a></li>
+
+					</ul></li> -->
+
+
+
+
+
+
+
+				<!-- <li class="treeview"><a href="#/main/addTherapistSchedule">
+						<i class="fa fa-list-alt"></i> <span>Therapist Availability</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a></li> -->
+				<li class="treeview"
+					ng-show="hasFeature('Appiontment').canView==true"><a href="">
+						<i class="fa fa-handshake-o"></i><span>Appointment</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Add Appointment').canView==true"><a
+							href="#/main/add_appointment">Add Appointment</a></li>
+						<li ng-show="hasFeature('Appointment List').canView==true"><a
+							href="#/main/appointment_list">Appointment List</a></li>
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Calendar').canView==true">
+					<a href="#/main/calender2"> <i class="fa fa-calendar-check-o"></i><span>Calendar</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				</li>
+
+
+				<li class="treeview" ng-show="hasFeature('Billings').canView==true"><a
+					href=""> <i class="fa fa-dollar"></i><span>Accounts</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+
+						<li ng-show="hasFeature('PatientBillings').canView==true"><a
+							href="#/main/patientslist">Patient Billing</a></li>
+						<!-- <li ng-show="hasFeature('PaymentsList').canView==true"><a
+							href="#/main/paymentsList">Payments List</a></li> -->
+						<li ng-show="hasFeature('Invoice').canView==true"><a
+							href="#/main/invoices">Invoices</a></li>
+						<li ng-show="hasFeature('MonthlyClinicExpenses').canView==true"><a
+							href="#/main/addMonthlyClinicExpenses">Monthly Clinic Expenses</a></li>	
+
+
+					</ul></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('Mental Template').canView==true"><a>
+						<i class="fa fa-user"></i><span>Mental Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Mental Cluster').canView==true"><a
+							href="#/main/MentalCluster">Mental Cluster</a></li>
+						<li ng-show="hasFeature('Mental Scale').canView==true"><a
+							href="#/main/MentalScale">Mental Scale</a></li>
+						<li ng-show="hasFeature('Appiontment').canView==true"><a
+							href="#/main/ClusterAndScale">Update Mental Scale</a></li>
+
+					</ul></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('Motor Template').canView==true"><a> <i
+						class="fa fa-check-square-o"></i><span>Motor Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Motor Cluster').canView==true"><a
+							href="#/main/addMotorCluster"> Motor Cluster</a></li>
+						<li ng-show="hasFeature('Motor Scale').canView==true"><a
+							href="#/main/addMotorScale"> Motor Scale</a></li>
+						<li ng-show="hasFeature('Assign MotorScales').canView==true"><a
+							href="#/main/assignMotorScalesToCluster">Assign MotorScales</a></li>
+					</ul></li>
+				<li class="treeview"
+					ng-show="hasFeature('Vsms Template').canView==true"><a> <i
+						class="fa fa-check-square-o"></i><span>VSMS Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Vsms Cluster').canView==true"><a
+							href="#/main/addVsmsCluster"> VSMS Cluster</a></li>
+						<li ng-show="hasFeature('Vsms Question').canView==true"><a
+							href="#/main/VSMSQuestion"> VSMS Question</a></li>
+
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Template').canView==true"><a
+					href=""> <i class="fa fa-sitemap"></i><span>Templates</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li class="treeview"
+							ng-show="hasFeature('Speech Therapy').canView==true"><a
+							href=""> <i class="fa fa-sitemap"></i><span>Speech
+									Therapy </span> <span class="pull-right-container"> <i
+									class="fa fa-angle-left pull-right"></i></a> </span>
+							<ul class="treeview-menu">
+								<li><a href="#/main/addtemplate"
+									ng-show="hasFeature('Evalution Template').canView==true">Evaluation
+										Template</a></li>
+								<li><a href="#/main/goalsTemplate"
+									ng-show="hasFeature('Goals Template').canView==true">Goals
+										Template</a></li>
+								<li><a href="#/main/speechTheraphyTemplates"
+									ng-show="hasFeature('Goals Template').canView==true">Result
+										Template</a></li>
+							</ul></li>
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Reports').canView==true"><a
+					href=""> <i class="fa ti-layers-alt"></i><span>Reports</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<!-- <li ng-show="hasFeature('Patient List').canView==true"><a
+							href="#/main/searchPatients">All Filters</a></li> -->
+						<li ng-show="hasFeature('ClientTypeReports').canView==true"><a
+							href="#/main/searchByClientType">Patient Reports</a></li>
+						<li ng-show="hasFeature('DepartmentTypeReports').canView==true"><a
+							href="#/main/searchByDepartmentType">Department Type</a></li>
+						<!-- ng-show="hasFeature('Appointment List').canView==true" -->
+						<li ng-show="hasFeature('AppointmentTypeReports').canView==true"><a
+							href="#/main/appointment_listReports">Appointment Reports</a></li>
+						<!-- 	<li ng-show="hasFeature('Patient List').canView==true"><a href="#/main/searchByAppointment">Appointment Type</a></li> -->
+
+						<li ng-show="hasFeature('Patient Reports').canView==true"><a
+							href="#/main/patient_reportsList">Patient Reports</a></li>
+
+
+					</ul></li>
+
+
+				<li class="treeview"
+					ng-show="hasFeature('MyTemplate').canView==true"><a href="">
+						<i class="fa fa-check-square-o"></i><span>My Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+
+						<li ng-show="hasFeature('Category').canView==true"><a
+							href="#/main/addCategory">Add Category</a></li>
+						<li><a href="#/main/roleFeature">Add Role Features</a></li>
+						<li ng-show="hasFeature('Evaluation').canView==true"><a
+							href="#/main/evaluation">Evaluation</a></li>
+						<li ng-show="hasFeature('Add Evaluation').canView==true"><a
+							href="#/main/addEvalutionCategory">Add Evaluation Category</a></li>
+						<li ng-show="hasFeature('Therapist Availability').canView==true"><a
+							href="#/main/addTherapistSchedule">Therapist Availability </a></li>
+						<li ng-show="hasFeature('Therapist Holidays').canView==true"><a
+							href="#/main/addTherapistHolidays">Therapist Holidays</a></li>
+						<!-- <li><a href="#/main/registeredCompanies">Registered
+								Companies</a></li>  -->
+						<li ng-show="hasFeature('Dynamic Template').canView==true"><a
+							href="#/main/dynamicTemplate">Dynamic Template</a></li>
+						<li ng-show="hasFeature('Speech Therapy').canView==true"><a
+							href="#/main/addSpeechTheraphyCategoryTemplate">SpeechTherapy
+								Category</a></li>
+						<li ng-show="hasFeature('Category Type').canView==true"><a
+							href="#/main/categoryTypeList">Category Type</a></li>
+						<li ng-show="hasFeature('SubCategory').canView==true"><a
+							href="#/main/addSubCategory">Add Sub Category</a></li>
+						<li ng-show="hasFeature('Patient Registration').canView==true"><a
+							href="#/main/addPatientRegType">Add Patient Registration Type</a></li>
+					</ul></li>
+
+
+
+				<li class="treeview"
+					ng-show="hasFeature('Parent Template').canView==true"><a
+					href=""> <i class="fa fa-check-square-o"></i><span>Parent
+							Template</span> <span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+
+						<li ng-show="hasFeature('AddCaretakerCategory').canView==true"><a
+							href="#/main/CaretakerCategoryLookup">Add Caretaker Category</a></li>
+						<li ng-show="hasFeature('AddCaretakerQuestion').canView==true"><a
+							href="#/main/CareTakerQuestionLookup">Add Caretaker Question</a></li>
+						<li
+							ng-show="hasFeature('Child Observation Category').canView==true"><a
+							href="#/main/addChildObservationCategoryLookup">Child
+								Observation Category</a></li>
+						<li
+							ng-show="hasFeature('Child Observation Question').canView==true"><a
+							href="#/main/addChildObservationQuestionLookup">Child
+								Observation Question</a></li>
+						<li ng-show="hasFeature('AddScreeningTestCategory').canView==true"><a
+							href="#/main/addScreeningTest">Add ScreeningTestCategory </a></li>
+						<li ng-show="hasFeature('AddScreeningTestQuestion').canView==true"><a
+							href="#/main/addScreeningTestQuestion">Add
+								ScreeningTestQuestion </a></li>
+						<li ng-show="hasFeature('CSBS Category').canView==true"><a
+							href="#/main/addCsbsCategory">CSBS Category</a></li>
+						<li ng-show="hasFeature('CSBS Question').canView==true"><a
+							href="#/main/addCsbsQuestion">CSBS Question</a></li>
+						<li ng-show="hasFeature('NICHQ Parent Category').canView==true"><a
+							href="#/main/addNichqParentCategoryLookup">NICHQ Parent
+								Category</a></li>
+						<li ng-show="hasFeature('NICHQ Parent Question').canView==true"><a
+							href="#/main/addNichqParentQuestionLookup">NICHQ Parent
+								Question</a></li>
+						<li ng-show="hasFeature('M-chart lookup').canView==true"><a
+							href="#/main/listMchartLookup">M-chart lookup</a></li>
+
+					</ul></li>
+				<li class="treeview"
+					ng-show="hasFeature('AssessmentTemplates').canView==true"><a>
+						<i class="fa fa-user"></i><span>Assessment Templates</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('CareTakerMilestone').canView==true"><a
+							href="#/main/careTakerMilestones">CareTaker Milestone</a></li>
+						<li ng-show="hasFeature('Child Growth').canView==true"><a
+							href="#/main/ChildObservation">Child Growth</a></li>
+						<li ng-show="hasFeature('Child Assessment').canView==true"><a
+							href="#/main/ScreeningTest">Child Assessment</a></li>
+						<li ng-show="hasFeature('CSBS Assessment').canView==true"><a
+							href="#/main/addCsbsTemplate">CSBS Assessment</a></li>
+						<li ng-show="hasFeature('NICHQ Assessment').canView==true"><a
+							href="#/main/addNichqTemplate">NICHQ Assessment</a></li>
+						<li ng-show="hasFeature('Speech Evaluation').canView==true"><a
+							href="#/main/speechEvaluate">Speech Evaluation</a></li>
+						<li ng-show="hasFeature('Goal Category').canView==true"><a
+							href="#/main/goalCategory">Goal Category</a></li>
+					</ul></li>
+				<li class="treeview"
+					ng-show="hasFeature('Autism Template').canView==true"><a><i
+						class="fa fa-child"></i><span> Autism Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Teacher Category').canView==true"><a
+							href="#/main/addTeacherInfoCategoryLookup">Teacher Category</a></li>
+						<li ng-show="hasFeature('Teacher Question').canView==true"><a
+							href="#/main/addTeacherQuestionLookup">Teacher Question</a></li>
+						<li ng-show="hasFeature('Parent Info').canView==true"><a
+							href="#/main/ParentInfo">Parent Info</a></li>
+						<li ng-show="hasFeature('M-CHAT').canView==true"><a
+							href="#/main/M-Chat">M-CHAT</a></li>
+						<li ng-show="hasFeature('Behavioural').canView==true"><a
+							href="#/main/behavioural">Behavioural</a></li>
+						<li ng-show="hasFeature('DepartmentPhysiotherapy').canView==true"><a
+							href="#/main/departmentOfPhysiptherapy">department Of
+								Physiotherapy</a></li>
+					</ul></li>
+
+				<li class="treeview"
+					ng-show="hasFeature('ISAABehaviour Template').canView==true"><a><i
+						class="fa fa-child"></i><span> ISAABehaviour Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </a>
+					<ul class="treeview-menu">
+						<li
+							ng-show="hasFeature('IsaaBehaviourCategoryLookup').canView==true"><a
+							href="#/main/addIsaaBehaviourCategoryLookUP">IsaaBehaviourCategoryLookup</a></li>
+						<li
+							ng-show="hasFeature('AddIsaaBehaviourQuestionLookup').canView==true"><a
+							href="#/main/addIsaaBehaviourQuestionLookup">Add
+								IsaaBehaviourQuestionLookup</a></li>
+						<li
+							ng-show="hasFeature('IsaaBehaviourQuestionLookupList').canView==true"><a
+							href="#/main/isaaBehaviourQuestionLookupList">IsaaBehaviourQuestionLookupList</a></li>
+					</ul></li>
+				<li class="treeview"
+					ng-show="hasFeature('Physiotherapy Template').canView==true"><a><i
+						class="fa fa-child"></i><span> Physiotherapy Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Speech Evaluation').canView==true"><a
+							href="#/main/addSpeechEvalutionTemplate">Speech Evalution</a></li>
+						<li ng-show="hasFeature('PhysioTherapyEvalution').canView==true"><a
+							href="#/main/physioTherapyEvalutionTemplate">PhysioTherapyEvalution</a></li>
+						<li ng-show="hasFeature('PsychologyBMP').canView==true"><a
+							href="#/main/addPsychologyTemplate">PsychologyBMP</a></li>
+					</ul></li>
+				<li class="treeview"
+					ng-show="hasFeature('Generic Template').canView==true"><a><i
+						class="fa fa-child"></i><span> Generic Template</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span> </a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Add Generic Template').canView==true"><a
+							href="#/main/addGenericTemplate">Generic Template</a></li>
+						<li ng-show="hasFeature('GenericCategoryTemplate').canView==true"><a
+							href="#/main/genericCategoryTemplate">Generic Category
+								Template</a></li>
+						<li ng-show="hasFeature('GenericQuestionTemplate').canView==true"><a
+							href="#/main/genericQuestionTemplate">Generic Question
+								Template</a></li>
+					</ul></li>
+
+				<li class="treeview" ng-show="hasFeature('Settings').canView==true">
+					<a href=""> <i class="fa ti-settings"></i><span>Settings</span>
+						<span class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<li ng-show="hasFeature('Settings').canView==true"><a
+							href="#/main/changepassword">ChangePassword </a></li>
+					</ul>
+
+				</li>
+		</div>
+		<!-- /.sidebar -->
+	</aside>
+	<!-- loadiing main content-->
+	<div ui-view></div>
+
+	<footer id="footer" class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 1.0
+		</div>
+		<strong>Copyright &copy; 2020-2021 <a>WISH CURE</a>.
+		</strong> All rights reserved.
+	</footer>
+</div>
+
+
+

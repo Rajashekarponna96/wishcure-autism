@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="patientprogressnote" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="74de8b18-f450-4d8b-a9b5-43bcfae88a58">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="history" class="java.lang.String"/>
+	<parameter name="backgroundInformation" class="java.lang.String"/>
+	<parameter name="observation" class="java.lang.String"/>
+	<parameter name="testAdministered" class="java.lang.String"/>
+	<parameter name="pragmaticSkills" class="java.lang.String"/>
+	<parameter name="oralMotor" class="java.lang.String"/>
+	<parameter name="summary" class="java.lang.String"/>
+	<parameter name="recommandations" class="java.lang.String"/>
+	<parameter name="parentalTips" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="uci" class="java.lang.String"/>
+	<parameter name="age" class="java.lang.String"/>
+	<parameter name="dateOfTest" class="java.lang.String"/>
+	<parameter name="ssn" class="java.lang.String"/>
+	<parameter name="parent" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="467" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="80" y="3" width="322" height="30" uuid="ff70ed68-7ca3-48c6-b6ba-077ecf6b7e2d"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Speech and Language Evaluation Note]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="130" y="80" width="98" height="20" uuid="605d40d8-a449-49f0-b408-7c1ed7d784be"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="130" y="109" width="98" height="20" uuid="83347898-45ce-4d5b-b010-c132f0b3e4bf"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{uci}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="80" width="47" height="20" uuid="8d957580-a67a-4c83-a855-b46cf2de5410"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="109" width="46" height="20" uuid="b6bcc4e7-2474-467d-847c-3127bd8efe98"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UCI      :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="128" y="138" width="98" height="20" uuid="6651c112-9c96-4055-bfca-e45eef574197"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{age}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="139" width="46" height="21" uuid="9b29fcd1-9c8e-4fd5-9bb0-db0e61b78d2a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age     :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="80" width="89" height="19" uuid="5220b536-3f17-4dd5-a4db-5642ffb3e72f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Of Test   :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="409" y="81" width="71" height="20" uuid="51e345ad-689b-4fb7-8de0-f794b01e575e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateOfTest}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="111" width="88" height="18" uuid="efadf4cc-e125-49da-8863-38c04e24f57b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SSN                :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="408" y="111" width="71" height="18" uuid="b9850d64-7aa1-4a03-8920-71d3ef02d9e1"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ssn}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="138" width="88" height="22" uuid="0eed2d2b-ac73-442d-9863-d7a7d9cf54fd"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ParentName  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="409" y="138" width="72" height="20" uuid="f18bbf73-fb20-4f67-b55f-a979e58c3187"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="181" width="94" height="17" uuid="e7e29158-f753-4cce-9efd-0eedd7368057"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[History             :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="81" y="211" width="400" height="28" isRemoveLineWhenBlank="true" uuid="9d503ad0-2701-4f97-a6ed-03c0fb17b0e5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{history}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="81" y="251" width="169" height="16" uuid="beaa5800-4ec7-4881-854a-07dbc91ba617"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Background Information  : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="80" y="281" width="401" height="28" uuid="b4009657-9af9-4a7d-925c-5bfd395ffc3e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{backgroundInformation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="80" y="320" width="94" height="16" uuid="185303e3-ce4e-417d-be2f-322b83990ba7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observation    : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="82" y="349" width="399" height="28" uuid="73668e06-f0ae-4c5f-91ae-65a06722983e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="382" width="181" height="17" uuid="837a1519-58b2-4dcd-88bc-902524e2af83"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Test  Administered   : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="82" y="410" width="399" height="50" uuid="9ac9d3f1-f37f-4a5e-95e9-26fed432388a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{testAdministered}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="537">
+			<staticText>
+				<reportElement positionType="Float" x="82" y="7" width="98" height="20" uuid="9b50649f-1de3-4587-8d46-dae7e4c5b1cc"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oral Motor         : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="81" y="39" width="398" height="30" uuid="900e46e6-a60f-435f-9b62-4487b63b1a4e"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{oralMotor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="79" width="128" height="16" uuid="888f2a01-260c-4940-abf9-ebf8ca9829e1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pragmatic Skills  : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="80" y="109" width="401" height="39" uuid="58c39b8f-445e-4025-8258-479127c38c15"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pragmaticSkills}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="159" width="96" height="18" uuid="15ead000-c5b1-43b6-8705-d7c085b1efe8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary           : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="81" y="187" width="400" height="40" uuid="028f85d3-87f2-4e62-9c37-4d0d8183e5e3"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{summary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="239" width="114" height="25" uuid="a7386714-ea21-4b71-bddc-3d7a7ad7a53f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recommendations: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="82" y="277" width="398" height="38" uuid="98368205-c368-40b5-8cb7-911d0b5c1ecd"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{recommandations}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="82" y="330" width="98" height="17" uuid="4d5c55ef-41f3-4123-a0c3-6383664e2c4e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parental Tips     :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="" positionType="Float" isPrintRepeatedValues="false" x="82" y="358" width="399" height="39" uuid="b86ec879-0e3b-4e25-92c0-7793c3e95f7a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parentalTips}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

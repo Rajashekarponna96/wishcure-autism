@@ -1,0 +1,412 @@
+<!-- <head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head> -->
+<style>
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.text {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.select {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.label-info {
+	color: #fff;
+	background-color: #53d4fa;
+	border: 2px solid #53d4fa;
+}
+
+.label-success {
+	color: #fff;
+	background-color: #009688;
+	border: 2px solid #009688;
+}
+</style>
+
+
+
+
+<div class="content-wrapper" ng-init="findAllTherapistAppointments();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Therapist - Patients List</h1>
+			<small>Assign Existing Patients To Different Existing
+				Therapists</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Therapist - Patients List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" ng-click="gotoList();">
+
+						<div class="btn-group">
+							<a class="btn btn-success"> <i class="fa fa-list"></i> User
+								List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+
+						<div class="content">
+							<div class="row">
+								<div class="content-block content-block-horizantal">
+									<div class="col-sm-12 text-right">
+										<!-- 	<div class="content-block-ttl">SubAppointment List</div> -->
+										<div class="row block-main">
+											<div class="row content-input">
+
+												<div class="col-sm-3 form-group">
+													<label class="col-form-label" ><b>Therapist Name</b></label>
+													<!-- ng-model="therapistAppointments[0].doctor.firstName" -->
+													<div class="input-group">
+														<span class="input-group-addon"><i
+															class="icon-user"></i></span> <input type="text"
+															name="invoice[name]" class="form-control"
+															ng-model="user.firstName"
+															value="Charlie Runkle" placeholder="Patient Name">
+													</div>
+												</div>
+												<div class="col-sm-3 form-group">
+													<label class="col-form-label" ><b>Therapist Email</b></label>
+													<!-- ng-model="therapistAppointments[0].doctor.email" -->
+													<div class="input-group">
+														<span class="input-group-addon"><i
+															class="icon-envelope"></i></span> <input type="email"
+															name="invoice[email]"
+															ng-model="user.email"
+															class="form-control" placeholder="Patient Email">
+													</div>
+												</div>
+												<div class="col-sm-3 form-group">
+													<label class="col-form-label" ><b>Therapist Mobile Number</b>
+														</label>
+														<!-- ng-model="therapistAppointments[0].doctor.mobileNumber" -->
+													<div class="input-group">
+														<span class="input-group-addon"><i
+															class="icon-phone"></i></span> <input type="text"
+															name="invoice[mobile]" value="0011223344"
+															ng-model="user.mobileNumber"
+															class="form-control" placeholder="Patient Mobile Number">
+													</div>
+												</div>
+
+												<div class="col-sm-3 form-group" >
+													<label class="col-form-label"><b>Therapist Department</b></label>
+													<!-- ng-model="therapistAppointments[therapistAppointments.length-1].doctor.department.departmentName" -->
+													<div class="input-group">
+														<span class="input-group-addon"><i
+															class="fa "></i></span> <input type="text"
+															class="form-control" value="08-10-2017"
+															ng-model="user.department.departmentName"
+															placeholder="Department">
+													</div>
+													<!-- yyyy-MM-dd -->
+												</div>
+
+
+												<!--  -->
+												<div class="row">
+													<div class="col-sm-12"></div>
+												</div>
+
+												<!--  -->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- </div> -->
+
+
+
+								<!-- <div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+									<div class="input-group custom-search-form">
+										<input type="text" class="form-control" ng-model="search"
+											placeholder="search.." ng-change="getAllDepartmentsListSearch(search);"><span
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div> -->
+
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th ng-click="sort('department.departmentName')">Patient
+												Name &nbsp;<span class="glyphicon sort-icon"
+												ng-show="sortKey=='department.departmentName'"
+												ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+											</th>
+											<th ng-click="sort('department.descriptionName')">Starts
+												Date&nbsp;<span class="glyphicon sort-icon"
+												ng-show="sortKey=='department.descriptionName'"
+												ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+											</th>
+											<th>Starts Time</th>
+											<th>Ends Time</th>
+											<th>Ends Date</th>
+											<th>Status</th>
+											<th>Assign</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											ng-repeat="appointment in therapistAppointments |orderBy:sortKey:reverse | filter:search ">
+											<!--   <td><input type="radio" name="radioGroup">
+                                       <label>{{department.id}}</label>   
+                                   </td> -->
+											<td>{{appointment.patient.firstName}}</td>
+											<td>{{appointment.appointmentStartedDate}}</td>
+											<td>{{appointment.appointmentStartTime}}</td>
+											<td>{{appointment.appointmentEndTime}}</td>
+											<td>{{appointment.appointmentEndedDate}}</td>
+											<!-- <td>{{appointment.appointmentStartedDate}}</td>
+										<td>{{appointment.appointmentStartedDate}}</td> -->
+
+											<!--  <td>{{department.status}}</td> -->
+											<td><span class="label-success label label-default"
+												ng-if="appointment.occurance=='NEVER'"> ONCE</span><span
+												class="label-default label label-danger"
+												ng-if="appointment.occurance=='WEEKLY'"> RECURSIVE</span></td>
+											<td>
+												<button class="btn btn-info btn-sm" data-toggle="modal"
+													data-target="#ordine" data-placement="left"
+													ng-click="searchSchedules(appointment);" title="Assign">
+													<i class="fa fa-hourglass-2" aria-hidden="true"></i>
+												</button> <!-- <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-show="hasFeature('Departent Management').canDelete==true"
+												ng-click="deleteDepartment(department.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button> -->
+											</td>
+										</tr>
+										<tr ng-if="therapistAppointments.length == 0">
+											<td colspan="7" align="center">
+												<h3>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h3>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+
+
+
+							<div class="row">
+								<table style="border-collapse: collapse; width: 100%;">
+									<tbody>
+										<tr>
+											<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+													<select name="example_length" ng-model="size"
+													ng-change="sizeChanged(size);">
+														<option value="5">5</option>
+														<option value="10">10</option>
+														<option value="25">25</option>
+														<option value="50">50</option>
+														<option value="100">100</option>
+												</select> records per page
+											</label></td>
+
+
+
+
+											<td align="right" style="padding-right: 20px;">
+												<ul class="pagination pagination-large">
+													<li><a rel="next" ng-click="firstPage();">First</a></li>
+													<li><a rel="next" class="btn btn-info btn-md"
+														data-toggle="tooltip" data-placement="left"
+														ng-click="previousPage();" title="prev"
+														style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+													</a></li>
+													<li><a rel="next" class="btn btn-info btn-md"
+														data-toggle="tooltip" data-placement="right"
+														ng-click="nextPage();" title="next"
+														style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+													</a></li>
+													<li><a rel="next" ng-click="lastPage();">Last</a></li>
+												</ul>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
+<div id="ordine" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content " ng-if="flag1!=true">
+			<div class="modal-header" style="background-color: #20B2AA">
+				<button style="color: black" type="button" class="close"
+					data-dismiss="modal">&times;</button>
+				<h4 style="color: white" class="modal-title">Therapist
+					Availability</h4>
+					<!-- <small>List of Therapist availability during the Schedule..
+						Please Choose One</small> -->
+			</div>
+
+			<div>
+
+				<div class="panel-body">
+					<center><small> Available  Therapist During The Schedule</small></center>
+						
+					<hr>
+					<form class="col-sm-12">
+						<!-- <div ng-repeat="scheduledHour in schedulesDtos">
+
+							<div class="col-sm-5">
+								<label class="radio-inline"><input type="radio"
+									style="bottom: 0px;" ng-model="appointment.weekDays"
+									name="status1" ng-value="1" ng-checked="appointment.weekDays"></label>
+								<button type="button" class="buttonAppointment"
+									data-dismiss="modal"
+									ng-click="updateAppointmentWithAssignedTherapist(scheduledHour);">{{scheduledHour.doctorName}}</button>
+							</div>
+
+							<div class="col-sm-5">
+								<button type="button" class="buttonAppointment"
+									data-dismiss="modal"
+									ng-click="updateAppointmentWithAssignedTherapist(scheduledHour);">{{scheduledHour.doctor.department.departmentName}}</button>
+							</div>
+						</div> -->
+						<!--Tabular  -->
+						<div class="table-responsive col-sm-12">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!-- <th>Serial No</th> -->
+										<th>Select</th>
+										<th>Therapist</th>
+										<th>Department</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="schedule in schedulesDtos | orderBy : 'id':true">
+									
+									<td>
+									<label class="radio-inline"><input type="radio" ng-value="schedule.doctorName" 
+									style="bottom: 0px;" ng-model="appointment.star"  ng-click="radioClick(schedule)"
+									name="status1"  >
+									</label>
+									</td>
+										<td>{{schedule.doctorName}}</td>
+										<td>{{schedule.doctor.department.departmentName}}</td>
+										
+									</tr>
+									<tr ng-if="schedulesDtos.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							<br> <br>
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="updateAppointmentWithAssignedTherapist();" 
+								data-dismiss="modal"	ng-disabled="!appointment.star">Submit</button>
+								<a class="btn btn-danger" data-dismiss="modal">Cancel</a>
+
+							</div>
+						</div>
+						<!--  -->
+
+					</form>
+
+
+				</div>
+
+
+			</div>
+		</div>
+		<!-- /.content-wrapper -->
+	</div>
+</div>

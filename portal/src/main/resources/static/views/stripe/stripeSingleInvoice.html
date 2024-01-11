@@ -1,0 +1,260 @@
+<style>
+h2 {
+	position: relative;
+	color: #fff;
+	background: #f43059;
+	font-size: 1.5em;
+	float: left;
+	clear: both;
+	padding: 10px 10px 10px 20px;
+	margin-left: -20px;
+	margin-bottom: 20px;
+	text-shadow: 0 -1px #d0284b, 0 1px #f96080;
+	-moz-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+h2:before {
+	content: " ";
+	background: url(../img/css/ribbon.png);
+	display: block;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin-bottom: -10px;
+	z-index: -1;
+}
+
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.text {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.select {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+</style>
+<!-- getSubAppointmentsByInvoiceNo(); -->
+<div class="content-wrapper"
+	ng-init="">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Invoice</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Invoice</li>
+				<!-- {{patientObject.patient.id}} -->
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+				
+				
+				<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary btn-list" ng-click="gotoInvoiceList();"> <i
+								class="fa fa-list"></i> Invoice list
+							</a>
+
+						</div>
+					</div>
+					
+					
+					<div class="panel-body">
+						<div class="inv-template">
+							<div class="inv-template-hdr">
+								<div class="row">
+									<!-- <div class="col-sm-2">
+										<div class="ribbon">
+											<h2 style="width: 230px;"
+												ng-if="invoiceSingle.paidStatus=='PARTIALLYPAID'">
+												PARTIALLY PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus=='UNPAID'">UN PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus=='PAID'"
+												style="bgcolor: green">PAID</h2>
+											<h2 ng-if="invoiceSingle.paidStatus==undefined">UN PAID</h2>
+										</div>
+									</div> -->
+									<!-- <div class="col-sm-10 text-right">
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<a href="" class="btn btn-primary btn-sm"
+												ng-click="gotoEditInvoice(patientObject)"><i
+												class="fa fa-pencil-square-o mr-1"></i> Edit Invoice</a> <a
+												ng-click="downloadInvoice();" class="btn btn-primary btn-sm"><i></i>Download</a>
+											<a class="btn btn-primary btn-sm" target="_blank"><i></i>Print</a>
+										</div>
+									</div> -->
+								</div>
+							</div>
+							<br> <br>
+							<hr>
+							<br>
+							<form class="col-sm-12">
+								<div class="col-sm-3">
+									<label>Billed To</label>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-14">{{username11}}</p>
+								</div>
+								<div class="col-sm-3">
+									<label class="font-12">Invoice Number</label>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-12">{{invoiceStripe.number}}</p>
+								</div>
+
+
+								<div class="col-sm-3">
+									<label>Billing address</label>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-14">None</p>
+								</div>
+								<div class="col-sm-3">
+									<label class="font-12">Billing method</label>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-12">Charge payment source on file</p>
+								</div>
+
+
+								<div class="col-sm-3">
+									<p>&nbsp;</p>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-14">&nbsp;</p>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-12">&nbsp;</p>
+								</div>
+								<div class="col-sm-3">
+									<p class="font-12">&nbsp;</p>
+								</div>
+
+							</form>
+
+
+
+							<div class="inv-template-item">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>DESCRIPTION</th>
+											<th>QTY</th>
+											<th>UNIT PRICE</th>
+											<th>AMOUNT</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>{{invoiceStripe.start}} To {{invoiceStripe.end}}</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>{{invoiceStripe.desc}}</td>
+											<td>{{invoiceStripe.quantity}}</td>
+											<td>{{invoiceStripe.unitPrice}}</td>
+											<td>${{invoiceStripe.amountDue}}</td>
+										</tr>
+										<!-- <tr>
+											<td>First 10</td>
+											<td>1</td>
+											<td>$59.99</td>
+											<td>$59.99</td>
+										</tr> -->
+										<!-- <tr align="right" class="total">
+												<td rowspan="3" colspan="1">
+													<p></p>
+												</td>
+												<td colspan="2"><span> Subtotal	</span></td>
+												<td colspan="1" align="center"><span>$ {{amt}}</span></td>
+											</tr> -->
+										<tr align="right" class="total">
+											<td rowspan="3" colspan="1">
+												<p></p>
+											</td>
+											<td colspan="2"><span>Sub Total</span></td>
+											<td colspan="1" align="left"><span>${{invoiceStripe.subtotal}}</span></td>
+										</tr>
+										<tr align="right" class="total">
+											<td colspan="2"><span>Total </span></td>
+											<td colspan="1" align="left"><span>${{invoiceStripe.total}}</span></td>
+										</tr>
+										<tr align="right" class="total">
+											<td colspan="2"><span>Amount Paid</span></td>
+											<td colspan="1" align="left"><span>${{invoiceStripe.amountDue}}</span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="pdf" ng-if="downloadInvoicecontent !=undefined "
+								id="div1" style="display: block;">
+								<iframe id="myFrame" src="{{downloadInvoicecontent}}"
+									width="100%" height="800px"></iframe>
+
+							</div>
+						</div>
+						<div class="inv-template-ftr"></div>
+					</div>
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+		<!-- </div> -->
+	</section>
+	<!-- /.content -->
+</div>

@@ -1,0 +1,150 @@
+
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCodeInUpdate();getAllSitesByCompanyUserNamePage();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Update Facility</h1>>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Facility</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Facility
+								List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="siteForm">
+
+
+
+							<div class="col-tsm-6 form-group">
+								<label>Facility Name</label> <input type="text" value=""
+									class="form-control" name="siteName"
+									placeholder="Enter Site  Name"
+									ng-model="updateSiteObj.siteName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(siteForm.siteName.$touched && siteForm.siteName.$invalid)">
+									<span ng-show="siteForm.siteName.$error.required">Facility
+										Name is required.</span>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Address 1</label> <input type="text" class="form-control"
+									name="address" ng-model="updateSiteObj.address.address1"
+									placeholder="Enter Address 1" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(siteForm.address.$touched &&siteForm.address.$invalid)">
+									<span ng-show="siteForm.address.$error.required">Address
+										is required.</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Address 2</label> <input type="text" class="form-control"
+									name="address2" ng-model="updateSiteObj.address.address2"
+									placeholder="Enter Address 2" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> <span style="color: red" ng-cloak
+									ng-show="(siteForm.address2.$touched &&siteForm.address2.$invalid)">
+									<span ng-show="siteForm.address2.$error.required">Address
+										is required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>City</label> <input ng-model="updateSiteObj.address.city"
+									class="form-control" name="city" aria-required="true"
+									aria-invalid="true" required> <span style="color: red"
+									ng-cloak
+									ng-show="(siteForm.city.$touched && siteForm.city.$invalid)">
+									<span ng-show="siteForm.city.$error.required">City is
+										required.</span>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>State</label> <input
+									ng-model="updateSiteObj.address.state" class="form-control"
+									name="state" aria-required="true" aria-invalid="true"><span
+									style="color: red" ng-cloak
+									ng-show="(siteForm.state.$touched && siteForm.state.$invalid)">
+									<span ng-show="siteForm.state.$error.required">State is
+										required.</span>
+							</div>
+							<div class="form-group col-lg-6	">
+								<label>Country</label> <input
+									ng-model="updateSiteObj.address.country" class="form-control"
+									name="country" aria-required="true" aria-invalid="true">
+								<span style="color: red" ng-cloak
+									ng-show="(siteForm.country.$touched && siteForm.country.$invalid)">
+									<span ng-show="siteForm.country.$error.required">Country
+										is required.</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Zipcode</label> <input type="text" class="form-control"
+									name="zip" ng-model="updateSiteObj.address.zipcode"
+									placeholder="Enter zipcode" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+								</textarea>
+								<span style="color: red" ng-cloak
+									ng-show="(siteForm.zip.$touched && siteForm.zip.$invalid)">
+									<span ng-show="siteForm.zip.$error.required">Zip Code is
+										required.</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="updateSiteObj.status" name="status"
+									ng-value="true" ng-checked="!site.status">Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="updateSiteObj.status" name="status" ng-value="false">InActive</label>
+							</div>
+
+							<div class="reset-button">
+
+								<button class="btn btn-success"
+									ng-click="updateSite(updateSiteObj)">Update</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+
+</div>
+
+

@@ -1,0 +1,169 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateRegistrationDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateChildDetails();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateUploadDocuments();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdatePayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-1"
+	ng-init="getAllDepartmentsByCmpany();getAllCategoryTypeByStatus();">
+	<hr>
+	<form name="patientObjectForm">
+<div class="col-sm-12">
+			<br>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.firstName == undefined || patientObject.firstName =='' "
+					style="color: red">*</span>Child First Name</label> <span style="color: red"
+					ng-show="(patientObjectForm.firstName.$touched && patientObjectForm.firstName.$invalid)">
+					<span ng-show="patientObjectForm.firstName.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="firstName" class="form-control"
+					placeholder="Enter Child Name" ng-model="patientObject.firstName" required>
+			</div>
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObjectForm.lastName == undefined || patientObjectForm.lastName =='' "
+					style="color: red">*</span>Child Last Name</label> <span style="color: red"
+					ng-show="(patientObjectForm.lastName.$touched && patientObjectForm.lastName.$invalid)">
+					<span ng-show="patientObjectForm.lastName.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="lastName" class="form-control"
+					placeholder="Last Name" ng-model="patientObject.lastName" required>
+			</div>
+			
+			
+			
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.dateOfBirth == undefined || patientObject.dateOfBirth == '' "
+					style="color: red">*</span>DOB</label> <span style="color: red"
+					ng-show="(patientObjectForm.dateOfBirth.$touched && patientObjectForm.dateOfBirth.$invalid)">
+					<span style="color: red" ng-show="patientObjectForm.dateOfBirth.$error.required">
+						is required.</span>
+				</span> <input type="DATE" class="form-control" ng-change="getAge()"
+					name="dateOfBirth" placeholder="Enter DOB" id="birth_date"
+					ng-model="patientObject.dateOfBirth" required>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label>Age</label> <input type="text" class="form-control" allow-only-numbers
+					placeholder="Enter Age" id="age" ng-model="patientObject.age" name="age"
+					required>
+			</div>
+			
+			
+			
+			
+			<div class="col-lg-6 form-group"><label>
+				<span ng-if="patientObject.ssn == undefined || patientObject.ssn =='' "
+				 style="color: red">*</span>Aadhaar Number</label><span style="color: red"
+					ng-show="(patientObject.ssn.$touched && patientObject.ssn.$invalid)">
+					<span ng-show="patientObject.ssn.$error.required"> is
+						required.</span></span> <input type="text" class="form-control"
+					allow-only-numbers name="ssn" placeholder="Enter Aadhaar Number"
+					ng-model="patientObject.ssn" maxlength="12">
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.relationshipToChild == undefined || patientObject.relationshipToChild =='' "
+					style="color: red">*</span>Relationship To Child</label> <span style="color: red"
+					ng-show="(patientObjectForm.relationshipToChild.$touched && patientObjectForm.relationshipToChild.$invalid)">
+					<span ng-show="patientObjectForm.relationshipToChild.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="relationshipToChild" class="form-control"
+					placeholder="Enter Relationship To Child" ng-model="patientObject.relationshipToChild" required>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label>Mother Tongue</label>
+				<input type="text" name="motherTongue" class="form-control"
+					placeholder="Enter Mother Tongue of Child" ng-model="patientObject.motherTongue" required>
+			</div>
+			<div class="col-lg-6 form-group">
+				<label>Languages Known</label>
+				 <input type="text" name="languagesKnown" class="form-control"
+					placeholder="Enter Languages Known of Child" ng-model="patientObject.languagesKnown" required>
+			</div>
+			
+			<div class="col-sm-3 form-group" align="left">
+				<label>Sex</label><label class="radio-inline"></label>
+			</div>
+			<div class="col-sm-3 form-group" align="left">
+				<label class="radio-inline"> <input type="radio"
+					ng-value="0" name="gender" ng-model="patientObject.gender">Male
+				</label> <label class="radio-inline">&nbsp;&nbsp;<input
+					type="radio" name="gender" ng-model="patientObject.gender" ng-value="1">Female
+				</label>
+			</div>
+			
+				<div class="col-sm-3 form-group" align="left">
+				<label>Is Evaluation Done?</label>
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="radio-inline"><input type="radio"
+					name="evalutionDone" ng-checked="false"
+					ng-model="patientObject.evalutionDone" value="true">Yes</label> <label
+					class="radio-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+					type="radio" name="evalutionDone" ng-model="patientObject.evalutionDone"
+					ng-checked="true" value="false">No
+				</label>
+			</div>
+			
+			</div>
+	</form>
+	<!-- <div class="col-sm-12">
+		<br>
+	</div>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoupdateParentDetails();">Next</button> -->
+</div>
+
+<div class="col-sm-12">
+	<br>
+	<button class="btn btn-primary nextBtn pull-left" type="button"
+		ng-click="gotoupdateRegistrationDetails();">Previous</button>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoupdateParentDetails()">Next</button>
+</div>

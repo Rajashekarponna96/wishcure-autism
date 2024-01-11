@@ -1,0 +1,454 @@
+<div class="content-wrapper scrollpage"
+	ng-init="getAllDepartments();getAllPatients();myFunctionDuration();initmethod();getAllDepartments();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Appointment</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Appointment</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> Appointment List
+							</a>
+						</div>
+					</div>
+
+					<div class="panel-body">
+						<form class="col-sm-12" name="patientForm">
+
+
+							<div class="col-sm-10 form-group col-sm-offset-2">
+
+
+
+								<div class="col-sm-4">
+									<label>Starts At</label><span style="color: red" ng-cloak
+										ng-show="(patientForm.date.$touched && patientForm.date.$invalid)">
+										<span ng-show="patientForm.date.$error.required">Date
+											And Time is required.</span>
+									</span>
+								</div>
+								<div class="col-sm-3" ng-if="flag">
+									<input type="text" class="form-control" name="date"
+										placeholder="Enter StartDate"
+										ng-model="appointment.appointmentStartedDate | date : 'MM-dd-yyyy'"
+										ng-change="appointment.weekDays=appointment.appointmentStartedDate.getDay()"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-3" ng-if="!flag">
+									<input type="date" class="form-control" name="date1"
+										placeholder="Enter DOB"
+										ng-model="appointment.appointmentStartedDate"
+										ng-change="appointment.weekDays=appointment.appointmentStartedDate.getDay()"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+									<br>
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control" ng-model="appointmentStartTime"
+										data-md-container-class="selectdemoSelectHeader">
+										<option value="" class="active">Start time</option>
+										<option value="00:00:00">12:00 AM</option>
+										<option value="00:30:00">12:30 AM</option>
+										<option value="01:00:00">01:00 AM</option>
+										<option value="01:30:00">01:30 AM</option>
+										<option value="02:00:00">02:00 AM</option>
+										<option value="02:30:00">02:30 AM</option>
+										<option value="03:00:00">03:00 AM</option>
+										<option value="03:30:00">03:30 AM</option>
+										<option value="04:00:00">04:00 AM</option>
+										<option value="04:30:00">04:30 AM</option>
+										<option value="05:00:00">05:00 AM</option>
+										<option value="05:30:00">05:30 AM</option>
+										<option value="06:00:00">06:00 AM</option>
+										<option value="06:30:00">06:30 AM</option>
+										<option value="07:00:00">07:00 AM</option>
+										<option value="07:30:00">07:30 AM</option>
+										<option value="08:00:00">08:00 AM</option>
+										<option value="08:30:00">08:30 AM</option>
+										<option value="09:00:00">09:00 AM</option>
+										<option value="09:30:00">09:30 AM</option>
+										<option value="10:00:00">10:00 AM</option>
+										<option value="10:30:00">10:30 AM</option>
+										<option value="11:00:00">11:00 AM</option>
+										<option value="11:30:00">11:30 AM</option>
+										<option value="12:00:00">12:00 PM</option>
+										<option value="12:30:00">12:30 PM</option>
+										<option value="13:00:00">01:00 PM</option>
+										<option value="13:30:00">01:30 PM</option>
+										<option value="14:00:00">02:00 PM</option>
+										<option value="14:30:00">02:30 PM</option>
+										<option value="15:00:00">03:00 PM</option>
+										<option value="15:30:00">03:30 PM</option>
+										<option value="16:00:00">04:00 PM</option>
+										<option value="16:30:00">04:30 PM</option>
+										<option value="17:00:00">05:00 PM</option>
+										<option value="17:30:00">05:30 PM</option>
+										<option value="18:00:00">06:00 PM</option>
+										<option value="18:30:00">06:30 PM</option>
+										<option value="19:00:00">07:00 PM</option>
+										<option value="19:30:00">07:30 PM</option>
+										<option value="20:00:00">08:00 PM</option>
+										<option value="20:30:00">08:30 PM</option>
+										<option value="21:00:00">09:00 PM</option>
+										<option value="21:30:00">09:30 PM</option>
+										<option value="22:00:00">10:00 PM</option>
+										<option value="22:30:00">10:30 PM</option>
+										<option value="23:00:00">11:00 PM</option>
+										<option value="23:30:00">11:30 PM</option>
+									</select><br>
+								</div>
+								<div class="col-sm-4">
+									<label>Ends At</label><span style="color: red" ng-cloak
+										ng-show="(patientForm.date.$touched && patientForm.date.$invalid)">
+										<span ng-show="patientForm.date.$error.required"> Date
+											And Time is required.</span>
+									</span>
+								</div>
+								<div class="col-sm-3" ng-if="flag">
+									<input type="text" class="form-control" name="date"
+										placeholder="Enter EndDate"
+										ng-model="appointment.appointmentEnddate | date : 'MM-dd-yyyy'"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-3" ng-if="!flag">
+									<input type="date" class="form-control" name="date"
+										placeholder="Enter DOB"
+										ng-model="appointment.appointmentEnddate" aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+									<br>
+								</div>
+								<div class="col-sm-3">
+									<select class="form-control" ng-model="appointmentEndTime"
+										data-md-container-class="selectdemoSelectHeader">
+										<option value="" class="active">End time</option>
+										<option value="00:00:00">12:00 AM</option>
+										<option value="00:30:00">12:30 AM</option>
+										<option value="01:00:00">01:00 AM</option>
+										<option value="01:30:00">01:30 AM</option>
+										<option value="02:00:00">02:00 AM</option>
+										<option value="02:30:00">02:30 AM</option>
+										<option value="03:00:00">03:00 AM</option>
+										<option value="03:30:00">03:30 AM</option>
+										<option value="04:00:00">04:00 AM</option>
+										<option value="04:30:00">04:30 AM</option>
+										<option value="05:00:00">05:00 AM</option>
+										<option value="05:30:00">05:30 AM</option>
+										<option value="06:00:00">06:00 AM</option>
+										<option value="06:30:00">06:30 AM</option>
+										<option value="07:00:00">07:00 AM</option>
+										<option value="07:30:00">07:30 AM</option>
+										<option value="08:00:00">08:00 AM</option>
+										<option value="08:30:00">08:30 AM</option>
+										<option value="09:00:00">09:00 AM</option>
+										<option value="09:30:00">09:30 AM</option>
+										<option value="10:00:00">10:00 AM</option>
+										<option value="10:30:00">10:30 AM</option>
+										<option value="11:00:00">11:00 AM</option>
+										<option value="11:30:00">11:30 AM</option>
+										<option value="12:00:00">12:00 PM</option>
+										<option value="12:30:00">12:30 PM</option>
+										<option value="13:00:00">01:00 PM</option>
+										<option value="13:30:00">01:30 PM</option>
+										<option value="14:00:00">02:00 PM</option>
+										<option value="14:30:00">02:30 PM</option>
+										<option value="15:00:00">03:00 PM</option>
+										<option value="15:30:00">03:30 PM</option>
+										<option value="16:00:00">04:00 PM</option>
+										<option value="16:30:00">04:30 PM</option>
+										<option value="17:00:00">05:00 PM</option>
+										<option value="17:30:00">05:30 PM</option>
+										<option value="18:00:00">06:00 PM</option>
+										<option value="18:30:00">06:30 PM</option>
+										<option value="19:00:00">07:00 PM</option>
+										<option value="19:30:00">07:30 PM</option>
+										<option value="20:00:00">08:00 PM</option>
+										<option value="20:30:00">08:30 PM</option>
+										<option value="21:00:00">09:00 PM</option>
+										<option value="21:30:00">09:30 PM</option>
+										<option value="22:00:00">10:00 PM</option>
+										<option value="22:30:00">10:30 PM</option>
+										<option value="23:00:00">11:00 PM</option>
+										<option value="23:30:00">11:30 PM</option>
+
+									</select><br>
+								</div>
+								<!-- <div class="col-sm-2" ng-disabled="patientForm.$invalid">
+									<a ng-disabled="patientForm.$invalid"
+										ng-click="searchSchedules(appointment.appointmentStartedDate,appointment.appointmentEnddate);"><small class="label-info label label-default" ng-disabled="!appointment.appointmentStartedDate || !appointment.appointmentEnddate">Check
+											Availability</small></a>
+								</div> -->
+								<!--  -->
+								<div class="col-sm-4" ng-if="!flag && loggedUserRole=='Super Admin'">
+									<label><span
+										ng-if="appointment.department == undefined || appointment.department =='' "
+										style="color: red">*</span>Department</label> <span style="color: red"
+										ng-show="(patientForm.department.$touched && patientForm.department.$invalid)">
+										<span ng-show="patientForm.department.$error.required">
+											is required.</span>
+									</span>
+								</div>
+								<div class="col-sm-3" ng-if="!flag && loggedUserRole=='Super Admin'">
+									<select class="form-control" ng-model="appointment.department"
+										name="department"
+										ng-options="department as department.departmentName for department in departmentsList"
+										required>
+										<option value="" class="active">Select Department</option>
+									</select>
+								</div>
+								<!-- <div class="col-sm-2" ng-if="flag">
+									<button class="btn label-info"
+										ng-click="findScheduledHours123();">Availability</button>
+								<div ng-repeat="list in hoursList">
+                                <button  type="button" class="buttonAppointment">{{list}}</button>
+								</div>		
+								{{hoursList | json}}
+								</div> -->
+
+
+								<!--  -->
+
+								<div class="col-sm-4" ng-if="flag">
+									<label><span
+										ng-if="appointment.description == undefined ||  appointment.description =='' "
+										style="color: red">*</span>Title</label><span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.problem.$touched && patientForm.problem.$invalid)">
+										<span ng-show="patientForm.problem.$error.required"> is
+											required.</span>
+									</span>
+								</div>
+								<div class="col-sm-6" ng-if="flag">
+									<input class="form-control" name="problem"
+										placeholder="problem" ng-model="appointment.description"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required><br>
+								</div>
+								<!--  -->
+								<div class="col-sm-4" ng-if="flag">
+									<label><span
+										ng-if="appointment.patient == undefined || appointment.patient =='' "
+										style="color: red">*</span>Patient Name</label><span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.patient.$touched && patientForm.patient.$invalid)">
+										<span ng-show="patientForm.patient.$error.required"> is
+											required.</span>
+									</span>
+								</div>
+								<div class="col-sm-6" ng-if="flag">
+									<select name="patient" class="form-control"
+										ng-model="appointment.patient"
+										ng-options="patient as patient.firstName for patient in  patientList"
+										required>
+										<option value="" class="active">Select Patient</option>
+									</select><br>
+								</div>
+								<div class="col-sm-4"
+									ng-if="loggedUserRole=='Therapist' && flag">
+									<label>Therapist Name </label>
+								</div>
+								<div class="col-sm-6"
+									ng-if="loggedUserRole=='Therapist' && flag ">
+									<input name="doctor" class="form-control" ng-model="doctorname"
+										ng-disabled="doctorname" /> <br>
+								</div>
+								<div class="col-sm-4"
+									ng-if="loggedUserRole=='Therapist' && !flag ">
+									<label>Therapist Name </label>
+								</div>
+								<div class="col-sm-6"
+									ng-if="loggedUserRole=='Therapist' && !flag ">
+									<input name="doctor" class="form-control"
+										ng-model="loggedFirstname"> <br>
+								</div>
+								<!-- <div class="col-sm-4"
+									ng-if="loggedUserRole!='Therapist' && !flag">
+									<label>Therapist Name </label>
+								</div>
+								<div class="col-sm-6"
+									ng-if="loggedUserRole!='Therapist' && !flag">
+									<select name="doctor" class="form-control" ng-model="doctor"
+										ng-options="doctor as doctor.firstName for doctor in  therapistList">
+										<option value="" class="active">Select Therapist</option>
+										<option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option>
+									</select> <br>
+								</div> -->
+
+								<div class="col-sm-4"
+									ng-if="loggedUserRole!='Therapist' && flag">
+									<label>Therapist Name </label>
+								</div>
+								<div class="col-sm-6"
+									ng-if="loggedUserRole!='Therapist' && flag">
+									<input name="doctor" class="form-control" ng-model="doctorname"
+										ng-disabled="doctorname" /> <br>
+								</div>
+
+								<div class="col-sm-4" ng-if="flag">
+									<label><span
+										ng-if="appointment.occurance == undefined || appointment.occurance =='' "
+										style="color: red">*</span>Repeat Appointment</label><span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.occurance.$touched && patientForm.occurance.$invalid)">
+										<span ng-show="patientForm.occurance.$error.required">
+											is required.</span>
+								</div>
+								<div class="col-sm-6" ng-if="flag">
+									<select name="occurance" ng-model="appointment.occurance"
+										class="form-control" required>
+										<!-- <option value="" class="active">Select Appointment</option>
+										<option value="NEVER" class="active">Once</option> -->
+										<!-- <option value="DAILY">Daily</option> -->
+										<option value="WEEKLY">Weekly</option>
+										<!-- <option value="MONTHLY">Monthly</option> -->
+									</select><br>
+								</div>
+
+
+
+
+								<div ng-if="appointment.occurance=='WEEKLY'">
+									<div class="col-sm-4">
+										<label>Repeat Every</label>&nbsp;(in week(s))
+									</div>
+									<div class="col-sm-6">
+										<input name="title" type="number" class="form-control"
+											placeholder="days" ng-model="appointment.weeks" ng-value="1"
+											size="4" aria-required="true" aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											type="number">
+									</div>
+								</div>
+								<div ng-if="appointment.occurance=='WEEKLY'">
+									<div class="col-sm-4">
+										<label>End:</label>
+									</div>
+									<div class="col-sm-6 border7">
+										<label class="radio-inline" style="margin-left: 13px;">
+											<input type="radio" ng-model="appointment.end" name="status"
+											ng-value="0">Never
+										</label>
+									</div>
+									<div class="col-sm-4">&nbsp;</div>
+									<div class="col-sm-1">
+										<label class="radio-inline" style="margin-left: 9px;">
+											<input type="radio" ng-model="appointment.end" name="status"
+											ng-value="1">After
+										</label>
+									</div>
+									<div class="col-sm-3" style="margin-left: 10px;">
+										<input name="title" type="number" class="form-control"
+											ng-disabled="appointment.end!=1"
+											ng-click="makeEndNumberNull()"
+											ng-model="appointment.afterOccurrence" ng-value="1" size="4"
+											ng-change="myFunction()" type="number">
+									</div>
+									<div class="col-sm-2">
+										occurrence(s)<br> <br>
+									</div>
+
+
+									<div class="col-sm-4 border7">&nbsp;</div>
+									<div class="col-sm-1">
+										<label class="radio-inline"> <input type="radio"
+											ng-model="appointment.end" name="status" ng-value="2"
+											ng-checked="!department.status">On
+										</label><span style="color: red"
+											ng-show="(patientForm.date.$touched && patientForm.date.$invalid)">
+											<span ng-show="patientForm.date.$error.required"> is
+												required.</span>
+										</span>
+									</div>
+									<div class="col-sm-3">
+										<input type="DATE" class="form-control" name="date"
+											ng-disabled="appointment.end!=2" placeholder="Enter DOB"
+											ng-model="appointment.appointmentEndedDate"
+											ng-click="makeOccurrenceNull()" required>
+									</div>
+									<div class="col-sm-2 border7">
+										&nbsp;<br>
+									</div>
+									<div class="col-sm-4 border7">
+										<label>Repeat every:</label>
+									</div>
+									<!-- <div class="col-sm-6">
+										<label ng-value="day" ng-repeat="day in weekDays"> <input
+											type="checkbox" checklist-model="appointment.weekDays" 
+											checklist-value="day">&nbsp;{{day}}&nbsp;&nbsp;&nbsp;
+										</label>
+									</div> -->
+									<div class="col-sm-6">
+										<label class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="1"
+											ng-checked="appointment.weekDays">Monday</label> <label
+											class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="2"
+											ng-checked="appointment.weekDays">Tuesday</label> <label
+											class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="3"
+											ng-checked="appointment.weekDays">Wednesday</label><br>
+
+										<label class="radio-inline"> <input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="4"
+											ng-checked="appointment.weekDays">Thursday
+										</label> <label class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="5"
+											ng-checked="appointment.weekDays">Friday</label> <label
+											class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="6"
+											ng-checked="appointment.weekDays">Saturday</label> <label
+											class="radio-inline"><input type="radio"
+											ng-model="appointment.weekDays" name="status1" ng-value="0"
+											ng-checked="appointment.weekDays">Sunday</label>
+
+									</div>
+								</div>
+
+
+
+								<div class="reset-button col-sm-12" ng-if="flag">
+									<button class="btn btn-success"
+										ng-disabled="patientForm.$invalid"
+										ng-click="addAppointment();" data-toggle="tooltip" title=""
+										data-original-title="Click here to Book an appointment">Submit</button>
+									<a class="btn btn-danger" ng-click="gotoApp()">Reset</a>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

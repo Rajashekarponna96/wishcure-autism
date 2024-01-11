@@ -1,0 +1,303 @@
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateRegistrationDetails();" type="button"
+				class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateUploadDocuments();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdatePayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateSummary();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="">
+		<hr>
+		<div class="content-block content-block-horizantal"
+			style="background-color: rgba(128, 128, 128, 0.2)">
+			<div class="content-block-ttl">Registration Info</div>
+			<div class="content-block-main">
+			<div class="row content-input">
+					<div class=" col-md-12">
+					<div class="col-sm-4">
+							<label>Reg No : </label> <input type="text"
+								name="regNumber" ng-model="patientObject.regNumber"
+								placeholder="Registration No" readonly>
+						</div>
+						
+						<div class="col-sm-4">
+							<label>Date : </label> <input type="text"
+								name="regDate" ng-model="patientObject.regDate"
+								placeholder="Date" readonly>
+						</div>
+						
+						<div class="col-sm-4">
+							<label>Registration Type : </label> <input type="text"
+								name="patientRegistrationType" ng-model="patientObject.patientRegistrationType.name"
+								placeholder="Registration Type" readonly>
+						</div>
+					</div>
+					<div class=" col-md-12">
+					<div class="col-sm-4">
+					<label>Department : </label> <!-- <input type="text"
+								name="categoryType" ng-model="patientObject.department.departmentName"
+								placeholder="Department " readonly> -->
+								 <li ng-repeat="department in patientObject.departments">
+          {{department.departmentName}}
+      </li>
+					</div>
+					<div class="col-sm-4">
+					<label>Referred By : </label> <input type="text"
+								name="referredBy" ng-model="patientObject.referredBy"
+								placeholder="Referred By" readonly>
+					</div>
+					<div class="col-sm-4">
+					<label>Reason For Referral : </label> <input type="text"
+								name="reasonForReferral" ng-model="patientObject.reasonForReferral"
+								placeholder="Reason For Referral" readonly>
+					</div>
+					<div class="col-sm-4">
+					<label>Patient Note : </label> <input type="text"
+								name="patientNote" ng-model="patientObject.patientNote"
+								placeholder="PatientNote" readonly>
+					</div>
+					</div>
+					</div>
+					</div>
+					</div>
+		
+	
+	<div class="">
+	<div class="content-block content-block-horizantal"
+			style="background-color: rgba(128, 128, 128, 0.2)">
+			<div class="content-block-ttl">Child Info</div>
+			<div class="content-block-main">
+			<div class="row content-input">
+					<div class=" col-md-12">
+						<div class="col-sm-4">
+							<label>Child Name : </label> <input type="text"
+								name="child_id" ng-model="patientObject.firstName"
+								placeholder="Child Name" readonly>
+						</div>
+						
+						<div class="col-sm-4">
+							<label>Date of Birth : </label> <input type="text" value=""
+								ng-model="patientObject.dateOfBirth |date" readonly>
+						</div>
+						
+						<div class="col-sm-4">
+							<label>Age : </label> <input type="text" name="appointment_id"
+								value="" ng-model="patientObject.age" placeholder="Age" readonly>
+						</div>
+					
+						
+					</div>
+					<div class=" col-md-12">
+						<div class="col-sm-4">
+							<label>Aadhaar Number : </label> <input type="text" name="ssn"
+								ng-model="patientObject.ssn" placeholder="SSN" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Relationship To Child : </label> <input type="text"
+								name="relationshipToChild" ng-model="patientObject.relationshipToChild"
+								placeholder="Relationship To Child " readonly>
+						</div>
+						
+						<div class="col-sm-4">
+							<label>Sex : </label> <input type="text"
+								name="gender" ng-model="patientObject.gender"
+								placeholder="Gender" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Mother Tongue : </label> <input type="text"
+								name="gender" ng-model="patientObject.motherTongue"
+								placeholder="Mother Tongue" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Languges known : </label> <input type="text"
+								name="gender" ng-model="patientObject.languagesKnown"
+								placeholder="Languages Known" readonly>
+						</div>
+						
+					</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	</div>
+	
+					
+	<div class="">
+		<div class="content-block content-block-horizantal"
+			style="background-color: rgba(128, 128, 128, 0.2)">
+			<div class="content-block-ttl">Parent Info</div>
+			<div class="content-block-main">
+				<div class="row content-input">
+				<div class=" col-md-12">
+				<div class="col-sm-4">
+							<label>Father's Name : </label> <input type="text"
+								name="parentName" ng-model="patientObject.parentName"
+								placeholder="Parent Name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Father's Phone Number : </label> <input type="text"
+								name="mobileNumber" ng-model="patientObject.mobileNumber"
+								placeholder="Phone Number" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Mother's Name : </label> <input type="text"
+								name="motherName" ng-model="patientObject.motherName"
+								placeholder="Mother Name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Mother's Phone Number : </label> <input type="text"
+								name="mobileNumber" ng-model="patientObject.secondaryNumber"
+								placeholder="Phone Number" readonly>
+						</div>
+						<!-- <div class="col-sm-4">
+							<label>Street Address 1 : </label> <input type="text" value=""
+								ng-model="patientObject.address1.address1" readonly>
+						</div> -->
+						
+				</div>
+					<div class=" col-md-12">
+					
+						<div class="col-sm-4">
+							<label>Street Address  : </label> <input type="text" value=""
+								ng-model="patientObject.address1.address2" readonly>
+						</div>
+						
+						
+						<div class="col-sm-4">
+							<label>City : </label> <input type="text" name="appointment_id"
+								ng-model="patientObject.address1.city" placeholder="City" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>State : </label> <input type="text" name="appointment_id"
+								ng-model="patientObject.address1.state" placeholder="State"
+								readonly>
+						</div>
+					</div>
+					<div class=" col-md-12">
+					
+						<div class="col-sm-4">
+							<label>Country : </label> <input type="text"
+								name="appointment_id" ng-model="patientObject.address1.country"
+								placeholder="Country" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Zip/Postal Code : </label> <input type="text" value=""
+								ng-model="patientObject.address1.zipcode" readonly
+								placeholder="Zip/Postal Code">
+						</div>
+						<div class="col-sm-4">
+							<label>No.Of Sibings : </label> <input type="text" value=""
+								ng-model="patientObject.siblings" readonly
+								placeholder="Siblings">
+						</div>
+						<div class="col-sm-4">
+							<label>Communication Status : </label> <input type="text" name="email" value=""
+								ng-model="patientObject.email" readonly
+								placeholder="Communication Status">
+						</div>
+						
+					</div>
+					<br> <br>
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	
+	<div class="">
+		<div class="content-block content-block-horizantal"
+			style="background-color: rgba(128, 128, 128, 0.2);">
+			<div class="content-block-ttl">Payment Info</div>
+			<div class="content-block-main">
+				<div class="row content-input">
+					<div class=" col-md-12">
+					
+					<div class="col-sm-4">
+							<label>Payment Id : </label> <input type="text"
+								value="" ng-model="payment.paymentId" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Payment Type : </label> <input type="text"
+								name="appointment_id" ng-model="payment.paymentTypes.name" readonly>
+						</div>
+						<div class="col-sm-4">
+							<label>Mode Of Payment Type : </label> <input type="text"
+								name="appointment_id" ng-model="payment.modeOfPaymentTypes"
+								readonly>
+						</div>
+						
+						
+						
+					</div>
+					
+					<div class=" col-md-12">
+						<div class="col-sm-4">
+							<label>Per Session Cost : </label> <input type="text" value=""
+								ng-model="payment.assignedAmount" readonly>
+						</div>
+						</div>
+					<!-- <div class="row col-md-12">
+						
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- <button class="btn btn-primary nextBtn pull-left" type="button"
+		ng-click="gotoPayments();">Previous</button> -->
+
+	<div class="reset-button col-sm-12" align="center">
+
+<button class="btn btn-info  pull-left" type="button"
+	ng-click="gotoupdatePayments();">Previous</button>
+<button class="btn btn-success"
+	ng-click="updatePatientData()" type="submit">Update</button>
+	<button class="btn btn-danger "
+	ng-click="gotoback()" type="submit">Cancel</button>
+		
+	</div>
+	<!-- <button class="btn btn-success pull-right" ng-click="addPatientData()"
+		type="submit">Finish!</button> -->
+</div>

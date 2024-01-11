@@ -1,0 +1,240 @@
+<div class="content-wrapper" ng-init="getCaretakerCategoryLookups();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>CareTaker Milestones</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a>Parent Role</a></li>
+				<li class="active">Parent Role</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<li style="float:left;"
+						ng-repeat="category in categorylookupLists" 
+						ng-click="getAllCaretakerMilestones(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}
+					</a></li><li>
+					<button class="btn btn-primary" data-toggle="tooltip" ng-if="loggedUserRole!='Parent'" ng-click="goToBack();"
+						data-placement="right" title="Add Category">
+						<i class="" aria-hidden="true">+</i>
+					</button></li>
+				</ul>
+				<!-- Tab panels -->
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+						<div class="col-sm-12 border">
+								<p align="center">
+									<label>Video</label>
+								</p>
+								<video width="100%" height="300" controls="controls">
+									<source
+										src="/views/parent/Autism - causes, symptoms, diagnosis, treatment, pathology.mp4"
+										type="video/ogg">
+								</video>
+							</div>
+							
+							<div class="col-sm-12 class= table-responsive" align="justify">
+								<div>
+									<table class="table table-bordered table-hover"
+										ng-if="categoryGeneralList.length<1">
+										<thead>
+										<tr>
+											<td colspan="2"><label>Parent Role:</label></td></tr>
+											<tr>
+											<td colspan="2"><label><!-- Each child develops at
+													her own pace, but talk to your baby's doctor if your
+													1-month-old: -->
+													{{categorylookupList[0].careTakerCategoryLookup.description}}
+													</label></td>
+										</tr>
+										</thead>
+										<tbody ng-repeat="question in categorylookupList">
+											<div ng-repeat="answer in question.careTakerAnswerLookups">
+												<tr ng-repeat="answer in question.careTakerAnswerLookups">
+													<td class="col-sm-10">{{question.name}}</td>
+
+													<td class="col-sm-4"><label class="radio-inline">
+															<input type="radio"
+															ng-checked="answer.selectedAnswer=='true'"
+															ng-model="answer.selectedAnswer" ng-value="true">Yes
+													</label> <label class="radio-inline"> <input type="radio"
+															g-checked="answer.selectedAnswer=='false'"
+															ng-model="answer.selectedAnswer" ng-value="false">No
+													</label></td>
+												</tr>
+											</div>
+										</tbody>
+										<tr>
+											<td colspan="2">
+												<div align="center">
+													<button class="btn btn-primary" 
+														ng-click="saveCaretakerMilestones(categorylookupList);">
+														Save</button>
+													<button class="btn btn-danger" ng-click="">Cancel</button>
+												</div>
+											</td>
+										</tr>
+										<tr rowspan="3"
+										ng-if="childQuestionsListByCategoryId.length == 0">
+										<td colspan="2" align="center"><b><h1>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h1></b></td>
+									</tr>
+
+									</table>
+
+
+									<table class="table table-bordered table-hover"
+										ng-if="categoryGeneralList.length>01">
+										<thead>
+										<tr>
+											<td colspan="2"><label>Parent Role:</label></td></tr>
+											<tr>
+											<td colspan="2"><label><!-- Each child develops at
+													her own pace, but talk to your baby's doctor if your
+													1-month-old: -->
+													{{categoryGeneralList[0].careTakerCategoryLookup.description}}
+													</label></td>
+										</tr>
+										</thead>
+										<tbody ng-repeat="question in categoryGeneralList">
+											<div ng-repeat="answer in question.careTakerAnswers">
+												<tr ng-repeat="answer in question.careTakerAnswers">
+													<td class="col-sm-10">{{question.name}}</td>
+
+													<td class="col-sm-4"><label class="radio-inline">
+															<input type="radio"
+															ng-checked="answer.selectedAnswer=='true'"
+															ng-model="answer.selectedAnswer" ng-value="true">Yes
+													</label> <label class="radio-inline"> <input type="radio"
+															g-checked="answer.selectedAnswer=='false'"
+															ng-model="answer.selectedAnswer" ng-value="false">No
+													</label></td>
+												</tr>
+										</tbody>
+										<tr>
+											<td colspan="2">
+												<div align="center">
+													<button class="btn btn-primary"
+														ng-click="updateCaretakerMilestones(categoryGeneralList);">
+														Save</button>
+													<button class="btn btn-danger" ng-click="">Cancel</button>
+												</div>
+											</td>
+										</tr>
+										
+										<tr rowspan="3"
+										ng-if="categoryGeneralList.length == 0">
+										<td colspan="2" align="center"><b><h1>
+													<i class="fa fa-meh-o"></i> No records found!
+												</h1></b></td>
+									</tr>
+										</div>
+									</table>
+									<div ng-if="loggedUserRole!='Parent'">
+									<button class="btn btn-primary"  ng-click="showme=true">Add
+											Goal</button>
+									<form name="screeningTestform" ng-show="showme">
+							
+
+							<div class="form-group">
+								<div class="col-sm-3">
+									<label>Goal</label>{{questionName}}
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="text"  class="form-control"
+										name="QuestionName"
+										placeholder="Enter  Goal"
+										ng-model="goal.questionName" >
+										
+										 <!-- <span style="color: red" 
+										ng-show="(screeningTestform.QuestionName.$touched && screeningTestform.QuestionName.$invalid)">
+										<span ng-show="screeningTestform.QuestionName.$error.required">
+											Goal required.</span></span> -->
+								</div>
+								<div class="col-sm-3" align="center">
+									<br> <br>
+								</div>
+							</div>
+							<div class="form-group col-sm-12">
+								<div class="col-sm-3">
+									<label></label>
+								</div>
+								<div class="col-sm-6">
+									<div ng-repeat="evalution in evalutions">
+										<input type="hidden" value="" class="form-control" name="answer"
+											placeholder="Enter Your Answer" ng-model="evalution.name"
+											aria-required="true" aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required> <span style="color: red" ng-cloak
+											ng-show="(screeningTestform.answer.$touched && screeningTestform.answer.$invalid)">
+											<span ng-show="screeningTestform.answer.$error.required">Answer
+												is required.</span>
+									</div>
+
+								</div><br>
+								<div class="col-sm-3">
+									<a class="btn btn-lg" ng-click="newItem()"> <span
+										class=""></span>
+									</a>
+
+								</div>
+							</div>
+							
+						</form>
+						<div class="reset-button col-sm-12" ng-show="showme">
+						<button class="btn btn-success" ng-click="addCaretakerQuestionLookup(goal)"
+							ng-disabled="screeningTestform.$invalid">Add</button>
+						<a class="btn btn-warning"  ng-click="showme=false">Cancel</a>
+					</div>
+					</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type='text/javascript'>
+	function ScrollDiv() {
+
+		if (document.getElementById('ecran').scrollTop < (document
+				.getElementById('ecran').scrollHeight - document
+				.getElementById('ecran').offsetHeight)) {
+			-1
+			document.getElementById('ecran').scrollTop = document
+					.getElementById('ecran').scrollTop + 1
+		} else {
+			document.getElementById('ecran').scrollTop = 0;
+		}
+	}
+	setInterval(ScrollDiv, 50)
+</script>

@@ -1,0 +1,233 @@
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.text {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.select {
+	border: none;
+	overflow: auto;
+	outline: none;
+	resize: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.label-info {
+    color: #fff;
+    background-color: #53d4fa;
+    border: 2px solid #53d4fa;
+}
+
+/* .label-success {
+    color: #fff;
+    background-color: #009688;
+    border: 2px solid #009688;
+} */
+</style>
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-handshake-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>SubAppointment List</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">SubAppointment List</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content" ng-init="getAllSubAppointmentsByAppointment()">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+				<div class="panel-heading">
+                                    <div class="btn-group" ng-click="gotoAppointmentReports()"> 
+                                        <a class="btn btn-success" > <i class="fa fa-list"></i> Appointment List</a>  
+                                    </div>
+                                </div>
+					<div class="panel-body">
+						<form>
+							<!-- <div class="page-hdr">
+								<div class="row">
+									<div class="col-8 page-name">
+										<h1>
+											<i class="fa fa-credit-card"></i>Invoice Edit
+										</h1>
+									</div>
+									<div class="col-4 page-menu">
+										<a id="cancel" href="index.php?route=invoice"
+											data-toggle="tooltip" data-placement="left"
+											title="Back to List"><i class="fa fa-reply"></i></a>
+										<button type="submit" name="submit" data-toggle="tooltip"
+											data-placement="left" title="Save Appointment">
+											<i class="fa fa-floppy-o"></i>
+										</button>
+									</div>
+								</div>
+							</div> -->
+							
+
+							<div class="content">
+							
+								<div class="content-block content-block-horizantal">
+								<div class="col-sm-12 text-right">
+										<!-- <div class="btn-group" role="group" aria-label="Basic example">
+											<a href="" class="btn btn-success btn-sm" ng-click="gotoAppointmentReports()"><i
+												class="fa fa-eye-square-o mr-1"></i>Appointment List </a>
+										</div> -->
+									</div>
+									<div class="content-block-ttl">SubAppointment List</div>
+									<!--  -->
+									
+									<!--  -->
+									<div class="content-block-main">
+										<!-- <input type="hidden" name="_token" value=""> -->
+										<div class="row content-input">
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Patient Name</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="icon-user"></i></span>
+													<input type="text" name="invoice[name]"
+														class="form-control" ng-model="subList[0].patient.firstName"
+														value="Charlie Runkle"
+														placeholder="Patient Name">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Email</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-envelope"></i></span> <input type="email"
+														name="invoice[email]" ng-model="subList[0].patient.email"
+														class="form-control" placeholder="Patient Email">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label class="col-form-label">Patient Mobile Number</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="icon-phone"></i></span> <input type="text"
+														name="invoice[mobile]" value="0011223344" ng-model="changeMobileNumber(subList[0].patient.mobileNumber)"
+														class="form-control" placeholder="Patient Mobile Number">
+												</div>
+											</div>
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Doctor</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-user-md"></i></span> <input type="text" name="invoice[name]"
+														class="form-control" ng-model="subList[subList.length-1].doctor.firstName"
+														value="Charlie Runkle"
+														placeholder="Doctor Name">
+												</div>
+											</div>
+											<div class="col-sm-6 form-group">
+												<label class="col-form-label">Department</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-sitemap"></i></span> <input type="text"
+														class="form-control" value="08-10-2017"
+														ng-model="subList[subList.length-1].doctor.department.departmentName"
+														placeholder="Department">
+												</div><!-- yyyy-MM-dd -->
+											</div>
+											<!--  -->
+											<div class="col-sm-12 form-group">
+											
+											<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+									      <th>No.</th>
+										<th>start Date</th>
+										<th>start time</th>
+										<th>End Date</th>
+										<th>End time</th>
+									     <th>Status</th>
+										<th>Doctor</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="subAppointment in subList | orderBy : 'id':true">
+									      <td>{{$index+1}}</td>
+									    <td>{{changeDate(subAppointment.appointmentStartedDate);}}</td>
+										<td>{{subAppointment.appointmentStartTime | date:'HH:mm:ss'}}</td>
+										<td>{{changeDate(subAppointment.appointmentEndedDate);}}</td>
+										<td>{{subAppointment.appointmentEndTime | date:'HH:mm:ss'}}</td>
+                                        <td><span class="label-info label label-default"
+											ng-if="subAppointment.status=='AWAITING'"> AWAITING</span><span
+											class="label-default label label-success"
+											ng-if="subAppointment.status=='COMPLETE'"> COMPLETE</span><span
+											class="label-default label label-danger"
+											ng-if="subAppointment.status=='CANCEL'"> CANCEL</span>
+											</td>
+											<td>{{subAppointment.doctor.firstName}}  {{subAppointment.doctor.lastName}}</td>
+									</tr>
+									<tr ng-if="subList.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+											</div>
+										</div><!--  -->
+
+									</div>
+								</div>
+								<input type="hidden" class="taxes"
+									value="[{&quot;id&quot;:&quot;1&quot;,&quot;name&quot;:&quot; Vat 7.0&quot;,&quot;rate&quot;:&quot;7&quot;},{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Vat 7.5&quot;,&quot;rate&quot;:&quot;7.5&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;name&quot;:&quot;Vat 12.5&quot;,&quot;rate&quot;:&quot;12.5&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;CGST 5.5&quot;,&quot;rate&quot;:&quot;5.5&quot;},{&quot;id&quot;:&quot;5&quot;,&quot;name&quot;:&quot;SGST 5.5&quot;,&quot;rate&quot;:&quot;5.5&quot;},{&quot;id&quot;:&quot;6&quot;,&quot;name&quot;:&quot;CGST 12&quot;,&quot;rate&quot;:&quot;12&quot;},{&quot;id&quot;:&quot;7&quot;,&quot;name&quot;:&quot;CGST 18&quot;,&quot;rate&quot;:&quot;18&quot;}]">
+								<input type="hidden" name="invoice[appointment_id]" value="19">
+								<input type="hidden" name="id" value="54">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>

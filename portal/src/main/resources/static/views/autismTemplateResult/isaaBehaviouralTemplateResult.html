@@ -1,0 +1,109 @@
+
+<div ng-init="getISAABehaviorReportByPatientId();isaaBehavioralResultBypatient(); ">
+	<h3 align="center">ISAA Behavioral Template Result</h3>
+	<table class="table table-bordered table-hover">
+		
+		<tbody>
+			<tr>
+				<td>Rarely Upto 20% Score 1</td>
+				<td>1</td>
+				
+			</tr>
+			<tr>
+				<td>Sometimes 21-40% Score 2</td>
+				<td>2</td>
+				
+			</tr>
+			<tr>
+				<td>Frequently 41-60% Score 3 </td>
+				<td>3</td>
+				
+			</tr>
+			<tr>
+				<td>Mostly 61-80% Score 4</td>
+				<td>4</td>
+				
+			</tr>
+			<tr>
+				<td> Always 81-100% Score 5</td>
+				<td>5</td>
+				
+			</tr>
+
+		</tbody>
+	</table>
+
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Classification</th>
+				<th>No autism <70</th>
+				<th>Mild autism 70-106</th>
+				<th>Moderate Autism 107-153</th>
+				<th>Severe Autism >153</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Total Score</td>
+				<td>{{isaaBehaviourreport.avgPerformanceScorel70}}</td>
+				<td>{{ isaaBehaviourreport.avgPerformanceScore70to106 }}</td>
+				<td>{{ isaaBehaviourreport.avgPerformanceScore107to153 }}</td>
+				<td>{{ isaaBehaviourreport.avgPerformanceScoreg153 }}</td>
+			</tr>
+			<tr>
+				<td>Comment: </td>
+				<td>{{isaaBehaviourreport.statement}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+		</tbody>
+	</table>
+	
+	
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions1to9"></div>
+	</div>
+	<p align="left">Social Relationship And Reciprocity</p>
+	<br>
+	<hr>
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions10to14"></div>
+	</div>
+
+	<p align="left">Emotional Responsiveness</p>
+	<br>
+	<hr>
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions15to23"></div>
+	</div>
+	<p align="left">Speech-Language And Communications</p>
+	<br>
+	<hr>
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions24to30"></div>
+	</div>
+	<p align="left">Behaviour Patterns</p>
+	<br>
+	<hr>
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions31to36"></div>
+	</div>
+	<p align="left">Sensory Aspects</p>
+	<br>
+	<hr>
+	<div class="demo-container">
+		<div id="chart" dx-chart="chartOptions37to40"></div>
+	</div>
+	<p align="left">Cognitive Component</p>
+	<br>
+	<hr>
+
+</div>
+<style>
+#chart {
+	height: 440px;
+}
+</style>

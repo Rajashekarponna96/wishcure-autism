@@ -1,0 +1,85 @@
+<div>
+		<div class="row">
+			<div class="col-sm-12">
+					<div>
+						<div class="col-sm-12">
+							<br> <label>History :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.history"></textarea>
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Background Information :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.backgroundInformation"></textarea>
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Observation :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.observation"></textarea>
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Test Administered :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.testAdministered"></textarea>
+						</div>
+						
+						<div class="col-sm-12">
+							<br> <label>Oral Motor :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.oralMotor"></textarea>
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Pragmatic Skills :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.pragmaticSkills"></textarea>
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Summary :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.summary"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Recommendations :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.recommendations"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Receptive Language :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.receptiveLanguage"></textarea>
+
+						</div>
+						<div class="col-sm-12">
+							<br> <label>Expressive Language :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.expressiveLanguage"></textarea>
+
+						</div>
+
+						<div class="col-sm-12">
+							<br> <label>Parental Tips :</label>
+							<textarea class="col-sm-12 border" rows="5"
+								ng-model="template.parentalTips"></textarea>
+
+							<br> <br>
+							<div class=col-sm-12>
+								<strong>It was a pleasure to meet and work with
+									Paitent_name. Feel free to contact me with any questions.</strong> <br>
+								<label>Assessment and therapy session completed by:</label> <br>
+								<br> <br> <br> <label>Upload Your
+									signarure</label> <input type="file" ng-model="template.path">
+							</div>
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="addtemplate(template)"
+									ng-show="hasFeature('Evalution Template').canAdd==true"
+									ng-disabled="packagenameform.$invalid">Save</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+</div>
+

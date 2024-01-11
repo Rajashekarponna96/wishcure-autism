@@ -1,0 +1,172 @@
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-dropdown-multiselect/1.11.8/angularjs-dropdown-multiselect.min.js"></script>
+<div class="stepwizard">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoRegistrationDetails();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-3">
+			<a ng-click="gotoPayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-1"
+	ng-init="getAllPatientRegistrationTypesList();">
+	<!-- getAllCategoryTypes(); -->
+	<hr>
+	<form name="patientForm">
+		<div class="col-sm-12">
+			<br>
+			<div class="col-sm-6 form-group">
+				<label><span
+					ng-if="patient.regNumber == undefined || patient.regNumber == '' "
+					style="color: red">*</span>Reg No</label> <span style="color: red"
+					ng-show="(patientForm.regNumber.$touched && patientForm.regNumber.$invalid)">
+					<span ng-show="patientForm.regNumber.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="regNumber" class="form-control"
+					ng-model="patient.regNumber" required readonly="readonly">
+
+			</div>
+
+			<div class="col-sm-6 form-group">
+				<span ng-if="patient.regDate == undefined || patient.regDate == '' "
+					style="color: red">*</span><label>Date</label> <span
+					style="color: red"
+					ng-show="(patientForm.regDate.$touched && patientForm.regDate.$invalid)">
+					<span style="color: red"
+					ng-show="patientForm.regDate.$error.required"> is required.</span>
+				</span> <input type="text" date="dd-MM-yyyy" class="form-control"
+					name="regDate" id="regDate" ng-model="patient.regDate"
+					readonly="readonly">
+			</div>
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.patientRegistrationType == undefined || patient.patientRegistrationType == '' "
+					style="color: red">*</span>Registration Type</label> <span
+					style="color: red"
+					ng-show="(patientForm.patientRegistrationType.$touched && patientForm.patientRegistrationType.$invalid)">
+					<span ng-show="patientForm.patientRegistrationType.$error.required">
+						is required.</span>
+				</span> <select class="form-control" name="patientRegistrationType"
+					ng-model="patient.patientRegistrationType"
+					ng-change="getAllDepartmentsByRegistartiontype(patient.patientRegistrationType.id);"
+					ng-options="patientRegistrationType as patientRegistrationType.name for patientRegistrationType in patientRegistrationTypes"><option
+						value="" class="active">Select Registration Type</option></select>
+
+			</div>
+
+			<!-- <div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.categoryType == undefined || patient.categoryType == '' "
+					style="color: red">*</span>Department</label> <span style="color: red"
+					ng-show="(patientForm.categoryType.$touched && patientForm.categoryType.$invalid)">
+					<span ng-show="patientForm.categoryType.$error.required"> is
+						required.</span>
+				</span> <select class="form-control" name="categoryType"
+					ng-model="patient.categoryType"
+					ng-options="categoryType as categoryType.name  for categoryType in categoriesList"><option
+						value="" class="active">Select Department</option></select>
+
+			</div> -->
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.department == undefined ||patient.department =='' "
+					style="color: red">*</span>Department</label> <span style="color: red"
+					ng-show="(patient.department.$touched && patient.department.$invalid)">
+					<span ng-show="patient.department.$error.required"> is
+						required.</span>
+				</span><select class="form-control" ng-model="patient.departments"
+					ng-click="deptMsg()" name="department"
+					multiple ng-options="department as department.departmentName for department in departmentsListByRegistrationType">
+					<option value="" class="active">Select Department</option>
+				</select>
+			</div>
+			
+
+
+			<div class="col-lg-6 form-group">
+				<label>Referred By</label> <select class="form-control"
+					name="referredBy" ng-model="patient.referredBy"><option
+						value="" class="active">Select referredBy</option>
+					<option value="doctor" class="active">Doctor</option>
+					<option value="school" class="active">School</option>
+					<option value="center" class="active">Center</option>
+
+
+				</select>
+			</div>
+
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patient.reasonForReferral == undefined || patient.reasonForReferral =='' "
+					style="color: red">*</span>Reason For Referral</label> <span
+					style="color: red"
+					ng-show="(patientForm.reasonForReferral.$touched && patientForm.reasonForReferral.$invalid)">
+					<span ng-show="patientForm.reasonForReferral.$error.required">
+						is required.</span>
+				</span> <input type="text" name="reasonForReferral" class="form-control"
+					placeholder="Enter Reason For Referral"
+					ng-model="patient.reasonForReferral" required>
+			</div>
+
+		</div>
+
+
+	</form>
+	<div class="col-sm-12">
+		<br>
+	</div>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoChildDetails();">Next</button>
+</div>
+
+<script type="text/javascript">
+	/* $(document).ready(function () {
+	 $("#registartionType").change(function () {
+	 var val = $(this).val();
+	 if (val == "Consultation") {
+	 $("#department").html("<option value='Consultation Department'>Select Department</option><option value='Development Pediatrition'>Development Pediatrition</option><option value='Neurology'>Neurology</option><option value='Pediatrition'>Pediatrition</option><option value='Psychology'>Psychology</option>");
+	 } else if (val == "Assessment") {
+	 $("#department").html("<option value='Assesment'>Select Department</option><option value='Clinical Psycologist'>Clinical Psycologist</option>");
+	 } else if (val == "Therapy") {
+	 $("#department").html("<option value='Therapy'>Select Department</option><option value='Speech Threapy'>Speech Threapy</option><option value='Occasional Therapy'>Occasional Therapy</option><option value='Special Education'>Special Education</option><option value='Vocational Training'>Vocational Training</option><option value='Physiotherapy'>Physiotherapy</option><option value='Early Intervention'>Early Intervention</option>");
+	 } else if (val == "") {
+	 $("#department").html("<option value='Select Department'>Select Department</option>");
+	 }
+	 });
+
+	 }); */
+</script>

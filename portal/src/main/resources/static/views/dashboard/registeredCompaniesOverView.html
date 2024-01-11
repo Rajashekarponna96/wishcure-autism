@@ -1,0 +1,518 @@
+<div class="content-wrapper" ng-init="getAllActiveTherapistsForInternalDashboard();getAllRegistrationsForInternalDashboard();
+getAllActivepersonsForInternalDashboard();getAllInactivepersonsForInternalDashboard();getNewPatientsCountForInternalDashboard();
+totalPatientsRegisteredForInternalDashboard();getTodayPatientsDataForInternalDashboard();getAllactiveAdminsForInternalDashboard();
+getAllInactiveAdminsForInternalDashboard();getAllInactiveTherapistsForInternalDashboard();inActivePatientsForInternalDashboard();
+getAllAppointmentsCountByRoleForInternalDashboard();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-tachometer"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Over View - {{userName.userAccount.company.companyName}} </h1>
+			<!-- <h2>Owner {{userName.username}}</h2> -->
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Internal Dashboard</li>
+			</ol>
+		</div>
+	</section>
+	
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12"> 
+				 
+				<div class="panel panel-bd lobidrag">
+				<div class="panel-heading">
+                                    <div class="btn-group" ng-click="gotoregisteredCompanies();"> 
+                                        <a class="btn btn-success" > <i class="fa fa-list"></i> Registered Companies</a>  
+                                    </div>
+                                </div>
+					<div class="panel-body">
+					<section class="content">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-click="gotoActiveAdminsAndSuperAdminMethod(userName);"
+				 >
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{activePersonsList}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Users</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="gotoInactiveAdminsAndSuperAdminMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePersonsList}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Users</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="goactiveTherapistsMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfActiveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Active Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="goInActiveTherapistsMethod(userName);">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfInaciveTherapists}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Therapist</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-click="gotoTotalUsers(userName);"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfRegisteredUsers}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Users</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>TotalPatients</h4>
+							<h4>Engaged</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePatients}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{count}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="gotopatientList();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{totalPatientsRegistered}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Total Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				ng-click="gotopatientListInactive();">
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{inActivePatients}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>InActive Patients</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-click="gotoInvoicePage(userName)"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">
+								<!-- {{numberOfActiveTherapists+numberOfActiveAdmins}} -->
+								</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-users fa-2x"></i>
+							<h4>Billing Invoices</h4>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Total Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			
+			<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3"
+				>
+				<div class="panel panel-bd cardbox">
+					<div class="panel-body">
+						<div class="statistic-box">
+							<h2>
+								<span class="count-number">{{numberOfAppointments}}</span>
+							</h2>
+						</div>
+						<div class="items pull-left">
+							<i class="fa fa-user-circle fa-2x"></i>
+							<h4>Today Appointments</h4>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			
+			
+			<!-- <div class="col-sm-12">
+							<div class="reset-button">
+								 <a ng-click="goToBack();"
+									class="btn btn-danger">Back</a>
+
+							</div>
+						</div> -->
+						<!-- {{userName.createdDate}} -->
+	
+		</div>
+		
+	</section>
+					<!--NANI  -->
+					
+					
+<!--NANI  -->
+						
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+	</section>
+	
+
+
+
+<section class="content">
+<div class="tab-content">
+
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body" >
+					<!-- 	<div class="col-sm-12 table-responsive" align="justify"> -->
+							<div class="col-sm-12 " align="justify">
+							<form  name="patientForm">
+								<div class="col-sm-12">
+									<!--  -->
+									
+									<!-- <form >	 -->	
+	<div >
+		<div class="row">
+			<!-- <div class="col-8 page-name">
+				<h1><i class="fa fa-users"></i>Edit Patient</h1>
+			</div> -->
+			<!-- <div class="col-4 page-menu">
+				<a id="cancel" href="index.php?route=patient" data-toggle="tooltip" data-placement="left" title="" data-original-title="Back to List"><i class="fa fa-reply"></i></a>
+				<button type="submit" name="submit" data-toggle="tooltip" data-placement="left" title="" data-original-title="Save Page"><i class="fa fa-floppy-o"></i></button>
+			</div> -->
+		</div>
+	</div><div style="display: block; width: 1099px; height: 70px; float: none;"></div>
+		<div class="content">
+		<input type="hidden" name="_token" value="413ccea5ca6b8ce59e0da0d74a15110a305317f742542dcc5f09cc85ddf4f25288776a66377494dbf3154612b21c29b49cdcd6ee235b8ea2b77355d52eef0188">
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="content-block content-block-horizantal">
+					<div class="content-block-ttl">Basic details</div>
+					<div class="content-block-main">
+						<div class="row content-input">
+							<div class="col-sm-6">
+								<label>First Name : </label>
+								<input type="text" class="input-text" name="firstname" ng-model="userName.firstName" placeholder="Enter your First Name" required="">
+								<p class="content-input-error-name" style="display: none;">Please enter name!</p>
+							</div>
+							<div class="col-sm-6">
+								<label>Last Name : </label>
+								<input type="text" class="input-text" name="lastname" ng-model="userName.lastName"  placeholder="Enter your Last Name" required="">
+								<p class="content-input-error-name" style="display: none;">Please enter last name!</p>
+							</div>
+						</div>
+						<div class="row content-input">
+							<div class="col-sm-6">
+								<label>Email Address : </label>
+								<input type="email" class="input-email" name="email" ng-model="userName.email"  placeholder="Enter your Email Address" readonly="" required="">
+								<p class="content-input-error-name">Please enter email!</p>
+							</div>
+							<div class="col-sm-6">
+								<label>Mobile : </label>
+								<input type="text"  name="mobile" ng-model="userName.mobileNumber" phone-input placeholder="Enter your Mobile number"  >
+								<!-- <p class="content-input-error-name">Please enter phone number!</p> -->
+							</div>
+						</div>
+											</div>
+				</div>
+				<div class="content-block content-block-horizantal">
+					<div class="content-block-ttl">Other details</div>
+					<div class="content-block-main">
+						<div class="row content-input">
+							<div class="col-sm-6">
+								<label>Street Address 1: </label>
+								<input type="text" name="dob" id="user-dob"  ng-model="userName.userAccount.company.address1.address1" placeholder="Enter Street Address 1" class="hasDatepicker">
+							</div>
+							<div class="col-sm-6">
+																<label>Street Address 2 : </label>
+								<input type="text" ng-model="userName.userAccount.company.address1.address2" placeholder="Enter Street Address 2" readonly="">
+															</div>
+						</div>
+						<div class="row content-input">
+							<div class="col-sm-6">
+								<label>City : </label>
+								<input type="text" name="location" ng-model="userName.userAccount.company.address1.city" placeholder="Enter City">
+							</div>
+							<div class="col-sm-6">
+								<label>State : </label>
+								<input type="text" name="country" ng-model="userName.userAccount.company.address1.state" placeholder="Enter State">
+							</div>
+						</div>
+						
+						<div class="row content-input">
+							<div class="col-sm-6">
+								<label>Country : </label>
+								<!-- <input type="text" name="location" ng-model="userName.userAccount.company.address.city.name" placeholder="User Location"> -->
+							
+							<input type="text" class="form-control" rows="3"
+				ng-model="userName.userAccount.company.address1.country" name="address"
+				placeholder="Enter Country" required>
+							</div>
+							
+							<div class="col-sm-6">
+								<label>ZipCode : </label>
+								<input type="text" name="location" ng-model="userName.userAccount.company.address1.zipcode" placeholder="Enter ZipCode">
+							</div>
+						</div>
+						<!-- <div class="row content-input content-radio">
+							<div class="col-sm-6">
+								<label>Gender : </label>
+								<div >
+									<div class="col-sm-2 form-group" align="left" >
+			<label class="radio-inline">	<input type="radio"ng-value="0" ng-checked="userName.gender=='MALE'" name="gender">Male </label> &nbsp;&nbsp;&nbsp;
+					</div> <div style="padding-left: 260px;">
+					<label class="radio-inline">
+				<input	type="radio" name="gender" ng-checked="userName.gender=='FEMALE'" ng-model="userName.gender" ng-value="1">Female
+				</label>
+			</div>
+								</div>
+							</div>
+						</div> -->
+						
+					</div>
+				</div>
+			
+			</div>
+			<div class="col-sm-4">
+								
+								<div class="content-block content-block-horizantal">
+					<div class="content-block-ttl">For office use{{userName.countryName}}</div>
+					<div class="content-block-main">
+												<!-- <div class="content-input">
+							<label>User Role : </label>
+							<select name="role" title="Select User Role" class="select-list" required="" id="ui-id-1" style="display: none;">
+								<option value="1" selected="">Patient</option>
+								<option value="2">Handler</option>
+								<option value="3">Doctor</option>
+								<option value="4">Dean</option>
+							</select><span tabindex="0" id="ui-id-1-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="ui-id-1-menu" aria-haspopup="true" title="Select User Role" class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">Patient</span></span>
+							<div class="content-description">
+								If you want to give an admin access to user then select role otherwise do not select. It will automatically assign patient role to user.
+							</div>
+						</div> -->
+						<div class="content-input">
+							<label>Email : </label>
+							<input type="text" name="username" ng-model="userName.modifiedByUser" placeholder="User Name">
+							<div class="content-description">
+								The Active Status will be coming to this Mail Id!
+							</div>
+						</div>
+												<div class="content-input">
+							<label>Created Date : </label>
+							<input type="text" ng-model="userName.createdDate" readonly="">
+						</div>
+												<!-- <div class="content-input">
+							<label>Email Confirmation : </label>
+							<input type="text" value="Unconfirmed" readonly="">
+						</div> -->
+						<div class="content-input">
+							<label>Status : </label>
+							<select name="status" class="form-control" ng-model="userName.activeStatus">
+								<!-- <option value="" disabled="" >Status</option> -->
+								<option value="ACTIVE" selected="">Active</option>
+								<option value="INACTIVE">InActive</option>
+								<option value="HOLD">Hold</option>
+							</select>
+										<!-- <select name="occurance"  ng-model="userName.active" 
+										class="form-control" required>
+										<option  value='false'>Awaiting</option>
+										<option  value='true'>Complete</option>
+										<option  value=false>Awaiting1</option>
+										<option  value=true>Complete1</option>
+										<option  value="false">Awaiting2</option>
+										<option  value="true">Complete2</option>
+										
+										<option  ng-value='false'>Awaiting</option>
+										<option  ng-value='true'>Complete</option>
+										<option  ng-value=false>Awaiting1</option>
+										<option  ng-value=true>Complete1</option>
+										<option  ng-value="false">Awaiting2</option>
+										<option  ng-value="true">Complete2</option>
+										
+									</select> -->
+							<!-- <span tabindex="0" id="ui-id-2-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="ui-id-2-menu" aria-haspopup="true" class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">Active</span></span> -->
+						</div>
+						<div class="content-submit text-center">
+			<button type="submit" name="submit" ng-click="active(userName)" class="btn btn-primary">Save</button>
+		<button class="btn btn-danger" >Cancel</button>
+		</div>
+				
+												<!-- <div class="content-input">
+							<label>Notify User : </label>
+							<div class="content-radio-container">
+								<div>
+									<input type="checkbox" name="sendmail" value="1" id="send-mail" checked="">
+									<label for="send-mail"><span><i class="fa fa-check"></i></span><p>Send an Email</p></label>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="id" value="226">
+		</div>
+		<!-- <div class="content-submit text-center">
+			<button type="submit" name="submit" ng-click="active(userName)" class="btn btn-primary">Save</button>
+		</div> -->
+	</div>
+<!-- </form> -->
+									
+									
+									</div>
+									</form>
+										
+									<!--  -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+				</section>
+</div>
+

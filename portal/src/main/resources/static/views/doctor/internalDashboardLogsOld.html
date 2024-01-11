@@ -1,0 +1,186 @@
+<div class="content-wrapper"
+	ng-init="gotoActiveAdminsAndSuperAdmin();gotoInactiveAdminsAndSuperAdmin();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." ng-model="search"> <span
+						class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>User Logs</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">User Logs</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Content Header (Page header) -->
+
+	<!-- Main content -->
+
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+
+					<div class="panel-body">
+
+						<!-- <div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead> -->
+
+						<div ng-repeat="user in userLists">
+							<div class="panel panel-default"
+								style="border-left: 5px solid #32c1ce;">
+								<div class="panel-heading"
+									style="padding-bottom: 2px; padding-top: 2px;">
+									<div class="row">
+										<div class="col-sm-2  text-left">
+											<span>{{$index+1}}</span>
+										</div>
+										<div class="col-sm-10 text-right">
+											<em>Role : </em> <span>{{user.userAccount.role.roleName}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body"
+									style="padding-bottom: 2px; padding-top: 10px;">
+									<div class="row card-bdy">
+										<div class="col-sm-1 text-left">
+											<div class="card-img card-icon" align="right">
+												<i class="fa fa-user-o fa-3x"></i>
+											</div>
+										</div>
+
+										<div class="col-sm-6 text-left">
+
+											<div class="card-info">
+												<div class="card-name">{{user.firstName}}
+													{{user.lastName}}</div>
+												<div class="card-text">{{user.email}}</div>
+												<div class="card-text">{{changeMobileNumber(user.mobileNumber);}}</div>
+
+											</div>
+										</div>
+
+
+										<div class="col-sm-5 text-right">
+											<div href="index.php?route=themeoption/doctor/edit&amp;id=3"
+												class="invoice-doctor-name" target="_blank">
+												<i class="fa fa-user-md"></i> {{user.createdByUser}}
+											</div>
+											<div class="invoice-amount">
+												<p>
+													<span>Created Date - </span><span>{{user.createdDate}}</span>
+												</p>
+
+												<p>
+													<span>Modified Date - </span><span>{{user.modifiedDate}}</span>
+												</p>
+												<p>
+													<span>Modified By User- </span><span>{{user.modifiedByUser}}</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									<!-- Panel Footer -->
+									<div class="card-ftr">
+										<div class="card-action text-left">
+											<span class="label-success label label-default"
+												ng-if="user.userAccount.active==true"> Active</span><span
+												class="label-default label label-danger"
+												ng-if="user.userAccount.active==false"> InActive</span>
+										</div>
+										<!--gotoInvoicePage(pa) gotoView -->
+
+									</div>
+								</div>
+
+								<!-- <tr>
+										 <th>Serial No</th>
+										<th >First Name </th>
+										<th >Last Name</th>
+										<th >Email </th>
+										<th >Created By user </th>
+										<th >Created Date</th>
+										<th >Modified By user</th>
+										<th >Modified date</th>
+										<th>Status</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="user in userLists ">
+										
+										<td>{{user.firstName}}</td>
+										<td>{{user.lastName}}</td>
+										<td>{{user.userAccount.username}}</td>
+										<td>{{user.createdByUser}}</td>
+										<td>{{user.createdDate}}</td>
+										<td>{{user.modifiedByUser}}</td>
+										<td>{{user.modifiedDate}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="user.userAccount.active==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="user.userAccount.active==false"> InActive</span> <td><span class="label-success label label-default" ng-if="department.status==true"> Active</span><span class="label-default label label-danger" ng-if="department.status==false"> InActive</span>
+                                   </td>
+                                   
+										
+										
+									</tr>
+									<tr ng-if="userLists.length == 0">
+										<td colspan="7" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table> -->
+								<div ng-if="userLists.length == 0">
+									<div class="container">
+										<div class="panel panel-default">
+											<div class="panel-heading">Panel Heading</div>
+											<div class="panel-body">
+												<i class="fa fa-meh-o"></i> No records found!
+											</div>
+											<div class="panel-footer">Panel Footer</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-sm-12">
+							<div class="reset-button">
+								<a ng-click="goToBackFromLogs();" class="btn btn-danger">Back</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+

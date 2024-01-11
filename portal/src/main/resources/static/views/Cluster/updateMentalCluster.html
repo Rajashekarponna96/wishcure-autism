@@ -1,0 +1,92 @@
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Mental Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="#/main/dashboard"><i class="pe-7s-home"></i>
+						Home</a></li>
+				<li><a href="#">Mental Template</a></li>
+				<li class="active">Mental Template</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list">Mental Template</i>
+							</a>
+						</div>
+					</div>
+					<div class="content">
+						<div class="row">
+							<div class="panel-body">
+								<form name="mentalClusterForm" class="col-sm-12">
+									<div class="col-sm-6">
+										<div class="form-group col-sm-12">
+											<label>Cluster Name</label> <input type="text" value=""
+												class="form-control" name="clusterName"
+												placeholder="Enter Cluster Name" ng-model="cluster.name"
+												aria-required="true" aria-invalid="true"
+												ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+												required> <span style="color: red" ng-cloak
+												ng-show="(mentalClusterForm.clusterName.$touched && mentalClusterForm.clusterName.$invalid)">
+												<span
+												ng-show="mentalClusterForm.clusterName.$error.required">
+													Cluster Name is required.</span>
+										</div>
+										<div class="form-group col-sm-12">
+											<label>Cluster Description</label>
+											<textarea value="" class="form-control"
+												name="clusterDescription"
+												placeholder="Enter Cluster Description"
+												ng-model="cluster.descripation" aria-required="true"
+												aria-invalid="true"
+												ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+												required> <span style="color: red" ng-cloak
+													ng-show="(mentalClusterForm.clusterDescription.$touched && mentalClusterForm.clusterDescription.$invalid)">
+													<span
+													ng-show="mentalClusterForm.clusterDescription.$error.required">
+											Cluster Description is required.</span>
+											</span></textarea>
+										</div>
+										<div class="row" align="center">
+											<span ng-if="message != undefined" style="color: red">{{message}}<br>
+											</span><br>
+										</div>
+										<div class="reset-button">
+											<button class="btn btn-success"
+												ng-click="updateMentalCluster(cluster)"
+												ng-disabled="mentalClusterForm.$invalid">Save</button>
+											<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+</div>

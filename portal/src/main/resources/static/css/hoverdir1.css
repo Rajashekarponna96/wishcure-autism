@@ -1,0 +1,44 @@
+.da-thumbs {
+	list-style: none;
+	position: relative;
+	padding: 0;
+	margin:0;
+}
+.da-thumbs li {
+	float: left;
+	position: relative;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	width:33.33%;
+}
+.da-thumbs li a,
+.da-thumbs li a img {
+	display: block;
+	position: relative;
+}
+.da-thumbs li a {
+	overflow: hidden;
+}
+.da-thumbs li a div {
+	position: absolute;
+	background: #FBB829;
+	width: 100%;
+	height: 100%;
+}
+.da-thumbs li a div span {
+  color: #fff;
+  display: table-cell;
+  font-weight: 700;
+  padding: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.da-thumbs li a div span span {
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  font-weight: normal;
+  margin-top: 15px;
+  padding: 0;
+  text-transform: capitalize;
+}

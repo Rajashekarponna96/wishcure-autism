@@ -1,0 +1,373 @@
+<div class="content-wrapper"
+	ng-init="getAllDepartments();getAllPatients(); getAllTherpistByDepartment(updatedappointment.department.id);getAllTherapists();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Update Appointment</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="index-2.html"><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Appointment</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ng-click="gotoList();"> <i
+								class="fa fa-list"></i> Appointment List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body" >
+						<form class="col-sm-12" name="addPatientForm" >
+
+
+							<div class="form-group">
+								<div class="form-group  col-sm-8 col-sm-offset-2" >
+									<label>Title</label><br> <input 
+										class="form-control" ng-model="updatedappointment.description"
+										rows="3" placeholder="problem"> </input>
+								</div>
+								<div class="col-sm-4 form-group col-sm-offset-2">
+									<label>Patient Name</label> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.patient.$dirty && addPatientForm.patient.$invalid)">
+										<span ng-show="addPatientForm.patient.$error.required">
+											is required.</span></span><select name="patient"
+										class="form-control" ng-model="updatedappointment.patient.firstName"
+										ng-options="patient.firstName as patient.firstName for patient in  patientList"
+										required>
+										<option value="" class="active">Select Patient</option>
+									</select> 
+								</div>
+								<!-- <div class="col-sm-4 form-group">
+									<label>Department Name</label> <select name="department"
+										class="form-control" ng-model="appointment.department"
+										ng-options="department as department.departmentName for department in departmentsList"
+										ng-change="getAllTherpistByDepartment(appointment.department.id);"
+										required>
+										<option value="" class="active">Select Department</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.department.$dirty && addPatientForm.department.$invalid)">
+										<span ng-show="addPatientForm.department.$error.required">Department
+											is required.</span>
+								</div> -->
+								<!-- <div class="col-sm-4 form-group">
+									<label>Department Name</label> <select name="department"
+										class="form-control" ng-model="updatedappointment.department"
+										ng-options="department as department.departmentName for department in departmentsList track by $index"
+										ng-change="getAllTherpistByDepartment(updatedappointment.department.id);"
+										required>
+										<option value="" class="active">Select Department</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.department.$dirty && addPatientForm.department.$invalid)">
+										<span ng-show="addPatientForm.department.$error.required">Department
+											is required.</span>
+								</div>
+								
+								<div class="col-sm-4 form-group col-sm-offset-2"> 
+									<label>Therapist Name</label> <select name="doctor"
+										class="form-control" ng-model="updatedappointment.doctor"
+										ng-options="doctor as doctor.firstName for doctor in therapistList track by $index"
+										ng-change="getTherpistAvailablity(updatedappointment.doctor.id);"
+										required>
+										<option value="" class="active">Select Therapist</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.doctor.$dirty && addPatientForm.doctor.$invalid)">
+										<span ng-show="addPatientForm.doctor.$error.required">Therapist
+											Name is required.</span>
+								</div> -->
+								
+								<div class="col-sm-4 form-group">
+									<label>Therapists Name </label>
+									<select name="doctor" class="form-control" ng-model="updatedappointment.doctor.firstName"
+										ng-options="doctor.firstName as doctor.firstName for doctor in  therapistList">
+											<option value="" class="active">Select Therapist</option>
+											<!-- <option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option> -->
+									</select></td>
+								</div>
+								<div  class="col-sm-4 form-group col-sm-offset-2">
+									<label>Starts At</label>
+									<mdp-date-picker mdp-placeholder="from Date"
+											 ng-model="updatedappointment.appointmentStartDate"></mdp-date-picker>
+									<mdp-time-picker mdp-placeholder="from Time"
+											 ng-model="updatedappointment.appointmentStartDate"></mdp-time-picker>
+								</div>
+								
+								<div  class="col-sm-4 form-group">
+									<label>Ends At</label>
+									<mdp-date-picker mdp-placeholder="To Date"
+											ng-model="updatedappointment.appointmentEndDate"></mdp-date-picker>
+									<mdp-time-picker mdp-placeholder="To Time"
+											ng-model="updatedappointment.appointmentEndDate"></mdp-time-picker>
+								</div>
+								
+								<!-- <div class="col-sm-4 form-group ">
+									<label>Appointment Start Date</label> <input
+										name="appointmentStartDate"
+										ng-model="updatedappointment.appointmentStartDate"
+										class="datepicker form-control hasDatepicker" type="Date"
+										placeholder="Start date" value="" size="4">
+
+								</div>
+								<div class="col-sm-4 form-group col-sm-offset-2">
+									<label>Start Time</label> <input name="appointmentStartTime"
+										id="time" format="HH:mm:ss"
+										class="datepicker form-control hasDatepicker" type="Time"
+										ng-model="updatedappointment.appointmentStartTime"
+										placeholder="End date" value="" size="4">
+								</div> 
+								
+								
+								
+								
+
+							</div>
+							<div class="col-sm-4 form-group ">
+								<label>Appointment End Date</label> <input
+									name="appointmentEndDate"
+									ng-model="updatedappointment.appointmentEndDate"
+									class="datepicker form-control hasDatepicker" type="Date"
+									placeholder="Start date" value="" size="4">
+							</div>
+
+							<div class="col-sm-4 form-group col-sm-offset-2">
+								<label>End Time</label> <input name="appointmentStartTime"
+									format="HH:mm:ss" id="time"
+									class="datepicker form-control hasDatepicker" type="Time"
+									ng-model="updatedappointment.appointmentEndTime"
+									placeholder="End date" value="" size="4">
+							</div>
+							 <div class="col-sm-4 form-group col-sm-offset-2">
+									<label>Department Name</label> <select name="department"
+										class="form-control" ng-model="updatedappointment.department"
+										ng-options="department as department.departmentName for department in departmentsList track by $index"
+										ng-change="getAllTherpistByDepartment(updatedappointment.department.id);"
+										required>
+										<option value="" class="active">Select Department</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.department.$dirty && addPatientForm.department.$invalid)">
+										<span ng-show="addPatientForm.department.$error.required">Department
+											is required.</span>
+								</div> -->
+							
+							<div class="col-sm-8 form-group col-sm-offset-2">
+								<label>Repeat</label> <select name="occurance"
+									class="form-control" ng-model="updatedappointment.occurance" required>
+									<option value="ONETIME" class="active">Once</option>
+									<option value="RECURSIVE">Recursive</option>
+								</select>
+							</div>
+							
+							<div class="col-sm-8 form-group col-sm-offset-2" ng-if="updatedappointment.occurance=='RECURSIVE'">
+								<label>Repeat for every </label> (In Week(s)):<input type="number" class="form-control"
+											ng-model="updatedappointment.weeks" ng-value="1" size="4" />
+							</div>
+														    <div class="col-sm-8 form-group col-sm-offset-2" ng-if="updatedappointment.occurance=='RECURSIVE'">
+										<label>Repeat every:&nbsp;</label> <label
+											ng-value="day" ng-repeat="day in weekDays"> <input
+												type="checkbox" checklist-model="updatedappointment.weekDays"
+												checklist-value="day">{{day}}&nbsp;
+										</label>
+
+									</div>
+							
+							<!-- <div class="col-sm-10 form-group" >
+								<label>Repeat</label> <select name="occurance"
+									class="form-control" ng-model="appointment.occurance" required>
+									<option value="ONETIME" class="active">Once</option>
+									<option value="RECURSIVE1">Recursive</option>
+								</select>
+							</div>
+							
+							
+							<div ng-if="appointment.occurance=='RECURSIVE1'">
+								<table class="col-sm-12">
+									<tr class="col-sm-12">
+										<td class="col-sm-2"><label>Repeat every: </label></td><td class="col-sm-10"> <input type="number" class="form-control"
+											ng-model="appointment.weeks" ng-value="1" size="4" /></td><td>Week(s)
+										</td>
+
+									</tr>
+									<tr><td><br></td></tr>
+									<tr>
+										<td><label>Repeat On Every:&nbsp;&nbsp;</label> <label
+											ng-value="day" ng-repeat="day in weekDays"> <input
+												type="checkbox" checklist-model="appointment.weekDays"
+												checklist-value="day">{{day}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</label></td>
+
+									</tr>
+								</table> -->
+
+							<div class="reset-button col-sm-12">
+								<a class="btn btn-success" ng-click="updateAppointment(updatedappointment);">Update</a>
+								<a class="btn btn-warning">Reset</a>
+							</div>
+					</div>
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+</div>
+<div id="ordine" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content ">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h4 class="modal-title">Phisician's Shift Hours</h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<table class="col-sm-12" border="1">
+								<tr>
+									<th>Day</th>
+									<th>Start</th>
+									<th>End</th>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12"></form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+</div>
+</div>
+		
+
+		<!-- <div class="col-sm-6 form-group">
+									<label>Select Department</label> <select name="department"
+										class="form-control" ng-model="appointment.department"
+										ng-options="department as department.departmentName for department in departmentsList"
+										ng-change="getAllTherpistByDepartment(appointment.department.id);"
+										required>
+										<option value="" class="active">Select Department</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.department.$dirty && addPatientForm.department.$invalid)">
+										<span ng-show="addPatientForm.department.$error.required">Department
+											is required.</span>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label>Therapist Name</label> <select name="doctor"
+										class="form-control" ng-model="appointment.doctor"
+										ng-options="doctor as doctor.firstName for doctor in therapistList"
+										ng-change="getTherpistAvailablity(appointment.doctor.id);"
+										required>
+										<option value="" class="active">Select Therapist</option>
+									</select> <span style="color: red" ng-cloak
+										ng-show="(addPatientForm.doctor.$dirty && addPatientForm.doctor.$invalid)">
+										<span ng-show="addPatientForm.doctor.$error.required">Therapist
+											Name is required.</span>
+											
+									
+								</div>
+								
+						button ng-if="appointment.doctor!=undefined" type="button" class="btn btn-info btn-xs"
+										tooltip="Therapist Availability" data-toggle="modal" data-target="#ordine">
+										<i class="fa fa-pencil"></i>
+										</button>
+						
+
+							<div class="col-sm-6 form-group">
+								<label>Patient</label> <select name="patient"
+									class="form-control" ng-model="appointment.patient"
+									ng-options="patient as patient.firstName for patient in  patientList"
+									required>
+									<option value="" class="active">Select Patient</option>
+								</select> <span style="color: red" ng-cloak
+									ng-show="(addPatientForm.patient.$dirty && addPatientForm.patient.$invalid)">
+									<span ng-show="addPatientForm.patient.$error.required">Patient
+										is required.</span>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>From Date</label> <input name="appointmentStartDate"
+									ng-model="appointment.appointmentStartDate"
+									class="datepicker form-control hasDatepicker" type="Date"
+									placeholder="Start date" value="" size="4">
+
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Start Time</label> <input name="appointmentStartTime"
+									format="HH:mm:ss" class="datepicker form-control hasDatepicker"
+									type="Time" ng-model="appointment.appointmentStartDate"
+									placeholder="End date" value="" size="4">
+								<input type="text" value="" class="form-control"
+											ng-model="schedule.toTime" placeholder="Enter End Time">
+
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>End Date</label> <input name="appointmentEndDate"
+									ng-model="appointment.appointmentEndDate"
+									class="datepicker form-control hasDatepicker" type="Date"
+									placeholder="Start date" value="" size="4">
+
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>End Time</label> <input name="appointmentEndTime"
+									format="HH:mm:ss" class="datepicker form-control hasDatepicker"
+									type="Time" ng-model="appointment.appointmentEndDate"
+									placeholder="End date" value="" size="4">
+								<input type="text" value="" class="form-control"
+											ng-model="schedule.toTime" placeholder="Enter End Time">
+							</div>
+
+
+							<div class="col-sm-6 form-group">
+								<label>Repeat</label> <select name="repeat" class="form-control"
+									ng-model="appointment.repeat" required>
+									<option value="Once" class="active">Once</option>
+									<option value="Recursive">Recursive</option>
+								</select>
+							</div>
+							<div ng-if="appointment.repeat=='Recursive'">
+								<table class="col-sm-12">
+									<tr>
+										<td><label>Repeat every: </label> <input type="number"
+											ng-model="appointment.weeks" ng-value="1" size="4" />Week(s)
+										</td>
+
+									</tr>
+									<tr>
+										<td colspan="2"><label>Repeat On :&nbsp;&nbsp;</label> <label
+											ng-value="day" ng-repeat="day in weekDays"> <input
+												type="checkbox" checklist-model="appointment.weekDays"
+												checklist-value="day"> &nbsp;{{day}}&nbsp;
+										</label></td>
+
+									</tr>
+								</table>
+							</div>
+							<br> -->

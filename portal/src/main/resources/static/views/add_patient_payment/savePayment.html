@@ -1,0 +1,706 @@
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getAllClients();getCycles();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+
+			<h1>Add Payment</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Add Payment</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<div class="col-sm-12">
+
+
+					<div class="panel panel-bd lobidrag">
+						<div class="panel-body">
+							<div class="border">
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.firstName}} {{patientObject.lastName}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>DOB :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.dateOfBirth | date}}</p>
+										<!-- <input type="date" ng-model="patientObject.dateOfBirth | date"> -->
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>UCI :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.ucl}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Age :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.age}}</p>
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Parent Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.gaurdian}}</p>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Phone Number :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.mobileNumber}}</p>
+									</div>
+								</div>
+
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Email Id :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{patientObject.email}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Doctor Name:</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.doctor.firstName}} {{payment.doctor.lastName}}</p> -->
+										<p>{{doctor.firstName}} {{doctor.lastName}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Doctor Department :</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.doctor.department.departmentName}}</p> -->
+										<p>{{doctor.department.departmentName}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>No Of Cycles :</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.noOfCycles}}</p> -->
+										<p>{{noOfCycles}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Paid Amount :</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.amount}}</p> -->
+										<p>{{amount}}</p>
+									</div>
+								</div>
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Remaining Amount:</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.remainingAmount}}</p> -->
+										<p>{{remainingAmount}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+								
+								
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Total Amount:</label>
+									</div>
+									<div class="col-sm-6">
+										<!-- <p>{{payment.totalAmount}}</p> -->
+										<p>{{totalAmount}}</p>
+									</div>
+								</div>
+								
+								<br> <br>
+							</div>
+							<br> <br>
+							<br> 
+							
+							<form id="registrationForm" name="patientForm">
+
+								<div class="col-sm-12">
+<!-- 									<div class="col-sm-6 form-group">
+										<label>First Name</label> <input type="text" name="firstName"
+											class="form-control" placeholder="Enter firstname"
+											ng-model="patientObject.firstName" aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.firstName.$touched && patientForm.firstName.$invalid)">
+											<span ng-show="patientForm.firstName.$error.required">First
+												Name is required.</span>
+										</span>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Last Name</label> <input type="text"
+											class="form-control" name="lastName"
+											placeholder="Enter Lastname"
+											ng-model="patientObject.lastName" aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.lastName.$touched && patientForm.lastName.$invalid)">
+											<span ng-show="patientForm.lastName.$error.required">Last
+												Name is required.</span>
+										</span>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>DOB</label> <input type="text" class="form-control"
+											placeholder="Enter DOB"
+											ng-model="patientObject.dateOfBirth | date" required
+											readonly="readonly">
+									</div>
+									
+									<div class="col-sm-6 form-group">
+										<label>UCI</label> <input type="text" class="form-control"
+											maxlength="10" placeholder="Enter UCI"
+											ng-model="patientObject.ucl" name="uci" aria-invalid="true"
+											allow-only-numbers
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.uci.$touched && patientForm.uci.$invalid)">
+											<span ng-show="patientForm.uci.$error.required">UCI is
+												required.</span>
+										</span>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Age</label> <input type="text" class="form-control"
+											allow-only-numbers placeholder="Enter Age"
+											ng-model="patientObject.age" name="age" aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.age.$touched && patientForm.age.$invalid)">
+											<span ng-show="patientForm.age.$error.required">Age is
+												required.</span>
+										</span>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Parent Name</label> <input type="text"
+											class="form-control" placeholder="Enter Parent Name"
+											name="parentname" ng-model="patientObject.gaurdian"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.parentname.$touched && patientForm.parentname.$invalid)">
+											<span ng-show="patientForm.parentname.$error.required">Parent
+												Name is required.</span>
+										</span>
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Phone Number</label> <input type="text"
+											class="form-control" phone-input maxlength="14"
+											minlength="14" value="" name="mobileNumber"
+											ng-model="patientObject.mobileNumber"
+											placeholder="Enter Phone Number" aria-required="true"
+											class="error" id="txt_patient_mobileNumber"
+											aria-invalid="true" mobile-available
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											maxlength="10" required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.mobileNumber.$dirty && patientForm.mobileNumber.$invalid)">
+											<span ng-show="patientForm.mobileNumber.$error.required">PhoneNumber
+												is required.</span> <span
+											ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$dirty) ">
+												phone number should be 10 digits </span>
+										</span>
+										<div ng-if="patientForm.$pending.mobileNumberExists">checking....</div>
+										<div ng-if="patientForm.$error.mobileNumberExists">PhoneNumber
+											exists already</div>
+									</div>
+									
+
+
+									<div class="form-group col-lg-6">
+										<label>Country</label> <input
+											ng-model="patientObject.address.country.name"
+											class="form-control" name="country" aria-required="true"
+											aria-invalid="true" required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.country.$touched && patientForm.country.$invalid)">
+											<span ng-show="patientForm.country.$error.required">Country
+												is required.</span>
+										</span>
+									</div>
+									<div class="form-group col-lg-6">
+										<label>State</label> <input
+											ng-model="patientObject.address.state.name"
+											class="form-control" name="state" aria-required="true"
+											aria-invalid="true" required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.state.$touched && patientForm.state.$invalid)">
+											<span ng-show="patientForm.state.$error.required">State
+												is required.</span>
+										</span>
+									</div>
+
+
+									<div class="form-group col-lg-6">
+										<label>City</label> <input
+											ng-model="patientObject.address.city.name"
+											class="form-control" name="city" aria-required="true"
+											aria-invalid="true" required readonly="readonly"> <span
+											style="color: red" ng-cloak
+											ng-show="(patientForm.city.$touched && patientForm.city.$invalid)">
+											<span ng-show="patientForm.city.$error.required">City
+												is required.</span>
+										</span>
+									</div>
+
+								
+									<div class="form-group col-lg-6">
+										<label>Zip/Postal Code</label> <input type="text"
+											allow-only-numbers ng-model="patientObject.address.zipcode"
+											class="form-control" name="zipcode" maxlength="5"
+											placeholder="Enter zipcode" required readonly="readonly">
+										<span style="color: red" ng-cloak
+											ng-show="(patientForm.zipcode.$touched && patientForm.zipcode.$invalid)">
+											<span ng-show="patientForm.zipcode.$error.required">Zip/Postal
+												Code is required.</span>
+										</span>
+									</div>
+
+
+									
+
+									<div class="form-group col-sm-6">
+										<label class="control-label" for="emailid">Email Id</label> <input
+											type="email" value="" placeholder="Enter Email"
+											id="txt_email" class="form-control" name="email"
+											ng-model="patientObject.email" aria-required="true"
+											class="error" id="txt_user_email" aria-invalid="true"
+											email-available
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required
+											readonly="readonly"> <span style="color: red"
+											ng-cloak
+											ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+										<span ng-show="patientForm.email.$error.required">Email
+											is required.</span> <span style="color: red"
+											ng-show="patientForm.email.$error.pattern"> Please
+											enter a valid email address!</span>
+										<div ng-if="patientForm.$pending.emailExists"
+											style="color: red">checking....</div>
+										
+									</div>
+
+ -->
+
+									<!--  -->
+									<div class="col-sm-6 form-group">
+										<label>Payment Type</label> <select class="form-control"
+											ng-model="payment.paymentTypes">
+											<option value="" class="active">Select Payment Type</option>
+											<option ng-value="CHECK">CHECK</option>
+											<option ng-value="SWIPE">SWIPE</option>
+											<option ng-value="DD">DD</option>
+											<option ng-value="CASH">CASH</option>
+										</select>
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='CHECK'">
+										<label>Check Number</label> <input type="text"
+											ng-model="payment.checkNumber" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='CHECK'">
+										<label>Check Issued Bank</label> <input type="text"
+											ng-model="payment.checkIssuedBank" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='DD'">
+										<label>DD Number</label> <input type="text"
+											ng-model="payment.ddNumber" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group"
+										ng-if="payment.paymentTypes=='DD'">
+										<label>DD Issued Bank</label> <input type="text"
+											ng-model="payment.ddIssuedBank" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Mode Of Payment Type</label> <select
+											ng-model="payment.modeOfPaymentTypes" class="form-control">
+											<option value="" class="active">Select Mode Of
+												Payment Type</option>
+											<option ng-value="ONCE">ONCE</option>
+											<option ng-value="WEEKLY">WEEKLY</option>
+											<option ng-value="MONTHLY">MONTHLY</option>
+											<option ng-value="QUARTERLY">QUARTERLY</option>
+											<option ng-value="HALFYEARLY">HALFYEARLY</option>
+											<option ng-value="YEARLY">YEARLY</option>
+										</select>
+									</div>
+									<div class="col-sm-6 form-group">
+									<!-- ng-change="cycles()" -->
+										<label>Amount</label> <input type="text"
+											ng-model="payment.paidAmount" 
+											class="form-control">
+									</div>
+									<!-- <div class="col-sm-6 form-group">
+										<label>Number of cycles</label> <input type="text"
+											ng-model="payment.noOfCycles" readonly="readonly"
+											class="form-control">
+									</div> -->
+									<div class="col-sm-6 form-group">
+										<label>For Which Month</label> <input type="date"
+											ng-model="payment.therapyDoneDate" class="form-control">
+									</div>
+									<div class="col-sm-6 form-group">
+										<label>Paid Date</label> <input type="date"
+											ng-model="payment.paidDate" class="form-control">
+									</div>
+									<!-- <div class="col-sm-6 form-group">
+										<label>Total Amount</label> <input type="text"
+											ng-model="payment.totalAmount" class="form-control"
+											readonly="readonly">
+									</div> -->
+									<!--  -->
+								</div>
+							</form>
+							<div align="center" class="col-sm-12">
+								<br>
+
+								<button class="btn btn-primary" ng-click="addPayment(payment,noOfCycles,totalAmount)">Submit</button>
+								<button class="btn btn-danger" ng-click="gotoSearching();">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	
+					<div class="content-wrapper" ng-init="getCountrysBasedOnIsdCode();getAllClients();getCycles();">
+					<div class="content">
+						<form id="registrationForm" name="patientForm">
+						<div class="panel-body">
+							<div class="col-sm-12">
+								<div class="col-sm-6 form-group">
+									<label>First Name</label> <input type="text" name="firstName"
+										class="form-control" placeholder="Enter firstname"
+										ng-model="patientObject.firstName" aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required readonly="readonly"> <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.firstName.$touched && patientForm.firstName.$invalid)">
+										<span ng-show="patientForm.firstName.$error.required">First
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Last Name</label> <input type="text"
+										class="form-control" name="lastName"
+										placeholder="Enter Lastname" ng-model="patientObject.lastName"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required readonly="readonly"> <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.lastName.$touched && patientForm.lastName.$invalid)">
+										<span ng-show="patientForm.lastName.$error.required">Last
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>DOB</label> <input type="text" class="form-control"
+										placeholder="Enter DOB"
+										ng-model="patientObject.dateOfBirth | date" required
+										readonly="readonly">
+								</div>
+								
+								<div class="col-sm-6 form-group">
+									<label>UCI</label> <input type="text" class="form-control"
+										maxlength="10" placeholder="Enter UCI"
+										ng-model="patientObject.ucl" name="uci" aria-invalid="true"
+										allow-only-numbers
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required readonly="readonly"> <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.uci.$touched && patientForm.uci.$invalid)">
+										<span ng-show="patientForm.uci.$error.required">UCI is
+											required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Age</label> <input type="text" class="form-control"
+										allow-only-numbers placeholder="Enter Age"
+										ng-model="patientObject.age" name="age" aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required readonly="readonly"> <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.age.$touched && patientForm.age.$invalid)">
+										<span ng-show="patientForm.age.$error.required">Age is
+											required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Parent Name</label> <input type="text"
+										class="form-control" placeholder="Enter Parent Name"
+										name="parentname" ng-model="patientObject.gaurdian"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required readonly="readonly"> <span style="color: red"
+										ng-cloak
+										ng-show="(patientForm.parentname.$touched && patientForm.parentname.$invalid)">
+										<span ng-show="patientForm.parentname.$error.required">Parent
+											Name is required.</span></span>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label>Phone Number</label> <input type="text"
+										class="form-control" phone-input maxlength="14" minlength="14"
+										value="" name="mobileNumber"
+										ng-model="patientObject.mobileNumber"
+										placeholder="Enter Phone Number" aria-required="true"
+										class="error" id="txt_patient_mobileNumber"
+										aria-invalid="true" mobile-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										maxlength="10" required readonly="readonly"> <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.mobileNumber.$dirty && patientForm.mobileNumber.$invalid)">
+										<span ng-show="patientForm.mobileNumber.$error.required">PhoneNumber
+											is required.</span> <span
+										ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$dirty) ">
+											phone number should be 10 digits </span></span>
+										<div ng-if="patientForm.$pending.mobileNumberExists">checking....</div>
+										<div ng-if="patientForm.$error.mobileNumberExists">PhoneNumber
+											exists already</div>
+								</div>
+								
+
+
+								<div class="form-group col-lg-6">
+									<label>Country</label> <input
+										ng-model="patientObject.address.country.name"
+										class="form-control" name="country" aria-required="true"
+										aria-invalid="true" required readonly="readonly"> <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.country.$touched && patientForm.country.$invalid)">
+										<span ng-show="patientForm.country.$error.required">Country
+											is required.</span></span>
+								</div>
+								<div class="form-group col-lg-6">
+									<label>State</label> <input
+										ng-model="patientObject.address.state.name"
+										class="form-control" name="state" aria-required="true"
+										aria-invalid="true" required readonly="readonly"> <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.state.$touched && patientForm.state.$invalid)">
+										<span ng-show="patientForm.state.$error.required">State
+											is required.</span></span>
+								</div>
+
+
+								<div class="form-group col-lg-6">
+									<label>City</label> <input
+										ng-model="patientObject.address.city.name"
+										class="form-control" name="city" aria-required="true"
+										aria-invalid="true" required readonly="readonly"> <span
+										style="color: red" ng-cloak
+										ng-show="(patientForm.city.$touched && patientForm.city.$invalid)">
+										<span ng-show="patientForm.city.$error.required">City
+											is required.</span></span>
+								</div>
+
+								<div class="form-group col-lg-6">
+									<label>Address</label>
+									<textarea type="text" class="form-control" rows="3"
+										ng-model="patientObject.address.address1" name="address"
+										placeholder="Enter Address" required readonly="readonly"></textarea>
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.address.$touched && patientForm.address.$invalid)">
+										<span ng-show="patientForm.address.$error.required">Address
+											is required.</span></span>
+								</div>
+								<div class="form-group col-lg-6">
+									<label>Zip/Postal Code</label> <input type="text"
+										allow-only-numbers ng-model="patientObject.address.zipcode"
+										class="form-control" name="zipcode" maxlength="5"
+										placeholder="Enter zipcode" required readonly="readonly">
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.zipcode.$touched && patientForm.zipcode.$invalid)">
+										<span ng-show="patientForm.zipcode.$error.required">Zip/Postal
+											Code is required.</span></span>
+								</div>
+
+
+								
+
+								<div class="form-group col-sm-6"
+									>
+									<label class="control-label" for="emailid">Email Id</label> <input
+										type="email" value="" placeholder="Enter Email" id="txt_email"
+										class="form-control" name="email"
+										ng-model="patientObject.email" aria-required="true"
+										class="error" id="txt_user_email" aria-invalid="true"
+										email-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required readonly="readonly">
+									<span style="color: red" ng-cloak
+										ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+									<span ng-show="patientForm.email.$error.required">Email
+										is required.</span> <span style="color: red"
+										ng-show="patientForm.email.$error.pattern"> Please
+										enter a valid email address!</span>
+									<div ng-if="patientForm.$pending.emailExists"
+										style="color: red">checking....</div>
+									
+								</div>
+								
+							</div>
+							
+							
+							<div class="col-sm-6">
+			<label>Payment Type</label> <select class="form-control"
+				ng-model="payment.paymentTypes">
+				<option value="" class="active">Select Payment Type</option>
+				<option ng-value="CHECK">CHECK</option>
+				<option ng-value="SWIPE">SWIPE</option>
+				<option ng-value="DD">DD</option>
+				<option ng-value="CASH">CASH</option>
+			</select>
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='CHECK'">
+			<label>Check Number</label> <input type="text" ng-model="payment.checkNumber" class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='CHECK'">
+			<label>Check Issued Bank</label> <input type="text" ng-model="payment.checkIssuedBank"
+				class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='DD'">
+			<label>DD Number</label> <input type="text" ng-model="payment.ddNumber" class="form-control">
+		</div>
+		<div class="col-sm-6" ng-if="payment.paymentTypes=='DD'">
+			<label>DD Issued Bank</label> <input type="text" ng-model="payment.ddIssuedBank" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Mode Of Payment Type</label> <select ng-model="payment.modeOfPaymentTypes"
+				class="form-control">
+				<option value="" class="active">Select Mode Of Payment Type</option>
+				<option ng-value="ONCE">ONCE</option>
+				<option ng-value="WEEKLY">WEEKLY</option>
+				<option ng-value="MONTHLY">MONTHLY</option>
+				<option ng-value="YEARLY">YEARLY</option>
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label>Amount</label> <input type="text" ng-model="payment.paidAmount" ng-change="cycles()" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Number of cycles</label> <input type="text" ng-model="payment.noOfCycles"
+				class="form-control">
+		</div>
+		
+		<div class="col-sm-6">
+			<label>Paid Date</label> <input type="date" ng-model="payment.paidDate" class="form-control">
+		</div>
+		<div class="col-sm-6">
+			<label>Total Amount</label> <input type="text" ng-model="payment.totalAmount" class="form-control">
+		</div>
+		
+						</div>	
+						</form>
+						<div align="center" class="col-sm-12">
+	<br>
+		
+		<button class="btn btn-primary" ng-click="addPayment(payment)"
+			>Save</button>
+			<button class="btn btn-danger" ng-click="gotoList();">Cancel</button>	
+	</div>
+					</div>
+		</div>
+ -->

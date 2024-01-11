@@ -1,0 +1,184 @@
+<div class="stepwizard" > <!-- ng-init="getCategoryByRegistartiontype(patientObject);"  -->
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateRegistrationDetails();" type="button"
+				ng-style="activeColor1" class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Registration Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateChildDetails();" type="button"
+				class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Child Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateParentDetails();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Parent Details</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateUploadDocuments();" type="button"
+				class="btn btn-default btn-circle">3</a>
+			<p>
+				<small>Upload Documents</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdatePayments();" type="button"
+				class="btn btn-default btn-circle">4</a>
+			<p>
+				<small>Payment</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-2">
+			<a ng-click="gotoupdateSummary();" type="button"
+				class="btn btn-default btn-circle">5</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="" id="step-1"
+	ng-init="getAllPatientRegistrationTypesList();getAllDepartmentsByRegistartiontype(patientObject.patientRegistrationType.id);">
+	<hr>
+	<form name="patientObjectForm">
+	<div class="col-sm-12">
+	<br>
+			<div class="col-lg-6 form-group">
+			<label><span ng-if="patientObject.regNumber == undefined || patientObject.regNumber == '' " style="color: red">*</span>Reg No</label>
+			<span style="color: red"
+					ng-show="(patientObjectForm.regNumber.$touched && patientObjectForm.regNumber.$invalid)">
+					<span ng-show="patientObjectForm.regNumber.$error.required"> is
+						required.</span>
+						</span>
+			<input type="text" name="regNumber" class="form-control"
+					ng-model="patientObject.regNumber"  readonly="readonly">
+			
+			</div>
+			
+			<div class="col-sm-6 form-group">
+				<span
+					ng-if="patientObject.regDate == undefined || patientObject.regDate == '' "
+					style="color: red">*</span><label>Date</label> <span
+					style="color: red"
+					ng-show="(patientObjectForm.regDate.$touched && patientObjectForm.regDate.$invalid)">
+					<span style="color: red"
+					ng-show="patientObjectForm.regDate.$error.required"> is
+						required.</span>
+				</span> 
+				<input type="text" date="dd-MM-yyyy" class="form-control" name="regDate" id="regDate" 
+					ng-model="patientObject.regDate" readonly="readonly">
+			</div>
+			
+			<!-- <div class="col-lg-6 form-group">
+			<label><span ng-if="patientObject.patientRegistrationType == undefined || patientObject.patientRegistrationType == '' " style="color: red">*</span>Registration Type</label>
+			<span style="color: red"
+					ng-show="(patientObjectForm.patientRegistrationType.$touched && patientObjectForm.patientRegistrationType.$invalid)">
+					<span ng-show="patientObjectForm.patientRegistrationType.$error.required"> is
+						required.</span>
+						</span>
+				<select ng-model="patientObject.patientRegistrationType" class="form-control" ng-change="getAllCategoriesByRegistartiontype(patientObject.patientRegistrationType.id);"
+					name="patientRegistrationType" ng-options="patientRegistrationType as patientRegistrationType.name  for patientRegistrationType in patientRegistrationTypes track by patientRegistrationType.id">
+					<option value="">Select Registration Type</option>
+				</select> 
+				
+			</div> -->
+			
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.patientRegistrationType == undefined || patientObject.patientRegistrationType == '' "
+					style="color: red">*</span>Registration Type</label> <span
+					style="color: red"
+					ng-show="(patientObjectForm.patientRegistrationType.$touched && patientObjectForm.patientRegistrationType.$invalid)">
+					<span ng-show="patientObjectForm.patientRegistrationType.$error.required">
+						is required.</span>
+				</span> <select class="form-control" name="patientRegistrationType"
+					ng-model="patientObject.patientRegistrationType"
+					ng-change="getAllDepartmentsByRegistartiontype(patientObject.patientRegistrationType.id);"
+					
+					ng-options="patientRegistrationType as patientRegistrationType.name for patientRegistrationType in patientRegistrationTypes track by patientRegistrationType.id"><option
+						value="" class="active">Select Registration Type</option></select>
+
+			</div>
+			
+			
+			
+			
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.department == undefined ||patientObject.department =='' "
+					style="color: red">*</span>Department</label> <span style="color: red"
+					ng-show="(patientObject.department.$touched && patientObject.department.$invalid)">
+					<span ng-show="patientObject.department.$error.required"> is
+						required.</span>
+				</span><select multiple class="form-control" ng-model="patientObject.departments"
+					ng-click="deptMsg()" name="department"
+					ng-options="department as department.departmentName for department in departmentsListByRegistrationType track by department.id">
+					
+					<option value="" class="active">Select Department</option>
+				</select>
+			</div>
+			
+			
+			
+			<div class="col-lg-6 form-group">
+				<label>Referred By</label> <select class="form-control"
+					name="referredBy" ng-model="patientObject.referredBy"><option
+						value="" class="active">Select referredBy</option>
+					<option value="doctor" class="active">Doctor</option>
+					<option value="school" class="active">School</option>
+					<option value="center" class="active">Center</option>
+
+
+				</select>
+			</div>
+			
+			<div class="col-lg-6 form-group">
+				<label><span
+					ng-if="patientObject.reasonForReferral == undefined || patientObject.reasonForReferral =='' "
+					style="color: red">*</span>Reason For Referral2</label> <span style="color: red"
+					ng-show="(patientObjectForm.reasonForReferral.$touched && patientObjectForm.reasonForReferral.$invalid)">
+					<span ng-show="patientObjectForm.reasonForReferral.$error.required"> is
+						required.</span>
+				</span> <input type="text" name="reasonForReferral" class="form-control"
+					placeholder="Enter Reason For Referral" ng-model="patientObject.reasonForReferral" required>
+			</div>
+			
+		<!-- <div class="col-sm-12">
+		<label>Patient Note :</label><br>
+		<textarea 
+			class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5"
+			ng-trim="false" maxlength="1500"
+			ng-model="patientObject.patientNote"></textarea>
+		<p  class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-patient.patientNote.length}}&nbsp;Characters
+			Left</p>
+			
+	</div> -->	
+			
+			
+			
+	</div>
+		
+			
+	</form>
+	<div class="col-sm-12">
+		<br>
+	</div>
+	<button class="btn btn-primary nextBtn pull-right" type="button"
+		ng-click="gotoupdateChildDetails();">Next</button>
+</div>
+<script type="text/javascript">
+   $('a').on('click', function () {
+		    var selectedValues = $('#subCategorys').val();
+		    
+		    for(var i=0; i< selectedValues.length; i++)
+		        $('html').append(selectedValues[i]+'<br />');
+		});
+</script>

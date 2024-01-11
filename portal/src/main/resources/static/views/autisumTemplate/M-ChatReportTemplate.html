@@ -1,0 +1,100 @@
+<div class="content-wrapper scrollpage" ng-init="getPatient();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<h1>M-CHAT Report</h1>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">M-CHAT</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> M-CHAT Report
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12">
+							<div class="col-lg-6 form-group">
+								<label>FirstName:</label><input type="text"
+									ng-model="patient.firstName" class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>LastName:</label><input type="text"
+									ng-model="patient.lastName" class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Filled out by:</label> <input type="text"
+									ng-model="patient.filledOutBy" class="form-control" required>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Date Of Birth:</label><input type="text"
+									ng-model="patient.dateOfBirth" class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Relationship of child:</label><input type="text"
+									ng-model="patient.relationshipOfChildren" class="form-control">
+							</div>
+							<div class="form-group col-sm-6">
+								<label>E-Mail</label> <input type="email" value=""
+									class="form-control" ng-model="patient.emailPatient">
+							</div>
+							<div class="form-group col-sm-6">
+								<label>PhoneNumber</label> <input type="number" value=""
+									class="form-control" ng-model="patient.phoneNumber">
+							</div>
+						</form>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!-- <th>Serial No</th> -->
+										<th>Question Name</th>
+										<th>Action</th>
+										<!--  <th>Update</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="mchart in mchartList">
+										<td>{{mchart.name}}</td>
+										<td><input type="radio" ng-model="mchart.selectedAnswer"
+											ng-checked="mchart.selectedAnswer==true" ng-value="true" />&nbsp;Yes
+											<input type="radio" ng-model="mchart.selectedAnswer"
+											ng-checked="mchart.selectedAnswer==false" ng-value="false" />&nbsp;No
+											</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+					<button type="button" class="btn btn-danger"
+						ng-click="gotoMchat();">Cancel</button>
+						
+
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

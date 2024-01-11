@@ -1,0 +1,260 @@
+<div class="content-wrapper scrollpage"
+	ng-init="getAllClients();getAllDepartments();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Search By ClientType</h1>
+			<small>Here you can view client type by filtering between the dates or by client or by payment status.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Reports</a></li>
+				<li class="active">Search Patients</li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>&nbsp;
+								Reports
+							</a>
+
+
+						</div>
+					</div>
+					<div class="panel-body">
+						<form role="form">
+							<div class="panel-body">
+								<div class="col-sm-12">
+
+									<div class="col-sm-3 ">
+										<mdp-date-picker mdp-placeholder="From Date"
+											ng-model="patient.startedDate"></mdp-date-picker>
+									</div>
+									<div class="col-sm-3">
+										<mdp-date-picker mdp-placeholder="To Date"
+											ng-model="patient.endDate"></mdp-date-picker>
+									</div>
+									
+									
+									<div class="col-sm-3 " layout="row">
+										<md-input-container class="md-block">
+										 <label>Type of report</label> 
+										<md-select ng-model="patient.status" mdp-placeholder="fg">
+										 <md-option value="">Select type o report</md-option>
+										<md-option	value="EVALUTION">&nbsp; Evalution  &nbsp;</md-option>
+										 <md-option value="PROGRESS"> &nbsp; Progess Note &nbsp; </md-option>
+										 <md-option value="EXIT"> &nbsp; Exit Note &nbsp; </md-option>
+										</md-select> </md-input-container>
+									</div>
+
+									
+
+								</div>
+								
+
+								<div class="col-sm-12">
+								
+								</div>
+							</div>
+
+							<div class="">
+								<div class="reset-button">
+									<a href="" class="btn btn-success"
+										ng-click="searchPatient(patient);">Filter</a> <a href=""
+										class="btn btn-warning">Reset</a>
+
+								</div>
+							</div>
+						</form>
+
+						<div class="table-responsive">
+							<table  class="table table-bordered table-hover">
+								<thead >
+									<tr>
+										<th>Id</th>
+										<th>Patient Name</th>
+										<th>Status</th>
+										
+										
+										 <th colspan="2">Action</th> 
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="pa in seachPatientsList | filter:search">
+										<td>{{pa.id}}</td>
+										<td>{{pa.firstName}} {{pa.lastName}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="pa.active==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="pa.active==false"> InActive</span></td>
+											
+											<td ng-click="gotoReport();"
+											><i
+											class="hvr-buzz-out fa fa-eye" data-toggle="tooltip"
+											title="View Report Info"></i></td>
+										<td>
+											<button class="btn btn-info btn-xs" data-toggle="tooltip"
+												data-placement="left" ng-click="generateEvaluationReport();"
+												title="Patient Report">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										</td>
+
+									</tr>
+									<tr ng-if="seachPatientsList.length == undeined || seachPatientsList.length == 0">
+										<td colspan="8" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="content-wrapper" ng-init="getAllClients();getAllDepartments();">
+	Content Header (Page header)
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Search Patient</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Search Patient</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<div class="content">
+ <form role="form">
+   <div class="panel-body">
+
+                                     <div class="form-group col-lg-3">
+									<label><span
+										ng-if="patient.clientType == undefined || patient.clientType == '' "
+										style="color: red">*</span>Type of Client</label> <select
+										ng-model="patient.clientType" class="form-control"
+										name="client" aria-required="true" aria-invalid="true"
+										ng-options="client as client.clientTypeName  for client in clientsList"
+										required>
+										<option value="" class="active">Select Client</option>
+									</select> <span style="color: red"
+										ng-show="(patientForm.client.$touched && patientForm.client.$invalid)">
+										<span ng-show="patientForm.client.$error.required">Type
+											of Client is required.</span>
+									</span>
+								</div>
+								
+								
+                                
+								
+								<div class="col-sm-3 form-group">
+										<label>Payment Status</label> <select class="form-control"
+											ng-model="payment.status">
+											<option value="" class="active">Select Payment Status</option>
+											<option ng-value="PAID">PAID</option>
+											<option ng-value="DUES">DUES</option>
+									
+										</select>
+									</div>
+								
+								 <div class="col-sm-3 form-group">
+										<label>Payment Type</label> <select
+											ng-model="payment.modeOfPaymentTypes" class="form-control">
+											<option value="" class="active">Select Payment Type</option>
+											<option ng-value="ONCE">ONCE</option>
+											<option ng-value="WEEKLY">WEEKLY</option>
+											<option ng-value="MONTHLY">MONTHLY</option>
+											<option ng-value="QUARTERLY">QUARTERLY</option>
+											<option ng-value="HALFYEARLY">HALFYEARLY</option>
+											<option ng-value="YEARLY">YEARLY</option>
+										</select>
+									</div>
+								<div class="col-sm-3">
+								<label>Department</label> <select class="form-control"
+									id="exampleSelect1" ng-model="patient.department"
+									ng-options="department as department.departmentName for department in departmentsList"
+									name="select" size="1">
+									<option value="" class="active">Select Department</option>
+								</select>
+							</div>
+								   
+                                     
+								
+								 </div>
+								</form>
+								<div class="">
+							<div class="reset-button">
+								<a href="" class="btn btn-success"
+									
+									ng-click="searchPatient(patient);">Search</a> <a href=""
+									class="btn btn-warning">Reset</a>
+
+							</div>
+						</div>
+</div>
+ </div>
+ -->

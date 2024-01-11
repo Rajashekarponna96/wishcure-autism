@@ -1,0 +1,379 @@
+<div class="stepwizard" ng-init="activeColor1();">
+	<div class="stepwizard-row setup-panel">
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle">1</a>
+			<p>
+				<small>Primary Registration</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle">2</a>
+			<p>
+				<small>Package Subscription</small>
+			</p>
+		</div>
+		<div class="stepwizard-step col-xs-4">
+			<a type="button" class="btn btn-default btn-circle"
+				ng-style="activeColor1">3</a>
+			<p>
+				<small>Summary</small>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary setup-content" id="step-4">
+	<div class="panel-heading">
+		<h3 class="panel-title">Summary</h3>
+	</div>
+	<div class="panel-body">
+		<div class="content-block content-block-horizantal">
+			<div class="content-block-main">
+				<div class="row content-input">
+					<div class="col-sm-4">
+						<label>First Name : </label> <input type="text"
+							name="appointment_id" ng-model="user.firstName"
+							placeholder="First Name" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Last Name : </label> <input type="text"
+							name="appointment_id" ng-model="user.lastName"
+							placeholder="Last Name" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Company Type :</label> <input type="text" name=""
+							ng-model="companyType.companyTypeName" placeholder="Company Type"
+							readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>Company Name :</label> <input type="text"
+							name="appointment_id" ng-model="user.companyName"
+							placeholder="Company Name" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Mobile Number : </label> <input type="text"
+							name="appointment_id" ng-model="changeMobileNumber(user.moiblenumber);"
+							placeholder="Mobile Number" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Email Address :</label> <input type="text" name=""
+							ng-model="user.email" placeholder="Email Address" readonly>
+					</div>
+					<div class="col-sm-4"
+						ng-if="companyType.id==2 && user.organizationName != undefined && user.organizationName != '' ">
+						<label>Organization Name :</label> <input type="text"
+							name="appointment_id" ng-model="user.organizationName"
+							placeholder="Organization Name" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Package Type :</label> <input type="text"
+							name="appointment_id" ng-model="user.stripePackage.packageName"
+							placeholder="Package Type" readonly>
+					</div>
+					<div class="col-sm-4">
+						<label>Data Storage(Gb) :</label> <input type="text" name=""
+							ng-model="stripePlan.nickname" placeholder="Data Storage(Gb)"
+							readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>Street Address 1 :</label> <input type="text" name="appointment_id"
+							ng-model="user.address1" placeholder="Address" readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>Street Address 2 :</label> <input type="text" name="appointment_id"
+							ng-model="user.address2" placeholder="Address" readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>City :</label> <input type="text" name=""
+							ng-model="user.city" placeholder="City" readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>State :</label> <input type="text" name="appointment_id"
+							ng-model="user.state" placeholder="State" readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>Country :</label> <input type="text" name="appointment_id"
+							ng-model="user.country" placeholder="Country" readonly>
+					</div>
+					<div class="col-sm-4" ng-if="companyType.id==1">
+						<label>Zip/Postal :</label> <input type="text"
+							name="appointment_id" ng-model="user.zipcode"
+							placeholder="Zip/Postal" readonly>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-heading">
+		<h3 class="panel-title">Payments</h3>
+	</div>
+	<div class="panel-body">
+		<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+				<li><input type="radio" value="true" name="payment" ng-change="emptyDataAtACH();"
+					ng-model="payments" ng-checked="checked">&nbsp;Card&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li><input type="radio" value="false" name="payment"
+					ng-model="payments">&nbsp;ACH</li>
+			</ul>
+			<!-- Tab panels -->
+			<div class="tab-content">
+				<div class="panel-body" id="card" ng-if="payments=='true'">
+					<div class="col-sm-12">
+						<form name="cardForm" stripe-form="stripeCallback">
+							<div class="col-sm-6">
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="number == undefined || number =='' " style="color: red">*</span>Card
+										No :</label> <span style="color: red"
+										ng-show="(cardForm.card.$touched && cardForm.card.$invalid)">
+										<span ng-show="cardForm.card.$error.required">is
+											required.</span>
+									</span>
+								</div>
+								<div class="form-group col-sm-6">
+									<input ng-model="number" placeholder="Card Number"
+										payments-format="card" payments-validate="card" name="card"
+										class="form-control" required>
+								</div>
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="expiry == undefined || expiry =='' " style="color: red">*</span>Expiry
+										:</label> <span style="color: red"
+										ng-show="(cardForm.expiry.$touched && cardForm.expiry.$invalid)">
+										<span ng-show="cardForm.expiry.$error.required">is
+											required.</span>
+									</span>
+								</div>
+								<div class="form-group col-sm-6">
+									<input ng-model="expiry" placeholder="Expiration"
+										payments-format="expiry" payments-validate="expiry"
+										class="form-control" name="expiry" required>
+								</div>
+								<div class="form-group col-sm-6">
+									<label><span ng-if="cvc == undefined || cvc  =='' "
+										style="color: red">*</span>CVV :</label> <span style="color: red"
+										ng-show="(cardForm.cvc.$touched && cardForm.cvc.$invalid)">
+										<span ng-show="cardForm.cvc.$error.required">is
+											required.</span>
+									</span>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="password" ng-model="cvc" placeholder="CVC" payments-format="cvc"
+										class="form-control" payments-validate="cvc" name="cvc"
+										required>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div align="center">
+									<button class="btn btn-info nextBtn pull-left" type="button"
+										ng-click="gotoPreviousPackageSubscription(user,packagePricing1,packagePricing1.packageNameMaster);">Previous</button>
+									<button class="btn btn-info" type="submit"
+										ng-disabled=" !user.firstName || !user.lastName || !companyType.companyTypeName || !user.stripePackage.packageName || !stripePlan.nickname ">Proceed
+										To Payment</button>
+									<button class="btn btn-danger" ng-click="gotoLogin();">Cancel</button>
+								</div>
+							</div>
+							<!-- <div ng-if="cardForm.card.$invalid">
+			              Error: invalid card number!
+		                  </div>
+		                   <div ng-if="cardForm.expiry.$invalid">
+			                Error: invalid expiration date!
+		                    </div>
+		                   <div ng-if="cardForm.cvc.$invalid">
+			                  Error: invalid CVC!
+		                    </div> -->
+						</form>
+
+					</div>
+				</div>
+				<div class="panel-body" id="ach" ng-if="payments=='false'">
+					<div class="col-sm-12">
+						<form action="" name="registrationForm">
+							<div class="col-sm-6">
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="achBankInfo.account_holder_type == undefined || achBankInfo.account_holder_type =='' "
+										style="color: red">*</span>Account Holder Type :</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<select autocomplete="off" name="account_holder_type"
+										ng-model="achBankInfo.account_holder_type"
+										class="form-control" required>
+										<option value="individual">Individual</option>
+										<option value="company">Company</option>
+									</select> <span style="color: red"
+										ng-show="(registrationForm.account_holder_type.$touched && registrationForm.account_holder_type.$invalid)">
+										<span
+										ng-show="registrationForm.account_holder_type.$error.required">is
+											required.</span>
+									</span>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="achBankInfo.account_holder_name == undefined || achBankInfo.account_holder_name =='' "
+										style="color: red">*</span>Holder Name :</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="text" class="form-control"
+										name="account_holder_name"
+										ng-model="achBankInfo.account_holder_name" required> <span
+										style="color: red"
+										ng-show="(registrationForm.account_holder_name.$touched && registrationForm.account_holder_name.$invalid)">
+										<span
+										ng-show="registrationForm.account_holder_name.$error.required">is
+											required.</span>
+									</span>
+								</div>
+
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="achBankInfo.account_number == undefined || achBankInfo.account_number =='' "
+										style="color: red">*</span> Account No :</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="text" class="form-control"
+										placeholder="Bank Account No" allow-only-numbers
+										name="account_number" ng-model="achBankInfo.account_number"
+										required> <span style="color: red"
+										ng-show="(registrationForm.account_number.$touched && registrationForm.account_number.$invalid)">
+										<span
+										ng-show="registrationForm.account_number.$error.required">is
+											required.</span>
+									</span>
+								</div>
+								<div class="form-group col-sm-6">
+									<label><span
+										ng-if="achBankInfo.routing_number == undefined || achBankInfo.routing_number =='' "
+										style="color: red">*</span>Routing No:</label>
+								</div>
+								<div class="form-group col-sm-6">
+									<input type="text" class="form-control"
+										placeholder="Routing No" name="routingNo"
+										ng-model="achBankInfo.routing_number" required> <span
+										style="color: red"
+										ng-show="(registrationForm.routingNo.$touched && registrationForm.routingNo.$invalid)">
+										<span ng-show="registrationForm.routingNo.$error.required">is
+											required.</span>
+									</span>
+								</div>
+							</div>
+							<input type="hidden" name="country" value="us" /> <input
+								type="hidden" name="currency" value="usd" />
+							<div class="col-sm-12">
+								<div align="center">
+									<button class="btn btn-info nextBtn pull-left" type="button"
+										ng-click="gotoPreviousPackageSubscription(user,packagePricing1,packagePricing1.packageNameMaster);">Previous</button>
+									<button class="btn btn-info" ng-click="CheckAch(achBankInfo)"
+										type="button"
+										ng-disabled=" !user.firstName || !user.lastName || !companyType.companyTypeName || !user.stripePackage.packageName || !stripePlan.nickname ">Proceed
+										To Payment</button>
+									<button class="btn btn-danger" ng-click="gotoLogin();">Cancel</button>
+								</div>
+
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" align="center"
+		ng-if="payments==undefined || payments==''">
+		<button class="btn btn-info nextBtn pull-left" type="button"
+			ng-click="gotoPreviousPackageSubscription(user,packagePricing1,packagePricing1.packageNameMaster);">Previous</button>
+		<!-- <button class="btn btn-info" ng-click="clickOnPurchase();"
+			ng-disabled=" !user.firstName || !user.lastName || !companyType.companyTypeName || !user.stripePackage.packageName || !stripePlan.nickname ">Proceed
+			To Payment 2</button>
+		<button class="btn btn-danger" ng-click="gotoLogin();">Cancel</button> -->
+	</div>
+</div>
+
+<style>
+<!--
+.stepwizard-step p {
+	margin-top: 0px;
+	color: #666;
+}
+
+.stepwizard-row {
+	display: table-row;
+}
+
+.stepwizard {
+	display: table;
+	width: 100%;
+	position: relative;
+}
+
+.stepwizard-step button[disabled] {
+	/*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/
+	
+}
+
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn
+	{
+	opacity: 1 !important;
+	color: #bbb;
+}
+
+.stepwizard-row:before {
+	top: 14px;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 100%;
+	height: 1px;
+	background-color: #ccc;
+	z-index: 0;
+}
+
+.stepwizard-step {
+	display: table-cell;
+	text-align: center;
+	position: relative;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+
+--> /**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+	background-color: white;
+	height: 40px;
+	padding: 10px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+	border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+}
+</style>
+<script>
+	var stripe = Stripe('pk_test_7W4ilnHOU35278UonFn8GovO');
+</script>
+<script type="text/javascript" src="https://js.stripe.com/v3/"></script>

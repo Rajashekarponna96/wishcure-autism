@@ -1,0 +1,130 @@
+<div class="content-wrapper scrollpage" ng-init="getAllCategoryTypes();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Sub Category</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Sub Category</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoSubCatList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Sub Category List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-6" name="updatesubcategoryform">
+						
+						 <div class="form-group">
+				<span ng-if="subCategory.categoryType == undefined || subCategory.categoryType == '' " style="color: red">*</span> 
+					<label>Category Type</label>
+					<span style="color: red"
+					ng-show="(updatesubcategoryform.categoryType.$touched && updatesubcategoryform.categoryType.$invalid)">
+					<span style="color: red"
+					ng-show="updatesubcategoryform.categoryType.$error.required"> is
+						required.</span>
+				</span>
+				<select ng-model="subCategory.categoryType" class="form-control"
+					name="categoryType" aria-required="true" aria-invalid="true"
+					ng-options="categoryType as categoryType.name  for categoryType in categoryTypesList track by categoryType.id"
+					required>
+					<option value="">Select Category Type</option>
+				</select>
+				
+				
+					</div>
+						
+							<div class="form-group">
+								<label>Sub Category Name</label><span style="color: red" ng-cloak
+									ng-show="(updatesubcategoryform.name.$touched && updatesubcategoryform.name.$invalid)">
+									<span ng-show="updatesubcategoryform.name.$error.required">
+										 is required.</span></span> <input type="text" value=""
+									class="form-control" name="name"
+									placeholder="Enter Sub Category Type Name"
+									ng-model="subCategory.name" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+							
+							
+
+							<div class="form-group">
+								<label>Sub Category Description</label><span style="color: red" ng-cloak
+									ng-show="(updatesubcategoryform.description.$touched && updatesubcategoryform.description.$invalid)">
+								<span ng-show="updatesubcategoryform.description.$error.required">
+									is required.</span></span>
+								<textarea rows="3" value="" class="form-control"
+									name="description" placeholder="Enter Category Type Description"
+									ng-model="subCategory.description" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required></textarea>
+							</div>
+							
+							<div class="form-check">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="subCategory.status" name="status"
+									ng-value="true">Active</label> <label class="radio-inline"><input
+									type="radio" ng-model="subCategory.status" name="status"
+									ng-value="false">InActive</label>
+							</div>
+							
+							<div class="row" align="center">
+						                       <span ng-if="message != undefined" style="color: red">{{message}}<br>
+						                       </span><br>
+					                      </div>
+					                      
+							<div class="reset-button">
+								<button class="btn btn-success"
+									ng-click="updateSubCategoryType(subCategory)"
+									ng-disabled="updatesubcategoryform.$invalid">Update</button>
+								<a class="btn btn-warning" ng-click="gotoSubCatback()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+	alert("ready . . . ");
+});
+</script> -->
+

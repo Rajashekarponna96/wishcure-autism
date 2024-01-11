@@ -1,0 +1,117 @@
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Search Patient</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href=""><i class="pe-7s-home"></i> Home</a></li>
+				<li><a href="#">Search Patient</a></li>
+				<li class="active">View More</li>
+			</ol>
+		</div>
+	</section>
+	<div class="content">
+ <form role="form">
+   <div class="panel-body">
+               <div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.firstName == undefined || patient.firstName =='' "
+										style="color: red">*</span>Patient Name</label><span style="color: red"
+										ng-show="(patientForm.firstName.$touched && patientForm.firstName.$invalid)">
+										<span ng-show="patientForm.firstName.$error.required">
+											 is required.</span>
+									</span> <input type="text"
+										name="firstName" class="form-control"
+										placeholder="Enter  Patient Name"  ng-model="patient.firstName"
+										required> 
+								</div>
+								
+								<div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.ucl == undefined || patient.ucl == '' "
+										style="color: red">*</span>UCI</label> <span style="color: red"
+										ng-show="(patientForm.ucl.$touched && patientForm.ucl.$invalid)">
+										<span ng-show="patientForm.ucl.$error.required"> is
+											required.</span>
+									</span>
+									<div ng-if="patientForm.$pending.uciExists">checking....</div>
+									<div ng-if="patientForm.$error.uciExists"> Number
+										exists already</div><input type="text"
+										class="form-control" maxlength="10" placeholder="Enter UCI"
+										 ng-model="patient.ucl" name="ucl" class="error"
+										aria-invalid="true" uci-available allow-only-numbers
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required> 
+								</div>
+
+                                     <div class="col-lg-6 form-group">
+									<label><span
+										ng-if="patient.mobileNumber == undefined || patient.mobileNumber == '' "
+										style="color: red">*</span> Phone Number</label><span style="color: red"
+										ng-show="(patientForm.mobileNumber.$dirty && patientForm.mobileNumber.$invalid)">
+										<span ng-show="patientForm.mobileNumber.$error.required" style="color:red">
+											is required.</span>
+									</span><span
+										ng-show="((patientForm.mobileNumber.$error.minlength ||
+                           patientForm.mobileNumber.$error.maxlength) && 
+                           patientForm.mobileNumber.$dirty) " style="color:red">
+										phone number should be 10 digits </span>
+									<div ng-if="patientForm.$pending.mobileNumberExists">checking....</div>
+									<div ng-if="patientForm.$error.mobileNumberExists" style="color:red">
+										exists already</div> <input
+										type="text" class="form-control" phone-input maxlength="14"
+										minlength="14" value="" name="mobileNumber"
+									ng-value="patient.mobileNumber" 	ng-model="patient.mobileNumber"
+										placeholder="Enter Phone Number" aria-required="true"
+										class="error" id="txt_patient_mobileNumber"
+										aria-invalid="true" mobile-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										 required> 
+								</div>
+								<div class="form-group col-sm-6" >
+									<label class="control-label" for="emailid">Email Id</label><span style="color: red"
+										ng-show="(patientForm.email.$touched && patientForm.email.$invalid)"></span>
+									<span ng-show="patientForm.email.$error.required">
+										is required.</span> <span style="color: red"
+										ng-show="patientForm.email.$error.pattern"> Please
+										enter a valid email address!</span>
+									<div ng-if="patientForm.$pending.emailExists"
+										style="color: red">checking....</div>
+									<div ng-if="patientForm.$error.emailExists" style="color: red">
+										exists already</div> <input
+										type="email" value="" placeholder="Enter Email" id="txt_email"
+										class="form-control" name="email" ng-model="patient.email" ng-value="patient.email"
+										aria-required="true" class="error" id="txt_user_email"
+										aria-invalid="true" email-available
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+									
+								</div>
+								 </div>
+								</form>
+								<div class="">
+							<div class="reset-button">
+								<a href="" class="btn btn-success"
+									
+									ng-click="searchPatient(patient);">Search</a> <a href=""
+									class="btn btn-warning">Reset</a>
+
+							</div>
+						</div>
+</div>
+ </div>

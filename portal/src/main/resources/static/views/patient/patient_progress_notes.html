@@ -1,0 +1,667 @@
+
+<div class="panel-body table-responsive"
+	ng-init="patientGoalsInformation();getDoctorByPatientId();getAllCratedDatesOfProgressnote();">
+	<div class="col-sm-12">
+		
+		<div class="col-sm-12 border">
+			<div class="sample" layout="column" ng-cloak>
+				<md-content class="md-padding"> <md-tabs
+					md-dynamic-height md-selected="selectedIndex" md-border-bottom
+					md-autoselect md-swipe-content> <md-tab
+					ng-repeat="tabdate in progressNoteDatesList track by $index"
+					label="{{tabdate}}"
+					ng-click="findAllPatientProgressSheetByPatientIdAndCreatedDate(tabdate);">
+
+				<form layout="column" class="sm-padding" style="padding-top: 0;">
+					<div class="col-sm-12">
+						<div align="left" class="col-sm-6">
+							<button class="btn btn-primary" data-toggle="tooltip"
+								data-placement="right" ng-click="addTabProgress();"
+								title="Click here to add new date">
+								<i class="" aria-hidden="true">+</i>
+							</button>
+						</div>
+					</div>
+				</form>
+				
+				
+				<div class="table-responsive" ng-if="flag">
+					<div class="form-group col-lg-12">
+						<br> <label>History :</label><br>
+						<textarea  ng-hide="editProgress" class="col-sm-11 border"
+							class="form-control" rows="5" ng-trim="false" 1 maxlength="1500"
+							ng-model="progressNote1.history"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500
+							- progressNote1.history.length}}&nbsp;Characters Left</p>
+							<P ng-show="editProgress">{{progressNote1.history}}</P>
+					</div>
+
+
+					<div class="form-group col-lg-12">
+						<label>Background Information :</label>
+						<textarea ng-hide="editProgress" class="col-sm-11  border"
+							class="form-control" ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.backgroundInformation"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.backgroundInformation.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.backgroundInformation}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<label>Observation :</label><br>
+						<textarea  ng-hide="editProgress" class="col-sm-11 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.observation"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.observation.length}}&nbsp;Characters
+							Left</p>
+							<p  ng-show="editProgress">{{progressNote1.observation}}</p>
+
+
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Test Administered :</label><br>
+						<textarea ng-hide="editProgress" class="col-sm-11  border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.testAdministered"></textarea>
+						<p ng-hide="editProgress" class="pull-right"
+							style="font-size: 11px; color: blue; margin-bottom: 30px;">{{1500-progressNote1.testAdministered.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.testAdministered}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<br> <label>Receptive Language :</label><br>
+						<textarea  ng-hide="editProgress"class="col-sm-11 border"
+							rows="5" ng-trim="false" maxlength="1500"
+							ng-model="progressNote1.receptiveLanguage"></textarea>
+						<p  ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.receptiveLanguage.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.receptiveLanguage}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Expressive Language :</label><br>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							rows="5" ng-trim="false" maxlength="1500"
+							ng-model="progressNote1.expressiveLanguage"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.expressiveLanguage.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.expressiveLanguage}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Oral Motor :</label>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.oralMotor"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.oralMotor.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.oralMotor}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Pragmatic Skills :</label>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.pragmaticSkills"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.pragmaticSkills.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.pragmaticSkills}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<label>Summary :</label>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.summary"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.summary.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.summary}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Recommendations :</label>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							ng-model="progressNote1.recommandations" ng-trim="false"
+							maxlength="1500" rows="5"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.recommandations.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.recommandations}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Parental Tips :</label><br>
+						<textarea ng-hide="editProgress" class="col-sm-11 border"
+							ng-model="progressNote1.parentalTips" ng-trim="false"
+							maxlength="180" rows="5"></textarea>
+						<p ng-hide="editProgress"class="pull-right" style="font-size: 11px; color: blue">{{180-progressNote1.parentalTips.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.parentalTips}}</P>
+					</div>
+					<div ng-if="patientSpeechTemplatesInEvalution.length > 0">
+						<label style="margin-left: 20px;">Result :</label>
+						<div ng-if="status1==true"
+							class="col-lg-12 col-md-12 col-sm-11">
+							<table class="table table-bordered table-hover border">
+								<thead>
+									<th colspan="3">{{speechTheraphyTemplate1.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate1.id,patientObject.id,speechTheraphyTemplate1.status)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</thead>
+								<tr>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.description"></td>
+								</tr>
+
+							</table>
+
+						</div>
+						<div ng-if="status2==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="3">{{speechTheraphyTemplate2.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate2.id,patientObject.id,speechTheraphyTemplate2.status)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+
+
+						<div ng-if="status3 == true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate3.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate3.id,patientObject.id,speechTheraphyTemplate3.status)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests"
+									style="margin-bottom: 30px;">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 20px;">
+								<tbody>
+									<tr>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.target}}</td>
+										<td colspan="3">{{speechTheraphyTemplate3.patientStandardScoreHeader.substitutions}}</td>
+									</tr>
+									<tr>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.wordLevel}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.initial}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.medial}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.ending}}</td>
+									</tr>
+									<tr
+										ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests">
+										<td><input type="text" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.wordLevel" /></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.initial" /></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.medial"></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.ending"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div ng-if="status4 ==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate4.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate4.id,patientObject.id,speechTheraphyTemplate4.status)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate4.patientSpeechsubTests">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+						<div ng-if="status5==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate5.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate5.id,patientObject.id,speechTheraphyTemplate5.status)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate5.patientSpeechsubTests">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+					<button type="button" class="btn btn-success"
+						ng-click="selectTemplateForProgress(progressNote1);">Select
+						Result From Template</button>
+					<div class="col-sm-12" align="center" >
+						<button class="btn btn-primary"
+							ng-click="addProgressNoteSheet(progressNote1)" ng-disabled="editProgress">Save</button>
+						<a ng-click="gotoList();" class="btn btn-warning">Cancel</a>
+						
+							
+							<button id="printPageButton" class="btn btn-primary"
+									onclick="window.print();">Print Report</button>
+						<!-- <embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+						<ng-pdf ng-src="{{content}}" scale="page-fit"></ng-pdf> -->
+					</div>
+				</div>
+
+
+
+				<div class="table-responsive" ng-if="!flag">
+					<div class="form-group col-lg-12">
+						<br> <label>History :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							class="form-control" rows="5" ng-trim="false" 1 maxlength="1500"
+							ng-model="progressNote1.history" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500
+							- progressNote1.history.length}}&nbsp;Characters Left</p>
+							<P ng-show="editProgress">{{progressNote1.history}}</P>
+					</div>
+
+
+					<div class="form-group col-lg-12">
+						<label>Background Information :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							class="form-control" ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.backgroundInformation"
+							ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.backgroundInformation.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.backgroundInformation}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<label>Observation :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.observation" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.observation.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.observation}}</P>
+
+
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Test Administered :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.testAdministered" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right"
+							style="font-size: 11px; color: blue; margin-bottom: 30px;">{{1500-progressNote1.testAdministered.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.testAdministered}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<br> <label>Receptive Language :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							rows="5" ng-trim="false" maxlength="1500"
+							ng-model="progressNote1.receptiveLanguage" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.receptiveLanguage.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.receptiveLanguage}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Expressive Language :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							rows="5" ng-trim="false" maxlength="1500"
+							ng-model="progressNote1.expressiveLanguage"
+							ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.expressiveLanguage.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.expressiveLanguage}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Oral Motor :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.oralMotor" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.oralMotor.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.oralMotor}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Pragmatic Skills :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.pragmaticSkills" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.pragmaticSkills.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.pragmaticSkills}}</P>
+					</div>
+
+					<div class="form-group col-lg-12">
+						<label>Summary :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-trim="false" maxlength="1500" rows="5"
+							ng-model="progressNote1.summary" ng-disabled="!addFlag"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.summary.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.summary}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<label>Recommendations :</label>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-model="progressNote1.recommandations" ng-trim="false"
+							maxlength="1500" rows="5" ng-disabled="!addFlag"></textarea>
+						<p  ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.recommandations.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.recommandations}}</P>
+					</div>
+					<div class="form-group col-lg-12">
+						<br> <label>Parental Tips :</label><br>
+						<textarea ng-hide="editProgress" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+							ng-model="progressNote1.parentalTips" ng-disabled="!addFlag"
+							ng-trim="false" maxlength="1500" rows="5"></textarea>
+						<p ng-hide="editProgress" class="pull-right" style="font-size: 11px; color: blue">{{1500-progressNote1.parentalTips.length}}&nbsp;Characters
+							Left</p>
+							<P ng-show="editProgress">{{progressNote1.parentalTips}}</P>
+					</div>
+					<div ng-if="patientSpeechTemplatesInEvalution.length > 0">
+						<label style="margin-left: 20px;">Result :</label>
+						<div ng-if="status1==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border">
+								<thead>
+									<th colspan="3">{{speechTheraphyTemplate1.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate1.id,patientObject.id)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</thead>
+								<tr>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="speechTheraphyTemplate1.patientStandardScore.description"></td>
+								</tr>
+
+							</table>
+
+						</div>
+						<div ng-if="status2==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="3">{{speechTheraphyTemplate2.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate2.id,patientObject.id)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="speechTheraphyTemplate2.patientStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+
+
+						<div ng-if="status3 == true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate3.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate3.id,patientObject.id)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests"
+									style="margin-bottom: 30px;">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 20px;">
+								<tbody>
+									<tr>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.target}}</td>
+										<td colspan="3">{{speechTheraphyTemplate3.patientStandardScoreHeader.substitutions}}</td>
+									</tr>
+									<tr>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.wordLevel}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.initial}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.medial}}</td>
+										<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.ending}}</td>
+									</tr>
+									<tr
+										ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests">
+										<td><input type="text" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.wordLevel" /></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.initial" /></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.medial"></td>
+										<td><input type="number" class="form-control"
+											ng-model="subtest.patientSpeechStandardScore.ending"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div ng-if="status4 ==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate4.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate4.id,patientObject.id)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate4.patientSpeechsubTests">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+						<div ng-if="status5==true"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-bordered table-hover border"
+								style="margin-top: 30px;">
+								<tr>
+									<th colspan="4">{{speechTheraphyTemplate5.templateName}}</th>
+									<th><i class="fa fa-times pull-right" style="color: red;"
+										ng-click="deleteTemplateInProgressAlert(speechTheraphyTemplate5.id,patientObject.id)"
+										data-toggle="tooltip" title="Delete Template"
+										aria-hidden="true" class="close"></i></th>
+								</tr>
+								<tr>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.subtest}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.standardScore}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.percentaileRank}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.summaryOfPerformance}}</td>
+									<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.description}}</td>
+								</tr>
+								<tr
+									ng-repeat="subtest in speechTheraphyTemplate5.patientSpeechsubTests">
+									<td>{{subtest.subTestName}}</td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+									<td><input type="number" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+									<td><input type="text" class="form-control"
+										ng-model="subtest.patientSpeechStandardScore.description"></td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+					<button type="button" class="btn btn-success" ng-disabled="!addFlag"
+						ng-click="selectTemplateForProgress(progressNote1);">Select
+						Result From Template</button>
+					<div class="col-sm-12" align="center">
+						<button class="btn btn-primary" ng-disabled="!addFlag"
+							ng-click="addProgressNoteSheet(progressNote1)" ng-disabled="editProgress"> Save</button>
+						<a ng-click="gotoList();" class="btn btn-warning">Cancel</a>
+						<button class="btn btn-primary"
+							ng-click="generateProgressReport(tabdate)"
+							ng-if="genProReport==false">Generate Report</button>
+						<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+						<ng-pdf ng-src="{{content}}" scale="page-fit"></ng-pdf>
+
+					</div>
+				</div>
+ 		
+ 
+ 	</md-tab> </md-tabs> </md-content>
+			</div>
+		</div>
+	</div>
+</div>

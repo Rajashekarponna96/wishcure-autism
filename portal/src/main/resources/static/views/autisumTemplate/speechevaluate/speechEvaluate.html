@@ -1,0 +1,1062 @@
+<div class="content-wrapper scrollpage" ng-init="">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Speech Evaluation Template123</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Speech Evaluation Template123</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Speech
+								Evaution Template
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12">
+							<div class="col-lg-6 form-group">
+								<label>Child Name:</label><input type="text" value=""
+									class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Age/sex:</label> <input type="text" value=""
+									class="form-control" required>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Date:</label><input type="text" value=""
+									class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Class:</label><input type="text" value=""
+									class="form-control">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>AudioLogic Evalution:</label><input type="text" value=""
+									class="form-control">
+							</div>
+						</form>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<div class="col-lg-6 form-group">
+								<label>(A) Oral Peripheral Examination</label>
+							</div>
+							<table style="width: 80%"
+								class="table table-bordered table-hover">
+								<tr>
+									<th>Speech Organ</th>
+									<th colspan="2">Appearnace</th>
+									<th style="text-align: center;" colspan="3">Function</th>
+								</tr>
+								<tr>
+									<td></td>
+									<td>Normal</td>
+									<td>Abnormal</td>
+									<td>Present</td>
+									<td>Present but inadequate</td>
+									<td>Absent</td>
+								</tr>
+								<tr>
+									<td>Lips</td>
+									<td><input type="checkbox" name="yes"
+										ng-model="speechEvaluation.oralLipsAppearance"></td>
+									<td><input type="checkbox" name="no"
+										ng-model="speechEvaluation.oralLipsAppearance"></td>
+									<td><input type="checkbox" name="yes"
+										ng-model="speechEvaluation.oralLipsFunction"></td>
+									<td><input type="checkbox" name="yesno"
+										ng-model="speechEvaluation.oralLipsFunction"></td>
+									<td><input type="checkbox" name="no"
+										ng-model="speechEvaluation.oralLipsFunction"></td>
+								</tr>
+								<tr>
+									<td>Mandible</td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralMandibleAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralMandibleAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralMandibleFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yesno" ng-model="speechEvaluation.oralMandibleFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralMandibleFunction"
+											type="checkbox"> </label></td>
+								</tr>
+								<tr>
+									<td>Tongue</td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralTongueAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralTongueAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralTongueFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yesno" ng-model="speechEvaluation.oralTongueFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralTongueFunction"
+											type="checkbox"> </label></td>
+								</tr>
+								<tr>
+									<td>Teeth</td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralTeethAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralTeethAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralTeethFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yesno" ng-model="speechEvaluation.oralTeethFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralTeethFunction"
+											type="checkbox"> </label></td>
+								</tr>
+								<tr>
+									<td>Hard Plate</td>
+									<td><label class="checkbox-inline"><input
+											name="yes"
+											ng-model="speechEvaluation.oralHardPlateAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralHardPlateAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralHardPlateFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yesno"
+											ng-model="speechEvaluation.oralHardPlateFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralHardPlateFunction"
+											type="checkbox"> </label></td>
+								</tr>
+								<tr>
+									<td>Soft palate</td>
+									<td><label class="checkbox-inline"><input
+											name="yes"
+											ng-model="speechEvaluation.oralSoftPlateAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralSoftPlateAppearance"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="speechEvaluation.oralSoftPlateFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yesno"
+											ng-model="speechEvaluation.oralSoftPlateFunction"
+											type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="speechEvaluation.oralSoftPlateFunction"
+											type="checkbox"> </label></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-lg-6 form-group">
+							<label>(B) Phonetic Level Assessment</label>
+							<div></div>
+							<label>1. Non Segmental Analysis</label>
+						</div>
+						<table style="width: 80%" class="table table-bordered table-hover">
+							<tr>
+								<th style="width: 30%"></th>
+								<th>Present Consistently</th>
+								<th>Present but inconsistent</th>
+								<th>Absent</th>
+							</tr>
+							<tr>
+								<td>Spontaneous Vocalization</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.spontaneousVocalization"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno"
+										ng-model="speechEvaluation.spontaneousVocalization"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.spontaneousVocalization"
+										type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>Vocalization on demand</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vocalizationOnDemand"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno" ng-model="speechEvaluation.vocalizationOnDemand"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vocalizationOnDemand"
+										type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>Duration Control</br> </br> &nbsp;&nbsp;(a)sustained vocalization
+									for 3-4 sec.</br> </br> &nbsp;&nbsp;(b)series of brief vocalization
+									lasting 1-2 seconds or less</br> </br> &nbsp;&nbsp;(c)stream of unto 3
+									vocalizations varying in duration
+								</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.durationControl"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno" ng-model="speechEvaluation.durationControl"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.durationControl" type="checkbox">
+								</label></td>
+							</tr>
+							<tr>
+								<td rowspan="4">Loudness Control</br> </br>&nbsp;&nbsp;(a)sound of 3
+									seconds duration in a loud voice</br> </br>(b)sound of 3 seconds duration
+									in a soft voice</br> </br> &nbsp;&nbsp;(c)sound of 3 seconds duration in
+									a whisper voice</br> </br> &nbsp;&nbsp;(d)several syllables varying in
+									loudness
+								</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes"
+										ng-model="speechEvaluation.loudnessControlLoudVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno"
+										ng-model="speechEvaluation.loudnessControlLoudVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.loudnessControlLoudVoice"
+										type="checkbox"> </label></td>
+							<tr>
+								<td><label class="checkbox-inline"><input
+										name="yes"
+										ng-model="speechEvaluation.loudnessControlSoftVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno"
+										ng-model="speechEvaluation.loudnessControlSoftVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.loudnessControlSoftVoice"
+										type="checkbox"> </label></td>
+							</tr>
+
+
+							<tr>
+								<td><label class="checkbox-inline"><input
+										name="yes"
+										ng-model="speechEvaluation.loudnessControlWishperVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno"
+										ng-model="speechEvaluation.loudnessControlWishperVoice"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.loudnessControlWishperVoice"
+										type="checkbox"> </label></td>
+
+							</tr>
+							<tr>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.loudnessControlLoudness"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno"
+										ng-model="speechEvaluation.loudnessControlLoudness"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.loudnessControlLoudness"
+										type="checkbox"> </label></td>
+							</tr>
+
+
+
+							</tr>
+							<tr>
+								<td rowspan="3">Pitch Control</br> </br> &nbsp;&nbsp;(a)sound of 3
+									sec duration in a high pitch.</br> </br> &nbsp;&nbsp;(b)sound of 3 sec
+									duration in a mid pitch</br> </br> &nbsp;&nbsp;(c)sound of 3 sec duration
+									in a low pitch
+								</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.pitchControlHigh"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno" ng-model="speechEvaluation.pitchControlHigh"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.pitchControlHigh" type="checkbox">
+								</label></td>
+							<tr>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.pitchControlMid"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno" ng-model="speechEvaluation.pitchControlMid"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.pitchControlMid" type="checkbox">
+								</label></td>
+							</tr>
+
+
+							<tr>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.pitchControlLow"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yesno" ng-model="speechEvaluation.pitchControlLow"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.pitchControlLow" type="checkbox">
+								</label></td>
+							</tr>
+
+
+							</tr>
+
+						</table>
+						<div class="col-lg-6 form-group">
+							<label>2. Segmental Analysis</label>
+
+
+							<table style="width: 80%"
+								class="table table-bordered table-hover">
+								<tr>
+									<th colspan="2"></th>
+									<th>Correct</th>
+									<th>Incorrect</th>
+								</tr>
+								<tr>
+									<td rowspan="5" align="center" center>bit</td>
+									<td>/p/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								<tr>
+
+									<td>/ph/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/b/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/bh/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/m/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								</tr>
+								<tr>
+									<td rowspan="4">Loaded path</td>
+
+
+									<td>/l/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								<tr>
+									<td>/v/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/t/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								</tr>
+								<tr>
+									<td>/th/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+
+								</tr>
+								<tr>
+									<td rowspan="2">Dentals</td>
+
+									<td>/d/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								<tr>
+									<td>/dh/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								</tr>
+								<tr>
+									<td rowspan="4">Retroflex</td>
+
+									<td>/t/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								<tr>
+									<td style="text-decoration: underline;">/t/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/d/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td style="text-decoration: underline;">/d/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								</tr>
+								<tr>
+									<td rowspan="4">Paltals</td>
+
+									<td>/c/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+								<tr>
+									<td>/ch/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/j/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/jh/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+
+								<tr>
+									<td rowspan="4">Velars</td>
+
+									<td>/k/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/kh/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/g/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="no" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								<tr>
+									<td>/gh/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+
+								<tr>
+									<td>Glottals</td>
+
+									<td>/h/</td>
+
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+									<td><label class="checkbox-inline"><input
+											name="yes" ng-model="" type="checkbox"> </label></td>
+
+								</tr>
+								</tr>
+
+							</table>
+						</div>
+
+
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>Phonological Level Assessment</label><br />
+						<br />
+						<h1>
+							<b> Segmental Analysis:</b>For each position of each phoneme mark
+							correct if the sound is correctly articulated.if not,write the
+							errors made by the child in the respective column.
+						</h1>
+					</div>
+					<div>
+						<table style="width: 80%" class="table table-bordered table-hover">
+							<tr>
+								<th colspan=2></th>
+								<th>Initial</th>
+								<th>Medial</th>
+								<th>Final</th>
+							</tr>
+							<tr>
+								<td rowspan="5" align="center" center>Bilabials</td>
+								<td>/p/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							<tr>
+
+								<td>/ph/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/b/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/bh/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/m/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="4">Dentals</td>
+
+
+
+								<td>/t/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							<tr>
+								<td>/th/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/d/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/dh/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="2">Alveolars</td>
+
+								<td>/l/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							<tr>
+								<td>/n/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="4">Retroflex</td>
+
+								<td>/t/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							<tr>
+								<td style="text-decoration: underline;">/t/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/d/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td style="text-decoration: underline;">/d/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="4">Paltals</td>
+
+								<td>/c/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							<tr>
+								<td>/ch/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/j/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/jh/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="4">Velars</td>
+
+								<td>/k/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/kh/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/g/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>/gh/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="" type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td>Glottals</td>
+
+								<td>/h/</td>
+
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalGlottals"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalGlottals"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalGlottals"
+										type="checkbox"> </label></td>
+							</tr>
+							</tr>
+							<tr>
+								<td>Emphsis/Stress</td>
+								<td></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalEmphsis"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalEmphsis"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalEmphsis"
+										type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>Phrasing</td>
+								<td></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalPhrasing"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalPhrasing"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalPhrasing"
+										type="checkbox"> </label></td>
+							</tr>
+							<tr>
+								<td>Rate</td>
+								<td></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalRate"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalRate"
+										type="checkbox"> </label></td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.phonologicalRate"
+										type="checkbox"> </label></td>
+							</tr>
+						</table>
+					</div>
+
+					<div>
+						<table style="width: 50%" class="table table-bordered table-hover">
+							<tr>
+
+								<th>Vowels</th>
+								<th>Present</th>
+								<th>Absent</th>
+							</tr>
+							<tr>
+
+								<td>/a/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelA" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelA" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/a:/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelAA" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/i/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelI" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelI" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/i:/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelII" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelII" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/u/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelU" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelU" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/u:/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelUU" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelUU" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/e/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelE" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelE" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/e:/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelEE" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelEE" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/ae/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelAE" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelAE" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/o/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelO" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelO" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/o:/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelOO" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelOO" type="checkbox"> </label></td>
+							</tr>
+							<tr>
+
+								<td>/au/</td>
+								<td><label class="checkbox-inline"><input
+										name="yes" ng-model="speechEvaluation.vowelAU" type="checkbox">
+								</label></td>
+								<td><label class="checkbox-inline"><input name="no"
+										ng-model="speechEvaluation.vowelAU" type="checkbox"> </label></td>
+							</tr>
+
+						</table>
+					</div>
+					<div align="center" class="col-sm-12">
+						<button class="btn btn-primary"
+							ng-click="savePatientSpeechEvalution()">Save</button>
+						<button class="btn btn-danger" ng-click="">Cancel</button>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<div class="col-lg-12 form-group">
+								<label class="col-lg-6"> Supervisor</label> <label
+									class="col-lg-6" style='text-align: right'>Trainee
+									Teacher</label>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

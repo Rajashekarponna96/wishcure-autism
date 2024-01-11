@@ -1,0 +1,148 @@
+<div class="content-wrapper" ng-init="getAllInactivePersonsByRegType();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." ng-model="search"> <span
+						class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>InActive Users- {{userName.userAccount.company.companyName}}</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">InActive Users</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Content Header (Page header) -->
+
+	<!-- Main content -->
+
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" >
+						<div class="btn-group"  ng-click="gotoDashboard();">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Dash board
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+									<div class="input-group custom-search-form">
+										<input type="text"  class="form-control"
+											 ng-model="search"
+											placeholder="search.." ng-change="getAllusersPageSearch(search);"><span  ng-click="getAllusersPageSearch(search);"
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!--  <th>Serial No</th> -->
+										<th ng-click="sort('firstName')">First Name &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='firstName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th ng-click="sort('user.lastName')">Last Name &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.lastName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										
+										<th ng-click="sort('user.userAccount.role.roleName')">Role Type &nbsp;<span
+											class="glyphicon sort-icon" ng-show="sortKey=='user.userAccount.role.roleName'"
+											ng-class="{'glyphicon glyphicon-sort-by-attributes':reverse,'glyphicon glyphicon-sort-by-attributes-alt':!reverse}"></span>
+										</th>
+										<th>Inactive Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="user in usersListsInactive |orderBy:sortKey:reverse | filter:search">
+										<!--  <td><input type="radio" name="radioGroup">
+                                       <label>{{user.id}}</label>   
+                                   </td> -->
+										<td>{{user.firstName}}</td>
+										<td>{{user.lastName}}</td>
+										
+										<td>{{user.userAccount.role.roleName}}</td>
+										<td>{{user.modifiedDate}}</td>
+										<td><span class="label-success label label-default"
+											ng-if="user.userAccount.active==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="user.userAccount.active==false"> InActive</span> 
+									</tr>
+									<tr ng-if="usersListsInactive.length == 0">
+										<td colspan="5" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+														<li><a rel="next" ng-click="firstPage();">First</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="left"
+															ng-click="previousPage();" title="prev"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+														</a></li>
+														<li><a rel="next" class="btn btn-info btn-md"
+															data-toggle="tooltip" data-placement="right"
+															ng-click="nextPage();" title="next"
+															style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+														</a></li>
+														<li><a rel="next" ng-click="lastPage();">Last</a></li>
+													</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+

@@ -1,0 +1,183 @@
+<div class="content-wrapper scrollpage" ng-init="getAllRCZ();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Regional Center</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Regional Center</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoRegionList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Regional Center List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="addRCform">
+
+							<div class="form-group col-lg-6">
+								<label><span
+									ng-if="region.regionalCenterZoneLookup == undefined || region.regionalCenterZoneLookup =='' "
+									style="color: red">*</span>Regional Center Zone Name</label> <span
+									style="color: red" ng-cloak
+									ng-show="(addRCform.rczName.$touched && addRCform.rczName.$invalid)">
+									<span ng-show="addRCform.rczName.$error.required"> is
+										required.</span>
+								</span> <select ng-model="region.regionalCenterZoneLookup"
+									class="form-control" name="therapystate"
+									ng-options="rcz as rcz.regionalCenterZoneName for rcz in rczLists track by rcz.id"
+									required>
+									<option value="" class="active">Select Regional Center
+										Zone</option>
+								</select>
+							</div>
+							<div class="form-group col-lg-6">
+								<label><span
+									ng-if="region.name == undefined || region.name =='' "
+									style="color: red">*</span>Regional Center Name</label> <span style="color: red"
+									ng-cloak
+									ng-show="(addRCform.rczName.$touched && addRCform.rczName.$invalid)">
+									<span ng-show="addRCform.rczName.$error.required"> is
+										required.</span>
+								</span> <input type="text" value="" class="form-control" name="rczName"
+									placeholder="Enter Name" ng-model="region.name" required>
+							</div>
+							
+							
+							<div class="form-group col-sm-6">
+								<label>E-Mail</label><span style="color: red"
+									ng-show="addRCform.insuranceEmail.$error.pattern">
+									Please enter a valid email address!</span> <span
+									ng-if="addRCform.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="addRCform.$error.emailExists" style="color: red">Email
+									exists already</span> <input type="email" value=""
+									placeholder="Enter insurance Email" id="txt_email"
+									class="form-control" name="insuranceEmail"
+									ng-model="region.email" 
+									id="txt_user_email" 
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+							</div>
+							
+							
+							<!-- <div class="form-group col-sm-6">
+								<label class="control-label" for="emailid">Email Id</label> <span
+									style="color: red" ng-show="addRCform.email.$error.pattern">
+									Please enter a valid email address!</span> <span
+									ng-if="addRCform.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="addRCform.$error.emailExists" style="color: red">Email
+									exists already</span> <input type="email" value=""
+									placeholder="Enter Email" id="txt_email" class="form-control"
+									name="email" ng-model="region.email" ng-value="rc.email"
+									email-available ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ "
+									required>
+							</div> -->
+							<div class="form-group col-lg-6">
+								<label>Mobile Number</label> <span
+									ng-show="((addRCform.mobileNumber.$error.minlength ||
+                           addRCform.mobileNumber.$error.maxlength) && 
+                          addRCform.mobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <input phone-input maxlength="14" minlength="14"
+									type="text" value="" class="form-control" name="mobileNumber"
+									placeholder="Enter Mobile Number"
+									ng-model="region.mobileNumber" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Street Address 1</label> <input id="autocomplete"
+									placeholder="Enter Street Address 1" name="address1"
+									class="form-control"
+									ng-model="region.reginoalCenterAddress.address1" type="text"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Street Address 2</label> <input
+									class="field form-control"
+									ng-model="region.reginoalCenterAddress.address2" id="route"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>City</label> <input class="field form-control"
+									ng-model="region.reginoalCenterAddress.city" id="locality"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>State</label> <input class="field form-control"
+									ng-model="region.reginoalCenterAddress.state"
+									id="administrative_area_level_1"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Country</label> <input class="field form-control"
+									ng-model="region.reginoalCenterAddress.country" id="country"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Zip code</label> <input type="text"
+									class="field form-control" allow-only-numbers maxlength="5"
+									ng-model="region.reginoalCenterAddress.zipcode"
+									id="postal_code"></input>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Faxno</label> <span
+									ng-show="((addRCform.faxNo.$error.minlength ||
+                           addRCform.faxNo.$error.maxlength) && 
+                          addRCform.faxNo.$dirty) "
+									style="color: red"> should be 10 digits </span>  <input type="text" class="form-control"
+									name="faxNo" placeholder="Enter faxNo" ng-model="region.faxNo"
+									phone-input maxlength="14" minlength="14" required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="region.status" name="status"
+									ng-value="true">Active</label> <label class="radio-inline"><input
+									type="radio" ng-model="region.status" name="status"
+									ng-value="false">InActive</label>
+							</div>
+
+							<div class="form-check col-sm-12">
+								<div class="reset-button">
+									<button class="btn btn-success"
+										ng-click="updateRegionalCenter(region)"
+										ng-disabled="!region.name || !region.regionalCenterZoneLookup||addRCform.insuranceEmail.$error.pattern||
+										((addRCform.mobileNumber.$error.minlength || addRCform.mobileNumber.$error.maxlength) && addRCform.mobileNumber.$dirty)
+                          ||((addRCform.faxNo.$error.minlength || addRCform.faxNo.$error.maxlength) && addRCform.faxNo.$dirty) ">Update</button>
+									<a class="btn btn-danger" ng-click="gotobackRegionalCenter()">Cancel</a>
+
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

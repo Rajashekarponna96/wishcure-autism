@@ -1,0 +1,340 @@
+<div class="content-wrapper"
+	ng-init="getAllTherapistsSchedulesByAdminUsername();getAllTherapists();">
+	<!-- schedules start -->
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<!-- <div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>My Availability</h1>
+			<small></small>
+
+		</div> -->
+
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Therapist Availability</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Availability</li>
+			</ol>
+		</div>
+
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<!-- <ol class="breadcrumb hidden-xs">
+						<li><a href="index-2.html"><i class="pe-7s-home"></i>
+								Home</a></li>
+						<li class="active">My Availability</li>
+					</ol> -->
+
+
+
+
+
+
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Schedules List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="addscheduleform">
+
+
+
+							<table align="center">
+								<tr>
+									<td align="center"><label>Therapists List: </label></td>
+									<td><select class="form-control" ng-model="therapist"
+										ng-options="therapist as therapist.firstName for therapist in  therapistList">
+											<option value="" class="active">Select Therapist</option>
+											<!-- <option ng-if="loggedUserRole==user.role.roleName">{{user.role.roleName}}</option> -->
+									</select></td>
+								</tr>
+								<tr><td>&nbsp;</td></tr>
+								<tr>
+									<td align="center"><label>Start Time</label></td>
+									<td align="center"><label>End Time</label></td>
+								</tr>
+								<tr>
+									<td><mdp-time-picker name="start"
+											ng-model="fromTime" flex layout="column"
+											layout-align="center center"></mdp-time-picker> <!-- <span style="color: red" ng-cloak
+											ng-show="(addscheduleform.start.$dirty && addscheduleform.start.$invalid)"> -->
+										<!-- <span ng-show="addscheduleform.start.$error.required">Start
+												Time is required.</span> --></td>
+									<td><mdp-time-picker name="end"
+											ng-model="toTime" flex layout="column"
+											layout-align="center center"></mdp-time-picker> <!-- <span style="color: red" ng-cloak
+											ng-show="(addscheduleform.end.$dirty && addscheduleform.end.$invalid)"> -->
+										<!-- <span ng-show="addscheduleform.end.$error.required">End
+												Time is required.</span> --></td>
+								</tr>
+								<tr>
+									<td colspan="2"><label>Available Days:&nbsp;&nbsp;</label>
+										<label ng-value="day" ng-repeat="day in days"> <input
+											type="checkbox" checklist-model="scheduleObj.availableDays"
+											checklist-value="day"> &nbsp;{{day}}&nbsp;
+									</label></td>
+								</tr>
+								<!-- <tr>
+									<td colspan="3" align="center">
+										<div class="form-group">
+											<label>Available Days</label><br>
+											<md-input-container> <md-select
+												align="center" ng-model="scheduleObj.availableDays"
+												md-on-close="clearSearchTerm()"
+												data-md-container-class="selectdemoSelectHeader" multiple
+												required> <md-select-header
+												class="demo-select-header"> <input
+												ng-model="searchTerm" type="search"
+												placeholder="Available Days"
+												class="demo-header-searchbox md-text"> </md-select-header> <md-optgroup
+												label="day"> <md-option ng-value="day"
+												ng-repeat="day in days |
+              filter:searchTerm">{{day}}</md-option>
+											</md-optgroup> </md-select> </md-input-container>
+										</div>
+										
+									</td>
+								</tr> -->
+
+
+							</table>
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="addScheduleByAdmin()" ng-show="hasFeature('Therapist Availability').canAdd==true"
+									ng-disabled="!fromTime || !toTime || !scheduleObj.availableDays ">Save</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+						<!-- 						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Serial No</th>
+										<th>start time</th>
+										<th>End time</th>
+										<th>Day</th>
+										<th>name</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="schedule in scheduleListAdmin">
+									<td>{{schedule.id}}</td>
+										<td>{{schedule.fromTime | date:'HH:mm:ss'}}</td>
+										<td>{{schedule.toTime | date:'HH:mm:ss'}}</td>
+										<td>{{arrayToString(schedule.availableDays)}}</td>
+                                        <td>{{schedule.doctor.firstName}}</td>
+										<td>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click="deleteSchedule(schedule.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+ -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+
+
+	<!-- schedules End -->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="content-wrapper"
+	ng-init="getAllSchedulesByDoctorUsername();">
+	schedules start
+	Content Header (Page header)
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>My Availability</h1>
+			<small></small>
+
+		</div>
+	</section>
+	Main content
+	<section class="content">
+		<div class="row">
+			Form controls
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<ol class="breadcrumb hidden-xs">
+						<li><a href="index-2.html"><i class="pe-7s-home"></i>
+								Home</a></li>
+						<li class="active">My Availability</li>
+					</ol>
+					<div class="panel-body">
+								<form name="addscheduleform">
+									<div align="center">
+										<label>Start Time</label>
+										
+										<mdp-time-picker name="start" ng-model="scheduleObj.fromTime"  flex layout="column" layout-align="center center" 
+											></mdp-time-picker>
+										<span style="color: red" ng-cloak
+											ng-show="(addscheduleform.start.$dirty && addscheduleform.start.$invalid)">
+											<span ng-show="addscheduleform.start.$error.required">Start
+												Time is required.</span>
+									</div>
+
+									<div align="center">
+										<label>End Time</label>
+										<mdp-time-picker  name="end" ng-model="scheduleObj.toTime"  flex layout="column" layout-align="center center" 
+											></mdp-time-picker>
+										<span style="color: red" ng-cloak
+											ng-show="(addscheduleform.end.$dirty && addscheduleform.end.$invalid)">
+											<span ng-show="addscheduleform.end.$error.required">End
+												Time is required.</span>
+									</div>
+									<div class="form-group" align="center">
+										<label>Available Days</label><br>
+										<md-input-container> <md-select align="center"
+											ng-model="scheduleObj.availableDays"
+											md-on-close="clearSearchTerm()"
+											data-md-container-class="selectdemoSelectHeader" multiple
+											required> <md-select-header
+											class="demo-select-header"> <input
+											ng-model="searchTerm" type="search"
+											placeholder="Available Days"
+											class="demo-header-searchbox md-text"> </md-select-header> <md-optgroup
+											label="day"> <md-option ng-value="day"
+											ng-repeat="day in days |
+              filter:searchTerm">{{day}}</md-option>
+										</md-optgroup> </md-select> </md-input-container>
+									</div>
+									<div class="reset-button" align="center">
+										<button class="btn btn-success" ng-click="addScheduleObj()"
+											ng-disabled="addscheduleform.$invalid">Save</button>
+										<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+									</div>
+								</form>
+							
+							
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Serial No</th>
+												<th>start time</th>
+												<th>End time</th>
+												<th>Day</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="schedule in scheduleList">
+												<td>{{schedule.fromTime | date:'HH:mm:ss'}}</td>
+												<td>{{schedule.toTime | date:'HH:mm:ss'}}</td>
+												<td>{{arrayToString(schedule.availableDays)}}</td>
+
+												<td>
+													<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+														data-placement="right"
+														ng-click="deleteSchedule(schedule.id);" title="Delete ">
+														<i class="fa fa-trash-o" aria-hidden="true"></i>
+													</button>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+						</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+	/.content
+
+
+	schedules End
+
+</div>
+ -->

@@ -1,0 +1,245 @@
+
+<div class="content-wrapper"
+	ng-init="getAllHolidaysByDoctorUsernamePage();">
+	<!-- shifts start <div class="content-wrapper" ng-init="getAllHolidaysByDoctorUsername();holidays.color='red'"> -->
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Personal Holidays</h1>
+			<small></small>
+
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<ol class="breadcrumb hidden-xs">
+						<li><a><i class="pe-7s-home"></i>
+								Home</a></li>
+						<li class="active">Holidays</li>
+					</ol>
+					<div class="panel-body">
+						<div >
+							<div align="center">
+								<form  name="holidaysForm">
+									<!-- <div class="form-group">
+										<md-input-container class="md-block" flex-gt-sm>
+										<label>Title</label> <md-icon
+											md-svg-src="assets/icons/ic_create_black_24px.svg"
+											class="name"></md-icon> <md-icon class="name"></md-icon> <input
+											ng-model="holidays.reason" type="text"> </md-input-container>
+									</div> -->
+
+									<!-- <div class="row">
+          <div class="input-field col s6">
+            <i class="mdi-image-timer prefix"></i>
+            <label for="startdate">FromDate*</label>
+            <input id="startdate" name="startdate" class="datepicker" type="date" ng-model="vm.holiday.fromdate" required>
+            <div class="errorTxt1" ng-show="holidaysForm.fromTime.$error.required" style="margin-left: 18%;"><div id="ufname-error" class="error">fromdate is required</div></div> 
+          </div> -->
+									<table align="center">
+										<tr align="center">
+											<td align="center"><md-input-container class="md-block" flex-gt-sm>
+												<label>Title</label> <md-icon
+													md-svg-src="assets/icons/ic_create_black_24px.svg"
+													class="name"></md-icon> <md-icon class="name"></md-icon> <input
+													name="title" ng-model="holidays.reason"
+													aria-required="true" aria-invalid="true"
+													ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+													type="text"> </md-input-container> <span style="color: red" ng-cloak
+												ng-show="(holidaysForm.title.$touched && holidaysForm.title.$invalid)">
+													<span ng-show="holidaysForm.title.$error.required">
+												</span></td>
+										</tr>
+										<tr align="center">
+
+											<td align="center"><mdp-date-picker mdp-placeholder="From Date"
+													ng-model="holidays.fromTime"></mdp-date-picker></td>
+
+											<!-- <div flex>
+											<mdp-date-picker mdp-placeholder="From Date"
+												ng-model="holidays.fromTime">
+												<input
+											name="fromTime" ng-model="holidays.fromTime" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											type="text" required></mdp-date-picker>
+												
+												<span style="color: red" ng-cloak
+											ng-show="(holidaysForm.fromTime.$touched && holidaysForm.fromTime.$invalid)">
+											<span ng-show="holidaysForm.fromTime.$error.required">Start
+												Time is required.</span>
+										</div> -->
+
+											<td align="center"><mdp-time-picker mdp-placeholder="From Time"
+													ng-model="holidays.fromTime"></mdp-time-picker></td>
+										</tr>
+										<tr align="center">
+											<td align="center"><mdp-date-picker mdp-placeholder="To Date"
+													ng-model="holidays.toTime"></mdp-date-picker></td>
+											<td align="center"><mdp-time-picker mdp-placeholder="To Time"
+													ng-model="holidays.toTime"></mdp-time-picker></td>
+										</tr>
+
+
+
+
+										<!-- <div class="form-group">
+										<md-input-container cclass="md-block" flex-gt-sm>
+										<label>Color</label> <md-icon
+											md-svg-src="assets/icons/ic_invert_colors_black_24px.svg"
+											class="name"></md-icon> <md-icon class="name"></md-icon> <input value="Red"
+											ng-model="holidays.color" type="text"> </md-input-container>
+									</div> -->
+									</table>
+									<br> <br>
+									<div class="reset-button">
+										<button class="btn btn-success"
+											ng-click="addHolidays(holidays)"
+											ng-show="hasFeature('Holidays').canAdd==true"
+											ng-disabled="!holidays.reason || !holidays.fromTime || !holidays.toTime">Save</button>
+										<a class="btn btn-danger" ng-click="gotoback(holidays)">Cancel</a>
+
+									</div>
+								</form>
+
+
+								<div flex="100">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>Title</th>
+													<th>Start Date</th>
+													<th>Start Time</th>
+													<th>End Date</th>
+													<th>End Time</th>
+													<!-- <th>Color</th> -->
+													<th>Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="holidays in holidaysLists">
+													<td>{{holidays.reason}}</td>
+													<td>{{changeDate(holidays.fromDate);}}</td>
+													<td>{{holidays.fromLocalTime}}</td>
+													<td>{{changeDate(holidays.toDate);}}</td>
+													<td>{{holidays.toLocalTime}}</td>
+													<!-- <td>{{holidays.color}}</td> -->
+													<td>
+														<!-- 													<button class="btn btn-info btn-sm" data-toggle="tooltip"
+														data-placement="left" ng-click="gotoupdate(holidays);"
+														title="Update">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+													</button>
+ -->
+														<button class="btn btn-danger btn-sm"
+															data-toggle="tooltip" data-placement="right"
+															ng-show="hasFeature('Holidays').canDelete==true"
+															ng-click="deleteHolidays(holidays.id);" title="Delete ">
+															<i class="fa fa-trash-o" aria-hidden="true"></i>
+														</button>
+													</td>
+												</tr>
+												<tr ng-if="holidaysLists.length == 0">
+													<td colspan="6" align="center">
+														<h3>
+															<i class="fa fa-meh-o"></i> No records found!
+														</h3>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+									<!-- <div class="page-nation text-right">
+										<ul class="pagination pagination-large">
+											<li><a rel="next" ng-click="firstPage();">First</a></li>
+											<li><a rel="next" class="btn btn-info btn-md"
+												data-toggle="tooltip" data-placement="left"
+												ng-click="previousPage();" title="prev"> <i
+													aria-hidden="true"></i><<
+											</a></li>
+											<li><a rel="next" class="btn btn-info btn-md"
+												data-toggle="tooltip" data-placement="right"
+												ng-click="nextPage();" title="next"> <i
+													aria-hidden="true"></i>>>
+											</a></li>
+											<li><a rel="next" ng-click="lastPage();">Last</a></li>
+										</ul>
+									</div> -->
+									<div class="row">
+							<table style="border-collapse: collapse; width: 100%;">
+								<tbody>
+									<tr>
+										<td style="padding-top: 28px; padding-left: 20px;"><label>Display
+												<select name="example_length" ng-model="size"
+												ng-change="sizeChanged(size);">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="25">25</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+											</select> records per page
+										</label></td>
+
+
+
+
+										<td align="right" style="padding-right: 20px;">
+											<ul class="pagination pagination-large">
+												<li><a rel="next" ng-click="firstPage();">First</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="left"
+													ng-click="previousPage();" title="prev"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i><<
+												</a></li>
+												<li><a rel="next" class="btn btn-info btn-md"
+													data-toggle="tooltip" data-placement="right"
+													ng-click="nextPage();" title="next"
+													style="padding-bottom: 7px;"> <i aria-hidden="true"></i>>>
+												</a></li>
+												<li><a rel="next" ng-click="lastPage();">Last</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+
+
+	<!-- Shifts End -->
+
+</div>

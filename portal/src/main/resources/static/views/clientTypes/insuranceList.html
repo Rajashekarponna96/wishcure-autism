@@ -1,0 +1,142 @@
+<div class="content-wrapper scrollpage"
+	ng-init="getAllInsuranceList();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Insurance List</h1>
+			<small>Here you can view, update or delete insurance details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Insurance List</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+
+						<div class="btn-group" ng-click="gotoAdd();">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								Insurance
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+								<div class="input-group custom-search-form">
+										<input type="text" class="form-control" ng-model="search"
+											placeholder="search.."><span
+											class="input-group-addon btn btn-primary"><i
+											class="glyphicon glyphicon-search"></i></span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Insurance Id</th>
+										<th>Insurance Company Name</th>
+										<th>Email</th>
+										<th>Mobile Number</th>
+										<!-- <th>Address</th>
+										 <th>Fax</th>  -->
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="insurance in insuranceListsPage | filter:search ">
+										<td>{{insurance.idNumber}}</td>
+										<td>{{insurance.insuranceCompanyName}}</td>
+										<td>{{insurance.emailId}}</td>
+										<td ng-if="insurance.mobileNumber != undefined">{{changeMobileNumber(insurance.mobileNumber)}}</td>
+										<td ng-if="insurance.mobileNumber == undefined">{{insurance.mobileNumber}}</td>
+									<!-- 	<td>{{insurance.address1.address1}},{{insurance.address1.address2}},{{insurance.address1.city}},{{insurance.address1.state}},{{insurance.address1.country}},{{insurance.address1.zipcode}}</td>
+										<td>{{insurance.fax}}</td> -->
+										<td><span class="label-success label label-default"
+											ng-if="insurance.status==true"> Active</span><span
+											class="label-default label label-danger"
+											ng-if="insurance.status==false"> InActive</span></td>
+										<td >
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"  ng-disabled="insurance.fromLookup == true"
+												data-placement="left" ng-click="gotoupdate(insurance);"
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"  ng-disabled="insurance.fromLookup == true"
+												data-placement="right"
+												ng-click="deleteInsurance(insurance.id);" title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+									<tr ng-if="insuranceLists.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+								<li><a rel="next" ng-click="firstPage();">First</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="left"
+									ng-click="previousPage();" title="prev"> <i
+										aria-hidden="true"></i><<
+								</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="right"
+									ng-click="nextPage();" title="next"> <i aria-hidden="true"></i>>>
+								</a></li>
+								<li><a rel="next" ng-click="lastPage();">Last</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -1,0 +1,201 @@
+<div class="content-wrapper" ng-init="getAllcsbs();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>CSBS Test</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="#/main/dashboard"><i class="pe-7s-home"></i>
+						Home</a></li>
+				<li><a href="#">CSBS Test</a></li>
+				<li class="active">CSBS Test</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<ul class="nav nav-tabs">
+					<li style="float: left;" ng-repeat="category in screeninhTestList"
+						ng-init="getAllParentQuestionCategoriesSocial(screeninhTestList[0].id);gotoCategory(screeninhTestList[0]);"
+						ng-click="getAllParentQuestionCategoriesSocial(category.id);gotoCategory(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}</a>
+					</li>
+					<li>
+						<button class="btn btn-primary" data-toggle="tooltip"
+							ng-if="loggedUserRole!='Parent'" ng-click="gotoCSBS();"
+							data-placement="right" title="Add category">
+							<i class="" aria-hidden="true">+</i>
+						</button>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+							<div class="col-sm-12">
+								<div class="sample" layout="column" ng-cloak>
+									<div class="col-sm-12 class= table-responsive" align="justify"
+										ng-if="ParentQuestionCategoryDtoListSocial.length == 0">
+										<div
+											ng-repeat="evalutionCategory in questionCategoryDtoListSocial">
+											<table class="table table-bordered table-hover col-sm-12">
+												<thead>
+													<tr>
+														<td colspan="2"><label>{{evalutionCategory.name}}:</label></td>
+													</tr>
+												</thead>
+												<tr
+													ng-repeat="evalutionQuestion in evalutionCategory.csbsQuestionLookups">
+													<td class="col-sm-8">{{evalutionQuestion.name}}</td>
+													<td class="col-sm-4">
+														<div
+															ng-repeat="answer in evalutionQuestion.csbsAnswerLookups"
+															style="float: left;">
+															<input type="checkbox" ng-model="answer.selectedAnswer"
+																ng-disabled="!addFlag"
+																ng-checked="answer.selectedAnswer==true" ng-value=true
+																name="{{name}}" />&nbsp;{{answer.name}}&nbsp;&nbsp;&nbsp;
+														</div>
+													</td>
+												</tr>
+												<tr rowspan="2"
+													ng-if="evalutionCategory.csbsQuestionLookups.length == 0">
+													<td colspan="2" align="center"><b><h1>
+																<i class="fa fa-meh-o"></i> No records found!
+															</h1></b></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div class="col-sm-12 class= table-responsive" align="justify"
+										ng-if="ParentQuestionCategoryDtoListSocial.length > 0">
+										<div
+											ng-repeat="evalutionCategory in ParentQuestionCategoryDtoListSocial">
+											<table class="table table-bordered table-hover col-sm-12">
+												<thead>
+													<tr>
+														<td colspan="2"><label>{{evalutionCategory.name}}:</label></td>
+													</tr>
+												</thead>
+												<tr
+													ng-repeat="evalutionQuestion in evalutionCategory.csbsQuestions">
+													<td class="col-sm-8">{{evalutionQuestion.name}}</td>
+													<td class="col-sm-4">
+														<div ng-repeat="answer in evalutionQuestion.csbsAnswers"
+															style="float: left;">
+															<input type="checkbox" ng-model="answer.selectedAnswer"
+																name="radio" ng-disabled="!addFlag" ng-value="answer" />&nbsp;{{answer.name}}&nbsp;&nbsp;&nbsp;
+														</div>
+													</td>
+												</tr>
+												<tr rowspan="2"
+													ng-if="evalutionCategory.csbsQuestions.length == 0">
+													<td colspan="2" align="center"><b><h1>
+																<i class="fa fa-meh-o"></i> No records found!
+															</h1></b></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div ng-if="loggedUserRole=='Super Admin'">
+										<button class="btn btn-primary" ng-click="showme=true">Add
+											Goal</button>
+										<form name="csbsform" ng-show="showme">
+											<div class="form-group">
+												<div class="col-sm-3">
+													<label>Question Name</label>
+												</div>
+												<div class="form-group col-sm-6">
+													<input type="text" value="" class="form-control"
+														name="QuestionName"
+														placeholder="Enter Evalution Question Name"
+														ng-model="obj.questionName" aria-required="true"
+														aria-invalid="true"
+														ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+														required> <span style="color: red" ng-cloak
+														ng-show="(csbsform.QuestionName.$touched && csbsform.QuestionName.$invalid)">
+														<span ng-show="csbsform.QuestionName.$error.required">
+															Question Name is required.</span>
+													</span>
+												</div>
+												<div class="col-sm-3" align="center">
+													<br> <br>
+												</div>
+											</div>
+
+											<div class="form-group col-sm-12">
+												<div class="col-sm-3">
+													<label>Answer</label>
+												</div>
+												<div class="col-sm-6">
+													<div ng-repeat="evalution in evalutions">
+														<input type="text" value="" class="form-control"
+															name="answer" placeholder="Enter Your Answer"
+															ng-model="evalution.name" aria-required="true"
+															aria-invalid="true"
+															ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+															required> <span style="color: red" ng-cloak
+															ng-show="(csbsform.answer.$touched && csbsform.answer.$invalid)">
+															<span ng-show="csbsform.answer.$error.required">Answer
+																is required.</span>
+														</span>
+													</div>
+
+												</div>
+												<div class="col-sm-3">
+													<a class="btn btn-lg" ng-click="newItem()"> <span
+														class="glyphicon glyphicon-plus-sign"></span>
+													</a>
+
+												</div>
+											</div>
+											<br>
+
+											<div class="form-group">
+												<div class="col-sm-9"></div>
+												<div class="col-sm-3">
+													<a class="btn btn-lg" ng-click="deleteItem()"> <span
+														class="glyphicon glyphicon-minus-sign"></span>
+													</a>
+												</div>
+											</div>
+											<div class="reset-button col-sm-12" ng-show="showme">
+												<button class="btn btn-success"
+													ng-click="addcsbsQuestion(obj)"
+													ng-disabled="csbsform.$invalid">Add</button>
+												<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+											</div>
+										</form>
+									</div>
+
+									<div align="center" class="col-sm-12"
+										ng-if="loggedUserRole !='Super Admin'"
+										ng-if="questionCategoryDtoListSocial.length > 0 || ParentQuestionCategoryDtoListSocial.length > 0">
+										<button class="btn btn-primary" ng-click="addSocialData()"
+											ng-disabled="!addFlag">Save</button>
+										<button class="btn btn-danger" ng-click="">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,154 @@
+<div ng-init="getAllcsbs();getAllcsbsQuestions();">
+	<!-- Content Header (Page header) -->
+<p align="center" style="padding:10px;"><b>CSBS DP Infant-Toddler Checklist</b></p>
+	<!-- Main content -->
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+			<ul class="nav nav-tabs">
+				<li style="float: left;" ng-repeat="csbsCategoryLookup in csbsCategoryLookupList"
+					
+					
+					ng-init="gotoCategory(csbsCategoryLookupList[0]);"><a ng-click="gotoCategory(csbsCategoryLookup);"
+					href="#tab1" data-toggle="tab" target="self">{{csbsCategoryLookup.name}}</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tab1">
+					<div class="panel-body">
+						<div class="col-sm-12">
+							<div class="sample" layout="column" ng-cloak>
+								<div class="col-sm-12 class= table-responsive" align="justify"
+									>
+									<div
+										ng-repeat="csbsQuestionLookup in csbsQuestionLookups">
+										<table class="table table-bordered table-hover col-sm-12">
+											<thead>
+												<tr>
+													<td colspan="2"><label>{{csbsQuestionLookup.name}}:</label></td>
+												<td class="col-sm-4">
+													<div
+														ng-repeat="csbsAnswerLookup in csbsQuestionLookup.csbsAnswerLookups"
+														style="float: left;">
+														<input type="radio" ng-model="csbsAnswerLookup.selectedAnswer"
+															ng-value=true
+															name="{{name}}" />&nbsp;{{csbsAnswerLookup.name}}&nbsp;&nbsp;&nbsp;
+													</div>
+												</td>
+												</tr>
+											</thead>
+											
+											<tr rowspan="2"
+												ng-if="csbsCategory.csbsQuestionLookups.length == 0">
+												<td colspan="2" align="center"><b><h1>
+															<i class="fa fa-meh-o"></i> No records found!
+														</h1></b></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class="col-sm-12 class= table-responsive" align="justify"
+									ng-if="patientCsbsQuestionsList.length > 0">
+									<div
+										ng-repeat="csbsCategory in patientCsbsQuestionsList">
+										<table class="table table-bordered table-hover col-sm-12">
+											<thead>
+												<tr>
+													<td colspan="2"><label>{{csbsCategory.name}}:</label></td>
+												</tr>
+											</thead>
+											
+											<tr rowspan="2"
+												ng-if="csbsCategory.csbsQuestions.length == 0">
+												<td colspan="2" align="center"><b><h1>
+															<i class="fa fa-meh-o"></i> No records found!
+														</h1></b></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<!-- 	<div ng-if="loggedUserRole=='Super Admin'">
+										<button class="btn btn-primary" ng-click="showme=true">Add
+											Goal</button>
+										<form name="csbsform" ng-show="showme">
+											<div class="form-group">
+												<div class="col-sm-3">
+													<label>Question Name</label>
+												</div>
+												<div class="form-group col-sm-6">
+													<input type="text" value="" class="form-control"
+														name="QuestionName"
+														placeholder="Enter Evalution Question Name"
+														ng-model="obj.questionName" aria-required="true"
+														aria-invalid="true"
+														ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+														required> <span style="color: red" ng-cloak
+														ng-show="(csbsform.QuestionName.$touched && csbsform.QuestionName.$invalid)">
+														<span ng-show="csbsform.QuestionName.$error.required">
+															Question Name is required.</span>
+													</span>
+												</div>
+												<div class="col-sm-3" align="center">
+													<br> <br>
+												</div>
+											</div>
+
+											<div class="form-group col-sm-12">
+												<div class="col-sm-3">
+													<label>Answer</label>
+												</div>
+												<div class="col-sm-6">
+													<div ng-repeat="evalution in evalutions">
+														<input type="text" value="" class="form-control"
+															name="answer" placeholder="Enter Your Answer"
+															ng-model="evalution.name" aria-required="true"
+															aria-invalid="true"
+															ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+															required> <span style="color: red" ng-cloak
+															ng-show="(csbsform.answer.$touched && csbsform.answer.$invalid)">
+															<span ng-show="csbsform.answer.$error.required">Answer
+																is required.</span>
+														</span>
+													</div>
+
+												</div>
+												<div class="col-sm-3">
+													<a class="btn btn-lg" ng-click="newItem()"> <span
+														class="glyphicon glyphicon-plus-sign"></span>
+													</a>
+
+												</div>
+											</div>
+											<br>
+
+											<div class="form-group">
+												<div class="col-sm-9"></div>
+												<div class="col-sm-3">
+													<a class="btn btn-lg" ng-click="deleteItem()"> <span
+														class="glyphicon glyphicon-minus-sign"></span>
+													</a>
+												</div>
+											</div>
+											<div class="reset-button col-sm-12" ng-show="showme">
+												<button class="btn btn-success"
+													ng-click="addcsbsQuestion(obj)"
+													ng-disabled="csbsform.$invalid">Add</button>
+												<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+											</div>
+										</form>
+									</div> -->
+
+								<div align="center" class="col-sm-12"
+									
+									ng-if="csbsQuestionLookups.length > 0 ">
+									<button class="btn btn-primary" ng-click="addCsbsData()"
+										>Save</button>
+									<button class="btn btn-danger" ng-click="">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

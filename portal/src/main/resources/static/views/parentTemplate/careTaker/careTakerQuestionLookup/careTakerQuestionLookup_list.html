@@ -1,0 +1,148 @@
+<div class="content-wrapper" ng-init="getCaretakerQuestionLookups();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..." ng-model="search"> <span
+						class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Caretaker Questions</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Caretaker Questions</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Content Header (Page header) -->
+
+	<!-- Main content -->
+
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading" ng-click="gotoAdd();">
+						<div class="btn-group">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i> Add
+								Caretaker Question
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<label>Display <select name="example_length"
+											ng-model="size" ng-change="sizeChanged(size);">
+												<option value="5">5</option>
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+										</select> records per page
+										</label>
+									</div>
+								</div>
+
+								<div class="col-sm-4"></div>
+
+								<div class="col-sm-4">
+									<div class="dataTables_length">
+										<div class="input-group custom-search-form">
+											<input type="search" class="form-control"
+												placeholder="search.." ng-model="naveen"> <span
+												class="input-group-btn">
+												<button class="btn btn-primary" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!--  <th>Serial No</th> -->
+										<th>Category Name</th>
+										<th>Category Question</th>
+										<th>Answer</th>
+										
+										<th>Update</th>
+									</tr>
+								</thead>
+								<tbody ng-repeat="category in questionLists | filter:naveen | orderBy:'id':true" >
+									<tr
+										ng-repeat="answer in category.careTakerAnswerLookups">
+										<!--  <td><input type="radio" name="radioGroup">
+                                       <label>{{user.id}}</label>   
+                                   </td> -->
+										<td>{{category.careTakerCategoryLookup.name}}</td>
+										<td>{{category.name}}</td>
+										<td>{{answer.name}}</td>
+										<td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click="gotoupdate(category,answer);"
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right" ng-click="deleteCaretakerQuestionLookup(category.id);"
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+									<tr ng-if="userList.length == 0">
+										<td colspan="6" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="page-nation text-right">
+							<ul class="pagination pagination-large">
+								<li><a rel="next" ng-click="firstPage();">First</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="left"
+									ng-click="previousPage();" title="prev"> <i
+										aria-hidden="true"></i><<
+								</a></li>
+								<li><a rel="next" class="btn btn-info btn-md"
+									data-toggle="tooltip" data-placement="right"
+									ng-click="nextPage();" title="next"> <i aria-hidden="true"></i>>>
+								</a></li>
+								<li><a rel="next" ng-click="lastPage();">Last</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+

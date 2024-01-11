@@ -1,0 +1,109 @@
+<style>
+
+.stepwizard-step p {
+	margin-top: 0px;
+	color: #666;
+}
+
+.stepwizard-row {
+	display: table-row;
+}
+
+.stepwizard {
+	display: table;
+	width: 100%;
+	position: relative;
+}
+
+.stepwizard-step button[disabled] {
+	/*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/
+	
+}
+
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn
+	{
+	opacity: 1 !important;
+	color: #bbb;
+}
+
+.stepwizard-row:before {
+	top: 14px;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 100%;
+	height: 1px;
+	background-color: #ccc;
+	z-index: 0;
+}
+
+.stepwizard-step {
+	display: table-cell;
+	text-align: center;
+	position: relative;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+</style>
+<div class="content-wrapper"
+	ng-init="getCountrysBasedOnIsdCode();getAllClients();getAllDepartments();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-child"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Patient</h1>
+			<small>Here you can add a new patient details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Patient</li>
+			</ol>
+
+		</div>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" ui-sref="main.patient_list"> <i
+								class="fa fa-list"></i> Patient List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="content">
+
+							<br>
+							<div ui-view></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

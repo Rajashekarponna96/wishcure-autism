@@ -1,0 +1,351 @@
+<div class="panel-body table-responsive"
+	ng-init="getExitSheetReportBy();getDoctorByPatientId();getAllSpeechTheraphyTemplatesByPatientInExit();getImagePathDataByUser();">
+
+	<div class="col-sm-12">
+		<label>History :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.history"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-
+			exitNote.history.length}}&nbsp;Characters Left</p>
+		<p ng-show="editExit">
+			{{exitNote.history}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Background Information :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500"
+			ng-model="exitNote.backgroundInformation"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.backgroundInformation.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.backgroundInformation}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Observation :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.observation"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.observation.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.observation}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Test Administered :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.testAdministered"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue; margin-bottom: 30px;">{{1500-exitNote.testAdministered.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.testAdministered}}<br>
+		</p>
+	</div>
+
+	<div class="col-sm-12">
+		<label>Receptive Language :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500"
+			ng-model="exitNote.receptiveLanguage"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.receptiveLanguage.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.receptiveLanguage}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Expressive Language :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500"
+			ng-model="exitNote.expressiveLanguage"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.expressiveLanguage.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.expressiveLanguage}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Oral Motor :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.oralMotor"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.oralMotor.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.oralMotor}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Pragmatic Skills :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.pragmaticSkills"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.pragmaticSkills.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.pragmaticSkills}}<br>
+		</p>
+	</div>
+
+	<div class="col-sm-12">
+		<label>Summary :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.summary"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.summary.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.summary}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Recommendations :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.recommandations"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.recommandations.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.recommandations}}<br>
+		</p>
+	</div>
+	<div class="col-sm-12">
+		<label>Parental Tips :</label><br>
+		<textarea ng-hide="editExit"
+			class="col-sm-11 border" rows="5"
+			ng-trim="false" maxlength="1500" ng-model="exitNote.parentalTips"></textarea>
+		<p ng-hide="editExit" class="pull-right"
+			style="font-size: 11px; color: blue">{{1500-exitNote.parentalTips.length}}&nbsp;Characters
+			Left</p>
+			<p ng-show="editExit">
+			{{exitNote.parentalTips}}<br>
+		</p>
+
+	</div>
+	<div ng-if="patientSpeechTemplatesInExit.length > 0">
+		<label style="margin-left: 20px;">Result :</label>
+		<div ng-if="status1==true"
+			class="col-sm-11 border">
+			<table class="table table-
+				bordered table-hover border">
+				<thead>
+					<th colspan="3">{{speechTheraphyTemplate1.templateName}}</th>
+					<th><i class="fa fa-times pull-right" style="color: red;"
+						ng-click="deleteTemplateInExitAlert(speechTheraphyTemplate1.id,patientObject.id,speechTheraphyTemplate1.status);"
+						data-toggle="tooltip" title="Delete Template" aria-hidden="true"
+						class="close"></i></th>
+				</thead>
+				<tr>
+					<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.standardScore}}</td>
+					<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.percentaileRank}}</td>
+					<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.summaryOfPerformance}}</td>
+					<td>{{speechTheraphyTemplate1.patientStandardScoreHeader.description}}</td>
+				</tr>
+				<tr>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate1.patientStandardScore.standardScore" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate1.patientStandardScore.percentaileRank" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate1.patientStandardScore.summaryOfPerformance"></td>
+					<td><input type="text" class="form-control"
+						ng-model="speechTheraphyTemplate1.patientStandardScore.description"></td>
+				</tr>
+
+			</table>
+
+		</div>
+		<div ng-if="status2==true"
+			class="col-sm-11 border">
+			<table class="table table-bordered table-hover border"
+				style="margin-top: 30px;">
+				<tr>
+					<th colspan="3">{{speechTheraphyTemplate2.templateName}}</th>
+					<th><i class="fa fa-times pull-right" style="color: red;"
+						ng-click="deleteTemplateInExitAlert(speechTheraphyTemplate2.id,patientObject.id,speechTheraphyTemplate2.status)"
+						data-toggle="tooltip" title="Delete Template" aria-hidden="true"
+						class="close"></i></th>
+				</tr>
+				<tr>
+					<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.standardScore}}</td>
+					<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.percentaileRank}}</td>
+					<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.summaryOfPerformance}}</td>
+					<td>{{speechTheraphyTemplate2.patientStandardScoreHeader.description}}</td>
+				</tr>
+				<tr>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate2.patientStandardScore.standardScore" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate2.patientStandardScore.percentaileRank" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="speechTheraphyTemplate2.patientStandardScore.summaryOfPerformance"></td>
+					<td><input type="text" class="form-control"
+						ng-model="speechTheraphyTemplate2.patientStandardScore.description"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div ng-if="status3 == true"
+			class="col-sm-11 border">
+			<table class="table table-bordered table-hover border"
+				style="margin-top: 30px;">
+				<tr>
+					<th colspan="4">{{speechTheraphyTemplate3.templateName}}</th>
+					<th><i class="fa fa-times pull-right" style="color: red;"
+						ng-click="deleteTemplateInExitAlert(speechTheraphyTemplate3.id,patientObject.id,speechTheraphyTemplate3.status)"
+						data-toggle="tooltip" title="Delete Template" aria-hidden="true"
+						class="close"></i></th>
+				</tr>
+				<tr>
+					<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.subtest}}</td>
+					<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.standardScore}}</td>
+					<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.percentaileRank}}</td>
+					<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.summaryOfPerformance}}</td>
+					<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.description}}</td>
+				</tr>
+				<tr
+					ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests"
+					style="margin-bottom: 30px;">
+					<td>{{subtest.subTestName}}</td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+					<td><input type="text" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.description"></td>
+				</tr>
+			</table>
+			<table class="table table-bordered table-hover border"
+				style="margin-top: 20px;">
+				<tbody>
+					<tr>
+						<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.target}}</td>
+						<td colspan="3">{{speechTheraphyTemplate3.patientStandardScoreHeader.substitutions}}</td>
+					</tr>
+					<tr>
+						<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.wordLevel}}</td>
+						<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.initial}}</td>
+						<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.medial}}</td>
+						<td>{{speechTheraphyTemplate3.patientStandardScoreHeader.ending}}</td>
+					</tr>
+					<tr
+						ng-repeat="subtest in speechTheraphyTemplate3.patientSpeechsubTests">
+						<td><input type="text" class="form-control"
+							ng-model="subtest.patientSpeechStandardScore.wordLevel" /></td>
+						<td><input type="number" class="form-control"
+							ng-model="subtest.patientSpeechStandardScore.initial" /></td>
+						<td><input type="number" class="form-control"
+							ng-model="subtest.patientSpeechStandardScore.medial"></td>
+						<td><input type="number" class="form-control"
+							ng-model="subtest.patientSpeechStandardScore.ending"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div ng-if="status4 ==true"
+			class="col-sm-11 border">
+			<table class="table table-bordered table-hover border"
+				style="margin-top: 30px;">
+				<tr>
+					<th colspan="4">{{speechTheraphyTemplate4.templateName}}</th>
+					<th><i class="fa fa-times pull-right" style="color: red;"
+						ng-click="deleteTemplateInExitAlert(speechTheraphyTemplate4.id,patientObject.id,speechTheraphyTemplate4.status)"
+						data-toggle="tooltip" title="Delete Template" aria-hidden="true"
+						class="close"></i></th>
+				</tr>
+				<tr>
+					<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.subtest}}</td>
+					<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.standardScore}}</td>
+					<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.percentaileRank}}</td>
+					<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.summaryOfPerformance}}</td>
+					<td>{{speechTheraphyTemplate4.patientStandardScoreHeader.description}}</td>
+				</tr>
+				<tr
+					ng-repeat="subtest in speechTheraphyTemplate4.patientSpeechsubTests">
+					<td>{{subtest.subTestName}}</td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+					<td><input type="text" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.description"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div ng-if="status5==true"
+			class="col-sm-11 border">
+			<table class="table table-bordered table-hover border"
+				style="margin-top: 30px;">
+				<tr>
+					<th colspan="4">{{speechTheraphyTemplate5.templateName}}</th>
+					<th><i class="fa fa-times pull-right" style="color: red;"
+						ng-click="deleteTemplateInExitAlert(speechTheraphyTemplate5.id,patientObject.id,speechTheraphyTemplate5.status)"
+						data-toggle="tooltip" title="Delete Template" aria-hidden="true"
+						class="close"></i></th>
+				</tr>
+				<tr>
+					<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.subtest}}</td>
+					<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.standardScore}}</td>
+					<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.percentaileRank}}</td>
+					<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.summaryOfPerformance}}</td>
+					<td>{{speechTheraphyTemplate5.patientStandardScoreHeader.description}}</td>
+				</tr>
+				<tr
+					ng-repeat="subtest in speechTheraphyTemplate5.patientSpeechsubTests">
+					<td>{{subtest.subTestName}}</td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.standardScore" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.percentaileRank" /></td>
+					<td><input type="number" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.summaryOfPerformance"></td>
+					<td><input type="text" class="form-control"
+						ng-model="subtest.patientSpeechStandardScore.description"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<button type="button" class="btn btn-success"
+		ng-click="selectTemplateExit();">Select Result From Template</button>
+
+	<div class=col-lg-12 col-md-12 col-sm-12 col-xs-12>
+		<br> <strong>It was a pleasure to meet and work with
+			{{patientObject.firstName}} {{patientObject.lastName}}. Feel free to
+			contact me with any questions.</strong> <br> <label>Assessment
+			and therapy session completed by:</label> <br> <br> <br> <br>
+		<div class="form-group col-lg-6">
+			<img ng-src="{{getImagePathDataByUser()}}" width="100">
+		</div>
+	</div>
+	<div class="col-sm-11 border" align="center">
+		<button class="btn btn-primary" ng-click="addExitNoteSheet()"
+			ng-disabled="editExit">Save</button>
+		<a ng-click="gotoList();" class="btn btn-warning">Cancel</a>
+		<button id="printPageButton" class="btn btn-primary"
+									onclick="window.print();">Print Report</button>
+		<!-- <embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed> -->
+	</div>
+</div>

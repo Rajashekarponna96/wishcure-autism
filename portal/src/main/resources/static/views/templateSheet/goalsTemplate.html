@@ -1,0 +1,964 @@
+<!-- 
+<div class="content-wrapper"
+	ng-init="getAllgoals();">
+
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							i <i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Goal Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Goal Template</li>
+			</ol>
+		</div>
+	</section>
+	Content Header (Page header)
+
+	Main content
+	<section class="content">
+		<div class="row">
+			Form controls
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i> Goal
+								Template
+							</a> 
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive col-sm-12">
+							<table class="table table-bordered table-hover col-sm-12">
+								<tr>
+									<th colspan="4"><label>Current Goals :</label></th>
+								</tr>
+								<tr ng-repeat="goal in goalList">
+									<td class="col-sm-1"><input type="checkbox"
+										ng-model="goal.selected" style="text-align: center;" /></td>
+									<td class="col-sm-8"><div>
+											<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+												editable-text="goal.goalTemplateLookupName"
+												onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+												|| 'empty' }}</a> <br>
+										</div></td>
+									<td class="col-sm-2"><input type="radio"
+										ng-model="goal.answer" ng-checked="goal.answer==1" value="1" />&nbsp;Yes
+									</td>
+									<td class="col-sm-2"><input type="radio"
+										ng-model="goal.answer" ng-checked="goal.answer==0" value="0" />&nbsp;No</td>
+
+								</tr>
+							</table>
+						</div>
+						<div class=col-sm-12">
+							<label>Current Goals :</label>
+
+							<div ng-repeat="goal in goalList" class="col-sm-12">
+								<div class="col-sm-8">
+									<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+										editable-text="goal.goalTemplateLookupName"
+										onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+										|| 'empty' }}</a> <br>
+								</div>
+								<div class="col-sm-2">
+									<input type="radio" ng-model="goal.answer"
+										ng-checked="goals.answer==1" value="1" />&nbsp;&nbsp;&nbsp;Yes
+								</div>
+								<div class="col-sm-2">
+									<input type="radio" ng-model="goal.answer"
+										ng-checked="goals.answer==0" value="0" />&nbsp;&nbsp;&nbsp;No
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-lg" ng-click="showMethod();"> <span
+								class="glyphicon glyphicon-plus-sign"></span>
+							</button>
+							<button class="btn btn-lg"  ng-click="hideMethod();"> <span
+								class="glyphicon glyphicon-plus-sign"></span>
+							</button>
+
+						</div>
+
+
+						<div class="col-sm-12" ng-if="buttonstatus">
+							<div class="col-sm-8">
+								<input type="text" value="" class="form-control col-sm-6"
+									name="goalTemplateLookupName"
+									placeholder="Enter Your Goal Here"
+									ng-model="goal.goalTemplateLookupName" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="col-sm-2">
+								<input type="radio" ng-model="goal.answer" value="true" />&nbsp;&nbsp;&nbsp;Yes
+							</div>
+							<div class="col-sm-2">
+								<input type="radio" ng-model="goal.answer" value="false" />&nbsp;&nbsp;&nbsp;No
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12">
+								<button class="btn btn-primary"
+									ng-show="hasFeature('Goals Template').canAdd==true"
+									ng-click="addGoal()">Add</button>
+							</div>
+						</div>
+						
+						<div class="col-sm-12" ng-if="!buttonstatus">
+							<div class="col-sm-12" align="center">
+								<button class="btn btn-primary"
+									ng-click="assignGoalsToPatient(patient,goalList);">AssignGoalsToPatient</button>
+									
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div> -->
+<!-- 
+<div class="content-wrapper" ng-init="getAllGoalsByStatus1(1);">
+	Content Header (Page header)
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Goal Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a> Goal Template</a></li>
+				<li class="active">Goal Template</li>
+			</ol>
+		</div>
+	</section>
+	Main content
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				Nav tabs
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab1" data-toggle="tab"
+						target="self" ng-click="getAllGoalsByStatus1(1);">Receptive
+							Language </a></li>
+					<li><a href="#tab2" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(2);">Expressive Langage </a></li>
+					<li><a href="#tab3" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(3);">Pragmatic/Social </a></li>
+					<li><a href="#tab4" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(4);">Fluency </a></li>
+					<li><a href="#tab5" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(5);">Articulation/Phonology</a></li>
+					<li><a href="#tab6" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(6);">Oral Motor </a></li>
+					<li><a href="#tab7" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(7);">Voice </a></li>
+					<li><a href="#tab8" data-toggle="tab" target="self"
+						ng-click="getAllGoalsByStatus1(8);">Augmentative Communication
+					</a></li>
+				</ul>
+				Tab panels
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+							<div class="col-sm-12 class= table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(1)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab2">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+										<td class="col-sm-2"><label class="radio-inline">
+												<input type="radio" ng-model="goal.answer"
+												ng-checked="goals.answer==1" value="1" />&nbsp;&nbsp;&nbsp;Yes
+										</label> <label class="radio-inline"> <input type="radio"
+												ng-model="goal.answer" ng-checked="goals.answer==0"
+												value="0" />&nbsp;&nbsp;&nbsp;No
+										</label></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(2)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab3">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+										<td class="col-sm-2"><label class="radio-inline">
+												<input type="radio" ng-model="goal.answer"
+												ng-checked="goals.answer==1" value="1" />&nbsp;&nbsp;&nbsp;Yes
+										</label> <label class="radio-inline"> <input type="radio"
+												ng-model="goal.answer" ng-checked="goals.answer==0"
+												value="0" />&nbsp;&nbsp;&nbsp;No
+										</label></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+								<div class="col-sm-12">
+									<div class="col-sm-3" ng-if="!assigned">
+										<button class="btn btn-sm btn-primary"
+											ng-click="showMethod();" data-toggle="tooltip"
+											data-placement="top" title="Click here to add new goals">Add
+											New Goal</button>
+									</div>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12" ng-if="buttonstatus">
+									<div class="col-sm-12">
+										<input type="text" value="" class="form-control col-sm-12"
+											name="goalTemplateLookupName"
+											placeholder="Enter Your Goal Here"
+											ng-model="goal.goalTemplateLookupName" aria-required="true"
+											aria-invalid="true"
+											ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+											required>
+									</div>
+									<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+									<div class="col-sm-12">
+										<button class="btn btn-primary"
+											ng-show="hasFeature('Goals Template').canAdd==true"
+											ng-click="addGoal(3)" data-toggle="tooltip"
+											data-placement="top"
+											title="Click here to save goals to patient">Save</button>
+										<button class="btn btn-danger" ng-click="hideMethod();"
+											data-toggle="tooltip" data-placement="top"
+											title="Click here to cancel goal">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab4">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="2 0"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(4)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab5">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No records found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(5)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab6">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No Goals found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(6)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+						<div class="tab-pane fade" id="tab7">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No Goals found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(7)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="tab8">
+						<div class="panel-body">
+							<div class="col-sm-12 table-responsive" align="justify">
+								<table class="table table-bordered table-hover">
+									<tr ng-repeat="goal in  goalsList">
+										<td class="col-sm-1" ng-if="assigned"><input
+											type="checkbox" data-checklist-model="patient.patientGoals"
+											data-checklist-value="goal"></td>
+										<td class="col-sm-11"><div>
+												<a href="#" e-style="width:500px;" ng-hide="$form.$visible"
+													editable-text="goal.goalTemplateLookupName"
+													onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+													|| 'empty' }}</a> <br>
+											</div></td>
+									</tr>
+									<tr ng-if="goalsList.length == 0">
+										<td colspan="12" align="center">
+											<h3>
+												<i class="fa fa-meh-o"></i> No Goals found!
+											</h3>
+										</td>
+									</tr>
+								</table>
+								<div align="center" ng-if="assigned">
+									<button class="btn btn-primary"
+										ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to add selected goals to patient">Assign
+										Goals To Patient</button>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-3" ng-if="!assigned">
+									<button class="btn btn-sm btn-primary" ng-click="showMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to add new goals">Add New Goal</button>
+								</div>
+							</div>
+							<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="col-sm-12" ng-if="buttonstatus">
+								<div class="col-sm-12">
+									<input type="text" value="" class="form-control col-sm-12"
+										name="goalTemplateLookupName"
+										placeholder="Enter Your Goal Here"
+										ng-model="goal.goalTemplateLookupName" aria-required="true"
+										aria-invalid="true"
+										ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+										required>
+								</div>
+								<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+								<div class="col-sm-12">
+									<button class="btn btn-primary"
+										ng-show="hasFeature('Goals Template').canAdd==true"
+										ng-click="addGoal(8)" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to save goals to patient">Save</button>
+									<button class="btn btn-danger" ng-click="hideMethod();"
+										data-toggle="tooltip" data-placement="top"
+										title="Click here to cancel goal">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="content-wrapper" ng-init="getAllGoalsByStatus1(1);getGoalCategoryLookups(); " style="height: 900px; overflow: scroll; overflow-y: auto;  overflow-x: auto;">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-tachometer"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Goals Template</h1>
+			<small>Here you can add new goals to the template based on category.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">GoalTemplate</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20" >
+			Goal Categories
+				<!-- <ul class="nav nav-tabs">
+					<li style="float:left;"
+						ng-repeat="goalCategory in goalCategorylookupLists" 
+						ng-click="getAllGoalCategories(goalCategory.name);"><a
+						href="#tab1" data-toggle="tab" target="self" >{{goalCategory.name}}
+					</a></li><li>
+					<div ng-if="!assigned">
+					<button class="btn btn-primary" data-toggle="tooltip" ng-if="loggedUserRole!='Parent'" ng-click="addNewGoalCategory();"
+						data-placement="right" title="Add Category">
+						<i class="" aria-hidden="true">+</i>
+					</button>
+					</div></li>
+				</ul>
+				 -->
+				<md-content class="md-padding">
+				<md-tabs
+								md-dynamic-height md-selected="selectedGoalCategoryIndex" md-border-bottom
+								 md-autoselect md-swipe-content> 
+								<md-tab
+								ng-repeat="goalCategory in goalCategorylookupLists"
+								label="{{goalCategory.name}}"
+								ng-click="getAllGoalCategories(goalCategory.name);">
+		
+								<!-- <md-tab
+								data-toggle="tooltip" ng-if="loggedUserRole!='Parent'"
+								label="+"
+								ng-click="addNewGoalCategory();"> -->
+				
+					
+				</md-tab>
+				</md-tabs>
+				<div ng-if="!assigned">
+					<button class="btn btn-primary" data-toggle="tooltip" ng-if="loggedUserRole!='Parent'" ng-click="addNewGoalCategory();"
+						data-placement="right" title="Add Category">
+						<i class="" aria-hidden="true" ng-click="showMethod();">+</i>
+					</button>
+					</div>
+				</md-content>
+				
+				<div class="tab-content"  ng-if="buttonstatus">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body" ng-show="addGoalCategory">
+						
+							 <form class="col-sm-6" name="goalCategoryform" >
+							<div class="form-group" >
+								<label>Goal Category Name</label> <input type="text"
+									class="form-control" name="categoryName"
+									placeholder="Goal Category Name"
+									ng-model="goalCategoryLookup.name" required> <span
+									style="color: red"
+									ng-show="(goalCategoryform.categoryName.$touched && goalCategoryform.categoryName.$invalid)">
+									<span ng-show="goalCategoryform.categoryName.$error.required">Category
+										Name is required.</span>
+								</span>
+							</div>
+							<div class="form-group">
+								<label> Goal Category Description</label> <input type="text" 
+									class="form-control" name="categoryDescription"
+									placeholder="Enter Goal Category Description"
+									ng-model="goalCategoryLookup.description" 
+									required> <span style="color: red" 
+									ng-show="(goalCategoryform.categoryDescription.$touched && goalCategoryform.categoryDescription.$invalid)">
+									<span ng-show="goalCategoryform.categoryDescription.$error.required">Category
+										Description is required.</span></span>
+							</div>
+							<div class="row" align="center">
+								<span ng-if="message != undefined" style="color: red">{{message}}<br>
+								</span><br>
+							</div>
+							<div class="reset-button">
+								<button type="button" class="btn btn-success" 
+									ng-click="addGoalCategoryLookup();" >Save</button>
+								<button class="btn btn-warning" type="reset" ng-click="hideMethod();">Cancel</button>
+
+							</div>
+						</form> 
+					</div>
+				</div>
+			</div>
+						
+			
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+					<div class="col-sm-12 border">
+						<div class="sample" layout="column" ng-cloak>
+							<md-content class="md-padding"> 
+							<md-tabs
+								md-dynamic-height md-selected="selectedTemplateIndex" md-border-bottom
+								md-autoselect md-swipe-content> 
+								<md-tab
+								ng-repeat="template in goalTemplateNamesList track by $index"
+								label="{{template}}"
+								ng-click="getAllTemplateGoalsByName(template);">
+							<div class="table-responsive">
+								<div class="tab-pane fade in active" id="tab1">
+									<div class="panel-body">
+										<div class="col-sm-12 class= table-responsive" align="justify">
+											<table class="table table-bordered table-hover">
+												<tr ng-repeat="goal in  goalsList">
+													<td class="col-sm-1" ng-if="assigned"><input
+														type="checkbox"
+														data-checklist-model="patient.patientGoals"
+														data-checklist-value="goal"></td>
+													<td class="col-sm-11"><div>
+															<a href="#" e-style="width:500px;"
+																ng-hide="$form.$visible"
+																editable-text="goal.goalTemplateLookupName"
+																onaftersave="updateGoal(goal)">{{goal.goalTemplateLookupName
+																|| 'empty' }}</a> <br>
+														</div></td>
+												</tr>
+												<tr ng-if="goalsList.length == 0">
+													<td colspan="12" align="center">
+														<h3>
+															<i class="fa fa-meh-o"></i> No records found!
+														</h3>
+													</td>
+												</tr>
+											</table>
+											<div align="center" ng-if="assigned">
+												<button class="btn btn-primary"
+													ng-click="assignGoalsToPatient();" data-toggle="tooltip"
+													data-placement="top"
+													title="Click here to add selected goals to patient">Assign
+													Goals To Patient</button>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="col-sm-3" ng-if="!assigned">
+												<button class="btn btn-sm btn-primary"
+													ng-click="showMethod();" data-toggle="tooltip"
+													data-placement="top" title="Click here to add new goals">Add
+													New Goal</button>
+											</div>
+										</div>
+										<div class="col-sm-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+										<div class="col-sm-12" ng-if="buttonstatus">
+											<div class="col-sm-12">
+												<input type="text" value="" class="form-control col-sm-12"
+													name="goalTemplateLookupName"
+													placeholder="Enter Your Goal Here"
+													ng-model="goal.goalTemplateLookupName" aria-required="true"
+													aria-invalid="true"
+													ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+													required>
+											</div>
+											<!--  <div class="form-group col-lg-6">
+								<label>Upload Image</label> <input type="file" name="file"
+									id="file"
+									onchange="angular.element(this).scope().fileChanged(this.files)">
+								<div style="color: red;">Please Upload *.jpg, *.png, *.gif
+									formats only.</div>
+							</div> 
+							<div class="form-group col-lg-6"
+								>
+								<img ng-src="{{getImageUrl}}" width="100">
+							</div>
+							<div class="form-group col-lg-6"
+								>
+								<img ng-src="{{viewImagePathData(imageUrlForGoal)}}"
+									width="100">
+							</div> -->
+											<div class="col-sm-12">&nbsp;&nbsp;&nbsp;</div>
+											<div class="col-sm-12">
+												<button class="btn btn-primary"
+													
+													ng-click="addGoal(templateName)" data-toggle="tooltip"
+													data-placement="top"
+													title="Click here to save goals to patient">Save</button>
+												<button class="btn btn-danger" ng-click="hideMethod();"
+													data-toggle="tooltip" data-placement="top"
+													title="Click here to cancel goal">Cancel123</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</md-tab> </md-tabs> </md-content>
+							</div>
+		</div>
+	</div>
+							<div class="col-sm-12" align="center" ng-disabled="!addFlag"
+								ng-if="patientGoalList.length > 0">
+								<button class="btn btn-primary" ng-click="addPatientGoals()"
+									data-toggle="tooltip" data-placement="top"
+									title="Click here to save goals to patient">Save Goals</button>
+								<a ng-click="gotoList();" class="btn btn-danger"
+									data-toggle="tooltip" data-placement="top"
+									title="Click here to cancel the goals">Cancel</a>
+							</div>
+						</div>
+
+					</div>
+			</div>
+
+
+		</div>
+	</section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,152 @@
+<div class="content-wrapper scrollpage" ng-init="">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-hospital-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Insurance</h1>
+			<small>Her you can update insurance company details.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Insurance</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Insurance List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form class="col-sm-12" name="patientForm">
+							<div class="col-lg-6 form-group">
+								<label>InsuranceId</label><input type="text" value=""
+									class="form-control" name="siteName"
+									placeholder="Enter InsuranceId" ng-model="insurance.idNumber">
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Insurance Company Name</label><input type="text"
+									name="insuranceCompanyName" class="form-control"
+									placeholder="Enter Insurance CompanyName"
+									ng-model="insurance.insuranceCompanyName" required>
+							</div>
+							<div class="form-group col-sm-6">
+								<label>E-Mail</label> <span
+									style="color: red"
+									ng-show="patientForm.insuranceEmail.$error.pattern">
+									Please enter a valid email address!</span> <span
+									ng-if="patientForm.$pending.emailExists" style="color: red">checking....</span>
+								<span ng-if="patientForm.$error.emailExists" style="color: red">Email
+									exists already</span> <input type="email" value=""
+									placeholder="Enter insurance Email" id="txt_email"
+									class="form-control" name="insuranceEmail"
+									ng-model="insurance.emailId"
+									ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ " required>
+							</div>
+							<div class="col-lg-6 form-group">
+								<label>Phone Number</label> <span
+									ng-show="((patientForm.insuranceMobileNumber.$error.minlength ||
+                           patientForm.insuranceMobileNumber.$error.maxlength) && 
+                           patientForm.insuranceMobileNumber.$dirty) "
+									style="color: red"> should be 10 digits </span> <span
+									ng-if="patientForm.$pending.mobileNumberExists">checking....</span>
+								<span ng-if="patientForm.$error.mobileNumberExists"
+									style="color: red"> exists already</span> <input type="text"
+									phone-input name="insuranceMobileNumber" class="form-control"
+									placeholder="Enter Insurance Phone Number" maxlength="14"
+									minlength="14" ng-model="insurance.mobileNumber" required>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Street Address 1</label> <input
+									placeholder="Enter your address" class="form-control"
+									ng-model="insurance.address1.address1" id="street_number"
+									type="text"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Street Address 2</label> <input
+									class="field form-control"
+									ng-model="insurance.address1.address2" id="route"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>City</label> <input class="field form-control"
+									ng-model="insurance.address1.city" id="locality"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>State</label> <input class="field form-control"
+									ng-model="insurance.address1.state"
+									id="administrative_area_level_1"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Country</label> <input class="field form-control"
+									ng-model="insurance.address1.country" id="country"></input>
+							</div>
+
+							<div class="col-sm-6 form-group">
+								<label>Zip code</label> <input class="field form-control"
+									allow-only-numbers maxlength="5"
+									ng-model="insurance.address1.zipcode" id="postal_code"></input>
+							</div>
+							<div class="col-sm-6 form-group">
+								<label>Fax</label><span ng-show="((patientForm.insurancefax.$error.minlength ||
+                           patientForm.insurancefax.$error.maxlength) && 
+                           patientForm.insurancefax.$dirty) "
+									style="color: red"> should be 10 digits </span> <input type="text" value=""
+									class="form-control" placeholder="Enter Fax" phone-input name="insurancefax" 
+									maxlength="14" minlength="14" ng-model="insurance.fax" required>
+							</div>
+							<!-- <div class="col-sm-6 form-group">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="insurance.status" name="status"
+									ng-value="true" ng-checked="!insurance.status">Active</label> <label
+									class="radio-inline"><input type="radio"
+									ng-model="insurance.status" name="status" ng-value="false">InActive</label>
+							</div> -->
+							 <div class="form-check">
+                                          <label>Status</label><br>
+                                           <label class="radio-inline"><input type="radio"  ng-model="insurance.status" name="status" ng-value="true" >Active</label>
+                                          <label class="radio-inline"><input type="radio" ng-model="insurance.status" name="status"  ng-value="false" >InActive</label>
+                                          </div>
+<!-- || (insurance.mobileNumber && !insurance.mobileNumber.length!=14 )  -->
+							<div class="reset-button col-sm-12">
+								<button class="btn btn-success"
+									ng-disabled="!insurance.insuranceCompanyName || patientForm.insuranceEmail.$error.pattern ||((patientForm.insuranceMobileNumber.$error.minlength ||
+                           patientForm.insuranceMobileNumber.$error.maxlength) && patientForm.insuranceMobileNumber.$dirty)||
+                          ((patientForm.insurancefax.$error.minlength ||patientForm.insurancefax.$error.maxlength) &&  patientForm.insurancefax.$dirty) "
+									ng-click="updateInsurance(insurance)">Update</button>
+								<a class="btn btn-danger" ng-click="gotoback()">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

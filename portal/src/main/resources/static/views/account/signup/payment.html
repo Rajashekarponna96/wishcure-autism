@@ -1,0 +1,136 @@
+
+<div class="content-wrapper"
+	ng-init="getAllPackageMAstersList();getAllSubscriptionMastersList();">
+	<!-- Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading"></div>
+					<div class="panel-body">
+
+						<form class="col-sm-12" name="packagepricingform">
+
+							<div class="form-group col-lg-6">
+								<label>Subscription Type</label><span style="color: red"
+									ng-cloak
+									ng-show="(packagepricingform.subscription.$touched && packagepricingform.subscription.$invalid)">
+									<span ng-show="packagepricingform.subscription.$error.required">
+										is required.</span>
+								</span> <select class="form-control"
+									ng-options="subscription as subscription.subscriptionName  for subscription in  subscriptionMasterLists"
+									name="subscription" aria-required="true" aria-invalid="true"
+									ng-model="packagePricing.subScriptionMaster"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required class="form-control">
+									<!--   <option value="" class="active">Select</option> -->
+									<option value="">Select Subscription Name</option>
+								</select>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Package Type</label> <span style="color: red" ng-cloak
+									ng-show="(packagepricingform.package.$touched && packagepricingform.package.$invalid)">
+									<span ng-show="packagepricingform.package.$error.required">
+										is required.</span>
+								</span><select class="form-control" name="package"
+									ng-options="packageMaster as packageMaster.packageName  for packageMaster in  packageMastersLists"
+									aria-required="true" aria-invalid="true"
+									ng-model="packagePricing.packageNameMaster"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required class="form-control">
+									<option value="">Select Package Name</option>
+								</select>
+							</div>
+
+							<div class="form-group col-lg-6">
+								<label>Min Data Storage</label><span style="color: red" ng-cloak
+									ng-show="(packagepricingform.minlimit.$touched && packagepricingform.minlimit.$invalid)">
+									<span ng-show="packagepricingform.minlimit.$error.required">
+										is required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="minlimit" id="txt_username"
+									ng-model="packagePricing.minDataStorage" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Max Data Storage</label> <span style="color: red"
+									ng-cloak
+									ng-show="(packagepricingform.minlimit.$touched && packagepricingform.minlimit.$invalid)">
+									<span ng-show="packagepricingform.minlimit.$error.required">
+										is required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="minlimit" id="txt_username"
+									ng-model="packagePricing.maxDataStorage" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Min No Of Users</label> <span style="color: red" ng-cloak
+									ng-show="(packagepricingform.maxlimit.$touched && packagepricingform.maxlimit.$invalid)">
+									<span ng-show="packagepricingform.maxlimit.$error.required">
+										is required.</span>
+								</span><input type="text" value="" allow-only-numbers
+									class="form-control" name="maxlimit" id="txt_username"
+									ng-model="packagePricing.minNoOfUsers" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Max No Of Users</label> <span style="color: red" ng-cloak
+									ng-show="(packagepricingform.maxlimit.$touched && packagepricingform.maxlimit.$invalid)">
+									<span ng-show="packagepricingform.maxlimit.$error.required">
+										is required.</span>
+								</span><input type="text" value="" allow-only-numbers
+									class="form-control" name="maxlimit" id="txt_username"
+									ng-model="packagePricing.maxNoOfUsers" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+							<div class="form-group col-lg-6">
+								<label>Package Price Per Users</label><span style="color: red"
+									ng-cloak
+									ng-show="(packagepricingform.packagepriceperunit.$touched && packagepricingform.packagepriceperunit.$invalid)">
+									<span
+									ng-show="packagepricingform.packagepriceperunit.$error.required">
+										is required.</span>
+								</span> <input type="text" value="" class="form-control"
+									name="packagepriceperunit" id="txt_username"
+									ng-model="packagePricing.packagePricePerUsers"
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+						</form>
+						<div ng-if="message != undefined">
+							<br>
+							<p style="color: red">{{message}}</p>
+						</div>
+						<br>
+						<div class="reset-button">
+							<button class="btn btn-success"
+								ng-click="addPackagePricing(packagePricing)"
+								ng-disabled="packagenameform.$invalid">Save</button>
+							<a class="btn btn-warning">Cancel</a>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

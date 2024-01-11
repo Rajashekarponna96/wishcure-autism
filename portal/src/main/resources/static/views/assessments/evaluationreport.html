@@ -1,0 +1,268 @@
+<p align="center" style="padding: 10px;">Evaluation Report</p>
+
+
+
+<div class="tab-content"
+	ng-init="getEvalutionSheetByStatusAndPatientId(patientObject.id,1);getAllDocuments();getDoctorByPatientId();getPatientMentalScalesByPatientId();getPatientMentalScalesAgeAndClusterCount();getPatientMentalScalesAgeAndClusterCountForGraph();getPatientMotorScalesAgeAndClusterCount();getPatientMotorScalesAgeAndClusterCountForGraph();getAllPatientMotorScalesByPatientId();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title ">
+			<form id="searchButton" action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>DQ ASSESSMENT REPORT</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Patient Mental Motor Report</li>
+			</ol>
+
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div id="listButton" class="panel-heading">
+						<div class="btn-group" ng-if="loggedUserRole !='Therapist'">
+							<a class="btn btn-success" ng-click="gotoList();"> <i
+								class="fa fa-plus"></i> Patient List
+							</a>
+						</div>
+						<div class="btn-group" ng-if="loggedUserRole =='Therapist'">
+							<a class="btn btn-success"> <i class="fa fa-plus"></i>
+								Patient Mental Motor Report
+							</a>
+						</div>
+
+					</div>
+					<div id="patientEvalutionReport" class="panel-body">
+						<div class="row">
+							<div class="panel-header">
+								<div class="col-sm-12">
+
+									<table class="table">
+
+										<tbody>
+										<thead></thead>
+										<tr>
+											<th>Reg No :</th>
+											<td>{{patientObject.regNumber}}</td>
+											<th>Name :</th>
+											<td>{{patientObject.firstName}}
+												{{patientObject.lastName}}</td>
+										</tr>
+										<tr>
+											<th>Gender :</th>
+											<td>{{patientObject.gender}}
+											<th>Date of Evaluation :</th>
+											<td>{{progress.date}}</td>
+										</tr>
+
+										<tr>
+											<th>Age :</th>
+											<td>{{patientObject.age}}</td>
+											<th>Evaluator :</th>
+											<td>{{doctorObj.firstName}} {{doctorObj.lastName}}</td>
+
+										</tr>
+										<tr>
+											<th>Reason for Refferal :</th>
+											<td>{{patientObject.reasonForReferral}}</td>
+
+											<th>Reffered by :</th>
+											<td>{{patientObject.referredBy}}</td>
+										</tr>
+										</tbody>
+									</table>
+  									
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										ng-disabled="loggedUserRole=='Patient'">
+										<br> <label>Developmental And Social History :</label><br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.history"></textarea>
+
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.history.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">{{progress.history}}</p>
+
+										<br> <label>Behavioural Observation :</label> <br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.observation"></textarea>
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.observation.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">{{progress.observation}}</p>
+										<br> A. Mental Observation
+										<ul ng-repeat="mentalScale in patientMentalScalelist">
+											<p ng-if="mentalScale.note.length">{{mentalScale.note}}</p>
+
+										</ul>
+										<br>
+										B. Motor Observation
+										
+										<ul ng-repeat="motorScale in patientMotorScalelist">
+											<p ng-if="motorScale.note.length">{{motorScale.note}}</p>
+
+										</ul>
+										<br> <label>Test Administered :</label><br>
+										<textarea ng-hide="editMode"
+											class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border"
+											rows="5"
+											ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+											ng-model="progress.testAdministered"></textarea>
+										<p ng-hide="editMode" class="pull-right" id="textCount"
+											style="font-size: 11px; color: blue">{{1500-progress.testAdministered.length}}&nbsp;Characters
+											Left</p>
+										<br>
+										<p ng-show="editMode">
+											{{progress.testAdministered}}<br>
+										</p>
+
+										<br> <label>Assessment Result :</label><br>
+										<p>Mental Age is {{mentalAgeAndClusterCount[0].mentalAge}}
+											Months and the calculated Mental Quotient is
+											{{mentalAgeAndClusterCount[0].mentalQuotient}}</p>
+										<br>
+										<p>Motor Age is {{motorAgeAndClusterCount[0].motorAge}}
+											Months and the calculated Motor Quotient is
+											{{motorAgeAndClusterCount[0].motorQuotient}}</p>
+										<br>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<br> <label>CHILD PERFORMANCE(MENTAL)</label><br>
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Name of cluster</th>
+												<th>Total No.Of Items Passed</th>
+												<th>Percentile</th>
+												<th>Remarks</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="mentalScaleCount in mentalAgeAndClusterCount">
+												<td>{{mentalScaleCount.clusterName}}
+													({{mentalScaleCount.scaleCount}})</td>
+												<td>{{mentalScaleCount.clusterCount}}</td>
+												<td>{{mentalScaleCount.percentile}}</td>
+												<td>{{mentalScaleCount.remarks}}</td>
+											</tr>
+											<tr ng-if="mentalAgeAndClusterCount.length==0">
+												<td colspan="4">No records found</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div id="mentalGraph" class="demo-container">
+										<div id="chart" dx-chart="chartOptionsMental"></div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<br> <br> <br> <label>CHILD
+										PERFORMANCE(MOTOR)</label><br>
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Name of cluster</th>
+												<th>Total No.Of Items Passed</th>
+												<th>Percentile</th>
+												<th>Remarks</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="motorScaleCount in motorAgeAndClusterCount">
+												<td>{{motorScaleCount.clusterName}}
+													({{motorScaleCount.scaleCount}})</td>
+												<td>{{motorScaleCount.clusterCount}}</td>
+												<td>{{motorScaleCount.percentile}}</td>
+												<td>{{motorScaleCount.remarks}}</td>
+											</tr>
+											<tr ng-if="motorAgeAndClusterCount.length==0">
+												<td colspan="4">No records found</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="demo-container">
+										<div id="chart" dx-chart="chartOptionsMotor"></div>
+									</div>
+								</div>
+							</div><br><br><br><br><br><br><br><br><br><br>
+							<div class="col-sm-12">
+								<br> <label>Interpretation :</label><br>
+								<textarea ng-hide="editMode"
+									class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5"
+									ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+									ng-model="progress.interpretation"></textarea>
+								<p ng-hide="editMode" class="pull-right" id="textCount"
+									style="font-size: 11px; color: blue">{{1500-progress.interpretation.length}}&nbsp;Characters
+									Left</p>
+									<br>
+								<p ng-show="editMode">
+									{{progress.interpretation}}<br>
+								</p>
+								<br> <label>Recommendations:</label><br>
+								<textarea ng-hide="editMode"
+									class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border" rows="5"
+									ng-disabled="documentsList.length >0||loggedUserRole=='Patient'"
+									ng-model="progress.recommandations"></textarea>
+								<p ng-hide="editMode" class="pull-right" id="textCount"
+									style="font-size: 11px; color: blue">{{1500-progress.recommandations.length}}&nbsp;Characters
+									Left</p>
+								<br>
+								<p ng-show="editMode">
+									{{progress.recommandations}}<br>
+								</p>
+							</div>
+							<div class=col-lg-12 >
+								<br> <strong>It was a pleasure to meet and work
+									with {{patientObject.firstName}} {{patientObject.lastName}}.
+									Feel free to contact me with any questions.</strong> <br> <label>Assessment
+									and therapy session completed by:</label> <br> <br> <br>
+								<br> Dr.{{doctorObj.firstName}} {{doctorObj.lastName}}
+
+							</div>
+							<div class="col-sm-12" align="center">
+								<button id="savePageButton" class="btn btn-primary"
+									ng-click="addEvalutionSave()" ng-disabled="editMode">Save</button>
+								<!-- <button class="btn btn-primary"
+									ng-click="generateEvaluationReport()">Generate Report</button> -->
+								<button id="cancelPageButton" ng-click="gotoList();"
+									class="btn btn-warning" ng-disabled="loggedUserRole=='Patient'">Cancel</button>
+
+								<button id="printPageButton" class="btn btn-primary"
+									onclick="window.print();">Print Report</button>
+								<embed ng-src="{{content}}" style="width: 850px; height: 600px;"></embed>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- /.content -->
+</div>
+
+
+

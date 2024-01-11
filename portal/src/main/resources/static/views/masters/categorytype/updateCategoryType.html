@@ -1,0 +1,116 @@
+
+<div class="content-wrapper scrollpage" ng-init="getAllPatientRegistrationTypesList();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Update Category Type</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Category Type</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group" ng-click="gotoList();">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Category Type List
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<form class="col-sm-6" name="addcategorytypeform">
+						
+						<div class="form-group">
+			<label><span ng-if="cType.patientRegistrationType == undefined || cType.patientRegistrationType == '' " style="color: red">*</span>Registration Type</label>
+			<span style="color: red"
+					ng-show="(addcategorytypeform.patientRegistrationType.$touched && addcategorytypeform.patientRegistrationType.$invalid)">
+					<span ng-show="addcategorytypeform.patientRegistrationType.$error.required"> is
+						required.</span>
+						</span>
+				<select class="form-control"
+									name="patientRegistrationType"
+									ng-model="cType.patientRegistrationType"
+									ng-options="patientRegistrationType as patientRegistrationType.name for patientRegistrationType in patientRegistrationTypes track by patientRegistrationType.id">
+										<option value="" >Select Registration Type</option></select>
+			</div>
+			
+							<div class="form-group">
+								<label>Category Type Name</label><span style="color: red" ng-cloak
+									ng-show="(addcategorytypeform.categoryTypeName.$touched && addcategorytypeform.categoryTypeName.$invalid)">
+									<span ng-show="addcategorytypeform.categoryTypeName.$error.required">
+										 is required.</span></span> <input type="text" value=""
+									class="form-control" name="categoryTypeName"
+									placeholder="Enter Category Type Name"
+									ng-model="cType.name" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required> 
+							</div>
+
+							<div class="form-group">
+								<label>Category Type Description</label><span style="color: red" ng-cloak
+									ng-show="(addcategorytypeform.description.$touched && addcategorytypeform.description.$invalid)">
+								<span ng-show="addcategorytypeform.description.$error.required">
+									is required.</span></span>
+								<textarea rows="3" value="" class="form-control"
+									name="description" placeholder="Enter Category Type Description"
+									ng-model="cType.description" aria-required="true"
+									aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required></textarea>
+								
+							</div>
+							<div class="form-check">
+								<label>Status</label><br> <label class="radio-inline"><input
+									type="radio" ng-model="cType.status" name="status"
+									ng-value="true">Active</label> <label class="radio-inline"><input
+									type="radio" ng-model="cType.status" name="status"
+									ng-value="false">InActive</label>
+							</div>
+							<div class="row" align="center">
+						                       <span ng-if="message != undefined" style="color: red">{{message}}<br>
+						                       </span><br>
+					                      </div>
+							<div class="reset-button">
+								<button class="btn btn-success"
+									ng-click="updateCategoryType(cType)"
+									ng-disabled="addcategorytypeform.$invalid">Update</button>
+								<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

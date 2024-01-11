@@ -1,0 +1,179 @@
+<div ng-init="getAllScreeningTest();">
+	
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<ul class="nav nav-tabs">
+					<li style="float: left;" ng-repeat="category in screeninhTestList"
+						ng-init="getAllCratedDatesOfPatientGoals(screeninhTestList[0].id);gotoCategory(screeninhTestList[0]);"
+						ng-click="getAllCratedDatesOfPatientGoals(category.id);gotoCategory(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}</a>
+					</li>
+					<li>
+						<button class="btn btn-primary" data-toggle="tooltip"
+							ng-if="loggedUserRole!='Parent'" ng-click="gotoback();"
+							data-placement="right" title="Add category">
+							<i class="" aria-hidden="true">+</i>
+						</button>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+							<div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Name :</label>
+									</div>
+									<div class="col-sm-6">
+										<p>{{firstName}} {{lastName}}</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-sm-6">
+										<label>Date of Test :</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="date" ng-model="today">
+									</div>
+									<br> <br>
+								</div>
+							</div>
+							<div class="col-sm-12 border">
+								<div class="sample" layout="column" ng-cloak>
+									<md-content class="md-padding"> <md-tabs
+										md-dynamic-height md-selected="selectedIndex" md-border-bottom
+										md-autoselect md-swipe-content> <md-tab
+										ng-repeat="tabdate in datesList track by $index"
+										label="{{tabdate.date}}"
+										ng-click="getAllParentQuestionCategoriesSocial(tabdate);">
+
+									<form layout="column" class="sm-padding"
+										style="padding-top: 0;">
+										<div class="col-sm-12">
+											<div align="left" class="col-sm-6">
+												<button class="btn btn-primary" data-toggle="tooltip"
+													data-placement="right" ng-click="addTab(tabdate.id);"
+													title="Add Goal">
+													<i class="" aria-hidden="true">+</i>
+												</button>
+												<!-- <button class="btn btn-primary" type="button"
+													data-toggle="tooltip" title="Add Goal" ng-click="addTab();">+</button> -->
+											</div>
+										</div>
+									</form>
+									<div class="col-sm-12 class= table-responsive" align="justify"
+										ng-if="flagSocial">
+										<div
+											ng-repeat="evalutionCategory in questionCategoryDtoListSocial">
+											<table class="table table-bordered table-hover col-sm-12">
+												<thead>
+													<tr>
+														<td colspan="2"><label>{{evalutionCategory.name}}:</label></td>
+													</tr>
+												</thead>
+												<tr
+													ng-repeat="evalutionQuestion in evalutionCategory.screeningTestQuestionLookups">
+													<td class="col-sm-10">{{evalutionQuestion.name}}?</td>
+													<td class="col-sm-2">
+														<div>
+															<input type="radio" ng-model="answer.selectedAnswer"
+																ng-disabled="!addFlag"
+																ng-checked="answer.selectedAnswer==true" value=true />&nbsp;Yes
+															<input type="radio" ng-model="answer.selectedAnswer"
+																ng-disabled="!addFlag"
+																ng-checked="answer.selectedAnswer==false" value=false />&nbsp;No
+														</div>
+													</td>
+												</tr>
+												<tr rowspan="2"
+													ng-if="evalutionCategory.screeningTestQuestionLookups.length == 0">
+													<td colspan="2" align="center"><b><h1>
+																<i class="fa fa-meh-o"></i> No records found!
+															</h1></b></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div class="col-sm-12 class= table-responsive" align="justify"
+										ng-if="!flagSocial">
+										<div
+											ng-repeat="evalutionCategory in ParentQuestionCategoryDtoListSocial">
+											<table class="table table-bordered table-hover col-sm-12">
+												<thead>
+													<tr>
+														<td colspan="2"><label>{{evalutionCategory.name}}:</label></td>
+													</tr>
+												</thead>
+												<tr
+													ng-repeat="evalutionQuestion in evalutionCategory.screeningTestQuestions">
+													<td class="col-sm-10">{{evalutionQuestion.name}}?</td>
+													<td class="col-sm-2">
+														<div
+															ng-repeat="answer in evalutionQuestion.screeningTestAnswers">
+															<input type="radio" ng-model="answer.selectedAnswer"
+																ng-disabled="!addFlag" ng-value=true />&nbsp;Yes <input
+																type="radio" ng-disabled="!addFlag"
+																ng-model="answer.selectedAnswer" ng-value=false />&nbsp;No
+														</div>
+													</td>
+												</tr>
+												<tr rowspan="2"
+													ng-if="evalutionCategory.screeningTestQuestions.length == 0">
+													<td colspan="2" align="center"><b><h1>
+																<i class="fa fa-meh-o"></i> No records found!
+															</h1></b></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div ng-if="loggedUserRole=='Super Admin'">
+										<button class="btn btn-primary" ng-click="showme=true">Add
+											Goal</button>
+										<form name="screeningTestform" ng-show="showme">
+
+
+											<div class="form-group">
+												<div class="col-sm-3">
+													<label>Goal</label>{{questionName}}
+												</div>
+												<div class="form-group col-sm-9">
+													<input type="text" value="" class="form-control"
+														name="QuestionName"
+														placeholder="Enter Evalution Question Name"
+														ng-model="obj.questionName"> </span>
+												</div>
+												<!-- <div class="col-sm-3">
+													<label>Answer</label>
+												</div>
+												<div class="col-sm-9">{{evalutions}}
+													<div ng-repeat="evalution in evalutions">
+														<input type="text" value="" class="form-control"
+															name="answer" placeholder="Enter Your Answer"
+															ng-model="evalution.name"> </span>
+													</div><br><br>
+												</div> -->
+											</div>
+										</form>
+										<div class="reset-button col-sm-12" ng-show="showme">
+											<button class="btn btn-success"
+												ng-click="addScreeningTestQuestion(obj)"
+												ng-disabled="screeningTestform.$invalid">Add</button>
+											<a class="btn btn-warning" ng-click="gotoback()">Cancel</a>
+										</div>
+									</div>
+
+									<div align="center" class="col-sm-12" 
+										ng-if="questionCategoryDtoListSocial.length > 0 || ParentQuestionCategoryDtoListSocial.length > 0">
+										<button class="btn btn-primary" ng-if="loggedUserRole!='Super Admin'"
+											ng-click="addSocialData(tabdate)" ng-disabled="!addFlag">Save</button>
+										<button class="btn btn-danger" ng-click="" ng-if="loggedUserRole!='Super Admin'">Cancel</button>
+									</div>
+									</md-tab> </md-tabs> </md-content>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>

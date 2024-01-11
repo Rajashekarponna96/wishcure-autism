@@ -1,0 +1,93 @@
+<div class="content-wrapper"
+	ng-init="getAllChildObservationCategoryLookups();getAllChildObservationQuestionLookups();">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-wallet"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Developmental Milestones</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li><a>Child Observation</a></li>
+				<li class="active">Child Observation</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 m-b-20">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<!-- ng-click="getQuestionsByCategoryId(category.id);" 
+					ng-click="getGeneralQuestionsByPersonAndCatId(category.id); -->
+					<li style="float: left;"
+						ng-repeat="category in childObservationCategoryLookupsList"
+						ng-click="getGeneralQuestionsByPersonAndCatId(category);"><a
+						href="#tab1" data-toggle="tab" target="self">{{category.name}}</a></li>
+					<li>	<button class="btn btn-primary" data-toggle="tooltip" ng-click="gotoback();"
+													data-placement="right" 
+													title="Add category">
+													<i class="" aria-hidden="true">+</i>
+												</button></li>
+						
+				</ul>
+				<!-- Tab panels -->
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="tab1">
+						<div class="panel-body">
+							<div>
+							 <form class="col-sm-6" name="departmentform">
+                                     
+                                        
+                                         <div class="form-group">
+							                        <label>Category/Tab Name</label> 
+							                        <input type="text"  class="form-control" name="departmentName" placeholder="Enter ChildObservationCategory Name"
+								                     ng-model="childObservationCategoryLookup.name" 
+								                    required> <span style="color: red" 
+								                    ng-show="(departmentform.departmentName.$touched && departmentform.departmentName.$invalid)">
+								                    <span ng-show="departmentform.departmentName.$error.required">ChildObservationCategory Name is required.</span></span>
+					 	                   </div>
+					 	                   
+					 	                   
+					 	                   <div class="form-group">
+							                        <label>Description</label> 
+							                        <input type="text"  class="form-control" name="departmentName" placeholder="Enter ChildObservationCategory Description"
+								                     ng-model="childObservationCategoryLookup.status" 
+								                    required> <span style="color: red" 
+								                    ng-show="(departmentform.departmentName.$touched && departmentform.departmentName.$invalid)">
+								                    <span ng-show="departmentform.departmentName.$error.required">ChildObservationCategory status is required.</span></span>
+					 	                   </div>
+					 	                   
+                                          <div class="row" align="center">
+						                       <span ng-if="message != undefined" style="color: red">{{message}}<br>
+						                       </span><br>
+					                      </div>
+                                          <div class="reset-button">
+                                           <button  class="btn btn-success" ng-click="addChildObservationCategoryLookup(childObservationCategoryLookup)"
+                                            ng-disabled="departmentform.$invalid">Add</button>
+                                           <a class="btn btn-warning" ng-click="gotobak()">Cancel</a>
+                                           
+                                       </div>
+                                   </form>
+                                   </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

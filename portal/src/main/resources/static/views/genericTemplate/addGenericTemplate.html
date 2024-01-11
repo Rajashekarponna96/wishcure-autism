@@ -1,0 +1,99 @@
+<div class="content-wrapper"
+	ng-init="">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-note2"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Generic Template</h1>
+			<small></small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">NICHQ Category</li>
+			</ol>
+		</div>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading"></div>
+					<div class="panel-body">
+						<form class="col-sm-6" name="nichqForm">
+							<div class="form-group">
+								<label>Template Type</label> <input type="text" value=""
+									class="form-control" name="categoryName"
+									placeholder="Enter Template Name" 
+									aria-required="true" aria-invalid="true"
+									ng-model-options="{ allowInvalid: true, updateOn: 'blur' }"
+									required>
+							</div>
+
+
+							<div class="reset-button">
+								<button class="btn btn-success" ng-click="">Add</button>
+								<a class="btn btn-warning" ng-click="gotoback();">Cancel</a>
+
+							</div>
+						</form>
+
+						<div class="table-responsive col-sm-12">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<!-- 	<th>Serial No</th> -->
+										<th>Id</th>
+										<th>Name</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="">
+										<td>1</td>
+										<td>Mchart</td>
+										<td>
+											<button class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="left" ng-click=""
+												title="Update">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										</td>
+										<td>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip"
+												data-placement="right"
+												ng-click=""
+												title="Delete ">
+												<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

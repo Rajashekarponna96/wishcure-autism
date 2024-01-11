@@ -1,0 +1,121 @@
+<script id="groupedMonthEvents.html" type="text/ng-template">
+
+  <div class="cal-month-day">
+
+    <span
+      class="pull-right"
+      data-cal-date
+      ng-click="vm.calendarCtrl.dateClicked(day.date)"
+      ng-bind="day.label">
+    </span>
+
+    <!--
+      *** Please note ***
+      The contents of the template have been stripped down for brevity.
+      You will need to adapt the original template from here for all functionality to work:
+      https://github.com/mattlewis92/angular-bootstrap-calendar/blob/master/src/templates/calendarMonthCell.html
+
+      Insert the div below into the full month view template
+    -->
+
+    <div style="position: relative; top: 35px; left: 5px">
+      <span ng-repeat="(type, events) in day.groups track by type">
+        <span class="label label-{{ type }}">
+          {{ events.length }}
+        </span>&nbsp;
+      </span>
+    </div>
+    <div class="cal-day-tick" ng-show="dayIndex === vm.openDayIndex && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled">
+      <i class="glyphicon glyphicon-chevron-up"></i>
+      <i class="fa fa-chevron-up"></i>
+    </div>
+
+  </div>
+</script>
+<!-- <div class="content-wrapper scrollpage" ng-controller="calendarCtrl as vm" -->
+<div class="content-wrapper" ng-controller="calendarCtrl as vm"
+	ng-init="getSubAppointmentssByRole();getHolidaysByRole();getAllSchedulesByTodayDate();">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="fa fa-calendar-check-o"></i>
+		</div>
+		<div class="header-title">
+			<form action="#" method="get"
+				class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control"
+						placeholder="Search..."> <span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<h1>Calendar</h1>
+			<small>Here you can view the availability of therapists.</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Calendar</li>
+			</ol>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary"> <i class="fa fa-list"></i>
+								Calendar
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<h2 class="text-center">{{vm.calendarTitle}}</h2>
+						<div class="row">
+							<div class="col-md-6 text-center">
+								<div class="btn-group">
+									<button class="btn btn-primary" mwl-date-modifier
+										date="vm.viewDate" decrement="vm.calendarView"
+										ng-click="getAllSchedulesByTodayDate();">Previous</button>
+									<button class="btn btn-default" mwl-date-modifier
+										date="vm.viewDate" set-to-today ng-click="getAllSchedulesByTodayDate();">Today</button>
+									<button class="btn btn-primary" mwl-date-modifier
+										date="vm.viewDate" increment="vm.calendarView"
+										ng-click="getAllSchedulesByTodayDate();">Next</button>
+								</div>
+							</div>
+							<br class="visible-xs visible-sm">
+							<div class="col-md-6 text-center">
+								<div class="btn-group">
+										 <label	class="btn btn-primary" ng-model="vm.calendarView"
+										uib-btn-radio="'month'" ng-click="getAllSchedulesByTodayDate();" >Month</label>
+									<label class="btn btn-primary" ng-model="vm.calendarView"
+										uib-btn-radio="'week'" ng-click="getAllSchedulesByTodayDate();">Week</label> <label
+										class="btn btn-primary" ng-model="vm.calendarView"
+										uib-btn-radio="'day'" ng-click="getAllSchedulesByTodayDate();">Day</label>
+								</div>
+							</div>
+
+						</div>
+						<br>
+						<mwl-calendar events="vm.events" view="vm.calendarView" 
+							view-date="vm.viewDate" view-title="vm.calendarTitle" 
+							on-event-click="vm.eventClicked(calendarEvent)"
+							on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+							cell-is-open="vm.cellIsOpen" day-view-start="06:00"
+							day-view-end="22:59" day-view-split="30"
+							cell-modifier="vm.groupEvents(calendarCell)"
+							cell-auto-open-disabled="true"
+							on-timespan-click="vm.timespanClicked(calendarDate, calendarCell)">
+						</mwl-calendar>
+						<br> <br> <br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</div>

@@ -1,0 +1,115 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
+
+<div class="panel-body table-responsive"
+	ng-init="getAllPatientBehaviouralProgrammeByPatientId();" id="patientEvalutionReport" ng-disabled="isBehaviouralManagementExists">
+	<p align="center">
+		<b>Behavioural Management Programme</b>
+	</p>
+	<hr>
+	<div class="row">
+		<div class="col-sm-10">
+			
+				<div class="col-sm-12">
+					<br> <label>STEP:1</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="IDENTIFICATION OF BEHAVIOUR PROBLEMS"
+						ng-model="behaviourlManagement.identification"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<br> <label> STEP:2</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="HIERARCHY OF BEHAVIOUR PROBLEMS"
+						ng-model="behaviourlManagement.hierarchy"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:3</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="TAREGT BEHAVIOURS IDENTIFIED FOR MANAGEMENT"
+						ng-model="behaviourlManagement.target"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:4</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="REWARDS IDENTIFIED "
+						ng-model="behaviourlManagement.rewards"></textarea>
+				</div>
+
+				<div class="col-sm-12">
+					<br> <label>STEP:5</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="ASSETS OF THE CHILD  "
+						ng-model="behaviourlManagement.assets"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:6</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="BASELINE (Mention recording techniques used) "
+						ng-model="behaviourlManagement.baseline"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:7</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="FUNCTIONAL ANALYSIS"
+						ng-model="behaviourlManagement.functionalAnalysis"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:8</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="BEHAVIOURAL PACKAGE PROGRAMME "
+						ng-model="behaviourlManagement.behaviouralPackage"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label>STEP:9</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="FOLLOW-UP (Record sessions new behaviour problems developed if any pronlems faced during conduct of BMP.Record improvement/success,if failure,record reasons for failure)"
+						ng-model="behaviourlManagement.followUp"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label>Consequences</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="Consequences(Ways of presentManagement)"
+						ng-model="behaviourlManagement.consequences"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label>Significant Information</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="Any other significant information"
+						ng-model="behaviourlManagement.siginificant"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label>Functions Identified</label>
+					<textarea class="col-sm-12 border" rows="5" placeholder="1. When"
+						ng-model="behaviourlManagement.functionsIdentifiedWhen"></textarea>
+					<textarea class="col-sm-12 border" rows="5" placeholder="2. Where"
+						ng-model="behaviourlManagement.functionsIdentifiedWhere"></textarea>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="3. With whom"
+						ng-model="behaviourlManagement.functionsIdentifiedWithWhom"></textarea>
+
+				</div>
+				<div class="col-sm-12">
+					<br> <label> Other Significant Information</label>
+					<textarea class="col-sm-12 border" rows="5"
+						placeholder="Any other significant information"
+						ng-model="behaviourlManagement.otherSiginificant"></textarea>
+
+				</div>
+				<div align="center">
+					<button class="btn btn-primary"
+						ng-click="savePatientBehaviourManagement();">Save</button>
+					<button class="btn btn-danger" ng-click="">Cancel</button>
+					<button id="create_pdf" class="btn btn-primary"
+									>Print multi Report</button>
+				</div>
+			
+
+		</div>
+	</div>
+</div>
+
